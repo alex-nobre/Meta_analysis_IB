@@ -1,0 +1,61 @@
+Study	np²	g	d	odds ratio	CIlow	CIhigh	F test	t test	z test	X^2 test	df effect	df error	N per group	N unnoticers	N noticers	prop.unnoticers	prop.noticers	p	
+Ariga et al. (2007) - exp. 2 (regular vs irregular)									0.22				20	11	9	45	55		
+Ariga et al. (2007) - exp. 2 (vertical vs horizontal)									-0,32				10	5	5	50	50		
+Beanland e Pammer (2010) - exp. 1A													72	58	14	0,81	0,19		
+Beanland e Pammer (2010) - exp. 2													50	23	27	0,46	0,54		
+Gabay et al. (2012) - exp. 1													30	18	12	0,6	0,4		
+Gabay et al. (2012) - exp. 2													23	10	13	0,434782609	0,565217391		
+Lathrop et al. (2011) - exp. 1													57	31	26	54	46		
+Lathrop et al. (2011) - exp. 2													53	29	14	54	46		
+Lo e Yeh (2008) - exp. 1 (200 ms)										1,88			43	17	26	40	60	> 0,05	
+Lo e Yeh (2008) - exp. 1 (500 ms)										0,02			41	20	21	49	51	> 0,05	
+Lo e Yeh (2008) - exp. 2 (200 ms)										0,04			23	12	11	52,17	47,83	> 0,05	
+Lo e Yeh (2008) - exp. 2 (500 ms)										0,36			25	14	11	54	44	> 0,05	
+Moore and Egeth (1997)  - exp. 1 (detection)									?				20	17	3	0,85	0,15	NS	
+Moore and Egeth (1997) - exp. 1 (identification)									0,45				20	9	11	0,45	0,55	NS	
+Moore and Egeth (1997)  - exp. 3 (detection)													20	20	0	1	0		
+Moore and Egeth (1997) - exp. 3 (identification)									-1,51				20	18	2	0,9	0,1	NS	
+Moore et al. (2003) – exp. 3 (regular vs irregular)										0,6			44	20	24	45,45	54,55		
+Moore et al. (2003) – exp. 3 (vertical vs horizontal)										0,45			20	9	11	45	55		
+Moore et al. (2004)									-3,4				25	21	4	0,84	0,16	NS	
+Most et al. (2005) – exp. 1 (US = black circle)													16	16	0	1	0		attend white shapes
+													16	2	14	0,12	0,88		attend black shapes
+													17	16	1	0,94	0,06		attend squares
+													16	3	13	0,19	0,81		attend circles
+Most et al. (2005) – exp. 2 (US = gray circle)													14	13	1	0,93	0,07		attend squares
+													14	2	12	0,14	0,86		attend circles
+Most et al. (2005) – exp. 3 (US = causasian)													25	8	17	0,32	0,68		attend causasian
+													25	15	10	0,6	0,4		attend african
+(US = african)													25	11	14	0,44	0,56		attend causasian
+													27	5	22	0,19	0,81		attend african
+Most et al. (2005) – exp. 4 (US = white triangle)													22	7	15	0,32	0,68		attend black circles
+(US = black triangle)													21	13	8	0,62	0,38		attend black circles
+Most et al. (2005) – exp. 5 (US = gradual onset gray)													22	14	8	0,64	0,36		attend black shapes
+(US = sudden onset gray)													22	13	9	0,59	0,41		attend black shapes
+Most et al. (2005) – exp. 6 (US = gradual onset black)													22	17	5	0,77	0,23		attend white shapes
+(US = sudden onset black)													23	13	10	0,57	0,43		attend white shapes
+Most et al. (2005) – exp. 7 (US = gradual onset black)													21	7	14	0,33	0,67		attend circles
+(US = sudden onset black)													22	11	11	0,5	0,5		attend circles
+Pitts et al. (2011)													32	16	16	50	50		
+Razpurker-Apfeld and Pratt (2008) - saw something													14	0	14	0	1		(saw someting / color / organization)
+Razpurker-Apfeld and Pratt (2008) - color													14	1	13	0,071428571	0,928571429		
+Razpurker-Apfeld and Pratt (2008) - organization													14	12	2	0,857142857	0,142857143		
+Richards et al. (2012)													131	62	70	0,47	0,53		
+Russell and Driver (2005) - exp. 1 (detection)													25	13	12	52	48		detection
+Russell and Driver (2005) - exp. 1 (forced-choice)													25	13	12	52	48		forced-choice
+Russell and Driver (2005) - exp. 2 (detection)													28	12	16	40	60		detection
+Russell and Driver (2005) - exp. 2 (forced-choice)													28	16	12	52	48		forced-choice
+Russell and Driver (2005) - exp. 3 (detection)													24	12	12	50	50		detection
+Russell and Driver (2005) - exp. 3 (forced-choice)													24	14	10	58	42		forced-choice
+Russell and Driver (2005) - exp. 4A													20	15	5	75	25		
+Russell and Driver (2005) - exp. 4B													21	11	10	52	48		
+Russell and Driver (2005) - exp. 5 (detection)										8,909			22	4	18	18	82	<0,01	detection
+Russell and Driver (2005) - exp. 5 (forced-choice)										1,636			22	8	14	36	64	n.s.	forced-choice
+Shafto and Pitts (2015)													30	15	15	50	50		
+Schnuerch et al. (2016) – exp. 1													61	56	5	0,92	0,08		
+Schnuerch et al. (2016) – exp. 2													58	55	3	0,94	0,06		
+Scholte et al. (2006) – MEG													14	7	7	50	50		
+Scholte et al. (2006) – fMRI													14	8	6	57,14285714	42,85714286		
+Vanderbroucke et al. (2014)													12	12	12	50	50		
+Wiemer et al. (2013) (flower)													60	25	35	41,7	58,3		flower
+Wiemer et al. (2013) spider)													60	29	31	48,3	51,7		spider

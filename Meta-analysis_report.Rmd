@@ -1,0 +1,32 @@
+---
+title: "Analysis_report"
+author: "Alexandre Nobre"
+date: "November 30, 2017"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Power analysis  
+```{r, comment = '', echo = FALSE}
+# Adapted from link
+
+es <- 0.7 # Enter your summary effect size
+print(paste('Summary effect size:', es, sep = " "))
+as <- 73.6  # Average per number per group
+print(paste('Average per number per group', as, sep = " "))
+mk <- 5  # Number of effect sizes
+print(paste('Number of effect sizes', mk, sep = " "))
+hg <- 3  # Heterogeneity (".33" for small, "1" for moderate, & "3" for large)
+print(paste('Heterogeneity', hg, sep = " "))
+
+eq1 <- ((as+as)/((as)*(as))) + ((es^2)/(2*(as+as)))
+eq2 <- hg*(eq1)
+eq3 <- eq2+eq1
+eq4 <- eq3/mk
+eq5 <- (es/sqrt(eq4))
+Power <- (1-pnorm(1.96-eq5)) # Two-tailed
+print(paste('Power:', Power, sep = ''))
+```
