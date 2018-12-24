@@ -2,7 +2,7 @@ library(pwr)
 library(tidyverse)
 
 # Read spreadsheet
-power_table <- read_delim("/Users/Gabi/Documents/GitHub/Meta_analysis_IB/power_implicit.txt", 
+power_table <- read_delim("/Users/Gabi/Documents/GitHub/Meta_analysis_IB/power_implicit.csv", 
                           delim=",", locale = locale(decimal_mark = "."))
 
 View(power_table)
