@@ -3,7 +3,7 @@ library(pwr)
 library(tidyverse)
 
 # Read spreadsheet
-power_table <- read_delim("C:/Users/Biosig/Google Drive/Doutorado/Tese/Meta-analysis/Dados/Analysis/power_awareness.txt", 
+power_table <- read_delim("./power_awareness.txt", 
                           delim="\t", locale = locale(decimal_mark = ","))
 
 View(power_table)

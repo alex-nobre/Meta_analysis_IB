@@ -1,0 +1,29 @@
+Study	eta_p_sqr	g	d	odds_ratio	CIlow	Cihigh	F	t	z	df_effect	df_error	N_per_group	p
+Ariga et al. (2007) - exp. 2			0.136					0.61		1	19	20	1
+Beanland e Pammer (2010) - exp. 1A		0.53	2.123		0.006	4.39		2.02		1	56	28	0.05
+Beanland e Pammer (2010) - exp. 2			1.48									41	
+Gabay et al. (2012) - exp. 1	0.17		0.905				6.1			1	28	18	0.02
+Gabay et al. (2012) - exp. 2	0.17		0.905				4.4			1	21	10	0.048
+Lo e Yeh (2008) - exp. 1 (200 ms)			0.12									43	0.44
+Lo e Yeh (2008) - exp. 1 (500 ms)			0.71									41	0.00005
+Lo e Yeh (2008) - exp. 2 (200 ms)			0.36									23	0.098
+Lo e Yeh (2008) - exp. 2 (500 ms)			0.002									25	0.99
+Moore and Egeth (1997)			0.7						3.13			20	0.01
+Moore et al. (2003) – exp. 3			0.41					2.72		1	43	16	sig but not reported
+Moore et al. (2004)			0.1					0.51		1	24	25	1
+Most et al. (2005) – exp. 1-7 pooled			0.215					2.9		1	181	186	0.04
+Pitts et al. (2011)			0.504				30.48			1	30	16	0.000005
+Razpurker-Apfeld and Pratt (2008)			0.134									14	
+Richards et al. (2012)	0.13		0.77									119	
+Russell and Driver (2005) - exp. 1	0.26		3.05									25	
+Russell and Driver (2005) - exp. 2	0.38		1.56									28	
+Russell and Driver (2005) - exp. 3	0.19		0.96									24	
+Russell and Driver (2005) - exp. 4A	0.24		1.12									20	
+Russell and Driver (2005) - exp. 4B	0.38		1.56									21	
+Russell and Driver (2005) - exp. 5	0.05		0.45									24	
+Shafto and Pitts (2015)			0.419					1.57		1	14	15	0.0083
+Schnuerch et al. (2016) – exp. 1			0.54									61	0.001
+Schnuerch et al. (2016) – exp. 2			0.33									58	0.007
+Scholte et al. (2006) – fMRI			1.25							1	7	8	
+Vanderbroucke et al. (2014)			0.385				13.8			3	66	37	0.000000438
+Wiemer et al. (2013)			0.92									120	0.01
