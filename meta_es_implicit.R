@@ -10,26 +10,32 @@ es_table <- read_delim("./es_table.txt",
 View(es_table)
 str(es_table)
 
-# Estimate correlation between measures (conditions) to compute Cohen's d for variance from two studies:
+## Estimate correlation between measures (conditions) to compute Cohen's d for variance from two studies:
 # Schnuerch et al. (2016)
 # Razpurker-apfeld and Pratt (2008)
 cor_pairs <- 0.95
 
-# Create variables to compute Hedges' g
+
+## Create variables to compute Hedges' g (formulas from Borestein's Introduction to Meta-Analisys, 2009)
+
+# Compute variance of d (formula 4.28)
 es_table$variance_d <- (1/es_table$N_per_group + 
                           (es_table$d)^2/2*es_table$N_per_group) * 2*(1-cor_pairs)
 
+# Compute correction factor J (formula 4.22)
 es_table$J <- 1 - (3/(4*(es_table$N_per_group-1)-1))
 
+# Compute Hedges' g (formula 4.23)
 es_table$hedgesg <- es_table$J * es_table$d 
 
+# Compute variance of g (formula 4.24)
 es_table$variance_g <- (es_table$J)^2 * es_table$variance_d
 
-
+# Compute standard error of g (formula 4.25)
 es_table$se_g <- sqrt(es_table$variance_g)
 
 
-# Compute meta analytic effect size
+## Compute meta analytic effect size
 
 metagen(es_table$hedgesg, es_table$se_g)
 
