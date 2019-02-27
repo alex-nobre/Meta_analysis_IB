@@ -16,7 +16,7 @@ str(es_table)
 cor_pairs <- 0.95
 
 
-## Create variables to compute Hedges' g (formulas from Borestein's Introduction to Meta-Analisys, 2009)
+## Create variables to compute Hedges' g (formulas from Borestein's Introduction to Meta-Analysis, 2009)
 
 # Compute variance of d (formula 4.28)
 es_table$variance_d <- (1/es_table$N_per_group + 
@@ -36,6 +36,22 @@ es_table$se_g <- sqrt(es_table$variance_g)
 
 
 ## Compute meta analytic effect size
+meta_es <- metagen(TE = es_table$hedgesg, # treatment effect (Hedge's g)
+                   es_table$se_g, #standard error of treatment 
+                   comb.fixed = TRUE,
+                   comb.random = TRUE)
 
-metagen(es_table$hedgesg, es_table$se_g)
+summary(meta_es)
+knitr::kable(meta_es)
 
+# Plots
+forest(meta_es)
+
+funnel(meta_es,
+       xlab = "Hedges' g")
+
+# Tests for assymetry
+meta_es$TE
+meta_es$seTE
+
+metabias(meta_es,  method = "rank")
