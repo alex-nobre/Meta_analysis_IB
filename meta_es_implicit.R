@@ -1,6 +1,11 @@
 
+# Load packages
 library(tidyverse)
 library(meta)
+
+# Save defaults
+defaults <- par()
+options_defaults <- options()
 
 # Read spreadsheet
 es_table <- read_delim("./es_table.txt", 
@@ -37,7 +42,8 @@ es_table$se_g <- sqrt(es_table$variance_g)
 
 ## Compute meta analytic effect size
 meta_es <- metagen(TE = es_table$hedgesg, # treatment effect (Hedge's g)
-                   es_table$se_g, #standard error of treatment 
+                   es_table$se_g, #standard error of treatment,
+                   studlab = es_table$Study,
                    comb.fixed = TRUE,
                    comb.random = TRUE)
 
@@ -45,13 +51,26 @@ summary(meta_es)
 knitr::kable(meta_es)
 
 # Plots
-forest(meta_es)
+
+forest(meta_es, # <------------------ RUN THIS TO RUN UNTRIMMED FOREST PLOT  <--------------
+       STUDLAB = TRUE, #should study labels be printed?
+       comb.fixed = FALSE, # plot fixed effect estimate?
+       comb.random = TRUE # plot random effect estimate
+       )
 
 funnel(meta_es,
-       xlab = "Hedges' g")
+       xlab = "Hedges' g")#,
+       #studlab = es_table$Study)
 
 # Tests for assymetry
-meta_es$TE
-meta_es$seTE
-
 metabias(meta_es,  method = "rank")
+
+# Estimate bias
+trimmed_meta <- trimfill(meta_es,
+                         left = TRUE,
+                         ma.fixed = FALSE)
+
+funnel(trimmed_meta)
+
+forest(trimmed_meta) # <------------------ RUN THIS TO RUN TRIMMED FOREST PLOT  <--------------
+

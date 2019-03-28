@@ -1,0 +1,103 @@
+---
+title: "Meta-analytic effect size and publication bias"
+author: "Alexandre de Pontes Nobre and Gabriela Melo"
+date: "27.03.2019"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Load packages
+library(tidyverse)
+library(meta)
+```
+
+
+```{r Compute meta-analytic effect size, include=FALSE, cache=TRUE}
+
+# Save defaults
+defaults <- par()
+options_defaults <- options()
+
+# Read spreadsheet
+es_table <- read_delim("C:/Users/Biosig/Google Drive/Doutorado/Tese/Meta-analysis_IB/Dados/Analysis/es_table.txt", 
+                          delim="\t", 
+                       locale = locale(decimal_mark = "."))
+
+
+## Estimate correlation between measures (conditions) to compute Cohen's d for variance from two studies:
+# Schnuerch et al. (2016)
+# Razpurker-apfeld and Pratt (2008)
+cor_pairs <- 0.95
+
+
+# Create variables to compute Hedges' g (formulas from Borestein's Introduction to Meta-Analysis, 2009)
+
+# Compute variance of d (formula 4.28)
+es_table$variance_d <- (1/es_table$N_per_group + 
+                          (es_table$d)^2/2*es_table$N_per_group) * 2*(1-cor_pairs)
+
+# Compute correction factor J (formula 4.22)
+es_table$J <- 1 - (3/(4*(es_table$N_per_group-1)-1))
+
+# Compute Hedges' g (formula 4.23)
+es_table$hedgesg <- es_table$J * es_table$d 
+
+# Compute variance of g (formula 4.24)
+es_table$variance_g <- (es_table$J)^2 * es_table$variance_d
+
+# Compute standard error of g (formula 4.25)
+es_table$se_g <- sqrt(es_table$variance_g)
+
+
+## Compute meta analytic effect size
+meta_es <- metagen(TE = es_table$hedgesg, # treatment effect (Hedge's g)
+                   es_table$se_g, #standard error of treatment,
+                   studlab = es_table$Study,
+                   comb.fixed = TRUE,
+                   comb.random = TRUE)
+
+summary(meta_es)
+knitr::kable(meta_es)
+```
+
+Here are the forest plot and the funnel plot to diagnose publication bias.
+
+```{r Forest plots and funnel plots, echo=FALSE}
+# Plots
+forest(meta_es)
+
+funnel(meta_es,
+       xlab = "Hedges' g")#,
+       #studlab = es_table$Study)
+```
+
+These plots are highly asymetrical. Here is a test for plot asymetry.
+
+```{r Test for funnel plot asymetry, echo=FALSE}
+metabias(meta_es,  method = "rank")
+```
+
+
+The test shows that there is indeed a bias. So, I used the trim-and-fill method, not so much to see how the plot would look like with the inputed dots (it is pretty clear there would be a large dark cloud on the left side) but as to check if the effect would remain after that.
+
+```{r Trim-and-fill method, include=FALSE}
+trimmed_meta <- trimfill(meta_es,
+                         left = TRUE,
+                         ma.fixed = FALSE)
+```
+
+```{r Plot trimmed-and-filled funnel plot, echo=FALSE}
+funnel(trimmed_meta)
+
+forest(trimmed_meta)
+```
+
+Check the analysis results here:
+
+```{r, echo = FALSE}
+trimmed_meta
+```
+
+So, the effect disappears. In light of this, I suppose we should discuss: 1) checking if this analysis is done correctly; and 2) what the causes for the bias are.
