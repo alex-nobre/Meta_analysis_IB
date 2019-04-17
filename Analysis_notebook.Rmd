@@ -28,6 +28,8 @@ In our analysis, since there is no treatment/control group, we have to choose an
 
 Are there any studies which do these criteria do not contemplate?
 
+* What about when it is a comparison against chance?
+
 2. Beanland and Pammer
 
 Each condition (eyes-fixating x eyes-moving in exp. 1A, slow-US x fast-US in exp. 2) is a separate contrast, so each should be coded in a separated line.

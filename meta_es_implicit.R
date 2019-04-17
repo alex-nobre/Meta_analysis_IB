@@ -8,7 +8,7 @@ defaults <- par()
 options_defaults <- options()
 
 # Read spreadsheet
-es_table <- read_delim("./es_table.txt", 
+es_table <- read_delim("./es_coding_table.txt", 
                           delim="\t", locale = locale(decimal_mark = ".")) #%>%
   #dplyr::select(c(1:14))
 
@@ -52,7 +52,7 @@ knitr::kable(meta_es)
 
 # Plots
 
-forest(meta_es, # <------------------ RUN THIS TO RUN UNTRIMMED FOREST PLOT  <--------------
+forest(meta_es, # <------------------ RUN THIS TO GENERATE UNTRIMMED FOREST PLOT  <--------------
        STUDLAB = TRUE, #should study labels be printed?
        comb.fixed = FALSE, # plot fixed effect estimate?
        comb.random = TRUE # plot random effect estimate
@@ -72,5 +72,21 @@ trimmed_meta <- trimfill(meta_es,
 
 funnel(trimmed_meta)
 
-forest(trimmed_meta) # <------------------ RUN THIS TO RUN TRIMMED FOREST PLOT  <--------------
+forest(trimmed_meta) # <------------------ RUN THIS TO GENERATE TRIMMED FOREST PLOT  <--------------
+
+
+#=============================================================================================================================#
+
+mean(es_table$N_trials_implicit)
+mean(es_table$N_trials_awareness)
+
+hist(es_table$N_trials_implicit,
+     ylim = c(0,30))
+hist(es_table$N_trials_awareness,
+     ylim = c(0,30))
+
+plot(es_table$N_trials_implicit, es_table$N_trials_awareness)
+
+min(es_table$N_trials_implicit)
+max(es_table$N_trials_implicit)
 
