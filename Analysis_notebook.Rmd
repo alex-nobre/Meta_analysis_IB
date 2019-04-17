@@ -1,0 +1,54 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+IB = inattentional blindness;
+US = unexpected stimulus/stimuli;
+
+
+Each experiment can contribute with one or more effect sizes/tests, one in each line. Each one of those is called a contrast.
+
+
+# Effect size computation
+We compute effect sizes based on available data from the papers. From the papers included after full-text reading, the following did not present enough data to allow the computation of an effect-size:
+ 
+ * Lathrop et al. (2011)
+ * Scholte et al. (2006) - MEG
+ 
+These were considered only in the qualitative, but not in the quantitative analysis.
+
+Effect sizes need a direction. Otherwise, if only the absolute value of the difference is recorded, all data points in the funnel plot will necessarily appear in the right side of the plot.
+
+In our analysis, since there is no treatment/control group, we have to choose an experimental condition and a control condition to decide the direction. Our options are:
+
+* When a study mentions a critical trial and a control trial, those are the experimental and the control conditions, respectively;
+* When the above is not mentioned, but it is clear that in one condition there is an US, and the other does not, the first is the experimental condition, the second is the control;
+* When a configuration is the US (e.g., grouping), the condition with the configuration is the experimental condition, the other is the control condition
+
+Are there any studies which do these criteria do not contemplate?
+
+2. Beanland and Pammer
+
+Each condition (eyes-fixating x eyes-moving in exp. 1A, slow-US x fast-US in exp. 2) is a separate contrast, so each should be coded in a separated line.
+
+Should we average the mean and sd of accuracy across critical trials (3 and 5) and control trials (2 and 4)? 
+
+First, there is a difference in the degree of awareness: For non-notices only, this is ok, trials don't differ in awareness. For noticers, this would be problematic, since this group includes both individuals who noticed the US in the first critical trial and those who didn't.
+
+If we only analyze non-noticers processing, this should not be a problem. 
+
+However, there is still the issue of repeated exposition, which differs between the first and second critical trials.
+In a lot of studies, we have multiple critical trials, in others, only one.
+Considering that we don't have access to single-trial data in most studies, I propose we do average th critical trials. This can be used later to a comparison of power between studies with distinct numbers of critical trials.
+
+
+
+
+
+-----------------------------------------------------------------------------------
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
