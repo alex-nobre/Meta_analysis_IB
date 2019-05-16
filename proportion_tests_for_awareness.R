@@ -21,12 +21,11 @@ power_table$prop.unnoticers <- ifelse(power_table$prop.unnoticers > 1,
 
 
 # Build vectors with values of P-hat, p and probability
-
 successes <- power_table["N noticers"][[1]]
 n <- power_table["N per group"][[1]]
 probability <- 0.5
 
-# compute value of proportion test if not yet available
+# Compute value of proportion test if not yet available
 chi_square_value <- sapply(successes, 
                         function(x,y) binom.test(x,y,p=0.5,
                                                  alternative = 'two.sided')$p.value, n)
@@ -55,6 +54,4 @@ power_table$cohensh <- ES.h(power_table$prop.unnoticers, power_table$prop.notice
 sum_es <- sum((power_table$`N per group` * power_table$cohensh))/sum(power_table$`N per group`)
 
 av_size <- mean(power_table$`N per group`)
-
-
 

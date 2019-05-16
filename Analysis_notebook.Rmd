@@ -1,7 +1,11 @@
 ---
-title: "R Notebook"
+title: "Analysis notebook"
 output: html_notebook
 ---
+
+This notebook details steps and decisions for the analysis of quantitive data in the meta-analysis.
+
+Legends:
 
 IB = inattentional blindness;
 US = unexpected stimulus/stimuli;
@@ -26,11 +30,23 @@ In our analysis, since there is no treatment/control group, we have to choose an
 * When the above is not mentioned, but it is clear that in one condition there is an US, and the other does not, the first is the experimental condition, the second is the control;
 * When a configuration is the US (e.g., grouping), the condition with the configuration is the experimental condition, the other is the control condition
 
+Problem:in some cases, smaller RTs result from implicit processing (e.g., orienting of attention by arrows - Gabay); in others, larger RTs result (e.g., amodal completion of dashed lines - Moore and Egeth, 2003).  So we cannot simply subtract experimental - control, because this will result in effects in both directions meaning the same thing
+
+
+## Alternative:
+
+- Code effects in the direction of facilitation as positive and effects in the direction of no facilitation (these will most likely be nonsignificant, but what matters is their contribution for the meta-analytic effect size) as negative.
+
+- For interactions: when the interaction between V1 and V2 does not indicate a reversal in the direction of the effect of levels of V2 across levels of V1, the direction of the effect shown by the interaction is the same as the direction of the effect of V2.
+
+
 Are there any studies which do these criteria do not contemplate?
 
-* What about when it is a comparison against chance?
+* What about when it is a comparison against chance? - deviations above chance mean a difference in the direction of facilitation, thus positive; below chance (also in this case, most likely nonsignificant) as no facilitation, thuss negative.
 
-2. Beanland and Pammer
+### 1. Ariga et al. (2008)
+
+### 2 to 5. Beanland and Pammer (2011)
 
 Each condition (eyes-fixating x eyes-moving in exp. 1A, slow-US x fast-US in exp. 2) is a separate contrast, so each should be coded in a separated line.
 
@@ -41,12 +57,109 @@ First, there is a difference in the degree of awareness: For non-notices only, t
 If we only analyze non-noticers processing, this should not be a problem. 
 
 However, there is still the issue of repeated exposition, which differs between the first and second critical trials.
-In a lot of studies, we have multiple critical trials, in others, only one.
-Considering that we don't have access to single-trial data in most studies, I propose we do average th critical trials. This can be used later to a comparison of power between studies with distinct numbers of critical trials.
+
+In a lot of studies, we have multiple critical trials, in others, only one. Considering that we don't have access to single-trial data in most studies, I propose we do average the critical trials. This can be used later to compare power between studies with distinct numbers of critical trials. 
+To analyze averaged trials, we need the combined means and standard deviations of both control trials averaged and both critical trials averaged. These can be computed from the raw data sent by Beanland.
+
+- Exp. 1A: Table 2 on page 981.
+
+- Exp. 2: TAble 8 on page 986.
+
+### 12. & 13. Moore and Egeth, exps. 1 and 3
+
+Experiment 2 is not included because it aims only at eliminating a visual confound; it does not include the illusion.
+
+The effect of the background on the responses is given by the percentage of subjects who responded according to the illusions (Ponzo illusion in exp. 1, Müller-Lyer illusion in exp. 3), compared with chance:
+
+- Exp. 1: "inattention block" data on page. 345
+
+- Exp. 3: "inattention block" data on page. 349
+
+### 14. Moore et al. (2003)
 
 
+### 15. to 19. Razpurker-Apfeld et al. (2008)
+
+Each condition (column/row vs. triangle/arrow) is treated as a separate constrast. 
+
+-RT: Implicit processing is indicated by the congruence effect, which is indicated by an interaction (better performance in same trials during same-backgrounds trials and better performance in different trials during different-background trials).
+The direction of the interaction is determined as explained above.
+
+- d': Implicit processing is the difference between d' in same and different background conditions. d' = hit - false alarms in different trials. If d' is positive, effect is facilitatory (hits > false alarms), so the effect size is also positive; otherwise, the effect size is negative.
 
 
+### 20. & 21. Richards et al. (2012)
+
+Data comes from page 174 in the paper, on Table 1, only from "IBs" participants. Lines from the inspection screen stage are not included because this stage does not include the US (red cross). Two options for effect:
+
+ - Number of participants fixating on the US is above chance; or
+ 
+ - Difference in fixations and in gaze time between IBs who fixate the US and those who don't.
+ 
+We can also split the sample between subsamples, each forming a contrast.
+ 
+ 
+### 22. to 26. Russel and Driver (2005)
+
+Similar to Razpurker-Apfeld et al. (2008).
+
+Exp. 1, acc: interaction significant, positive sign because effect is facilitatory
+
+Exp. 1, RT: interaction non-significant, positive sign because effect is facilitatory
+
+Exp. 2, acc: interaction significant, positive sign because effect is facilitatory
+
+Exp. 2, RT: interaction non-significant, positive sign because effect is facilitatory
+
+Exp. 3, acc: interaction significant, positive sign because effect is facilitatory
+
+Exp. 3, RT: interaction non-significant, positive sign because effect is facilitatory
+
+Exp. 4A, acc: interaction significant, positive sign because effect is facilitatory
+
+Exp. 4A, RT: interaction non-significant, but data not available to compute effect size
+
+Exp. 4A, acc: interaction significant, positive sign because effect is facilitatory
+
+Exp. 4B, RT: interaction non-significant, but data not available to compute effect size
+
+Exp. 5, acc: interaction significant, positive sign because effect is facilitatory
+
+Exp. 5, RT: interaction non-significant, positive sign because effect is facilitatory
+
+### 27. Shafto and Pitts (2015)
+
+Effect is computed from the t-value and corresponding df from Phase 1, in IB group. Effect is non-significant, and negative.
+
+
+### 28. & 29. Schnuerch et al. (2016) exps. 1 and 2.
+
+Difference between incongruent and neutral trials in RT, which tests the hypothesis. Both effects are significant and facilitatory, thus have a positive sign.
+
+Computed Cohen's d in experiment is different from reported Cohen's d (0.43). Which to keep?
+
+
+### 30. Scholte et al. (2006)
+
+There are multiple contrasts, for v1, v2, v3, and v4/v8. Should all of them be separated?
+
+
+### 31. Vandenbroucke et al. (2014)
+
+
+### 32. Wiemer et al. (2013)
+
+Difference between SCRs evoked by flower stimuli and spider stimuli (p.161). The effect is facilitatory - thus, the sign is positive - and significant.
+
+Design in between-subjects.
+
+Degree of freedom is decimal?? Round down?
+
+--------------------------------------------------------------------------------
+
+# Compute correlation to calculate variance of d for hedge's g
+
+Two datasets are available to compute the correlation estimate: Razpurker-Apfeld et al. (2004) and Schnuerch et al. (2016).
 
 -----------------------------------------------------------------------------------
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.

@@ -1,31 +1,35 @@
 Study	eta_p_sqr	g	d	odds_ratio	CIlow	Cihigh	F	t	z	df_effect	df_error	N_per_group	N_trials_awareness	N_trials_implicit	p	significant?
 Ariga et al. (2007) - exp. 2			0.136					0.61		1	19	20	1	1	0.75	
-Beanland e Pammer (2010) - exp. 1A fixating		0.53	2.123		0.006	4.39		2.02		1	56	28	1	2	0.05	
-Beanland e Pammer (2010) - exp. 1A moving													1			
-Beanland e Pammer (2010) - exp. 2			1.48									41	1	2		
-																
+Beanland e Pammer (2010) - exp. 1A fixating		0.53	2.123		0.006	4.39		2.02		1	56	27	1	2	0.05	
+Beanland e Pammer (2010) - exp. 1A moving												31	1	2		
+Beanland e Pammer (2010) - exp. 2- slow US			1.48									41	1	2		
+Beanland e Pammer (2010) - exp. 2 - fast  US			1.48									41	1	2		
 Gabay et al. (2012) - exp. 1	0.17		0.905				6.1			1	28	18	1	40	0.02	
 Gabay et al. (2012) - exp. 2	0.17		0.905				4.4			1	21	10	1	40	0.048	
 Lo e Yeh (2008) - exp. 1 (200 ms)			0.12									43	1	16	0.44	
 Lo e Yeh (2008) - exp. 1 (500 ms)			0.71									41	1	16	0.00005	
 Lo e Yeh (2008) - exp. 2 (200 ms)			0.36									23	1	64	0.098	
 Lo e Yeh (2008) - exp. 2 (500 ms)			0.002									25	1	64	0.99	
-Moore and Egeth (1997)			0.7						3.13			20	1	17	0.01	
-Moore et al. (2003) – exp. 3			0.41					2.72		1	43	16	1	1	sig but not reported	
+Moore and Egeth (1997) - exp. 1			0.7						3.13			20	1	17	0.01	
+Moore and Egeth (1997) - exp. 3			0.7						3.13			20	1	17	0.01	
+Moore et al. (2003), exp. 3			0.41					2.72		1	43	16	1	1	sig but not reported	
 Moore et al. (2004)			0.1					0.51		1	24	25	1	1	1	
-Most et al. (2005) – exp. 1-7 pooled			0.215					2.9		1	181	186	1	1	0.04	
-Pitts et al. (2011)			0.504				30.48			1	30	16	1	240	0.000005	
-Razpurker-Apfeld and Pratt (2008)			0.134									14	1	320		
-Richards et al. (2012)	0.13		0.77									119	1	1		
-Russell and Driver (2005) - exp. 1	0.26		3.05									25	1	480		
-Russell and Driver (2005) - exp. 2	0.38		1.56									28	1	480		
-Russell and Driver (2005) - exp. 3	0.19		0.96									24	1	600		
-Russell and Driver (2005) - exp. 4A	0.24		1.12									20	1	600		
-Russell and Driver (2005) - exp. 4B	0.38		1.56									21	1	600		
-Russell and Driver (2005) - exp. 5	0.05		0.45									24	1	600		
+Most et al. (2005), exp. 1-7 pooled			0.215					2.9		1	181	186	1	1	0.04	
+Razpurker-Apfeld and Pratt (2008) - columns/rows, RT			0.134									14	1	320		
+Razpurker-Apfeld and Pratt (2008) - columns/rows, d'			0.134									14	1	320		
+Razpurker-Apfeld and Pratt (2008) - triangle/arrow, RT												14	1	320		
+Razpurker-Apfeld and Pratt (2008) - triangle/arrow, d'												14	1	320		
+Richards et al. (2012) - tracking task	0.13		0.77									119	1	1		
+Russell and Driver (2005) - exp. 1, acc	0.26		3.05									25	1	480		
+Russell and Driver (2005) - exp. 1, RT												25	1			
+Russell and Driver (2005) - exp. 2, acc	0.38		1.56									28	1	480		
+Russell and Driver (2005) - exp. 2, RT												28	1			
+Russell and Driver (2005) - exp. 3, acc	0.19		0.96									24	1	600		
+Russell and Driver (2005) - exp. 3, RT												24	1			
+Russell and Driver (2005) - exp. 4A, acc	0.24		1.12									20	1	600		
+Russell and Driver (2005) - exp. 4B, acc	0.38		1.56									21	1	600		
+Russell and Driver (2005) - exp. 5, acc	0.05		0.45									24	1	600		
+Russell and Driver (2005) - exp. 5, RT												24	1			
 Shafto and Pitts (2015)			0.419					1.57		1	14	15	1	216	0.0083	
-Schnuerch et al. (2016) – exp. 1			0.54									61	1	150	0.001	
-Schnuerch et al. (2016) – exp. 2			0.33									58	1	192	0.007	
-Scholte et al. (2006) – fMRI			1.25							1	7	8	1	667		
-Vanderbroucke et al. (2014)			0.385				13.8			3	66	37	1	72	0.000000438	
-Wiemer et al. (2013)			0.92									120	1	1	0.01	
+Schnuerch et al. (2016), exp. 1			0.54									61	1	150	0.001	
+Schnuerch et al. (2016), exp. 2			0.33									58	1	192	0.007	
