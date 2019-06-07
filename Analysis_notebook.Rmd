@@ -143,9 +143,11 @@ Computed Cohen's d in experiment is different from reported Cohen's d (0.43). Wh
 
 There are multiple contrasts, for v1, v2, v3, and v4/v8. Should all of them be separated?
 
+- Exclude - not behavioral
 
 ### 31. Vandenbroucke et al. (2014)
 
+- Exclude - not behavioral
 
 ### 32. Wiemer et al. (2013)
 
@@ -155,11 +157,30 @@ Design in between-subjects.
 
 Degree of freedom is decimal?? Round down?
 
---------------------------------------------------------------------------------
+- Exclude - not behavioral
 
-# Compute correlation to calculate variance of d for hedge's g
+## Compute correlation to calculate variance of d for hedge's g
 
 Two datasets are available to compute the correlation estimate: Razpurker-Apfeld et al. (2004) and Schnuerch et al. (2016).
+
+## Moderation
+
+We have the following variables to conduct moderation analysis so far for the implicit effects:
+
+* Measure: RT vs accuracy
+
+* Relevance: irrelevant vs. relevant
+
+* N of trials - this needs to be done with a regression, using n of trials as a continuous predictor
+
+# Heterogeneity
+
+We will check heterogeneity in two ways:
+
+* With the heterogeneity test output by the meta-analytical model.
+
+* By checking the width of confidence intervals in forest plots. This can also be used to identify the the heterogeneous ES in case of a significant result in the heterogeneity test, and then to remove them so that the test becomes non-significant.
+
 
 -----------------------------------------------------------------------------------
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.

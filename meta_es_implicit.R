@@ -7,6 +7,12 @@ library(meta)
 defaults <- par()
 options_defaults <- options()
 
+#============================================================================================#
+#==================================== 1. Prepare data =======================================#
+#============================================================================================#
+# Create vector with effect sizes
+source("Calculate_effect_sizes.R")
+
 # Read spreadsheet
 es_table<- read_delim("./es_coding_table.txt", 
                           delim="\t", locale = locale(decimal_mark = ".")) #%>%
@@ -43,8 +49,11 @@ es_table$variance_g <- (es_table$J)^2 * es_table$variance_d
 # Compute standard error of g (formula 4.25)
 es_table$se_g <- sqrt(es_table$variance_g)
 
+#============================================================================================#
+#============================ 2. Compute meta-analytic ES ===================================#
+#============================================================================================#
 
-## Compute meta analytic effect size
+## Build meta analytic effect model
 meta_es <- metagen(TE = es_table$hedgesg, # treatment effect (Hedge's g)
                    es_table$se_g, #standard error of treatment,
                    studlab = es_table$Study,
@@ -55,12 +64,14 @@ summary(meta_es)
 knitr::kable(meta_es)
 
 # Plots
-
-forest(meta_es, # <------------------ RUN THIS TO GENERATE UNTRIMMED FOREST PLOT  <--------------
+dev.new(width = 20, height = 12)
+forest(meta_es, # RUN THIS TO GENERATE UNTRIMMED FOREST PLOT
        STUDLAB = TRUE, #should study labels be printed?
        comb.fixed = FALSE, # plot fixed effect estimate?
        comb.random = TRUE # plot random effect estimate
        )
+dev.copy2eps
+
 
 funnel(meta_es,
        xlab = "Hedges' g")#,
@@ -77,10 +88,12 @@ trimmed_meta <- trimfill(meta_es,
 funnel(trimmed_meta,
        xlab = "Effect size")
 
-forest(trimmed_meta) # <------------------ RUN THIS TO GENERATE TRIMMED FOREST PLOT #
+forest(trimmed_meta) # RUN THIS TO GENERATE TRIMMED FOREST PLOT 
 
 
-#=============================================================================================================================#
+#=========================================================================================#
+#=================================== Heterogeneity =======================================#
+#=========================================================================================#
 
 mean(es_table$N_trials_implicit)
 sd(es_table$N_trials_implicit)

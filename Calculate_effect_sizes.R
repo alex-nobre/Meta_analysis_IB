@@ -41,7 +41,7 @@ c2_n_pairs <- 27
 # Mean and SD for control trials
 c2_control_mean <- 6.20
 c2_control_sd <- 3.26
-
+c2_control_variance <- (c2_control_sd)^2
 
 # # Critical trial 1
 # c2_critical_t1_mean <- 4.5
@@ -58,13 +58,17 @@ c2_control_sd <- 3.26
 # Mean and SD for critical trials
 c2_critical_mean <- 4.93
 c2_critical_sd <- 2.76
+c2_critical_variance <- (c2_critical_sd)^2
 
 # t-test to get t-value
-c2_tvalue <- (c2_control_mean - c2_critical_mean)/
-              ((c2_control_sd - c2_critical_sd)/sqrt(c2_n_pairs))
+# c2_tvalue <- (c2_control_mean - c2_critical_mean)/
+#               ((c2_control_sd - c2_critical_sd)/sqrt(c2_n_pairs))
+# 
+# c2_cohensd <- c2_tvalue/sqrt(c2_n_pairs)
 
-c2_cohensd <- c2_tvalue/sqrt(c2_n_pairs)
-  
+c2_m_difference <- c2_control_mean-c3_critical_mean #control - critical because lower scores are better
+c2_cohensd <- c2_m_difference/sqrt(mean(c(c2_critical_variance,
+                                          c2_control_variance)))
 
 #==== 3. Beanland and Pammer (2010) exp. 1A, moving ====
 
@@ -86,6 +90,7 @@ c3_n_pairs <- 31
 # Mean and SD for control trials
 c3_control_mean <- 4.10
 c3_control_sd <- 2.76
+c3_control_variance <- (c3_control_sd)^2
 
 # # Critical trial 1
 # c3_critical_t1_mean <- 2.2
@@ -102,18 +107,22 @@ c3_control_sd <- 2.76
 # Mean and SD for critical trials
 c3_critical_mean <- 2.76
 c3_critical_sd <- 2.49
+c3_critical_variance <- (c3_critical_sd)^2
 
 # t-test to get t-value
-c3_tvalue <- (c3_control_mean - c3_critical_mean)/
-              ((c3_control_sd - c3_critical_sd)/sqrt(c3_n_pairs))
+# c3_tvalue <- (c3_control_mean - c3_critical_mean)/
+#               ((c3_control_sd - c3_critical_sd)/sqrt(c3_n_pairs))
+# 
+# c3_cohensd <- c3_tvalue/sqrt(c3_n_pairs)
 
-c3_cohensd <- c3_tvalue/sqrt(c3_n_pairs)
+c3_m_difference <- c3_control_mean-c3_critical_mean #control - critical because lower scores are better
+c3_cohensd <- c3_m_difference/sqrt(mean(c(c3_critical_variance,
+                                          c3_control_variance)))
 
 
 #==== 4. Beanland and Pammer (2010) exp. 2, slow US ====
 
 #  Compute effect sizes from mean, sds and N
-
 c4_n_pairs <- 41
 
 # # Control trial 1
@@ -131,6 +140,7 @@ c4_n_pairs <- 41
 # Mean and SD for control trials
 c4_control_mean <- 0.21
 c4_control_sd <- 0.75
+c4_control_variance <- (c4_control_sd)^2
 
 # # Critical trial 1
 # c4_critical_t1_mean <- 0.1
@@ -147,16 +157,20 @@ c4_control_sd <- 0.75
 # Mean and SD for critical trials
 c4_critical_mean <- -0.04
 c4_critical_sd <- 0.50
+c4_critical_variance <- (c4_critical_sd)^2
 
 # t-test to get t-value
-c4_tvalue <- (c4_control_mean - c4_critical_mean)/((c4_control_sd - c4_critical_sd)/sqrt(c4_n_pairs))
+# c4_tvalue <- (c4_control_mean - c4_critical_mean)/((c4_control_sd - c4_critical_sd)/sqrt(c4_n_pairs))
+# 
+# c4_cohensd <- c4_tvalue/sqrt(c4_n_pairs)
 
-c4_cohensd <- c4_tvalue/sqrt(c4_n_pairs)
+c4_m_difference <- c4_control_mean-c4_critical_mean #control - critical because lower scores are better
+c4_cohensd <- c4_m_difference/sqrt(mean(c(c4_critical_variance,
+                                          c4_control_variance)))
 
 #==== 5. Beanland and Pammer (2010) exp. 2, fast US ====
 
 #  Compute effect sizes from mean, sds and N
-
 c5_n_pairs <- 41
 
 # # Control trial 1
@@ -174,6 +188,7 @@ c5_n_pairs <- 41
 # Mean and SD for control trials
 c5_control_mean <- 0.15
 c5_control_sd <- 0.43
+c5_control_variance <- (c5_control_sd)^2
 
 # # Critical trial 1
 # c5_critical_t1_mean <- 0.1
@@ -190,11 +205,16 @@ c5_control_sd <- 0.43
 # Mean and SD for critical trials
 c5_critical_mean <- -0.15
 c5_critical_sd <- 0.43
+c5_critical_variance <- (c5_critical_sd)^2
 
 # t-test to get t-value
-c5_tvalue <- (c5_control_mean - c5_critical_mean)/((c5_control_sd - c5_critical_sd)/sqrt(c5_n_pairs))
+#c5_tvalue <- (c5_control_mean - c5_critical_mean)/((c5_control_sd - c5_critical_sd)/sqrt(c5_n_pairs))
 
-c5_cohensd <- c5_tvalue/sqrt(c5_n_pairs)
+#c5_cohensd <- c5_tvalue/sqrt(c5_n_pairs)
+
+c5_m_difference <- c5_control_mean-c5_critical_mean #control - critical because lower scores are better
+c5_cohensd <- c5_m_difference/sqrt(mean(c(c5_critical_variance,
+                                          c5_control_variance)))
 
 #==== 6. Gabay et al. (2012) - Exp. 1 ====
 
@@ -276,33 +296,33 @@ c13_cohensd <- esc_chisq(chisquared, es.type = "d", totaln = 20)$es
 
 # Compute effect sizes from t-value and sample size
 
-c13_tvalue <- 2.72 # positive value, because effect is in the direction of facilitation
-c13_n_pairs <- 43
+c14_tvalue <- 2.72 # positive value, because effect is in the direction of facilitation
+c14_n_pairs <- 43
 
-c13_cohensd <- c13_tvalue/sqrt(c13_n_pairs)
+c14_cohensd <- c14_tvalue/sqrt(c14_n_pairs)
 
 
 #==== 15. Moore et al. (2004) ====
 
 # Compute effect sizes from t-value and sample size
 
-c14_tvalue <- 0.51 # positive value, because effect is in the direction of facilitation
-c14_n_pairs <- 24
-
-c14_cohensd <- c14_tvalue/sqrt(c14_n_pairs)
-
-
-#==== 15. Most et al. (2005) ====
-
-# Compute effect sizes from t-value and sample size
-
-c15_tvalue <- 2.90 # positive value, because effect is in the direction of facilitation
-c15_n_pairs <- 181
+c15_tvalue <- 0.51 # positive value, because effect is in the direction of facilitation
+c15_n_pairs <- 24
 
 c15_cohensd <- c15_tvalue/sqrt(c15_n_pairs)
 
 
-#==== 15. Pitts et al. (2011) ==== FOR NOW, DO NOT USE
+#==== 16. Most et al. (2005) ====
+
+# Compute effect sizes from t-value and sample size
+
+c16_tvalue <- 2.90 # positive value, because effect is in the direction of facilitation
+c16_n_pairs <- 181
+
+c16_cohensd <- c16_tvalue/sqrt(c16_n_pairs)
+
+
+#==== 17. Pitts et al. (2011) ==== FOR NOW, DO NOT USE
 
 # Compute effect sizes from F-value and p-value?
 # 
@@ -324,59 +344,59 @@ c15_cohensd <- c15_tvalue/sqrt(c15_n_pairs)
 #                            es.type = "d")$es
 
 
-#==== 16. Razpurker-Apfeld et al. (2008) - columns/rows, RT ====
+#==== 17. Razpurker-Apfeld et al. (2008) - columns/rows, RT ====
 
 # Compute effect sizes from F-value and dfs
 
-c16_fvalue <- 5.41 # negative value, because experimental condition is smaller
-c16_dfeffect <- 1
-c16_dferror <- 13
-
-c16_cohensd <- (c16_fvalue * c16_dfeffect)/(c16_fvalue*c16_dfeffect+c16_dferror)
-
-
-#==== 17. Razpurker-Apfeld et al. (2008) - columns/rows, d' ====
-
-# Compute effect sizes from F-value and dfs
-
-c17_fvalue <- 4.98 # positive value, because effect is facilitatory
+c17_fvalue <- 5.41 # negative value, because experimental condition is smaller
 c17_dfeffect <- 1
 c17_dferror <- 13
 
 c17_cohensd <- (c17_fvalue * c17_dfeffect)/(c17_fvalue*c17_dfeffect+c17_dferror)
 
 
-#==== 18. Razpurker-Apfeld et al. (2008) - triangle/arrow, RT ====
+#==== 18. Razpurker-Apfeld et al. (2008) - columns/rows, d' ====
 
 # Compute effect sizes from F-value and dfs
 
-c18_fvalue <- 0.001 # negative value, because experimental condition is smaller
+c18_fvalue <- 4.98 # positive value, because effect is facilitatory
 c18_dfeffect <- 1
 c18_dferror <- 13
 
 c18_cohensd <- (c18_fvalue * c18_dfeffect)/(c18_fvalue*c18_dfeffect+c18_dferror)
 
 
-#==== 19. Razpurker-Apfeld et al. (2008) - triangle/arrow, d' ====
+#==== 19. Razpurker-Apfeld et al. (2008) - triangle/arrow, RT ====
 
 # Compute effect sizes from F-value and dfs
 
-c19_fvalue <- 2.3 # positive value, because effect is facilitatory
+c19_fvalue <- 0.001 # negative value, because experimental condition is smaller
 c19_dfeffect <- 1
 c19_dferror <- 13
 
 c19_cohensd <- (c19_fvalue * c19_dfeffect)/(c19_fvalue*c19_dfeffect+c19_dferror)
 
-#==== 20. Richards et al. (2012), tracking task  ====
+
+#==== 20. Razpurker-Apfeld et al. (2008) - triangle/arrow, d' ====
+
+# Compute effect sizes from F-value and dfs
+
+c20_fvalue <- 2.3 # positive value, because effect is facilitatory
+c20_dfeffect <- 1
+c20_dferror <- 13
+
+c20_cohensd <- (c20_fvalue * c20_dfeffect)/(c20_fvalue*c20_dfeffect+c20_dferror)
+
+#==== 21. Richards et al. (2012), tracking task  ====
 
 # Compute effect sizes from proportions
 
-c20_successes <- 25
-c20_pop <- 25+29
+c21_successes <- 25
+c21_pop <- 25+29
 
-c20_chisquared <- prop.test(c20_successes, c20_pop,p=0.5, alternative = 'greater')$statistic
+c21_chisquared <- prop.test(c21_successes, c21_pop,p=0.5, alternative = 'greater')$statistic
 
-c20_cohensd <- (-1) * esc_chisq(c20_chisquared, es.type = "d", totaln = 25+29)$es #negative, because effect is not facilitatory
+c21_cohensd <- (-1) * esc_chisq(c21_chisquared, es.type = "d", totaln = 25+29)$es #negative, because effect is not facilitatory
 
 
 #==== 22. Russell et al. (2008) - exp. 1, acc ====
@@ -560,7 +580,12 @@ c37_n2 <- 60
 c37_cohensd <- abs(c37_m1 - c37_m2)/sqrt((((c37_n1-1)*c37_SD1**2)+
                                             ((c37_n2-1)*c37_SD2**2))/(c37_n1+c37_n2))
 
-cohensd_names <- paste("c", c(1:20, 22:28, 30, 32:37), "_cohensd",
+
+#========================================#
+#==== Build vector with effect sizes ====#
+#========================================#
+
+cohensd_names <- paste("c", c(1:28, 30, 32:36), "_cohensd",
                  sep = "")
 
 cohensd <- map_dbl(cohensd_names, get)
