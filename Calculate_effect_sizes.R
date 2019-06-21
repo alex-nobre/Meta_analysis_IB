@@ -66,7 +66,7 @@ c2_critical_variance <- (c2_critical_sd)^2
 # 
 # c2_cohensd <- c2_tvalue/sqrt(c2_n_pairs)
 
-c2_m_difference <- c2_control_mean-c3_critical_mean #control - critical because lower scores are better
+c2_m_difference <- c2_control_mean-c2_critical_mean #control - critical because lower scores are better
 c2_cohensd <- c2_m_difference/sqrt(mean(c(c2_critical_variance,
                                           c2_control_variance)))
 
@@ -589,3 +589,4 @@ cohensd_names <- paste("c", c(1:28, 30, 32:36), "_cohensd",
                  sep = "")
 
 cohensd <- map_dbl(cohensd_names, get)
+
