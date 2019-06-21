@@ -129,6 +129,7 @@ ggplot(data=es_table) +
 #================================ Moderation analysis ====================================#
 #=========================================================================================#
 
+
 ### compute subgroup analysis for binary categorical variables ###
 
 # unexpected stimulus relevance
@@ -137,19 +138,19 @@ mod_relevance_us <- update(meta_es, byvar=es_table$us_relevance, print.byvar=FAL
 summary(mod_relevance_us)
 
 # type of implicit measure
-## 0 = attentional and/or perceptual / 1 = response / 2 = neurophysiology
-#mod_implicit_type <- update(meta_es, byvar=es_table$implicit_type, print.byvar=FALSE)
-#summary(mod_implicit_type)
+## 0 = attentional and/or perceptual / 1 = response
+mod_implicit_type <- update(meta_es, byvar=es_table$implicit_type, print.byvar=FALSE)
+summary(mod_implicit_type)
 
 # implicit measure outcome
 ## 0 = RT / 1 = accuracy
-mod_implicit_measure_1 <- update(meta_es, byvar=es_table$implicit_measure_1, print.byvar=FALSE)
-summary(mod_implicit_measure_1)
+mod_implicit_measure <- update(meta_es, byvar=es_table$implicit_measure, print.byvar=FALSE)
+summary(mod_implicit_measure)
 
 # unexpected stimulus presentation
-## 0 = IB block / 1 = IB phase / 2 = interleaved
-#mod_us_presentation <- update(meta_es, byvar=es_table$us_presentation, print.byvar=FALSE)
-#summary(mod_us_presentation)
+## 0 = IB block or IB phase / 1 = interleaved
+mod_us_presentation <- update(meta_es, byvar=es_table$us_presentation, print.byvar=FALSE)
+summary(mod_us_presentation)
 
 # unexpected stimulus delay type
 ## 0 = fixed / 1 = variable
@@ -165,6 +166,7 @@ summary(mod_us_assessment)
 ## 0 = non-significant / 1 = significant
 mod_significance <- update(meta_es, byvar=es_table$significance, print.byvar=FALSE)
 summary(mod_significance)
+
 
 ### compute metaregression for non-binary categorical or continuous variables ###
 
@@ -187,16 +189,6 @@ summary(mod_N_participants_implicit)
 # number of participants for awareness
 mod_N_participants_awareness <- metareg(meta_es, es_table$N_participants_awareness)
 summary(mod_N_participants_awareness)
-
-# type of implicit measure
-## 0 = attentional and/or perceptual / 1 = response / 2 = neurophysiology
-mod_implicit_type <- metareg(meta_es, es_table$implicit_type)
-summary(mod_implicit_type)
-
-# unexpected stimulus presentation
-## 0 = IB block / 1 = IB phase / 2 = interleaved
-mod_us_presentation <- metareg(meta_es, es_table$us_presentation)
-summary(mod_us_presentation)
 
 
 
