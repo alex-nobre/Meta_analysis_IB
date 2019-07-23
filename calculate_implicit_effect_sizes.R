@@ -272,24 +272,30 @@ c11_cohensd <- 0.002
 #==== 12. Moore and Egeth (1997), exp. 1 ====
 
 # Compute effect size from proportion
-
-c12_successes <- 85*20/100
 c12_pop <- 20
+c12_successes <- 85*20/100
+c12_pop - c12_successes 
 
-chisquared <- prop.test(c12_successes, c12_pop,p=0.5, alternative = 'two.sided')$statistic
+chisquared <- unname(chisq.test(c(c12_successes, c12_failures), 
+                                                  p = c(0.5, 0.5))$statistic)
 
-c12_cohensd <- esc_chisq(chisquared, es.type = "d", totaln = 20)$es
+c12_cohensd <- esc_chisq(chisquared, 
+                         es.type = "d", 
+                         totaln = 20)$es
 
 #==== 13. Moore and Egeth (1997), exp. 3 ====
 
 # Compute effect size from proportion
-
-c13_successes <- 95*20/100
 c13_pop <- 20
+c13_successes <- round(95*c13_pop/100)
+c13_failures <- c13_pop - c13_successes
 
-chisquared <- prop.test(c13_successes, c13_pop,p=0.5, alternative = 'two.sided')$statistic
+chisquared <- unname(chisq.test(c(c13_successes, c13_failures), 
+                                p = c(0.5, 0.5))$statistic)
 
-c13_cohensd <- esc_chisq(chisquared, es.type = "d", totaln = 20)$es
+c13_cohensd <- esc_chisq(chisquared, 
+                         es.type = "d", 
+                         totaln = 20)$es
 
 
 #==== 14. Moore et al. (2003) ====
@@ -307,7 +313,7 @@ c14_cohensd <- c14_tvalue/sqrt(c14_n_pairs)
 # Compute effect sizes from t-value and sample size
 
 c15_tvalue <- 0.51 # positive value, because effect is in the direction of facilitation
-c15_n_pairs <- 24
+c15_n_pairs <- 25
 
 c15_cohensd <- c15_tvalue/sqrt(c15_n_pairs)
 
@@ -390,13 +396,15 @@ c20_cohensd <- (c20_fvalue * c20_dfeffect)/(c20_fvalue*c20_dfeffect+c20_dferror)
 #==== 21. Richards et al. (2012), tracking task  ====
 
 # Compute effect sizes from proportions
-
-c21_successes <- 25
 c21_pop <- 25+29
+c21_successes <- 25
+c21_failures <- c21_pop - c21_successes
 
-c21_chisquared <- prop.test(c21_successes, c21_pop,p=0.5, alternative = 'greater')$statistic
-
-c21_cohensd <- (-1) * esc_chisq(c21_chisquared, es.type = "d", totaln = 25+29)$es #negative, because effect is not facilitatory
+c21_chisquared <- unname(chisq.test(c(c21_successes, c21_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+c21_cohensd <- (-1) * esc_chisq(c21_chisquared, 
+                                es.type = "d", 
+                                totaln = c21_pop)$es #negative, because effect is not facilitatory
 
 
 #==== 22. Russell et al. (2008) - exp. 1, acc ====
@@ -580,6 +588,61 @@ c37_n2 <- 60
 c37_cohensd <- abs(c37_m1 - c37_m2)/sqrt((((c37_n1-1)*c37_SD1**2)+
                                             ((c37_n2-1)*c37_SD2**2))/(c37_n1+c37_n2))
 
+
+#==== 40. Mack and Rock. exp 1. (2000) ====
+
+#==== 41. Mack and Rock. exp 2. (2000) ====
+c41_pop <- 41
+c41_successes <- 13
+c41_failures <- c41_pop - c41_successes
+
+
+c41_chisquared <- unname(chisq.test(c(c41_successes, c41_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+c41_cohensd <- esc_chisq(c41_chisquared,
+                         es.type = "d",
+                         totaln = c41_pop)$es
+
+#==== 42. Mack and Rock. exp 3. (2000) ====
+c42_pop <- 21
+c42_successes <- 6
+c42_failures <- c42_pop - c42_successes
+
+
+c42_chisquared <- unname(chisq.test(c(c42_successes, c42_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+c42_cohensd <- esc_chisq(c42_chisquared,
+                         es.type = "d",
+                         totaln = c42_pop)$es
+
+
+#==== 43. Mack and Rock. exp 4 (2000) ====
+c43_pop <- 29
+c43_successes <- 14
+c43_failures <- c43_pop - c43_successes
+
+
+c43_chisquared <- unname(chisq.test(c(c43_successes, c43_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+c43_cohensd <- esc_chisq(c43_chisquared,
+                         es.type = "d",
+                         totaln = c43_pop)$es
+
+#==== 44. Mack and Rock. exp 5 (2000) ====
+c44_pop <- 10+9
+c44_successes <- 5+3
+c44_failures <- c44_pop - c44_successes
+
+
+c44_chisquared <- unname(chisq.test(c(c44_successes, c44_failures), 
+                                    p = c(0.20, 0.80))$statistic)
+
+c44_cohensd <- esc_chisq(c44_chisquared,
+                         es.type = "d",
+                         totaln = c44_pop)$es
 
 #========================================#
 #==== Build vector with effect sizes ====#

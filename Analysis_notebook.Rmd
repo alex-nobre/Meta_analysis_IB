@@ -14,7 +14,7 @@ US = unexpected stimulus/stimuli;
 Each experiment can contribute with one or more effect sizes/tests, one in each line. Each one of those is called a contrast.
 
 
-# Effect size computation
+# Implicit Effect size computation
 We compute effect sizes based on available data from the papers. From the papers included after full-text reading, the following did not present enough data to allow the computation of an effect-size:
  
  * Lathrop et al. (2011)
@@ -33,7 +33,7 @@ In our analysis, since there is no treatment/control group, we have to choose an
 Problem:in some cases, smaller RTs result from implicit processing (e.g., orienting of attention by arrows - Gabay); in others, larger RTs result (e.g., amodal completion of dashed lines - Moore and Egeth, 2003).  So we cannot simply subtract experimental - control, because this will result in effects in both directions meaning the same thing
 
 
-## Alternative:
+* Alternative:
 
 - Code effects in the direction of facilitation as positive and effects in the direction of no facilitation (these will most likely be nonsignificant, but what matters is their contribution for the meta-analytic effect size) as negative.
 
@@ -44,9 +44,14 @@ Are there any studies which do these criteria do not contemplate?
 
 * What about when it is a comparison against chance? - deviations above chance mean a difference in the direction of facilitation, thus positive; below chance (also in this case, most likely nonsignificant) as no facilitation, thuss negative.
 
-### 1. Ariga et al. (2008)
+Whenever an implicit effect is computed from proportions or percentages:
 
-### 2 to 5. Beanland and Pammer (2011)
+* success = participant displayed the effect
+* failure = participant did not display the effect
+
+## 1. Ariga et al. (2008)
+
+## 2 to 5. Beanland and Pammer (2011)
 
 Each condition (eyes-fixating x eyes-moving in exp. 1A, slow-US x fast-US in exp. 2) is a separate contrast, so each should be coded in a separated line.
 
@@ -159,9 +164,159 @@ Degree of freedom is decimal?? Round down?
 
 - Exclude - not behavioral
 
+
+## Mack and Rock's experiments from chapter 8
+
+### Exp. 1 - p. 178-179
+
+Use reported number of subjects who offered prime as stem-completion to compute proportions.
+
+### Exp. 2 - p. 182
+
+Use reported number of subjects who offered prime as stem-completion to compute proportions.
+
+### Exp. 3 - p. 184
+
+Use reported number of subjects who offered prime as stem-completion to compute proportions.
+
+### Exp. 4 - p. 187-188
+
+Use reported number of subjects who offered prime as stem-completion to compute proportions.
+
+### Exp. 5 - p. 191
+
+Use reported number of subjects who offered prime as stem-completion to compute proportions.
+
 ## Compute correlation to calculate variance of d for hedge's g
 
 Two datasets are available to compute the correlation estimate: Razpurker-Apfeld et al. (2004) and Schnuerch et al. (2016).
+
+# Awareness effect sizes computations
+
+Whenever awareness is computed from proportions or percentages:
+
+* success = participant was aware
+* failure = participant was unaware
+
+## 1. Ariga et al. (2008)
+
+## 11 & 12. Moore and Egeth, exps. 1 and 3
+
+Use of direct query instead of forced-choice, since this can be performed using implicit knowledge
+
+* Exp. 1: p. 345
+
+* Exp. 3: p. 349
+
+Effect sizes computed using percentage of noticers given
+
+Result is infinite, so replace with largest effect in data
+
+## 13. Moore et al. (2003)
+
+Use question about regularity (p. 312), instead of orientation (p. 313), since the former assesses perception more generally and thus might be more sensitive
+
+Use reported percentage of noticers
+
+## 14. Moore et al. (2004)
+
+Use of direct query (714) instead of forced-choice for awareness effect, since this can be performed using implicit knowledge
+
+Effect size is computed from given percentage of noticers.
+
+## 15. Most et al. (2004)
+
+### Exp. 1 - p. 228
+
+Use reported sum of number of noticers across conditions as successes and total n across conditions as population. Although this mixes distinct rates of noticing in distinct conditions, this is coherent with how the implicit effect sizes were reported in experiment eight, where conditions are also mixed.
+
+### Exp. 2 - p. 229
+
+Use reported percentage of noticers in each condition to compute n of noticers, and sum results to obtain n of successes.
+
+### Exp. 3 - p. 229 (rates), 230 (total n)
+
+Use reported percentage of noticers in each condition to compute n of noticers, and sum results to obtain n of successes.
+
+### Exp. 4 - p. 229 (rates), 231 (total n)
+
+Use reported percentage of noticers in each condition to compute n of noticers, and sum results to obtain n of successes.
+
+### Exp. 5 - p. 229 (rates), 233 (total n)
+
+Use reported percentage of noticers in each condition to compute n of noticers, and sum results to obtain n of successes.
+
+### Exp. 6 - p. 229 (rates), 233 (total n)
+
+Use reported percentage of noticers in each condition to compute n of noticers, and sum results to obtain n of successes.
+
+### Exp. 7 - p. 229 (rates), 234 (total n)
+
+Use reported percentage of noticers in each condition to compute n of noticers, and sum results to obtain n of successes.
+
+
+## 16. Razpurker-Apfeld et al. (2008) 
+
+Use reported number of noticers (p. 188) and total n (p. 185) to compute chi-square. Two distinct effect sizes are computed by condition; within the same condition, the effect size is the same for RT and d', since it is the same sample. They are coded as separate cohen's d because RT and d' are separate entries (lines) in the table.
+
+## 17. Richards et al. (2012)
+
+Use reported percentage of noticers (p. 173) to compute n of noticers.
+
+## 18. Russel and Driver (2005), exps. 1-5
+
+### Exp. 1 - p. 610
+
+Use reported n of noticers to compute chi-squared.
+
+### Exp. 2 - p. 611
+
+Use reported n of noticers to compute chi-squared.
+
+### Exp. 3 - p. 613
+
+Use reported n of noticers to compute chi-squared.
+
+### Exp. 4A - p. 614-615
+
+Use reported n of noticers to compute chi-squared.
+
+### Exp. 4B - p. 615
+
+Use reported n of noticers to compute chi-squared.
+
+### Exp. 5 - p. 618
+
+Use reported n of noticers to compute chi-squared.
+
+## Mack and Rock's experiments from chapter 8
+
+### Exp. 1 - p. 178
+
+Use reported number of unaware subjects to compute proportions.
+
+### Exp. 2 - p. 182
+
+Use reported number of unaware subjects to compute proportions.
+
+### Exp. 3 - p. 184
+
+Use reported number of unaware subjects to compute proportions.
+
+### Exp. 4 - p. 187
+
+Use reported number of unaware subjects to compute proportions.
+
+## 19. Shafto and Pitts (2015) - p. 10943
+
+Use reported number of inattentionally blind subjects.
+
+## 20. Wiemer et al. (2013) - p. 160
+
+Use of percentage of noticers by condition to compute proportions, sum across conditions and compute chi-squared.
+
+
+# Meta-analytic model
 
 ## Moderation
 
@@ -173,9 +328,16 @@ We have the following variables to conduct moderation analysis so far for the im
 
 * N of trials - this needs to be done with a regression, using n of trials as a continuous predictor
 
+* Run moderator analysis for inattention paradigm
+
+* Run moderator analysis for papers performing group assessment of awareness instead of inattetion paradigm - Alex
+
+Perform analysis within subgroups and then comparisons between subgroups
+
+
 # Heterogeneity
 
-We will check heterogeneity in two ways:
+We checked heterogeneity in two ways:
 
 * With the heterogeneity test output by the meta-analytical model.
 
