@@ -14,7 +14,7 @@ US = unexpected stimulus/stimuli;
 Each experiment can contribute with one or more effect sizes/tests, one in each line. Each one of those is called a contrast.
 
 
-# Implicit Effect size computation
+# Implicit Effect size computations
 We compute effect sizes based on available data from the papers. From the papers included after full-text reading, the following did not present enough data to allow the computation of an effect-size:
  
  * Lathrop et al. (2011)
@@ -57,20 +57,17 @@ Each condition (eyes-fixating x eyes-moving in exp. 1A, slow-US x fast-US in exp
 
 Should we average the mean and sd of accuracy across critical trials (3 and 5) and control trials (2 and 4)? 
 
-First, there is a difference in the degree of awareness: For non-notices only, this is ok, trials don't differ in awareness. For noticers, this would be problematic, since this group includes both individuals who noticed the US in the first critical trial and those who didn't.
+First, there is a difference in the degree of awareness: For non-noticers only, this is ok, since trials don't differ in awareness. For noticers, this would be problematic, since this group includes both individuals who noticed the US in the first critical trial and those who didn't.
 
-If we only analyze non-noticers processing, this should not be a problem. 
+If we only analyze non-noticers processing, this should not be a problem. Since implicit processing effects are computed from non-noticers only, we can average trials for them without resulting in mixing explicit and implicit effects. This demands that the implicit group be composed only of participants who did not notice the US in either the first or the second critical trial.
 
-However, there is still the issue of repeated exposition, which differs between the first and second critical trials.
-
-In a lot of studies, we have multiple critical trials, in others, only one. Considering that we don't have access to single-trial data in most studies, I propose we do average the critical trials. This can be used later to compare power between studies with distinct numbers of critical trials. 
-To analyze averaged trials, we need the combined means and standard deviations of both control trials averaged and both critical trials averaged. These can be computed from the raw data sent by Beanland.
+There is still the issue of repeated exposition, which differs between the first and second critical trials. In a lot of studies, we have multiple critical trials, in others, only one. Considering that we don't have access to single-trial data in most studies, I propose we do average the critical trials. This can be used later to compare power between studies with distinct numbers of critical trials. To analyze averaged trials, we need the combined means and standard deviations of both control trials averaged and both critical trials averaged. These can be computed from the raw data sent by Beanland.
 
 - Exp. 1A: Table 2 on page 981.
 
-- Exp. 2: TAble 8 on page 986.
+- Exp. 2: Table 8 on page 986.
 
-### 12. & 13. Moore and Egeth, exps. 1 and 3
+## 12. & 13. Moore and Egeth, exps. 1 and 3
 
 Experiment 2 is not included because it aims only at eliminating a visual confound; it does not include the illusion.
 
@@ -80,10 +77,10 @@ The effect of the background on the responses is given by the percentage of subj
 
 - Exp. 3: "inattention block" data on page. 349
 
-### 14. Moore et al. (2003)
+## 14. Moore et al. (2003)
 
 
-### 15. to 19. Razpurker-Apfeld et al. (2008)
+## 15. to 19. Razpurker-Apfeld et al. (2008)
 
 Each condition (column/row vs. triangle/arrow) is treated as a separate constrast. 
 
@@ -93,7 +90,7 @@ The direction of the interaction is determined as explained above.
 - d': Implicit processing is the difference between d' in same and different background conditions. d' = hit - false alarms in different trials. If d' is positive, effect is facilitatory (hits > false alarms), so the effect size is also positive; otherwise, the effect size is negative.
 
 
-### 20. & 21. Richards et al. (2012)
+## 20. & 21. Richards et al. (2012)
 
 Data comes from page 174 in the paper, on Table 1, only from "IBs" participants. Lines from the inspection screen stage are not included because this stage does not include the US (red cross). Two options for effect:
 
@@ -104,7 +101,7 @@ Data comes from page 174 in the paper, on Table 1, only from "IBs" participants.
 We can also split the sample between subsamples, each forming a contrast.
  
  
-### 22. to 26. Russel and Driver (2005)
+## 22. to 26. Russel and Driver (2005)
 
 Similar to Razpurker-Apfeld et al. (2008).
 
@@ -132,29 +129,29 @@ Exp. 5, acc: interaction significant, positive sign because effect is facilitato
 
 Exp. 5, RT: interaction non-significant, positive sign because effect is facilitatory
 
-### 27. Shafto and Pitts (2015)
+## 27. Shafto and Pitts (2015)
 
 Effect is computed from the t-value and corresponding df from Phase 1, in IB group. Effect is non-significant, and negative.
 
 
-### 28. & 29. Schnuerch et al. (2016) exps. 1 and 2.
+## 28. & 29. Schnuerch et al. (2016) exps. 1 and 2.
 
 Difference between incongruent and neutral trials in RT, which tests the hypothesis. Both effects are significant and facilitatory, thus have a positive sign.
 
 Computed Cohen's d in experiment is different from reported Cohen's d (0.43). Which to keep?
 
 
-### 30. Scholte et al. (2006)
+## 30. Scholte et al. (2006)
 
 There are multiple contrasts, for v1, v2, v3, and v4/v8. Should all of them be separated?
 
 - Exclude - not behavioral
 
-### 31. Vandenbroucke et al. (2014)
+## 31. Vandenbroucke et al. (2014)
 
 - Exclude - not behavioral
 
-### 32. Wiemer et al. (2013)
+## 32. Wiemer et al. (2013)
 
 Difference between SCRs evoked by flower stimuli and spider stimuli (p.161). The effect is facilitatory - thus, the sign is positive - and significant.
 
@@ -165,27 +162,34 @@ Degree of freedom is decimal?? Round down?
 - Exclude - not behavioral
 
 
-## Mack and Rock's experiments from chapter 8
+## 33 to 35. Mack and Rock's experiments from chapter 8
 
 ### Exp. 1 - p. 178-179
 
-Use reported number of subjects who offered prime as stem-completion to compute proportions.
+Use reported number of subjects who offered prime word as stem-completion in the priming experiment and in the control experiment; build a contingency table with the proportions; and compute chi-squared from the contingency table.
+
+In figure 1, reported percentage of participants who offered the words as stem completion does not match the n reported in the text on page 179; using percentages to compute proportions instead.
 
 ### Exp. 2 - p. 182
 
-Use reported number of subjects who offered prime as stem-completion to compute proportions.
+Use reported number of subjects who offered prime word as stem-completion in the priming experiment and in the control experiment; build a contingency table with the proportions; and compute chi-squared from the contingency table.
 
 ### Exp. 3 - p. 184
 
-Use reported number of subjects who offered prime as stem-completion to compute proportions.
+Use reported number of subjects who offered prime word as stem-completion in the priming experiment and those in the control experiment who were presented roots for the same words as in exp 3 (short and flake) shown in figure 1 (p. 178), to control for stimulus properties like frequency; build a contingency table with the proportions; and compute chi-squared from the contingency table.
+
+In figure 1, reported percentage of participants who offered "short" as stem completion + those who offered "flake" does not match the n reported in the text on page 179; using percentages to compute proportions instead.
 
 ### Exp. 4 - p. 187-188
 
-Use reported number of subjects who offered prime as stem-completion to compute proportions.
+Use reported number of subjects who offered prime word as stem-completion in the priming experiment and in the control experiment; build a contingency table with the proportions; and compute chi-squared from the contingency table.
+
+Reported chi-square value was incorrect (14.54, p.188).
 
 ### Exp. 5 - p. 191
 
-Use reported number of subjects who offered prime as stem-completion to compute proportions.
+Use reported number of subjects who offered prime word as stem-completion in the priming experiment and in the control experiment; build a contingency table with the proportions; and compute chi-squared from the contingency table.
+
 
 ## Compute correlation to calculate variance of d for hedge's g
 
@@ -199,6 +203,10 @@ Whenever awareness is computed from proportions or percentages:
 * failure = participant was unaware
 
 ## 1. Ariga et al. (2008)
+
+## 2 to 5. Beanland and Pammer (2011)
+
+Since for the implicit processing effect sizes we considered only participants who were IB in both trials, and the goal of using awareness effect sizes is to assess the power of awareness measures, we adopted a conservative threshold and considered a success any participant who notices the US in either the first or the second critical trial.
 
 ## 11 & 12. Moore and Egeth, exps. 1 and 3
 
@@ -315,6 +323,10 @@ Use reported number of inattentionally blind subjects.
 
 Use of percentage of noticers by condition to compute proportions, sum across conditions and compute chi-squared.
 
+
+# Calculation of effect sizes for model
+
+We chose to use hedge's g as standardized effect size. We computed hedge's g using formulas for matched groups from Borenstein's introduction to meta-analysis (2009), pp. 25-30.
 
 # Meta-analytic model
 

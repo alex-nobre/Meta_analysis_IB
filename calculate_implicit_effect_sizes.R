@@ -1,6 +1,7 @@
 
 library(esc)
 library(tidyverse)
+library(magrittr)
 
 # Effect sizes:
 
@@ -274,10 +275,10 @@ c11_cohensd <- 0.002
 # Compute effect size from proportion
 c12_pop <- 20
 c12_successes <- 85*20/100
-c12_pop - c12_successes 
+c12_failures <- c12_pop - c12_successes 
 
 chisquared <- unname(chisq.test(c(c12_successes, c12_failures), 
-                                                  p = c(0.5, 0.5))$statistic)
+                                p = c(0.5, 0.5))$statistic)
 
 c12_cohensd <- esc_chisq(chisquared, 
                          es.type = "d", 
@@ -590,66 +591,136 @@ c37_cohensd <- abs(c37_m1 - c37_m2)/sqrt((((c37_n1-1)*c37_SD1**2)+
 
 
 #==== 40. Mack and Rock. exp 1. (2000) ====
+c41_pop <- 50 + 80
 
-#==== 41. Mack and Rock. exp 2. (2000) ====
-c41_pop <- 41
-c41_successes <- 13
-c41_failures <- c41_pop - c41_successes
+# compute correct number of completers in control group from percentages
 
+c41_control_completers <- round(10*20/100) + # yes in control group - flake
+  round(0*20/100) + # yes in control group - grace
+  round(15*20/100) + # yes in control group - short
+  round(5*20/100) # yes in control group - prize
 
-c41_chisquared <- unname(chisq.test(c(c41_successes, c41_failures), 
-                                    p = c(0.5, 0.5))$statistic)
+c41_chisquared_table <- matrix(c(80 - c41_control_completers, # no in control group
+                                  32, # no in ib group
+                                  c41_control_completers, # yes in control group
+                                  18), # yes in ib group
+                                nrow = 2,
+                                ncol = 2,
+                                dimnames = list(c("control", "ib"), #row names
+                                                c("no", "yes") #column names
+                                )
+)
+
+# Compute chisquare from table
+c41_chisquared <- unname(chisq.test(c41_chisquared_table)$statistic)
+
 
 c41_cohensd <- esc_chisq(c41_chisquared,
                          es.type = "d",
                          totaln = c41_pop)$es
 
-#==== 42. Mack and Rock. exp 3. (2000) ====
-c42_pop <- 21
-c42_successes <- 6
-c42_failures <- c42_pop - c42_successes
+#==== 41. Mack and Rock. exp 2. (2000) ====
+c42_pop <- 41 + 60
 
 
-c42_chisquared <- unname(chisq.test(c(c42_successes, c42_failures), 
-                                    p = c(0.5, 0.5))$statistic)
+c42_chisquared_table <- matrix(c(55, # no in control group
+                                 34, # no in ib group
+                                 5, # yes in control group
+                                 24), # yes in ib group
+                               nrow = 2,
+                               ncol = 2,
+                               dimnames = list(c("control", "ib"), #row names
+                                               c("no", "yes") #column names
+                               )
+)
+
+# Compute chisquare from table
+c42_chisquared <- unname(chisq.test(c42_chisquared_table)$statistic)
 
 c42_cohensd <- esc_chisq(c42_chisquared,
                          es.type = "d",
                          totaln = c42_pop)$es
 
+#==== 42. Mack and Rock. exp 3. (2000) ====
+c43_pop <- 21 + #exp. 3
+  20 + #control for exp 1 - short
+  20 #control for exp 1 - flake
 
-#==== 43. Mack and Rock. exp 4 (2000) ====
-c43_pop <- 29
-c43_successes <- 14
-c43_failures <- c43_pop - c43_successes
+c43_chisquared_table <- matrix(c(40 - (round(10*20/100) + round(15*20/100)), # no in control group
+                                 32, # no in ib group
+                                 round(10*20/100) + # yes in control group - flake
+                                   round(15*20/100), # yes in control group - short
+                                 18), # yes in ib group
+                               nrow = 2,
+                               ncol = 2,
+                               dimnames = list(c("control", "ib"), #row names
+                                               c("no", "yes") #column names
+                               )
+)
 
-
-c43_chisquared <- unname(chisq.test(c(c43_successes, c43_failures), 
-                                    p = c(0.5, 0.5))$statistic)
+# Compute chisquare from table
+c43_chisquared <- unname(chisq.test(c43_chisquared_table)$statistic)
 
 c43_cohensd <- esc_chisq(c43_chisquared,
                          es.type = "d",
                          totaln = c43_pop)$es
 
-#==== 44. Mack and Rock. exp 5 (2000) ====
-c44_pop <- 10+9
-c44_successes <- 5+3
-c44_failures <- c44_pop - c44_successes
 
+#==== 43. Mack and Rock. exp 4 (2000) ====
+c44_pop <- 60 + 29
 
-c44_chisquared <- unname(chisq.test(c(c44_successes, c44_failures), 
-                                    p = c(0.20, 0.80))$statistic)
+c44_chisquared_table <- matrix(c(53, # no in control group
+                                  15, # no in ib group
+                                  7, # yes in control group
+                                  14), # yes in ib group
+                                nrow = 2,
+                                ncol = 2,
+                                dimnames = list(c("control", "ib"), #row names
+                                                c("no", "yes") #column names
+                                                ) 
+                                )
+
+c44_chisquared <- unname(chisq.test(c44_chisquared_table)$statistic)
 
 c44_cohensd <- esc_chisq(c44_chisquared,
                          es.type = "d",
                          totaln = c44_pop)$es
 
+#==== 44. Mack and Rock. exp 5 (2000) ====
+c45_pop <- 60+10+9
+
+
+# Build variables for contingency table
+c45_group_control <- rep("control", 60)
+c45_group_ib <- rep("ib", 10+9)
+
+c45_implicit_control <- c(rep("yes", 7), rep("no", 53))
+c45_implicit_ib <- c(rep("yes", 8), rep("no", 11))
+
+c45_group <- c(c45_group_control,
+                c45_group_ib)
+c45_implicit <- c(c45_implicit_control,
+                          c45_implicit_ib)
+
+c45_data <- data.frame("group" = c45_group,
+                        "implicit" = c45_implicit)
+
+# Create contingency table from data frame
+c45_chisquared_table <- table(c45_data)
+
+# Compute chisquare from table
+c45_chisquared <- unname(chisq.test(c45_chisquared_table)$statistic)
+
+c45_cohensd <- esc_chisq(c45_chisquared,
+                         es.type = "d",
+                         totaln = c45_pop)$es
+
 #========================================#
 #==== Build vector with effect sizes ====#
 #========================================#
 
-cohensd_names <- paste("c", c(1:28, 30, 32:36), "_cohensd",
+implicit_cohensd_names <- paste("c", c(1:11, 41:45, 12:28, 30, 32:36), "_cohensd",
                  sep = "")
 
-cohensd <- map_dbl(cohensd_names, get)
+implicit_cohensd <- map_dbl(implicit_cohensd_names, get)
 

@@ -20,19 +20,15 @@ options_defaults <- options()
 #============================================================================================#
 #==================================== 1. Prepare data ========================================
 #============================================================================================#
-# Create vector with effect sizes
-source("Calculate_effect_sizes.R")
+# Create data frame
+source("create_es_data_table.R")
 
-# Read spreadsheet
-#es_table<- read_delim("./es_coding_table.txt", 
-#                         delim="\t", locale = locale(decimal_mark = ".")) #%>%
-  #dplyr::select(c(1:14))
-es_table<- read_delim("./es_coding_table.csv", 
-                      delim=";", 
-                      locale = locale(decimal_mark = ".")) #%>%
+# Create vectors with effect sizes for implicit processing and awareness
+source("calculate_implicit_effect_sizes.R")
+source("calculate_awareness_effect_sizes.R")
 
 View(es_table)
-#str(es_table)
+
 
 ## Estimate correlation between measures (conditions) 
 ##to compute Cohen's d for variance from two studies:
@@ -43,28 +39,50 @@ View(es_table)
 cor_pairs <- 0.93
 
 # replace ds by computed cohens ds
-es_table$d <- cohensd
+es_table$implicit_d <- implicit_cohensd
+es_table$awareness_d <- awareness_cohensd
 
-## Create variables to compute Hedges' g (formulas from Borestein's Introduction to Meta-Analysis, 2009)
+## Create variables to compute Hedges' g (formulas from Borestein's Introduction to Meta-Analysis, 2009) 
+## for both implicit and awareness effect sizes
+
+### Implicit ES
 
 # Compute variance of d (formula 4.28)
-es_table$variance_d <- (1/es_table$N_per_group + 
-                          (es_table$d)^2/2*es_table$N_per_group) * 2*(1-cor_pairs)
+es_table$variance_implicit_d <- (1/es_table$N_per_group + 
+                          (es_table$implicit_d)^2/2*es_table$N_per_group) * 2*(1-cor_pairs)
 
 # Compute correction factor J (formula 4.22)
 es_table$J <- 1 - (3/(4*(es_table$N_per_group-1)-1))
 
 # Compute Hedges' g (formula 4.23)
-es_table$hedgesg <- es_table$J * es_table$d 
+es_table$implicit_hedgesg <- es_table$J * es_table$implicit_d 
 
 # Compute variance of g (formula 4.24)
-es_table$variance_g <- (es_table$J)^2 * es_table$variance_d
+es_table$variance_implicit_g <- (es_table$J)^2 * es_table$variance_implicit_d
 
 # Compute standard error of g (formula 4.25)
-es_table$se_g <- sqrt(es_table$variance_g)
+es_table$se_implicit_g <- sqrt(es_table$variance_implicit_g)
+
+### Awareness ES
+
+# Compute variance of d (formula 4.28)
+es_table$variance_awareness_d <- (1/es_table$N_per_group + 
+                                   (es_table$awareness_d)^2/2*es_table$N_per_group) * 2*(1-cor_pairs)
+
+# Compute correction factor J (formula 4.22)
+es_table$J <- 1 - (3/(4*(es_table$N_per_group-1)-1))
+
+# Compute Hedges' g (formula 4.23)
+es_table$awareness_hedgesg <- es_table$J * es_table$awareness_d 
+
+# Compute variance of g (formula 4.24)
+es_table$variance_awareness_g <- (es_table$J)^2 * es_table$variance_awareness_d
+
+# Compute standard error of g (formula 4.25)
+es_table$se_awareness_g <- sqrt(es_table$variance_awareness_g)
 
 # Categorize experiments as inattention paradigms or not; 0 = no, 1 = yes
-es_table$inattention_paradigm <- c(rep(0, 16), #ariga_2007_exp2 to most_2005_exp1to7pooled
+es_table$inattention_paradigm <- c(rep(0, 21), #ariga_2007_exp2 to most_2005_exp1to7pooled
                                   rep(1,4), #razpurker-apfeld and pratt, 2008
                                   0, #richards_2012_tracking
                                   rep(1, 10), #russsel_driver_2005
@@ -75,7 +93,9 @@ es_table$inattention_paradigm <- c(rep(0, 16), #ariga_2007_exp2 to most_2005_exp
 # Categorize experiments as group assessment of awareness or not; 0 = no, 1 = yes
 es_table$group_aware_assess <- c(1, #ariga_2007_exp2
                                  rep(0, 6), #beanland_pammer_2010_exp1A_fixating to gabay_2012_exp2
-                                 rep(1,13), #lo_yeh_2008_exp1_200ms to razpurker-apfeld and pratt, 2008
+                                 rep(1,4), #lo_yeh_2008_exp1_200ms
+                                 rep(0, 5), #mack_and_rock_2000
+                                 rep(1,9),  # moore_egeth_1997_exp1 to razpurker-apfeld and pratt, 2008
                                  0, #richards_2012_tracking
                                  rep(1, 10), #russsel_driver_2005
                                  rep(0,3) #shafto_pitts_2015 and schunerch_2016
@@ -86,19 +106,20 @@ es_table$group_aware_assess <- c(1, #ariga_2007_exp2
 #============================ 2. Compute meta-analytic ES ====================================
 #============================================================================================#
 
+# 2.1. Implicit ES
 ## Build meta analytic effect model
-meta_es <- metagen(TE = es_table$hedgesg, # treatment effect (Hedge's g)
-                   es_table$se_g, #standard error of treatment,
+implicit_meta_es <- metagen(TE = es_table$implicit_hedgesg, # treatment effect (Hedge's g)
+                   es_table$se_implicit_g, #standard error of treatment,
                    studlab = es_table$study,
                    comb.fixed = TRUE,
                    comb.random = TRUE)
 
-summary(meta_es)
-knitr::kable(meta_es)
+summary(implicit_meta_es)
+knitr::kable(implicit_meta_es)
 
 # Plots
 dev.new(width = 20, height = 12)
-forest(meta_es, # generate untrimmed forest plot
+forest(implicit_meta_es, # generate untrimmed forest plot
        STUDLAB = TRUE, #should study labels be printed?
        comb.fixed = FALSE, # plot fixed effect estimate?
        comb.random = TRUE # plot random effect estimate
@@ -106,7 +127,7 @@ forest(meta_es, # generate untrimmed forest plot
 dev.copy2eps
 
 
-funnel(meta_es,
+funnel(implicit_meta_es,
        xlab = "Hedges' g")#,
        #studlab = es_table$Study)
 

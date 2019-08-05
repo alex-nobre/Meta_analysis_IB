@@ -39,178 +39,75 @@ c1_cohensd <- esc_chisq(c1_chisquared,
 #==== 2 Beanland and Pammer (2010) exp. 1A, fixating ====
 
 # Compute effect size from proportion
+c2_pop <- 36
+c2_successes <- round(25*c2_pop/100)
+c2_failures <- c2_pop - c2_successes
 
-c2_successes <- 20*20/100
-c2_pop <- 72
 
-chisquared <- prop.test(c2_successes, 
-                        c2_pop,
-                        p = 0.5, 
-                        alternative = 'two.sided')$statistic
+c2_chisquared <- unname(chisq.test(c(c2_successes, c2_failures), 
+                                   p = c(0.5, 0.5))$statistic)
 
-c2_cohensd <- esc_chisq(chisquared, 
+c2_cohensd <- esc_chisq(c2_chisquared, 
                         es.type = "d", 
-                        totaln = 20)$es
+                        totaln = c2_pop)$es
 
 #==== 3. Beanland and Pammer (2010) exp. 1A, moving ====
 
-#  Compute effect sizes from mean, sds and N
-c3_n_pairs <- 31
+# Compute effect size from proportion
+c3_pop <- 36
+c3_successes <- round(14*c3_pop/100)
+c3_failures <- c3_pop - c3_successes
 
-# # Control trial 1
-# c3_control_t1_mean <- 2.6
-# c3_control_t1_sd <- 2.6
-# 
-# # Control trial 2
-# c3_control_t2_mean <- 5.5
-# c3_control_t2_sd <- 3.4
 
-# # Combined mean and SD for control trials
-# c3_control_mean <- mean(c(c3_control_t1_mean, c3_control_t2_mean))
-# c3_control_sd <- mean(c(c3_control_t1_sd, c3_control_t2_sd))
+c3_chisquared <- unname(chisq.test(c(c3_successes, c3_failures), 
+                                   p = c(0.5, 0.5))$statistic)
 
-# Mean and SD for control trials
-c3_control_mean <- 4.10
-c3_control_sd <- 2.76
-c3_control_variance <- (c3_control_sd)^2
-
-# # Critical trial 1
-# c3_critical_t1_mean <- 2.2
-# c3_critical_t1_sd <- 2.9
-# 
-# # Critical trial 2
-# c3_critical_t2_mean <- 3.3
-# c3_critical_t2_sd <- 2.6
-
-# # Combined mean and SD for critical trials
-# c3_critical_mean <- mean(c(c3_critical_t1_mean, c3_critical_t2_mean))
-# c3_critical_sd <- mean(c(c3_critical_t1_sd, c3_critical_t2_sd))
-
-# Mean and SD for critical trials
-c3_critical_mean <- 2.76
-c3_critical_sd <- 2.49
-c3_critical_variance <- (c3_critical_sd)^2
-
-# t-test to get t-value
-# c3_tvalue <- (c3_control_mean - c3_critical_mean)/
-#               ((c3_control_sd - c3_critical_sd)/sqrt(c3_n_pairs))
-# 
-# c3_cohensd <- c3_tvalue/sqrt(c3_n_pairs)
-
-c3_m_difference <- c3_control_mean-c3_critical_mean #control - critical because lower scores are better
-c3_cohensd <- c3_m_difference/sqrt(mean(c(c3_critical_variance,
-                                          c3_control_variance)))
+c3_cohensd <- esc_chisq(c3_chisquared, 
+                        es.type = "d", 
+                        totaln = c3_pop)$es
 
 
 #==== 4. Beanland and Pammer (2010) exp. 2, slow US ====
 
-#  Compute effect sizes from mean, sds and N
-c4_n_pairs <- 41
+# Compute effect size from proportion
+c4_pop <- 25
+c4_successes <- round(44*c4_pop/100)
+c4_failures <- c4_pop - c4_successes
 
-# # Control trial 1
-# c4_control_t1_mean <- 0.2
-# c4_control_t1_sd <- 1.1
-# 
-# # Control trial 2
-# c4_control_t2_mean <- 0.2
-# c4_control_t2_sd <- 0.6
 
-# # Combined mean and SD for control trials
-# c4_control_mean <- mean(c(c4_control_t1_mean, c4_control_t2_mean))
-# c4_control_sd <- mean(c(c4_control_t1_sd, c4_control_t2_sd))
+c4_chisquared <- unname(chisq.test(c(c4_successes, c4_failures), 
+                                   p = c(0.5, 0.5))$statistic)
 
-# Mean and SD for control trials
-c4_control_mean <- 0.21
-c4_control_sd <- 0.75
-c4_control_variance <- (c4_control_sd)^2
-
-# # Critical trial 1
-# c4_critical_t1_mean <- 0.1
-# c4_critical_t1_sd <- 0.7
-# 
-# # Critical trial 2
-# c4_critical_t2_mean <- -0.2
-# c4_critical_t2_sd <- 0.6
-# 
-# # Combined mean and SD for critical trials
-# c4_critical_mean <- mean(c(c4_critical_t1_mean, c4_critical_t2_mean))
-# c4_critical_sd <- mean(c(c4_critical_t1_sd, c4_critical_t2_sd))
-
-# Mean and SD for critical trials
-c4_critical_mean <- -0.04
-c4_critical_sd <- 0.50
-c4_critical_variance <- (c4_critical_sd)^2
-
-# t-test to get t-value
-# c4_tvalue <- (c4_control_mean - c4_critical_mean)/((c4_control_sd - c4_critical_sd)/sqrt(c4_n_pairs))
-# 
-# c4_cohensd <- c4_tvalue/sqrt(c4_n_pairs)
-
-c4_m_difference <- c4_control_mean-c4_critical_mean #control - critical because lower scores are better
-c4_cohensd <- c4_m_difference/sqrt(mean(c(c4_critical_variance,
-                                          c4_control_variance)))
+c4_cohensd <- esc_chisq(c4_chisquared, 
+                        es.type = "d", 
+                        totaln = c4_pop)$es
 
 #==== 5. Beanland and Pammer (2010) exp. 2, fast US ====
 
-#  Compute effect sizes from mean, sds and N
-c5_n_pairs <- 41
+# Compute effect size from proportion
+c5_pop <- 25
+c5_successes <- round(48*c5_pop/100)
+c5_failures <- c5_pop - c5_successes
 
-# # Control trial 1
-# c5_control_t1_mean <- 0.2
-# c5_control_t1_sd <- 0.9
-# 
-# # Control trial 2
-# c5_control_t2_mean <- 0.2
-# c5_control_t2_sd <- 0.5
 
-# # Combined mean and SD for control trials
-# c5_control_mean <- mean(c(c5_control_t1_mean, c5_control_t2_mean))
-# c5_control_sd <- mean(c(c5_control_t1_sd, c5_control_t2_sd))
+c5_chisquared <- unname(chisq.test(c(c5_successes, c5_failures), 
+                                   p = c(0.5, 0.5))$statistic)
 
-# Mean and SD for control trials
-c5_control_mean <- 0.15
-c5_control_sd <- 0.43
-c5_control_variance <- (c5_control_sd)^2
-
-# # Critical trial 1
-# c5_critical_t1_mean <- 0.1
-# c5_critical_t1_sd <- 0.6
-# 
-# # Critical trial 2
-# c5_critical_t2_mean <- -0.3
-# c5_critical_t2_sd <- 0.7
-# 
-# # Combined mean and SD for critical trials
-# c5_critical_mean <- mean(c(c5_critical_t1_mean, c5_critical_t2_mean))
-# c5_critical_sd <- mean(c(c5_critical_t1_sd, c5_critical_t2_sd))
-
-# Mean and SD for critical trials
-c5_critical_mean <- -0.15
-c5_critical_sd <- 0.43
-c5_critical_variance <- (c5_critical_sd)^2
-
-# t-test to get t-value
-#c5_tvalue <- (c5_control_mean - c5_critical_mean)/((c5_control_sd - c5_critical_sd)/sqrt(c5_n_pairs))
-
-#c5_cohensd <- c5_tvalue/sqrt(c5_n_pairs)
-
-c5_m_difference <- c5_control_mean-c5_critical_mean #control - critical because lower scores are better
-c5_cohensd <- c5_m_difference/sqrt(mean(c(c5_critical_variance,
-                                          c5_control_variance)))
+c5_cohensd <- esc_chisq(c5_chisquared, 
+                        es.type = "d", 
+                        totaln = c5_pop)$es
 
 #==== 6. Gabay et al. (2012) - Exp. 1 ====
 
 # Compute effect size from proportion using n of noticers
-
-c6_successes <- 12
 c6_pop <- 30
+c6_successes <- 12
+c6_failures <- c6_pop - c6_successes
 
-chisquared <- prop.test(c6_successes, 
-                        c6_pop,
-                        p = 0.5, 
-                        alternative = 'two.sided')$statistic
+c6_chisquared <- unname(chisq.test(c(c6_successes, c6_failures), 
+                                   p = c(0.5, 0.5))$statistic)
 
-c6_cohensd <- esc_chisq(chisquared, 
+c6_cohensd <- esc_chisq(c6_chisquared, 
                         es.type = "d", 
                         totaln = c6_pop)$es
 
@@ -218,16 +115,14 @@ c6_cohensd <- esc_chisq(chisquared,
 #==== 7. Gabay et al. (2012) - Exp. 2 ====
 
 # Compute effect size from proportion using n of noticers
-
-c7_successes <- 13
 c7_pop <- 23
+c7_successes <- 13
+c7_failures <- c7_pop - c7_successes
 
-chisquared <- prop.test(c7_successes, 
-                        c7_pop,
-                        p = 0.5, 
-                        alternative = 'two.sided')$statistic
+c7_chisquared <- unname(chisq.test(c(c7_successes, c7_failures), 
+                                   p = c(0.5, 0.5))$statistic)
 
-c7_cohensd <- esc_chisq(chisquared, 
+c7_cohensd <- esc_chisq(c7_chisquared, 
                         es.type = "d", 
                         totaln = c7_pop)$es
 
@@ -235,7 +130,6 @@ c7_cohensd <- esc_chisq(chisquared,
 #==== 8. Lo e Yeh (2008) - exp. 1 (200 ms) ====
 
 # Compute effect size from proportion using given chi-squared value
-
 c8_pop <- 43
 c8_chisquared <- 1.88
 
@@ -656,34 +550,21 @@ c37_cohensd <- esc_chisq(c37_chisquared,
                          totaln = c37_pop)$es
 
 #==== 40. Mack and Rock. exp 1 (2000) ====
-c40_pop <- 80
-c40_successes <- 30
-c40_failures <- c40_pop - c40_successes
-
-
-c40_chisquared <- unname(chisq.test(c(c40_successes, c40_failures), 
-                                   p = c(0.5, 0.5))$statistic)
-
-c40_cohensd <- esc_chisq(c40_chisquared,
-                        es.type = "d",
-                        totaln = c40_pop)$es
-
-#==== 41. Mack and Rock. exp 2 (2000) ====
-c41_pop <- 75
-c41_successes <- 34
+c41_pop <- 80
+c41_successes <- 30
 c41_failures <- c41_pop - c41_successes
 
 
 c41_chisquared <- unname(chisq.test(c(c41_successes, c41_failures), 
-                                    p = c(0.5, 0.5))$statistic)
+                                   p = c(0.5, 0.5))$statistic)
 
 c41_cohensd <- esc_chisq(c41_chisquared,
-                         es.type = "d",
-                         totaln = c41_pop)$es
+                        es.type = "d",
+                        totaln = c41_pop)$es
 
-#==== 42. Mack and Rock. exp 3 (2000) ====
-c42_pop <- 30
-c42_successes <- 9
+#==== 41. Mack and Rock. exp 2 (2000) ====
+c42_pop <- 75
+c42_successes <- 34
 c42_failures <- c42_pop - c42_successes
 
 
@@ -694,9 +575,22 @@ c42_cohensd <- esc_chisq(c42_chisquared,
                          es.type = "d",
                          totaln = c42_pop)$es
 
+#==== 42. Mack and Rock. exp 3 (2000) ====
+c43_pop <- 30
+c43_successes <- 9
+c43_failures <- c43_pop - c43_successes
+
+
+c43_chisquared <- unname(chisq.test(c(c43_successes, c43_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+c43_cohensd <- esc_chisq(c43_chisquared,
+                         es.type = "d",
+                         totaln = c43_pop)$es
+
 #==== 44. Mack and Rock. exp 4 (2000) ====
-c44_pop <- 20+20
-c44_successes <- 10+11
+c44_pop <- 60
+c44_successes <- 31
 c44_failures <- c44_pop - c44_successes
 
 
@@ -707,12 +601,25 @@ c44_cohensd <- esc_chisq(c44_chisquared,
                          es.type = "d",
                          totaln = c44_pop)$es
 
+#==== 45. Mack and Rock. exp 5 (2000) ====
+c45_pop <- 20+20
+c45_successes <- 10+11
+c45_failures <- c45_pop - c45_successes
+
+
+c45_chisquared <- unname(chisq.test(c(c45_successes, c45_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+c45_cohensd <- esc_chisq(c45_chisquared,
+                         es.type = "d",
+                         totaln = c45_pop)$es
+
 #========================================#
 #==== Build vector with effect sizes ====#
 #========================================#
 
-awareness_cohensd_names <- paste("c", c(1:28, 30, 32:36, 40:44), "_cohensd",
-                       sep = "")
+awareness_cohensd_names <- paste("c", c(1:11, 41:45, 12:28, 30, 32:36), "_cohensd",
+                                 sep = "")
 
 awareness_cohensd <- map_dbl(awareness_cohensd_names, get)
 
