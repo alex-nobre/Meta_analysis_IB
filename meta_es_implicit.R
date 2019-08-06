@@ -132,10 +132,10 @@ funnel(implicit_meta_es,
        #studlab = es_table$Study)
 
 # Tests for assymetry
-metabias(meta_es,  method = "rank")
+metabias(implicit_meta_es,  method = "rank")
 
 # Estimate bias
-trimmed_meta <- trimfill(meta_es,
+trimmed_meta <- trimfill(implicit_meta_es,
                          left = TRUE,
                          ma.fixed = FALSE)
 
@@ -182,56 +182,55 @@ ggplot(data=es_table) +
 ### compute subgroup analysis for binary categorical variables ###
 
 # unexpected stimulus relevance
-## 0 = irrelevant / 1 = relevant
-mod_relevance_us <- update(meta_es, 
+mod_relevance_us <- update(implicit_meta_es, 
                            byvar=es_table$us_relevance, 
                            print.byvar=FALSE)
 summary(mod_relevance_us)
 
 # type of implicit measure
-## 0 = attentional and/or perceptual / 1 = response
-mod_implicit_type <- update(meta_es, 
+mod_implicit_type <- update(implicit_meta_es, 
                             byvar=es_table$implicit_type, 
                             print.byvar=FALSE)
 summary(mod_implicit_type)
 
 # implicit measure outcome
-## 0 = RT / 1 = accuracy
-mod_implicit_measure <- update(meta_es, 
+mod_implicit_measure <- update(implicit_meta_es, 
                                byvar=es_table$implicit_measure, 
                                print.byvar=FALSE)
 summary(mod_implicit_measure)
 
 # unexpected stimulus presentation
-## 0 = IB block or IB phase / 1 = interleaved
-mod_us_presentation <- update(meta_es, 
+mod_us_presentation <- update(implicit_meta_es, 
                               byvar=es_table$us_presentation, 
                               print.byvar=FALSE)
 summary(mod_us_presentation)
 
 # unexpected stimulus delay type
-## 0 = fixed / 1 = variable
-mod_us_delay_type <- update(meta_es, 
+mod_us_delay_type <- update(implicit_meta_es, 
                             byvar=es_table$us_delay_type, 
                             print.byvar=FALSE)
 summary(mod_us_delay_type)
 
 # awareness assessment
-## 0 = after critical trial / 1 = after block/phase
-mod_us_assessment <- update(meta_es, 
+mod_us_assessment <- update(implicit_meta_es, 
                             byvar=es_table$us_assessment, 
                             print.byvar=FALSE)
 summary(mod_us_assessment)
 
 # significance of implicit effect
-## 0 = non-significant / 1 = significant
-mod_significance <- update(meta_es, 
+mod_significance <- update(implicit_meta_es, 
                            byvar=es_table$significance, 
                            print.byvar=FALSE)
 summary(mod_significance)
 
+# gray literature
+gray_literature <- update(implicit_meta_es, 
+                           byvar=es_table$gray_literature, 
+                           print.byvar=FALSE)
+summary(gray_literature)
+
 #==== significance of inattention paradigm ====#
-mod_inattention <- update(meta_es, 
+mod_inattention <- update(implicit_meta_es, 
                            byvar=es_table$inattention_paradigm, 
                            print.byvar=FALSE)
 summary(mod_inattention)
@@ -250,7 +249,7 @@ forest(meta_inattention, # generate untrimmed forest plot
 )
 
 #==== significance of group assessment of awareness ====#
-mod_group_aware_assess <- update(meta_es, 
+mod_group_aware_assess <- update(implicit_meta_es, 
                           byvar=es_table$group_aware_assess, 
                           print.byvar=FALSE)
 summary(mod_group_aware_assess)
@@ -277,23 +276,23 @@ forest(meta_group_aware_assess, # generate untrimmed forest plot
 ### compute metaregression for non-binary categorical or continuous variables ###
 
 # number of participants per group
-mod_n_group <- metareg(meta_es, es_table$N_per_group)
+mod_n_group <- metareg(implicit_meta_es, es_table$N_per_group)
 summary(mod_n_group)
 
 # number of trials for implicit processing
-mod_n_trials_implicit <- metareg(meta_es, es_table$N_trials_implicit)
+mod_n_trials_implicit <- metareg(implicit_meta_es, es_table$N_trials_implicit)
 summary(mod_n_trials_implicit)
 
 # number of trials for awareness
-mod_n_trials_awareness <- metareg(meta_es, es_table$N_trials_awareness)
+mod_n_trials_awareness <- metareg(implicit_meta_es, es_table$N_trials_awareness)
 summary(mod_n_trials_awareness)
 
 # number of participants for implicit processing
-mod_N_participants_implicit <- metareg(meta_es, es_table$N_participants_awareness)
+mod_N_participants_implicit <- metareg(implicit_meta_es, es_table$N_participants_awareness)
 summary(mod_N_participants_implicit)
 
 # number of participants for awareness
-mod_N_participants_awareness <- metareg(meta_es, es_table$N_participants_awareness)
+mod_N_participants_awareness <- metareg(implicit_meta_es, es_table$N_participants_awareness)
 summary(mod_N_participants_awareness)
 
 
