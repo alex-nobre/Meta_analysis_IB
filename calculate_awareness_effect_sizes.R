@@ -202,6 +202,7 @@ c13_cohensd <- esc_chisq(c13_chisquared,
                          es.type = "d",
                          totaln = c13_pop)$es
 
+
 #==== 14. Moore et al. (2003) ====
 
 # Compute effect sizes from reported percentage of noticers
@@ -336,6 +337,8 @@ c17_cohensd <- esc_chisq(c17_chisquared,
 #==== 18. Razpurker-Apfeld et al. (2008) - columns/rows, d' ====
 
 # Effect size is the same as for RT
+c18_pop <- c17_pop
+c18_chisquared <- c17_chisquared
 c18_cohensd <- c17_cohensd
 
 
@@ -356,6 +359,8 @@ c19_cohensd <- esc_chisq(c19_chisquared,
 #==== 20. Razpurker-Apfeld et al. (2008) - triangle/arrow, d' ====
 
 # Effect size is the same as for RT
+c20_pop <- c19_pop
+c20_chisquared <- c19_chisquared
 c20_cohensd <- c19_cohensd
 
 #==== 21. Richards et al. (2012), tracking task  ====
@@ -376,6 +381,7 @@ c21_cohensd <- esc_chisq(c21_chisquared,
 
 # Compute effect sizes from proportions
 c22_pop <- 25
+c22_chisquared <- c21_chisquared
 c22_successes <- 12
 c22_failures <- c22_pop - c22_successes
 
@@ -388,6 +394,8 @@ c22_cohensd <- esc_chisq(c22_chisquared,
 #==== 23. Russell et al. (2008) - exp. 1, RT ====
 
 # Effect size is the same as for acc
+c23_pop <- c22_pop
+c23_chisquared <- c22_chisquared
 c23_cohensd <- c22_cohensd
 
 
@@ -408,6 +416,8 @@ c24_cohensd <- esc_chisq(c24_chisquared,
 #==== 25. Russell et al. (2008) - exp. 2, RT ====
 
 # Effect size is the same as for acc
+c25_pop <- c24_pop
+c25_chisquared <- c24_chisquared
 c25_cohensd <- c24_cohensd
 
 
@@ -427,6 +437,8 @@ c26_cohensd <- esc_chisq(c26_chisquared,
 #==== 27. Russell et al. (2008) - exp. 3, RT ====
 
 # Effect size is the same as for acc
+c27_pop <- c26_pop
+c27_chisquared <- c26_chisquared
 c27_cohensd <- c26_cohensd
 
 
@@ -447,6 +459,8 @@ c28_cohensd <- esc_chisq(c28_chisquared,
 #==== 29. Russell et al. (2008) - exp. 4A, RT ====
 
 # Effect size is the same as for acc
+c29_pop <- c28_pop
+c29_chisquared <- c28_chisquared
 c29_cohensd <- c28_cohensd
 
 #==== 30. Russell et al. (2008) - exp. 4B, acc ====
@@ -466,6 +480,8 @@ c30_cohensd <- esc_chisq(c30_chisquared,
 #==== 31. Russell et al. (2008) - exp. 4B, RT ====
 
 # Effect size is the same as for acc
+c31_pop <- c30_pop
+c31_chisquared <- c30_chisquared
 c31_cohensd <- c30_cohensd
 
 
@@ -486,6 +502,8 @@ c32_cohensd <- esc_chisq(c32_chisquared,
 #==== 33. Russell et al. (2008) - exp. 5, RT ====
 
 # Effect size is the same as for acc
+c33_pop <- c32_pop
+c33_chisquared <- c32_chisquared
 c33_cohensd <- c32_cohensd
 
 
@@ -507,7 +525,7 @@ c34_cohensd <- esc_chisq(c34_chisquared,
 
 # Compute effect sizes from proportions
 c35_pop <- 61
-c35_successes <- round(8*c21_pop/100)
+c35_successes <- round(8*c35_pop/100)
 c35_failures <- c35_pop - c35_successes
 
 c35_chisquared <- unname(chisq.test(c(c35_successes, c35_failures), 
@@ -521,7 +539,7 @@ c35_cohensd <- esc_chisq(c35_chisquared,
 
 # Compute effect sizes from proportions
 c36_pop <- 58
-c36_successes <- round(6*c21_pop/100)
+c36_successes <- round(6*c36_pop/100)
 c36_failures <- c36_pop - c36_successes
 
 c36_chisquared <- unname(chisq.test(c(c36_successes, c36_failures), 
@@ -623,3 +641,31 @@ awareness_cohensd_names <- paste("c", c(1:11, 41:45, 12:28, 30, 32:36), "_cohens
 
 awareness_cohensd <- map_dbl(awareness_cohensd_names, get)
 
+# Replace value for moore and egeth (1997) by other max because the computed d is infinite
+awareness_cohensd[18] <- max(awareness_cohensd[-18])
+
+awareness_totaln <- map_dbl(paste("c", c(1:11, 41:45, 12:28, 30, 32:36), "_pop",
+                                  sep = ""), get)
+awareness_hedgesg <- hedges_g(awareness_cohensd, awareness_totaln)
+
+awareness_chisquare_names <- paste("c", c(1:11, 41:45, 12:28, 30, 32:36), "_chisquared",
+                                   sep = "")
+
+awareness_chisquares <- map_dbl(awareness_chisquare_names, get)
+
+# Compute hedge's g
+awareness_hedgesg <- esc_chisq(awareness_chisquares,"g", totaln = awareness_totaln)$es
+
+# Replace value for moore and egeth (1997) by other max because the computed g is infinite
+awareness_hedgesg[18] <- max(awareness_hedgesg[-18])
+
+
+# SE of hedge's g
+awareness_hedgesg_se <- esc_chisq(awareness_chisquares,"g", totaln = awareness_totaln)$se
+
+# Replace Inf and NaNs
+awareness_hedgesg_se[which(awareness_hedgesg_se == Inf)] <- max(awareness_hedgesg_se[-which(awareness_hedgesg_se == Inf)])
+
+awareness_hedgesg_se[which(is.na(awareness_hedgesg_se))] <- min(awareness_hedgesg_se[-which(is.na(awareness_hedgesg_se))])
+
+awareness_hedgesg_se[which(awareness_hedgesg_se == Inf)] <- max(awareness_hedgesg_se[-which(awareness_hedgesg_se == Inf)])

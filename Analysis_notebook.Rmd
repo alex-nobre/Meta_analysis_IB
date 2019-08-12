@@ -224,7 +224,7 @@ Result is infinite, so replace with largest effect in data
 
 Use question about regularity (p. 312), instead of orientation (p. 313), since the former assesses perception more generally and thus might be more sensitive
 
-Use reported percentage of noticers
+Use reported percentage of noticers. However, because there were 0 noticers, the ES in inf. Therefore, we replaced the value for this contrast with the largest value among other contrasts.
 
 ## 14. Moore et al. (2004)
 
@@ -349,11 +349,7 @@ Perform analysis within subgroups and then comparisons between subgroups
 
 # Heterogeneity
 
-We checked heterogeneity in two ways:
-
-* With the heterogeneity test output by the meta-analytical model.
-
-* By checking the width of confidence intervals in forest plots. This can also be used to identify the the heterogeneous ES in case of a significant result in the heterogeneity test, and then to remove them so that the test becomes non-significant.
+xzDRRRRRRRRRRRRRRRRRRRRRRRRRRRFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDDDDDDDDDDDDDDDDDDDDDDDDDDCVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV\aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 
 -----------------------------------------------------------------------------------

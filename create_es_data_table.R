@@ -41,7 +41,7 @@ study_names <- c("ariga_2007_exp2",
                  "russell_driver_2005_exp5_rt", 
                  "shafto_pitts_2015",
                  "schnuerch_2016_exp1",
-                 "schnuerch_2016_exp1"
+                 "schnuerch_2016_exp2"
                  )
 
 N_per_group <- c(20, #ariga_2007_exp2  

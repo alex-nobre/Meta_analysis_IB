@@ -18,6 +18,14 @@ graphical_defaults <- par()
 options_defaults <- options()
 
 #============================================================================================#
+#======================================== 0. Functions ======================================#
+#============================================================================================#
+
+# Build "not in" operator
+# Souce: https://stackoverflow.com/questions/5831794/opposite-of-in
+'%!in%' <- function(x,y)!('%in%'(x,y))
+
+#============================================================================================#
 #==================================== 1. Prepare data ========================================
 #============================================================================================#
 # Create data frame
@@ -65,21 +73,11 @@ es_table$se_implicit_g <- sqrt(es_table$variance_implicit_g)
 
 ### Awareness ES
 
-# Compute variance of d (formula 4.28)
-es_table$variance_awareness_d <- (1/es_table$N_per_group + 
-                                   (es_table$awareness_d)^2/2*es_table$N_per_group) * 2*(1-cor_pairs)
+# Create column for Hedges' g
+es_table$awareness_hedgesg <- awareness_hedgesg
 
-# Compute correction factor J (formula 4.22)
-es_table$J <- 1 - (3/(4*(es_table$N_per_group-1)-1))
-
-# Compute Hedges' g (formula 4.23)
-es_table$awareness_hedgesg <- es_table$J * es_table$awareness_d 
-
-# Compute variance of g (formula 4.24)
-es_table$variance_awareness_g <- (es_table$J)^2 * es_table$variance_awareness_d
-
-# Compute standard error of g (formula 4.25)
-es_table$se_awareness_g <- sqrt(es_table$variance_awareness_g)
+# # Create column for standard error of g
+es_table$se_awareness_g <- awareness_hedgesg_se
 
 # Categorize experiments as inattention paradigms or not; 0 = no, 1 = yes
 es_table$inattention_paradigm <- c(rep(0, 21), #ariga_2007_exp2 to most_2005_exp1to7pooled
@@ -106,12 +104,12 @@ es_table$group_aware_assess <- c(1, #ariga_2007_exp2
 #============================ 2. Compute meta-analytic ES ====================================
 #============================================================================================#
 
-# 2.1. Implicit ES
+# ==== 2.1. Implicit ES ====
 ## Build meta analytic effect model
 implicit_meta_es <- metagen(TE = es_table$implicit_hedgesg, # treatment effect (Hedge's g)
                    es_table$se_implicit_g, #standard error of treatment,
                    studlab = es_table$study,
-                   comb.fixed = TRUE,
+                   comb.fixed = FALSE,
                    comb.random = TRUE)
 
 summary(implicit_meta_es)
@@ -124,15 +122,55 @@ forest(implicit_meta_es, # generate untrimmed forest plot
        comb.fixed = FALSE, # plot fixed effect estimate?
        comb.random = TRUE # plot random effect estimate
        )
-dev.copy2eps
+dev.copy2eps()
 
-
+# Check assimetry with funnel plot
 funnel(implicit_meta_es,
-       xlab = "Hedges' g")#,
-       #studlab = es_table$Study)
+       xlab = "Hedges' g",#()
+       studlab = es_table$study)
 
 # Tests for assymetry
 metabias(implicit_meta_es,  method = "rank")
+
+# Estimate bias with trim-and-fill method
+trimmed_meta <- trimfill(implicit_meta_es,
+                         left = TRUE,
+                         ma.fixed = FALSE)
+
+funnel(trimmed_meta,
+       xlab = "Effect size")
+
+forest(trimmed_meta) # generate trimmed forest plot
+
+
+# Remove studies with assymetric effect sizes
+es_table_2 <- es_table %>%
+  filter(study %!in% c("moore_egeth_1997_exp1", "moore_egeth_1997_exp3", 
+                       "mack_and_rock_2000_exp1", "mack_and_rock_2000_exp2", 
+                       "mack_and_rock_2000_exp3", "mack_and_rock_2000_exp4", "mack_and_rock_2000_exp5"))
+
+implicit_meta_es_2 <- metagen(TE = es_table_2$implicit_hedgesg, # treatment effect (Hedge's g)
+                            es_table_2$se_implicit_g, #standard error of treatment,
+                            studlab = es_table_2$study,
+                            comb.fixed = FALSE,
+                            comb.random = TRUE)
+
+summary(implicit_meta_es_2)
+
+# Plots
+forest(implicit_meta_es_2, # generate untrimmed forest plot
+       STUDLAB = TRUE, #should study labels be printed?
+       comb.fixed = FALSE, # plot fixed effect estimate?
+       comb.random = TRUE # plot random effect estimate
+)
+
+# Check assimetry with funnel plot
+funnel(implicit_meta_es_2,
+       xlab = "Hedges' g")#,
+       #studlab = es_table_2$study)
+
+# Tests for assymetry
+metabias(implicit_meta_es_2,  method = "rank")
 
 # Estimate bias
 trimmed_meta <- trimfill(implicit_meta_es,
@@ -144,6 +182,83 @@ funnel(trimmed_meta,
 
 forest(trimmed_meta) # generate trimmed forest plot
 
+# ==== 2.2. Awareness ES ====
+## Build meta analytic effect model
+awareness_meta_es <- metagen(TE = es_table$awareness_hedgesg, # treatment effect (Hedge's g)
+                            es_table$se_awareness_g, #standard error of treatment,
+                            studlab = es_table$study,
+                            comb.fixed = FALSE,
+                            comb.random = TRUE)
+
+summary(awareness_meta_es)
+knitr::kable(awareness_meta_es)
+
+# Plots
+dev.new(width = 20, height = 12)
+forest(awareness_meta_es, # generate untrimmed forest plot
+       STUDLAB = TRUE, #should study labels be printed?
+       comb.fixed = FALSE, # plot fixed effect estimate?
+       comb.random = TRUE # plot random effect estimate
+)
+dev.copy2eps()
+
+# Check assimetry with funnel plot
+funnel(awareness_meta_es,
+       xlab = "Hedges' g",
+       studlab = es_table$study)
+
+# Tests for assymetry
+metabias(awareness_meta_es,  method = "rank")
+
+# Estimate bias with trim-and-fill method
+trimmed_meta <- trimfill(awareness_meta_es,
+                         left = TRUE,
+                         ma.fixed = FALSE)
+
+funnel(trimmed_meta,
+       xlab = "Effect size")
+
+forest(trimmed_meta) # generate trimmed forest plot
+
+
+# Remove studies with assymetric effect sizes
+es_table_2 <- es_table %>%
+  filter(study %!in% c("moore_egeth_1997_exp1", "moore_egeth_1997_exp3", 
+                       "mack_and_rock_2000_exp1", "mack_and_rock_2000_exp2", 
+                       "mack_and_rock_2000_exp3", "mack_and_rock_2000_exp4", "mack_and_rock_2000_exp5"))
+
+awareness_meta_es_2 <- metagen(TE = es_table_2$awareness_hedgesg, # treatment effect (Hedge's g)
+                              es_table_2$se_awareness_g, #standard error of treatment,
+                              studlab = es_table_2$study,
+                              comb.fixed = FALSE,
+                              comb.random = TRUE)
+
+summary(awareness_meta_es_2)
+
+# Plots
+forest(awareness_meta_es_2, # generate untrimmed forest plot
+       STUDLAB = TRUE, #should study labels be printed?
+       comb.fixed = FALSE, # plot fixed effect estimate?
+       comb.random = TRUE # plot random effect estimate
+)
+
+# Check assimetry with funnel plot
+funnel(awareness_meta_es_2,
+       xlab = "Hedges' g")#,
+#studlab = es_table_2$study)
+
+# Tests for assymetry
+metabias(awareness_meta_es_2,  method = "rank")
+
+# Estimate bias
+trimmed_meta <- trimfill(awareness_meta_es,
+                         left = TRUE,
+                         ma.fixed = FALSE)
+
+funnel(trimmed_meta,
+       xlab = "Effect size")
+
+forest(trimmed_meta) # generate trimmed forest plot
 
 #=========================================================================================#
 #================================= 3.  Heterogeneity ======================================
@@ -178,7 +293,7 @@ ggplot(data=es_table) +
 #=============================== 4. Moderation analysis ===================================
 #=========================================================================================#
 
-
+#==== 4.1. Implicit es moderators ====
 ### compute subgroup analysis for binary categorical variables ###
 
 # unexpected stimulus relevance
@@ -256,15 +371,15 @@ summary(mod_group_aware_assess)
 
 
 ## Build meta analytic effect model
-meta_group_aware_assess <- metagen(TE = es_table$hedgesg, # treatment effect (Hedge's g)
-                            es_table$se_g, #standard error of treatment,
-                            studlab = es_table$group_aware_assess,
+meta_group_aware_assess <- metagen(TE = es_table$implicit_hedgesg, # treatment effect (Hedge's g)
+                            es_table$se_implicit_g, #standard error of treatment,
+                            studlab = es_table$study,
                             subset = es_table$group_aware_assess == 1,
                             comb.random = TRUE)
 
-metagen(TE = es_table$hedgesg, # treatment effect (Hedge's g)
-                                   es_table$se_g, #standard error of treatment,
-                                   studlab = es_table$group_aware_assess,
+metagen(TE = es_table$implicit_hedgesg, # treatment effect (Hedge's g)
+                                   es_table$se_implicit_g, #standard error of treatment,
+                                   studlab = es_table$study,
                                    subset = es_table$group_aware_assess == 0,
                                    comb.random = TRUE)
 
@@ -296,6 +411,31 @@ mod_N_participants_awareness <- metareg(implicit_meta_es, es_table$N_participant
 summary(mod_N_participants_awareness)
 
 
+#==== 4.2. Awareness es moderators ====
+
+# type of awareness measure
+# Include moderator
+mod_awareness_objective <- update(awareness_meta_es, 
+                            byvar=es_table$awareness_objective, 
+                            print.byvar=FALSE)
+summary(mod_awareness_objective)
+
+# run with subset
+meta_group_aware_objective <- metagen(TE = es_table$awareness_hedgesg, # treatment effect (Hedge's g)
+                                   es_table$se_awareness_g, #standard error of treatment,
+                                   studlab = es_table$study,
+                                   subset = es_table$awareness_objective == "objective",
+                                   comb.random = TRUE)
+
+meta_group_aware_objective <- metagen(TE = es_table$awareness_hedgesg, # treatment effect (Hedge's g)
+                                      es_table$se_awareness_g, #standard error of treatment,
+                                      studlab = es_table$study,
+                                      subset = es_table$awareness_objective == "subjective",
+                                      comb.random = TRUE)
 
 
-
+# awareness measure outcome
+mod_awareness_measure <- update(awareness_meta_es, 
+                               byvar=es_table$awareness_measure, 
+                               print.byvar=FALSE)
+summary(mod_awareness_measure)
