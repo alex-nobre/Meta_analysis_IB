@@ -27,45 +27,17 @@ c1_cohensd <- c1_tvalue/sqrt(c1_n_pairs)
 
 c2_n_pairs <- 27
 
-# # Control trial 1
-# c2_control_t1_mean <- 4.8
-# c2_control_t1_sd <- 3.6
-# 
-# # Control trial 2
-# c2_control_t2_mean <- 7.6
-# c2_control_t2_sd <- 3.5
-# 
-# # Combined mean and SD for control trials
-# c2_control_mean <- mean(c(c2_control_t1_mean, c2_control_t2_mean))
-# c2_control_sd <- mean(c(c2_control_t1_sd, c2_control_t2_sd))
 
 # Mean and SD for control trials
 c2_control_mean <- 6.20
 c2_control_sd <- 3.26
 c2_control_variance <- (c2_control_sd)^2
 
-# # Critical trial 1
-# c2_critical_t1_mean <- 4.5
-# c2_critical_t1_sd <- 3.6
-# 
-# # Critical trial 2
-# c2_critical_t2_mean <- 5.4
-# c2_critical_t2_sd <- 2.5
-# 
-# # Combined mean and SD for critical trials
-# c2_critical_mean <- mean(c(c2_critical_t1_mean, c2_critical_t2_mean))
-# c2_critical_sd <- mean(c(c2_critical_t1_sd, c2_critical_t2_sd))
-
 # Mean and SD for critical trials
 c2_critical_mean <- 4.93
 c2_critical_sd <- 2.76
 c2_critical_variance <- (c2_critical_sd)^2
 
-# t-test to get t-value
-# c2_tvalue <- (c2_control_mean - c2_critical_mean)/
-#               ((c2_control_sd - c2_critical_sd)/sqrt(c2_n_pairs))
-# 
-# c2_cohensd <- c2_tvalue/sqrt(c2_n_pairs)
 
 c2_m_difference <- c2_control_mean-c2_critical_mean #control - critical because lower scores are better
 c2_cohensd <- c2_m_difference/sqrt(mean(c(c2_critical_variance,
@@ -76,45 +48,17 @@ c2_cohensd <- c2_m_difference/sqrt(mean(c(c2_critical_variance,
 #  Compute effect sizes from mean, sds and N
 c3_n_pairs <- 31
 
-# # Control trial 1
-# c3_control_t1_mean <- 2.6
-# c3_control_t1_sd <- 2.6
-# 
-# # Control trial 2
-# c3_control_t2_mean <- 5.5
-# c3_control_t2_sd <- 3.4
-
-# # Combined mean and SD for control trials
-# c3_control_mean <- mean(c(c3_control_t1_mean, c3_control_t2_mean))
-# c3_control_sd <- mean(c(c3_control_t1_sd, c3_control_t2_sd))
-
 # Mean and SD for control trials
 c3_control_mean <- 4.10
 c3_control_sd <- 2.76
 c3_control_variance <- (c3_control_sd)^2
 
-# # Critical trial 1
-# c3_critical_t1_mean <- 2.2
-# c3_critical_t1_sd <- 2.9
-# 
-# # Critical trial 2
-# c3_critical_t2_mean <- 3.3
-# c3_critical_t2_sd <- 2.6
-
-# # Combined mean and SD for critical trials
-# c3_critical_mean <- mean(c(c3_critical_t1_mean, c3_critical_t2_mean))
-# c3_critical_sd <- mean(c(c3_critical_t1_sd, c3_critical_t2_sd))
 
 # Mean and SD for critical trials
 c3_critical_mean <- 2.76
 c3_critical_sd <- 2.49
 c3_critical_variance <- (c3_critical_sd)^2
 
-# t-test to get t-value
-# c3_tvalue <- (c3_control_mean - c3_critical_mean)/
-#               ((c3_control_sd - c3_critical_sd)/sqrt(c3_n_pairs))
-# 
-# c3_cohensd <- c3_tvalue/sqrt(c3_n_pairs)
 
 c3_m_difference <- c3_control_mean-c3_critical_mean #control - critical because lower scores are better
 c3_cohensd <- c3_m_difference/sqrt(mean(c(c3_critical_variance,
@@ -126,44 +70,18 @@ c3_cohensd <- c3_m_difference/sqrt(mean(c(c3_critical_variance,
 #  Compute effect sizes from mean, sds and N
 c4_n_pairs <- 41
 
-# # Control trial 1
-# c4_control_t1_mean <- 0.2
-# c4_control_t1_sd <- 1.1
-# 
-# # Control trial 2
-# c4_control_t2_mean <- 0.2
-# c4_control_t2_sd <- 0.6
-
-# # Combined mean and SD for control trials
-# c4_control_mean <- mean(c(c4_control_t1_mean, c4_control_t2_mean))
-# c4_control_sd <- mean(c(c4_control_t1_sd, c4_control_t2_sd))
 
 # Mean and SD for control trials
 c4_control_mean <- 0.21
 c4_control_sd <- 0.75
 c4_control_variance <- (c4_control_sd)^2
 
-# # Critical trial 1
-# c4_critical_t1_mean <- 0.1
-# c4_critical_t1_sd <- 0.7
-# 
-# # Critical trial 2
-# c4_critical_t2_mean <- -0.2
-# c4_critical_t2_sd <- 0.6
-# 
-# # Combined mean and SD for critical trials
-# c4_critical_mean <- mean(c(c4_critical_t1_mean, c4_critical_t2_mean))
-# c4_critical_sd <- mean(c(c4_critical_t1_sd, c4_critical_t2_sd))
 
 # Mean and SD for critical trials
 c4_critical_mean <- -0.04
 c4_critical_sd <- 0.50
 c4_critical_variance <- (c4_critical_sd)^2
 
-# t-test to get t-value
-# c4_tvalue <- (c4_control_mean - c4_critical_mean)/((c4_control_sd - c4_critical_sd)/sqrt(c4_n_pairs))
-# 
-# c4_cohensd <- c4_tvalue/sqrt(c4_n_pairs)
 
 c4_m_difference <- c4_control_mean-c4_critical_mean #control - critical because lower scores are better
 c4_cohensd <- c4_m_difference/sqrt(mean(c(c4_critical_variance,
@@ -174,34 +92,10 @@ c4_cohensd <- c4_m_difference/sqrt(mean(c(c4_critical_variance,
 #  Compute effect sizes from mean, sds and N
 c5_n_pairs <- 41
 
-# # Control trial 1
-# c5_control_t1_mean <- 0.2
-# c5_control_t1_sd <- 0.9
-# 
-# # Control trial 2
-# c5_control_t2_mean <- 0.2
-# c5_control_t2_sd <- 0.5
-
-# # Combined mean and SD for control trials
-# c5_control_mean <- mean(c(c5_control_t1_mean, c5_control_t2_mean))
-# c5_control_sd <- mean(c(c5_control_t1_sd, c5_control_t2_sd))
-
 # Mean and SD for control trials
 c5_control_mean <- 0.15
 c5_control_sd <- 0.43
 c5_control_variance <- (c5_control_sd)^2
-
-# # Critical trial 1
-# c5_critical_t1_mean <- 0.1
-# c5_critical_t1_sd <- 0.6
-# 
-# # Critical trial 2
-# c5_critical_t2_mean <- -0.3
-# c5_critical_t2_sd <- 0.7
-# 
-# # Combined mean and SD for critical trials
-# c5_critical_mean <- mean(c(c5_critical_t1_mean, c5_critical_t2_mean))
-# c5_critical_sd <- mean(c(c5_critical_t1_sd, c5_critical_t2_sd))
 
 # Mean and SD for critical trials
 c5_critical_mean <- -0.15
@@ -274,7 +168,7 @@ c11_cohensd <- 0.002
 
 # Compute effect size from proportion
 c12_pop <- 20
-c12_successes <- 85*20/100
+c12_successes <- round(85*c12_pop/100)
 c12_failures <- c12_pop - c12_successes 
 
 chisquared <- unname(chisq.test(c(c12_successes, c12_failures), 
