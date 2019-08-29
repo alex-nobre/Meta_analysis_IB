@@ -434,10 +434,10 @@ c33_cohensd <- (c33_fvalue * c33_dfeffect)/(c33_fvalue*c33_dfeffect+c33_dferror)
 
 # Compute effect sizes from t-value and sample size
 
-c34_tvalue <- -1.57 #negative value, because the control condition is larger (effect is also non-significant)
-c34_n_pairs <- 14
+#c34_tvalue <- -1.57 #negative value, because the control condition is larger (effect is also non-significant)
+#c34_n_pairs <- 14
 
-c34_cohensd <- c34_tvalue/sqrt(c34_n_pairs)
+#c34_cohensd <- c34_tvalue/sqrt(c34_n_pairs)
 
 
 #==== 35. Schnuerch et al. (2016) - exp. 1 ====
@@ -613,7 +613,7 @@ c45_cohensd <- esc_chisq(c45_chisquared,
 #==== Build vector with effect sizes ====#
 #========================================#
 
-implicit_cohensd_names <- paste("c", c(1:11, 41:45, 12:28, 30, 32:36), "_cohensd",
+implicit_cohensd_names <- paste("c", c(1:11, 41:45, 12:28, 30, 32, 33, 35, 36), "_cohensd",
                  sep = "")
 
 implicit_cohensd <- map_dbl(implicit_cohensd_names, get)

@@ -40,7 +40,7 @@ Problem:in some cases, smaller RTs result from implicit processing (e.g., orient
 - For interactions: when the interaction between V1 and V2 does not indicate a reversal in the direction of the effect of levels of V2 across levels of V1, the direction of the effect shown by the interaction is the same as the direction of the effect of V2.
 
 
-Are there any studies which do these criteria do not contemplate?
+Are there any studies which these criteria do not contemplate?
 
 * What about when it is a comparison against chance? - deviations above chance mean a difference in the direction of facilitation, thus positive; below chance (also in this case, most likely nonsignificant) as no facilitation, thuss negative.
 

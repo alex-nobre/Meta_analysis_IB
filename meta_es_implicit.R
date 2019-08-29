@@ -84,7 +84,7 @@ es_table$inattention_paradigm <- c(rep(0, 21), #ariga_2007_exp2 to most_2005_exp
                                   rep(1,4), #razpurker-apfeld and pratt, 2008
                                   0, #richards_2012_tracking
                                   rep(1, 10), #russsel_driver_2005
-                                  rep(0,3) #shafto_pitts_2015 and schunerch_2016
+                                  rep(0,2) #schunerch_2016
                                   ) %>%
   as.factor()
 
@@ -96,15 +96,14 @@ es_table$group_aware_assess <- c(1, #ariga_2007_exp2
                                  rep(1,9),  # moore_egeth_1997_exp1 to razpurker-apfeld and pratt, 2008
                                  0, #richards_2012_tracking
                                  rep(1, 10), #russsel_driver_2005
-                                 rep(0,3) #shafto_pitts_2015 and schunerch_2016
+                                 rep(0,2) #schunerch_2016
                                  ) %>%
   as.factor()
 
 #============================================================================================#
-#============================ 2. Compute meta-analytic ES ====================================
+#============================ 2. Compute implicit meta-analytic ES ===========================
 #============================================================================================#
 
-# ==== 2.1. Implicit ES ====
 ## Build meta analytic effect model
 implicit_meta_es <- metagen(TE = es_table$implicit_hedgesg, # treatment effect (Hedge's g)
                    es_table$se_implicit_g, #standard error of treatment,
@@ -182,7 +181,10 @@ funnel(trimmed_meta,
 
 forest(trimmed_meta) # generate trimmed forest plot
 
-# ==== 2.2. Awareness ES ====
+#============================================================================================#
+#============================ 3. Compute awareness meta-analytic ES ==========================
+#============================================================================================#
+
 ## Build meta analytic effect model
 awareness_meta_es <- metagen(TE = es_table$awareness_hedgesg, # treatment effect (Hedge's g)
                             es_table$se_awareness_g, #standard error of treatment,
@@ -261,7 +263,7 @@ funnel(trimmed_meta,
 forest(trimmed_meta) # generate trimmed forest plot
 
 #=========================================================================================#
-#================================= 3.  Heterogeneity ======================================
+#================= 4. Heterogeneity between implicit and awareness ES =====================
 #=========================================================================================#
 
 mean(es_table$N_trials_implicit)
@@ -280,6 +282,7 @@ min(es_table$N_trials_implicit)
 max(es_table$N_trials_implicit)
 
 
+# Histogram of n of trials for implicit
 ggplot(data=es_table) +
   geom_histogram(aes(x=N_trials_implicit)) + 
   labs(title = "Frequency of N of trials for implicit processing across studies",
@@ -290,128 +293,137 @@ ggplot(data=es_table) +
 
 
 #=========================================================================================#
-#=============================== 4. Moderation analysis ===================================
+#======================== 5. Moderation analysis of implicit ES ===========================
 #=========================================================================================#
 
-#==== 4.1. Implicit es moderators ====
-### compute subgroup analysis for binary categorical variables ###
+#====== 5.1. compute subgroup analysis for binary categorical variables ======
 
 # unexpected stimulus relevance
-mod_relevance_us <- update(implicit_meta_es, 
+mod_implicit_relevance_us <- update(implicit_meta_es, 
                            byvar=es_table$us_relevance, 
                            print.byvar=FALSE)
-summary(mod_relevance_us)
+summary(mod_implicit_relevance_us)
 
 # type of implicit measure
-mod_implicit_type <- update(implicit_meta_es, 
+mod_implicit_type_implicit_measure <- update(implicit_meta_es, 
                             byvar=es_table$implicit_type, 
                             print.byvar=FALSE)
-summary(mod_implicit_type)
+summary(mod_implicit_type_implicit_measure)
 
 # implicit measure outcome
-mod_implicit_measure <- update(implicit_meta_es, 
+mod_implicit_outcome_of_implicit_measure <- update(implicit_meta_es, 
                                byvar=es_table$implicit_measure, 
                                print.byvar=FALSE)
-summary(mod_implicit_measure)
+summary(mod_implicit_outcome_of_implicit_measure)
 
 # unexpected stimulus presentation
-mod_us_presentation <- update(implicit_meta_es, 
+mod_implicit_us_presentation <- update(implicit_meta_es, 
                               byvar=es_table$us_presentation, 
                               print.byvar=FALSE)
-summary(mod_us_presentation)
+summary(mod_implicit_us_presentation)
 
 # unexpected stimulus delay type
-mod_us_delay_type <- update(implicit_meta_es, 
+mod_implicit_us_delay_type <- update(implicit_meta_es, 
                             byvar=es_table$us_delay_type, 
                             print.byvar=FALSE)
-summary(mod_us_delay_type)
+summary(mod_implicit_us_delay_type)
 
 # awareness assessment
-mod_us_assessment <- update(implicit_meta_es, 
+mod_implicit_us_assessment <- update(implicit_meta_es, 
                             byvar=es_table$us_assessment, 
                             print.byvar=FALSE)
-summary(mod_us_assessment)
+summary(mod_implicit_us_assessment)
 
 # significance of implicit effect
-mod_significance <- update(implicit_meta_es, 
+mod_implicit_significance <- update(implicit_meta_es, 
                            byvar=es_table$significance, 
                            print.byvar=FALSE)
-summary(mod_significance)
+summary(mod_implicit_significance)
 
 # gray literature
-gray_literature <- update(implicit_meta_es, 
+mod_implicit_gray_literature <- update(implicit_meta_es, 
                            byvar=es_table$gray_literature, 
                            print.byvar=FALSE)
-summary(gray_literature)
+summary(mod_implicit_gray_literature)
 
 #==== significance of inattention paradigm ====#
-mod_inattention <- update(implicit_meta_es, 
+# Include moderator
+mod_implicit_inattention <- update(implicit_meta_es, 
                            byvar=es_table$inattention_paradigm, 
                            print.byvar=FALSE)
-summary(mod_inattention)
+summary(mod_implicit_inattention)
 
 
-## Build meta analytic effect model
-meta_inattention <- metagen(TE = es_table$hedgesg, # treatment effect (Hedge's g)
-                   es_table$se_g, #standard error of treatment,
+## Create model with subset
+meta_implicit_inattention <- metagen(TE = es_table$implicit_hedgesg, # treatment effect (Hedge's g)
+                   es_table$se_implicit_g, #standard error of treatment,
                    studlab = es_table$study,
                    subset = es_table$inattention_paradigm == 1,
                    comb.random = TRUE)
 
-forest(meta_inattention, # generate untrimmed forest plot
+forest(meta_implicit_inattention, # generate untrimmed forest plot
        STUDLAB = TRUE, #should study labels be printed?
        comb.random = TRUE # plot random effect estimate
 )
 
 #==== significance of group assessment of awareness ====#
-mod_group_aware_assess <- update(implicit_meta_es, 
+
+## Include moderator
+mod_implicit_group_aware_assess <- update(implicit_meta_es, 
                           byvar=es_table$group_aware_assess, 
                           print.byvar=FALSE)
-summary(mod_group_aware_assess)
+summary(mod_implicit_group_aware_assess)
 
 
-## Build meta analytic effect model
-meta_group_aware_assess <- metagen(TE = es_table$implicit_hedgesg, # treatment effect (Hedge's g)
+## Create model with subset
+meta_implicit_group_aware_assess_yes <- metagen(TE = es_table$implicit_hedgesg, # treatment effect (Hedge's g)
                             es_table$se_implicit_g, #standard error of treatment,
                             studlab = es_table$study,
                             subset = es_table$group_aware_assess == 1,
                             comb.random = TRUE)
 
-metagen(TE = es_table$implicit_hedgesg, # treatment effect (Hedge's g)
+meta_implicit_group_aware_assess_no <- metagen(TE = es_table$implicit_hedgesg, # treatment effect (Hedge's g)
                                    es_table$se_implicit_g, #standard error of treatment,
                                    studlab = es_table$study,
                                    subset = es_table$group_aware_assess == 0,
                                    comb.random = TRUE)
 
-forest(meta_group_aware_assess, # generate untrimmed forest plot
+forest(meta_implicit_group_aware_assess_yes, # generate untrimmed forest plot
        STUDLAB = TRUE, #should study labels be printed?
        comb.random = TRUE # plot random effect estimate
 )
 
-### compute metaregression for non-binary categorical or continuous variables ###
+#====== 5.2. compute metaregression for non-binary categorical or continuous variables ======
 
 # number of participants per group
-mod_n_group <- metareg(implicit_meta_es, es_table$N_per_group)
-summary(mod_n_group)
+mod_implicit_n_group <- metareg(implicit_meta_es, 
+                                es_table$N_per_group)
+summary(mod_implicit_n_group)
 
 # number of trials for implicit processing
-mod_n_trials_implicit <- metareg(implicit_meta_es, es_table$N_trials_implicit)
-summary(mod_n_trials_implicit)
+mod_implicit_n_trials_implicit <- metareg(implicit_meta_es, 
+                                          es_table$N_trials_implicit)
+summary(mod_implicit_n_trials_implicit)
 
 # number of trials for awareness
-mod_n_trials_awareness <- metareg(implicit_meta_es, es_table$N_trials_awareness)
-summary(mod_n_trials_awareness)
+mod_implicit_n_trials_awareness <- metareg(implicit_meta_es, 
+                                           es_table$N_trials_awareness)
+summary(mod_implicit_n_trials_awareness)
 
 # number of participants for implicit processing
-mod_N_participants_implicit <- metareg(implicit_meta_es, es_table$N_participants_awareness)
-summary(mod_N_participants_implicit)
+mod_implicit_N_participants_implicit <- metareg(implicit_meta_es, 
+                                                es_table$N_participants_awareness)
+summary(mod_implicit_N_participants_implicit)
 
 # number of participants for awareness
-mod_N_participants_awareness <- metareg(implicit_meta_es, es_table$N_participants_awareness)
-summary(mod_N_participants_awareness)
+mod_implicit_N_participants_awareness <- metareg(implicit_meta_es, 
+                                                 es_table$N_participants_awareness)
+summary(mod_implicit_N_participants_awareness)
 
 
-#==== 4.2. Awareness es moderators ====
+#=========================================================================================#
+#======================== 6. Moderation analysis of awareness ES ===========================
+#=========================================================================================#
 
 # type of awareness measure
 # Include moderator
@@ -420,22 +432,56 @@ mod_awareness_objective <- update(awareness_meta_es,
                             print.byvar=FALSE)
 summary(mod_awareness_objective)
 
-# run with subset
-meta_group_aware_objective <- metagen(TE = es_table$awareness_hedgesg, # treatment effect (Hedge's g)
+# create model with subset
+meta_awareness_objective_aware_obj <- metagen(TE = es_table$awareness_hedgesg, # treatment effect (Hedge's g)
                                    es_table$se_awareness_g, #standard error of treatment,
                                    studlab = es_table$study,
                                    subset = es_table$awareness_objective == "objective",
                                    comb.random = TRUE)
 
-meta_group_aware_objective <- metagen(TE = es_table$awareness_hedgesg, # treatment effect (Hedge's g)
+meta_awareness_objective_aware_sub <- metagen(TE = es_table$awareness_hedgesg, # treatment effect (Hedge's g)
                                       es_table$se_awareness_g, #standard error of treatment,
                                       studlab = es_table$study,
                                       subset = es_table$awareness_objective == "subjective",
                                       comb.random = TRUE)
 
 
-# awareness measure outcome
-mod_awareness_measure <- update(awareness_meta_es, 
+## include moderator for awareness measure
+mod_awareness_measure_awareness <- update(awareness_meta_es, 
                                byvar=es_table$awareness_measure, 
                                print.byvar=FALSE)
-summary(mod_awareness_measure)
+summary(mod_awareness_measure_awareness)
+
+
+#====== Group assessment of awareness =======#
+
+## include moderator
+mod_awareness_group_aware_assess <- update(awareness_meta_es, 
+                                  byvar=es_table$group_aware_assess, 
+                                  print.byvar=FALSE)
+summary(mod_awareness_group_aware_assess)
+
+## Create model with subset
+meta_awareness_group_aware_assess_yes <- metagen(TE = es_table$awareness_hedgesg, # treatment effect (Hedge's g)
+                                                es_table$se_awareness_g, #standard error of treatment,
+                                                studlab = es_table$study,
+                                                subset = es_table$group_aware_assess == 1,
+                                                comb.random = TRUE)
+
+meta_awareness_group_aware_assess_no <- metagen(TE = es_table$awareness_hedgesg, # treatment effect (Hedge's g)
+                                               es_table$se_awareness_g, #standard error of treatment,
+                                               studlab = es_table$study,
+                                               subset = es_table$group_aware_assess == 0,
+                                               comb.random = TRUE)
+
+forest(meta_awareness_group_aware_assess_yes, # generate untrimmed forest plot
+       STUDLAB = TRUE, #should study labels be printed?
+       comb.random = TRUE # plot random effect estimate
+)
+
+#====== 6.2. compute metaregression for non-binary categorical or continuous variables ======
+
+# number of trials for awareness
+mod_awareness_n_trials_awareness <- metareg(awareness_meta_es, 
+                                            es_table$N_trials_awareness)
+summary(mod_awareness_n_trials_awareness)

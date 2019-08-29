@@ -39,7 +39,7 @@ study_names <- c("ariga_2007_exp2",
                  "russell_driver_2005_exp4b_acc", 
                  "russell_driver_2005_exp5_acc",
                  "russell_driver_2005_exp5_rt", 
-                 "shafto_pitts_2015",
+                 #"shafto_pitts_2015",
                  "schnuerch_2016_exp1",
                  "schnuerch_2016_exp2"
                  )
@@ -80,7 +80,7 @@ N_per_group <- c(20, #ariga_2007_exp2
                  21, #russell_driver_2005_exp4b_acc
                  24, #russell_driver_2005_exp5_acc
                  24, #russell_driver_2005_exp5_rt
-                 15, #shafto_pitts_2015
+                 #15, #shafto_pitts_2015
                  61, #schnuerch_2016_exp1
                  58 #schnuerch_2016_exp2
                  )
@@ -122,7 +122,7 @@ us_relevance <- c("irrelevant", #ariga_2007_exp2
                   "irrelevant", #russell_driver_2005_exp4b_acc
                   "irrelevant", #russell_driver_2005_exp5_acc
                   "irrelevant", #russell_driver_2005_exp5_rt
-                  "irrelevant", #shafto_pitts_2015
+                  #"irrelevant", #shafto_pitts_2015
                   "irrelevant", #schnuerch_2016_exp1
                   "irrelevant" #schnuerch_2016_exp2
                   )
@@ -164,7 +164,7 @@ implicit_type <- c("response", #ariga_2007_exp2
                    "attentional", #russell_driver_2005_exp4b_acc
                    "attentional", #russell_driver_2005_exp5_acc
                    "attentional", #russell_driver_2005_exp5_rt
-                   "attentional", #shafto_pitts_2015
+                   #"attentional", #shafto_pitts_2015
                    "attentional", #schnuerch_2016_exp1
                    "attentional" #schnuerch_2016_exp2
                    )
@@ -206,7 +206,7 @@ implicit_measure <- c("RT", #ariga_2007_exp2
                       "accuracy", #russell_driver_2005_exp4b_acc
                       "accuracy", #russell_driver_2005_exp5_acc
                       "RT", #russell_driver_2005_exp5_rt
-                      0, #shafto_pitts_2015
+                      #0, #shafto_pitts_2015
                       "RT", #schnuerch_2016_exp1
                       "RT" #schnuerch_2016_exp2
                       )
@@ -248,7 +248,7 @@ N_trials_implicit <- c(1, #ariga_2007_exp2
                        600, #russell_driver_2005_exp4b_acc
                        600, #russell_driver_2005_exp5_acc
                        600, #russell_driver_2005_exp5_rt
-                       216, #shafto_pitts_2015
+                       #216, #shafto_pitts_2015
                        150, #schnuerch_2016_exp1
                        192 #schnuerch_2016_exp2
                        )
@@ -290,7 +290,7 @@ N_participants_implicit <- c(20, #ariga_2007_exp2
                             20, #russell_driver_2005_exp4b_acc
                             24, #russell_driver_2005_exp5_acc
                             24, #russell_driver_2005_exp5_rt
-                            15, #shafto_pitts_2015
+                            #15, #shafto_pitts_2015
                             61, #schnuerch_2016_exp1
                             58 #schnuerch_2016_exp2
                             )
@@ -332,7 +332,7 @@ awareness_objective <- c("objective", #ariga_2007_exp2
                          "objective", #russell_driver_2005_exp4b_acc
                          "objective", #russell_driver_2005_exp5_acc
                          "objective", #russell_driver_2005_exp5_rt
-                         "subjective", #shafto_pitts_2015
+                         #"subjective", #shafto_pitts_2015
                          "subjective", #schnuerch_2016_exp1
                          "subjective" #schnuerch_2016_exp2
                          )
@@ -374,7 +374,7 @@ us_presentation <- c("block_or_phase", #ariga_2007_exp2
                      "block_or_phase", #russell_driver_2005_exp4b_acc
                      "block_or_phase", #russell_driver_2005_exp5_acc
                      "block_or_phase", #russell_driver_2005_exp5_rt
-                     "block_or_phase", #shafto_pitts_2015
+                     #"block_or_phase", #shafto_pitts_2015
                      "block_or_phase", #schnuerch_2016_exp1
                      "block_or_phase" #schnuerch_2016_exp2
                      )
@@ -416,7 +416,7 @@ us_delay_type <- c("fixed", #ariga_2007_exp2
                    "variable", #russell_driver_2005_exp4b_acc
                    "variable", #russell_driver_2005_exp5_acc
                    "variable", #russell_driver_2005_exp5_rt
-                   "variable", #shafto_pitts_2015
+                   #"variable", #shafto_pitts_2015
                    "variable", #schnuerch_2016_exp1
                    "variable" #schnuerch_2016_exp2
                    )
@@ -458,7 +458,7 @@ us_assessment <- c("trial", #ariga_2007_exp2
                    "trial", #russell_driver_2005_exp4b_acc
                    "trial", #russell_driver_2005_exp5_acc
                    "trial", #russell_driver_2005_exp5_rt
-                   "block_or_phase", #shafto_pitts_2015
+                   #"block_or_phase", #shafto_pitts_2015
                    "block_or_phase", #schnuerch_2016_exp1
                    "block_or_phase" #schnuerch_2016_exp2
                    )
@@ -500,7 +500,7 @@ N_trials_awareness <- c(0, #ariga_2007_exp2
                         0, #russell_driver_2005_exp4b_acc
                         0, #russell_driver_2005_exp5_acc
                         0, #russell_driver_2005_exp5_rt
-                        1, #shafto_pitts_2015
+                        #1, #shafto_pitts_2015
                         1, #schnuerch_2016_exp1
                         1 #schnuerch_2016_exp2
                         )
@@ -542,7 +542,7 @@ N_participants_awareness <- c(20, #ariga_2007_exp2
                               21, #russell_driver_2005_exp4b_acc
                               24, #russell_driver_2005_exp5_acc
                               24, #russell_driver_2005_exp5_rt
-                              30, #shafto_pitts_2015
+                              #30, #shafto_pitts_2015
                               61, #schnuerch_2016_exp1
                               61 #schnuerch_2016_exp2
                               )
@@ -584,7 +584,7 @@ significance <- c("no", #ariga_2007_exp2
                   "yes", #russell_driver_2005_exp4b_acc
                   "no", #russell_driver_2005_exp5_acc
                   "no", #russell_driver_2005_exp5_rt
-                  "yes", #shafto_pitts_2015
+                  #"yes", #shafto_pitts_2015
                   "yes", #schnuerch_2016_exp1
                   "yes" #schnuerch_2016_exp2
                   )
@@ -625,7 +625,7 @@ gray_literature <- c("no", #ariga_2007_exp2
                      "no", #russell_driver_2005_exp4b_acc
                      "no", #russell_driver_2005_exp5_acc
                      "no", #russell_driver_2005_exp5_rt
-                     "no", #shafto_pitts_2015
+                     #"no", #shafto_pitts_2015
                      "no", #schnuerch_2016_exp1
                      "no" #schnuerch_2016_exp2
                      )

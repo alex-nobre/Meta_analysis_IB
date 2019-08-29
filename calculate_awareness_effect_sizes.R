@@ -510,15 +510,15 @@ c33_cohensd <- c32_cohensd
 #==== 34. Shafto and Pitts (2015) ====
 
 # Compute effect sizes from proportions
-c34_pop <- 30
-c34_successes <- 15
-c34_failures <- c34_pop - c34_successes
+#c34_pop <- 30
+#c34_successes <- 15
+#c34_failures <- c34_pop - c34_successes
 
-c34_chisquared <- unname(chisq.test(c(c34_successes, c34_failures), 
-                                    p = c(0.5, 0.5))$statistic)
-c34_cohensd <- esc_chisq(c34_chisquared, 
-                         es.type = "d", 
-                         totaln = c34_pop)$es
+#c34_chisquared <- unname(chisq.test(c(c34_successes, c34_failures), 
+#                                    p = c(0.5, 0.5))$statistic)
+#c34_cohensd <- esc_chisq(c34_chisquared, 
+#                         es.type = "d", 
+#                         totaln = c34_pop)$es
 
 
 #==== 35. Schnuerch et al. (2016) - exp. 1 ====
@@ -636,7 +636,7 @@ c45_cohensd <- esc_chisq(c45_chisquared,
 #==== Build vector with effect sizes ====#
 #========================================#
 
-awareness_cohensd_names <- paste("c", c(1:11, 41:45, 12:28, 30, 32:36), "_cohensd",
+awareness_cohensd_names <- paste("c", c(1:11, 41:45, 12:28, 30, 32, 33, 35, 36), "_cohensd",
                                  sep = "")
 
 awareness_cohensd <- map_dbl(awareness_cohensd_names, get)
@@ -644,11 +644,11 @@ awareness_cohensd <- map_dbl(awareness_cohensd_names, get)
 # Replace value for moore and egeth (1997) by other max because the computed d is infinite
 awareness_cohensd[18] <- max(awareness_cohensd[-18])
 
-awareness_totaln <- map_dbl(paste("c", c(1:11, 41:45, 12:28, 30, 32:36), "_pop",
+awareness_totaln <- map_dbl(paste("c", c(1:11, 41:45, 12:28, 30, 32, 33, 35, 36), "_pop",
                                   sep = ""), get)
 awareness_hedgesg <- hedges_g(awareness_cohensd, awareness_totaln)
 
-awareness_chisquare_names <- paste("c", c(1:11, 41:45, 12:28, 30, 32:36), "_chisquared",
+awareness_chisquare_names <- paste("c", c(1:11, 41:45, 12:28, 30, 32, 33, 35, 36), "_chisquared",
                                    sep = "")
 
 awareness_chisquares <- map_dbl(awareness_chisquare_names, get)
