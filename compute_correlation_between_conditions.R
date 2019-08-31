@@ -18,7 +18,7 @@ data_nonoticers <- subset(data_schnuerch, include == 1)
 View(data_nonoticers)
 
 # Compute correlation between conditions (incongruent and neutral)
-cor(data_nonoticers$median.neutral, 
+cor_schnuerch <- cor(data_nonoticers$median.neutral, 
     data_nonoticers$median.incong)
 
 
@@ -47,7 +47,7 @@ sd_background <- by(data_irene$Latency.mS.,
                     INDICES = data_irene$Background, 
                     FUN = sd)
 
-
+# correlation between backgrounds
 mean_background_sub <- tapply(data_irene$Latency.mS., 
                               INDEX = list(data_irene$Background, as.factor(data_irene$sub)), 
                               FUN = mean, simplify = TRUE)
@@ -62,3 +62,26 @@ mean_interaction <- aggregate(Latency.mS. ~ cond + Background,
 sd_interaction <- aggregate(Latency.mS. ~ cond + Background, 
                             data = data_irene, 
                             FUN = "sd")
+
+cor_razpurker <- mean(c(cor_cond,
+                        cor_background))
+#========================= Beanland and Pammer Exp 1A (2010) ==============================
+# Import data
+data_beanland_1A <- read.xlsx("Beanland&Pammer 2010 Exp1AB.xlsx", sheetIndex = 1)
+View(data_beanland_1A)
+
+data_beanland_1A <- data_beanland_1A[data_beanland_1A$notice == 0,]
+
+data_beanland_1A$control_trials_mean_err_raw <- rowMeans(cbind(data_beanland_1A$t1err_raw,
+                                                           data_beanland_1A$t2err_raw,
+                                                           data_beanland_1A$t4err_raw))
+
+data_beanland_1A$crit_trials_mean_err_raw <- rowMeans(cbind(data_beanland_1A$t3err_raw,
+                                                               data_beanland_1A$t5err_raw))
+
+cor_beanland_1A <- cor(data_beanland_1A$crit_trials_mean_err_raw,
+    data_beanland_1A$control_trials_mean_err_raw)
+
+cor_pairs <- mean(c(cor_schnuerch,
+                    cor_razpurker,
+                    cor_beanland_1A))

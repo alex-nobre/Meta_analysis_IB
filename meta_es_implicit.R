@@ -43,8 +43,9 @@ View(es_table)
 
 # Schnuerch et al. (2016)
 # Razpurker-apfeld and Pratt (2008)
+# Beanland and Pammer 1A (2010)
 
-cor_pairs <- 0.93
+ #cor_pairs <- 0.93
 
 # replace ds by computed cohens ds
 es_table$implicit_d <- implicit_cohensd
@@ -196,13 +197,11 @@ summary(awareness_meta_es)
 knitr::kable(awareness_meta_es)
 
 # Plots
-dev.new(width = 20, height = 12)
 forest(awareness_meta_es, # generate untrimmed forest plot
        STUDLAB = TRUE, #should study labels be printed?
        comb.fixed = FALSE, # plot fixed effect estimate?
        comb.random = TRUE # plot random effect estimate
 )
-dev.copy2eps()
 
 # Check assimetry with funnel plot
 funnel(awareness_meta_es,
