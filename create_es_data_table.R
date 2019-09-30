@@ -28,7 +28,7 @@ study_names <- c("ariga_2007_exp2",
                  "razpurker_pratt_2008_columns_rows_acc", 
                  "razpurker_pratt_2008_triangle_arrow_rt",
                  "razpurker_pratt_2008_triangle_arrow_acc", 
-                 "richards_2012_tracking", 
+                 #"richards_2012_tracking", 
                  "russell_driver_2005_exp1_acc", 
                  "russell_driver_2005_exp1_rt", 
                  "russell_driver_2005_exp2_acc",
@@ -41,9 +41,27 @@ study_names <- c("ariga_2007_exp2",
                  "russell_driver_2005_exp5_rt", 
                  #"shafto_pitts_2015",
                  "schnuerch_2016_exp1",
-                 "schnuerch_2016_exp2"
+                 "schnuerch_2016_exp2",
+                 "wood_simons_2019_exp1",
+                 "wood_simons_2019_exp2",
+                 "rashal_2017_exp1_RT",
+                 "rashal_2017_exp2_acc",
+                 "rashal_2017_exp3_RT",
+                 "rashal_2017_exp4_acc",
+                 "rashal_2017_exp4_RT",
+                 "rashal_2017_exp5_acc",
+                 "rashal_2017_exp5_RT",
+                 "rashal_2017_exp6_acc",
+                 "rashal_2017_exp6_RT",
+                 "kimchi_2004_exp_1_column_row_color_RT",
+                 "kimchi_2004_exp_1_triangle_arrow_color_acc",
+                 "kimchi_2004_exp_1_triangle_arrow_acc",
+                 "kimchi_2004_exp_2_square_cross_color_acc",
+                 "kimchi_2004_exp_2_square_cross_RT",
+                 "kimchi_2004_exp_2_square_cross_acc"
                  )
 
+#===== Total N? =====
 N_per_group <- c(20, #ariga_2007_exp2  
                  27, #beanland_pammer_2010_exp1A_fixating
                  31, #beanland_pammer_2010_exp1A_moving
@@ -69,7 +87,7 @@ N_per_group <- c(20, #ariga_2007_exp2
                  14, #razpurker_pratt_2008_columns_rows_acc
                  14, #razpurker_pratt_2008_triangle_arrow_rt
                  14, #razpurker_pratt_2008_triangle_arrow_acc
-                 119, #richards_2012_tracking
+                 #119, #richards_2012_tracking
                  25, #russell_driver_2005_exp1_acc
                  25, #russell_driver_2005_exp1_rt
                  28, #russell_driver_2005_exp2_acc
@@ -82,10 +100,27 @@ N_per_group <- c(20, #ariga_2007_exp2
                  24, #russell_driver_2005_exp5_rt
                  #15, #shafto_pitts_2015
                  61, #schnuerch_2016_exp1
-                 58 #schnuerch_2016_exp2
+                 58, #schnuerch_2016_exp2,
+                 175, #"wood_simons_2019_exp1"
+                 216, #"wood_simons_2019_exp2",
+                 20,  #"rashal_2017_exp1_RT"
+                 28,  #"rashal_2017_exp2_acc"
+                 18,  #"rashal_2017_exp3_RT"
+                 15,  #"rashal_2017_exp4_acc"
+                 15,  #"rashal_2017_exp4_RT",
+                 18, #"rashal_2017_exp5_acc"
+                 18, #"rashal_2017_exp5_RT"
+                 18, #"rashal_2017_exp6_acc"
+                 18, #"rashal_2017_exp6_RT"
+                 14, #"kimchi_2004_exp_1_column_row_color_RT"
+                 14, #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                 14, #"kimchi_2004_exp_1_triangle_arrow_acc"
+                 12, #"kimchi_2004_exp_2_square_cross_color_acc"
+                 12, #"kimchi_2004_exp_2_square_cross_RT"
+                 12 #"kimchi_2004_exp_2_square_cross_acc"
                  )
 
-
+#====== Did the us interact with the target stimulus? ======
 us_relevance <- c("irrelevant", #ariga_2007_exp2  
                   "irrelevant", #beanland_pammer_2010_exp1A_fixating
                   "irrelevant", #beanland_pammer_2010_exp1A_moving
@@ -111,7 +146,7 @@ us_relevance <- c("irrelevant", #ariga_2007_exp2
                   "irrelevant", #razpurker_pratt_2008_columns_rows_acc
                   "irrelevant", #razpurker_pratt_2008_triangle_arrow_rt
                   "irrelevant", #razpurker_pratt_2008_triangle_arrow_acc
-                  "irrelevant", #richards_2012_tracking
+                  #"irrelevant", #richards_2012_tracking
                   "irrelevant", #russell_driver_2005_exp1_acc
                   "irrelevant", #russell_driver_2005_exp1_rt
                   "irrelevant", #russell_driver_2005_exp2_acc
@@ -124,52 +159,86 @@ us_relevance <- c("irrelevant", #ariga_2007_exp2
                   "irrelevant", #russell_driver_2005_exp5_rt
                   #"irrelevant", #shafto_pitts_2015
                   "irrelevant", #schnuerch_2016_exp1
-                  "irrelevant" #schnuerch_2016_exp2
+                  "irrelevant", #schnuerch_2016_exp2,
+                  "relevant", #"wood_simons_2019_exp1"
+                  "irrelevant", #"wood_simons_2019_exp2"
+                  "irrelevant", #"rashal_2017_exp1_RT"
+                  "irrelevant",  #"rashal_2017_exp2_acc"
+                  "irrelevant",   #"rashal_2017_exp3_RT"
+                  "irrelevant",  #"rashal_2017_exp4_acc"
+                  "irrelevant",  #"rashal_2017_exp4_RT",
+                  "irrelevant", #"rashal_2017_exp5_acc"
+                  "irrelevant", #"rashal_2017_exp5_RT"
+                  "irrelevant", #"rashal_2017_exp6_acc"
+                  "irrelevant", #"rashal_2017_exp6_RT"
+                  "irrelevant", #"kimchi_2004_exp_1_column_row_color_RT"
+                  "irrelevant", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                  "irrelevant", #"kimchi_2004_exp_1_triangle_arrow_acc"
+                  "irrelevant", #"kimchi_2004_exp_2_square_cross_color_acc"
+                  "irrelevant", #"kimchi_2004_exp_2_square_cross_RT"
+                  "irrelevant" #"kimchi_2004_exp_2_square_cross_acc"
                   )
 
-
+#======= Is the implicit process perceptual or response-end? =======
 implicit_type <- c("response", #ariga_2007_exp2  
-                   "attentional", #beanland_pammer_2010_exp1A_fixating
-                   "attentional", #beanland_pammer_2010_exp1A_moving
-                   "attentional", #beanland_pammer_2010_exp2_slow_us
-                   "attentional", #beanland_pammer_2010_exp2_fast_us
-                   "response", #gabay_2012_exp1
-                   "response", #gabay_2012_exp2
-                   "response", #lo_yeh_2008_exp1_200ms
-                   "response", #lo_yeh_2008_exp1_500ms
+                   "perceptual", #beanland_pammer_2010_exp1A_fixating
+                   "perceptual", #beanland_pammer_2010_exp1A_moving
+                   "perceptual", #beanland_pammer_2010_exp2_slow_us
+                   "perceptual", #beanland_pammer_2010_exp2_fast_us
+                   "perceptual", #gabay_2012_exp1
+                   "perceptual", #gabay_2012_exp2
+                   "perceptual", #lo_yeh_2008_exp1_200ms
+                   "perceptual", #lo_yeh_2008_exp1_500ms
                    "response", #lo_yeh_2008_exp2_200ms
                    "response", #lo_yeh_2008_exp2_500ms
-                   "attentional", #mack_and_rock_2000_exp1,
-                   "attentional", #mack_and_rock_2000_exp2,
-                   "attentional", #mack_and_rock_2000_exp3,
-                   "attentional", #mack_and_rock_2000_exp4,
-                   "attentional", #mack_and_rock_2000_exp5,
-                   "response", #moore_egeth_1997_exp1
-                   "response", #moore_egeth_1997_exp3
-                   "response", #moore_2003_exp3
-                   "attentional", #moore_2004
-                   "attentional", #most_2005_exp1to7pooled
-                   "attentional", #razpurker_pratt_2008_columns_rows_rt
-                   "response", #razpurker_pratt_2008_columns_rows_acc
-                   "response", #razpurker_pratt_2008_triangle_arrow_rt
-                   "attentional", #razpurker_pratt_2008_triangle_arrow_acc
-                   "attentional", #richards_2012_tracking
-                   "attentional", #russell_driver_2005_exp1_acc
-                   "attentional", #russell_driver_2005_exp1_rt
-                   "attentional", #russell_driver_2005_exp2_acc
-                   "attentional", #russell_driver_2005_exp2_rt
-                   "attentional", #russell_driver_2005_exp3_acc
-                   "attentional", #russell_driver_2005_exp3_rt
-                   "attentional", #russell_driver_2005_exp4a_acc
-                   "attentional", #russell_driver_2005_exp4b_acc
-                   "attentional", #russell_driver_2005_exp5_acc
-                   "attentional", #russell_driver_2005_exp5_rt
-                   #"attentional", #shafto_pitts_2015
-                   "attentional", #schnuerch_2016_exp1
-                   "attentional" #schnuerch_2016_exp2
+                   "perceptual", #mack_and_rock_2000_exp1,
+                   "perceptual", #mack_and_rock_2000_exp2,
+                   "perceptual", #mack_and_rock_2000_exp3,
+                   "perceptual", #mack_and_rock_2000_exp4,
+                   "perceptual", #mack_and_rock_2000_exp5,
+                   "perceptual", #moore_egeth_1997_exp1
+                   "perceptual", #moore_egeth_1997_exp3
+                   "perceptual", #moore_2003_exp3
+                   "response", #moore_2004
+                   "perceptual", #most_2005_exp1to7pooled
+                   "perceptual", #razpurker_pratt_2008_columns_rows_rt
+                   "perceptual", #razpurker_pratt_2008_columns_rows_acc
+                   "perceptual", #razpurker_pratt_2008_triangle_arrow_rt
+                   "perceptual", #razpurker_pratt_2008_triangle_arrow_acc
+                   #"perceptual", #richards_2012_tracking
+                   "perceptual", #russell_driver_2005_exp1_acc
+                   "perceptual", #russell_driver_2005_exp1_rt
+                   "perceptual", #russell_driver_2005_exp2_acc
+                   "perceptual", #russell_driver_2005_exp2_rt
+                   "perceptual", #russell_driver_2005_exp3_acc
+                   "perceptual", #russell_driver_2005_exp3_rt
+                   "perceptual", #russell_driver_2005_exp4a_acc
+                   "perceptual", #russell_driver_2005_exp4b_acc
+                   "perceptual", #russell_driver_2005_exp5_acc
+                   "perceptual", #russell_driver_2005_exp5_rt
+                   #"perceptual", #shafto_pitts_2015
+                   "perceptual", #schnuerch_2016_exp1
+                   "perceptual", #schnuerch_2016_exp2,
+                   "perceptual", #"wood_simons_2019_exp1"
+                   "perceptual", #"wood_simons_2019_exp2"
+                   "perceptual", #"rashal_2017_exp1_RT"
+                   "perceptual",  #"rashal_2017_exp2_acc"
+                   "perceptual",   #"rashal_2017_exp3_RT"
+                   "perceptual",  #"rashal_2017_exp4_acc"
+                   "perceptual",  #"rashal_2017_exp4_RT",
+                   "perceptual", #"rashal_2017_exp5_acc"
+                   "perceptual", #"rashal_2017_exp5_RT"
+                   "perceptual", #"rashal_2017_exp6_acc"
+                   "perceptual", #"rashal_2017_exp6_RT"
+                   "perceptual", #"kimchi_2004_exp_1_column_row_color_RT"
+                   "perceptual", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                   "perceptual", #"kimchi_2004_exp_1_triangle_arrow_acc"
+                   "perceptual", #"kimchi_2004_exp_2_square_cross_color_acc"
+                   "perceptual", #"kimchi_2004_exp_2_square_cross_RT"
+                   "perceptual" #"kimchi_2004_exp_2_square_cross_acc"
                    )
 
-
+#======= Is implicit processing measured by RT or acc? ======
 implicit_measure <- c("RT", #ariga_2007_exp2  
                       "accuracy", #beanland_pammer_2010_exp1A_fixating
                       "accuracy", #beanland_pammer_2010_exp1A_moving
@@ -195,7 +264,7 @@ implicit_measure <- c("RT", #ariga_2007_exp2
                       "accuracy", #razpurker_pratt_2008_columns_rows_acc
                       "RT", #razpurker_pratt_2008_triangle_arrow_rt
                       "accuracy", #razpurker_pratt_2008_triangle_arrow_acc
-                      "accuracy", #richards_2012_tracking
+                      #"accuracy", #richards_2012_tracking
                       "accuracy", #russell_driver_2005_exp1_acc
                       "RT", #russell_driver_2005_exp1_rt
                       "accuracy", #russell_driver_2005_exp2_acc
@@ -208,17 +277,34 @@ implicit_measure <- c("RT", #ariga_2007_exp2
                       "RT", #russell_driver_2005_exp5_rt
                       #0, #shafto_pitts_2015
                       "RT", #schnuerch_2016_exp1
-                      "RT" #schnuerch_2016_exp2
+                      "RT", #schnuerch_2016_exp2,
+                      "accuracy", #"wood_simons_2019_exp1"
+                      "accuracy", #"wood_simons_2019_exp2"
+                      "RT", #"rashal_2017_exp1_RT"
+                      "accuracy", #"rashal_2017_exp2_acc"
+                      "RT",   #"rashal_2017_exp3_RT"
+                      "accuracy",  #"rashal_2017_exp4_acc"
+                      "RT",  #"rashal_2017_exp4_RT",
+                      "accuracy", #"rashal_2017_exp5_acc"
+                      "RT", #"rashal_2017_exp5_RT"
+                      "accuracy", #"rashal_2017_exp6_acc"
+                      "RT", #"rashal_2017_exp6_RT"
+                      "RT", #"kimchi_2004_exp_1_column_row_color_RT"
+                      "accuracy", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                      "accuracy", #"kimchi_2004_exp_1_triangle_arrow_acc"
+                      "accuracy", #"kimchi_2004_exp_2_square_cross_color_acc"
+                      "RT", #"kimchi_2004_exp_2_square_cross_RT"
+                      "RT" #"kimchi_2004_exp_2_square_cross_acc"
                       )
 
-
+#=========== How many trials were used to assess implicit processing? =============
 N_trials_implicit <- c(1, #ariga_2007_exp2  
                        2, #beanland_pammer_2010_exp1A_fixating
                        2, #beanland_pammer_2010_exp1A_moving
                        2, #beanland_pammer_2010_exp2_slow_us
                        2, #beanland_pammer_2010_exp2_fast_us
-                       40, #gabay_2012_exp1
-                       40, #gabay_2012_exp2
+                       72, #gabay_2012_exp1
+                       72, #gabay_2012_exp2
                        16, #lo_yeh_2008_exp1_200ms
                        16, #lo_yeh_2008_exp1_500ms
                        64, #lo_yeh_2008_exp2_200ms
@@ -237,7 +323,7 @@ N_trials_implicit <- c(1, #ariga_2007_exp2
                        320, #razpurker_pratt_2008_columns_rows_acc
                        320, #razpurker_pratt_2008_triangle_arrow_rt
                        320, #razpurker_pratt_2008_triangle_arrow_acc
-                       1, #richards_2012_tracking
+                       #1, #richards_2012_tracking
                        480, #russell_driver_2005_exp1_acc
                        480, #russell_driver_2005_exp1_rt
                        480, #russell_driver_2005_exp2_acc
@@ -250,10 +336,27 @@ N_trials_implicit <- c(1, #ariga_2007_exp2
                        600, #russell_driver_2005_exp5_rt
                        #216, #shafto_pitts_2015
                        150, #schnuerch_2016_exp1
-                       192 #schnuerch_2016_exp2
+                       192, #schnuerch_2016_exp2
+                       1, #"wood_simons_2019_exp1"
+                       1, #"wood_simons_2019_exp2"
+                       160, #"rashal_2017_exp1_RT"
+                       160,  #"rashal_2017_exp2_acc"
+                       160,   #"rashal_2017_exp3_RT"
+                       160,  #"rashal_2017_exp4_acc"
+                       160,  #"rashal_2017_exp4_RT",
+                       160, #"rashal_2017_exp5_acc"
+                       160, #"rashal_2017_exp5_RT"
+                       160, #"rashal_2017_exp6_acc"
+                       160, #"rashal_2017_exp6_RT"
+                       160, #"kimchi_2004_exp_1_column_row_color_RT"
+                       160, #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                       160, #"kimchi_2004_exp_1_triangle_arrow_acc"
+                       160, #"kimchi_2004_exp_2_square_cross_color_acc"
+                       160, #"kimchi_2004_exp_2_square_cross_RT"
+                       160 #"kimchi_2004_exp_2_square_cross_acc"
                        )
 
-
+#======== How many subjects in the sample for implicit processing testing? ===========
 N_participants_implicit <- c(20, #ariga_2007_exp2  
                             27, #beanland_pammer_2010_exp1A_fixating
                             31, #beanland_pammer_2010_exp1A_moving
@@ -279,7 +382,7 @@ N_participants_implicit <- c(20, #ariga_2007_exp2
                             14, #razpurker_pratt_2008_columns_rows_acc
                             14, #razpurker_pratt_2008_triangle_arrow_rt
                             14, #razpurker_pratt_2008_triangle_arrow_acc
-                            131, #richards_2012_tracking
+                            #131, #richards_2012_tracking
                             25, #russell_driver_2005_exp1_acc
                             25, #russell_driver_2005_exp1_rt
                             28, #russell_driver_2005_exp2_acc
@@ -292,10 +395,27 @@ N_participants_implicit <- c(20, #ariga_2007_exp2
                             24, #russell_driver_2005_exp5_rt
                             #15, #shafto_pitts_2015
                             61, #schnuerch_2016_exp1
-                            58 #schnuerch_2016_exp2
+                            58, #schnuerch_2016_exp2
+                            175, #"wood_simons_2019_exp1"
+                            216, #"wood_simons_2019_exp2"
+                            20, #"rashal_2017_exp1_RT"
+                            28,  #"rashal_2017_exp2_acc"
+                            18,  #"rashal_2017_exp3_RT"
+                            15,  #"rashal_2017_exp4_acc"
+                            15,  #"rashal_2017_exp4_RT",
+                            18, #"rashal_2017_exp5_acc"
+                            18, #"rashal_2017_exp5_RT"
+                            18, #"rashal_2017_exp6_acc"
+                            18, #"rashal_2017_exp6_RT"
+                            14, #"kimchi_2004_exp_1_column_row_color_RT"
+                            14, #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                            14, #"kimchi_2004_exp_1_triangle_arrow_acc"
+                            12, #"kimchi_2004_exp_2_square_cross_color_acc"
+                            12, #"kimchi_2004_exp_2_square_cross_RT"
+                            12 #"kimchi_2004_exp_2_square_cross_acc"
                             )
 
-
+#========  Which type of awareness measure was employed (objective or subjective)? =======
 awareness_objective <- c("objective", #ariga_2007_exp2  
                          "objective", #beanland_pammer_2010_exp1A_fixating
                          "objective", #beanland_pammer_2010_exp1A_moving
@@ -321,7 +441,7 @@ awareness_objective <- c("objective", #ariga_2007_exp2
                          "subjective", #razpurker_pratt_2008_columns_rows_acc
                          "subjective", #razpurker_pratt_2008_triangle_arrow_rt
                          "subjective", #razpurker_pratt_2008_triangle_arrow_acc
-                         "objective", #richards_2012_tracking
+                         #"objective", #richards_2012_tracking
                          "objective", #russell_driver_2005_exp1_acc
                          "objective", #russell_driver_2005_exp1_rt
                          "objective", #russell_driver_2005_exp2_acc
@@ -334,10 +454,27 @@ awareness_objective <- c("objective", #ariga_2007_exp2
                          "objective", #russell_driver_2005_exp5_rt
                          #"subjective", #shafto_pitts_2015
                          "subjective", #schnuerch_2016_exp1
-                         "subjective" #schnuerch_2016_exp2
+                         "subjective", #schnuerch_2016_exp2
+                         "objective", #"wood_simons_2019_exp1"
+                         "objective",  #"wood_simons_2019_exp2",
+                         "objective",  #"rashal_2017_exp1_RT"
+                         "objective",  #"rashal_2017_exp2_acc"
+                         "objective", #"rashal_2017_exp3_RT"
+                         "objective",  #"rashal_2017_exp4_acc"
+                         "objective",  #"rashal_2017_exp4_RT",
+                         "objective", #"rashal_2017_exp5_acc"
+                         "objective", #"rashal_2017_exp5_RT"
+                         "objective", #"rashal_2017_exp6_acc"
+                         "objective", #"rashal_2017_exp6_RT"
+                         "objective", #"kimchi_2004_exp_1_column_row_color_RT"
+                         "objective", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                         "objective", #"kimchi_2004_exp_1_triangle_arrow_acc"
+                         "objective", #"kimchi_2004_exp_2_square_cross_color_acc"
+                         "objective", #"kimchi_2004_exp_2_square_cross_RT"
+                         "objective" #"kimchi_2004_exp_2_square_cross_acc"
                          )
 
-
+#====== Was the US presented in a separate block/phase, or interleaved with non-US trials? =======
 us_presentation <- c("block_or_phase", #ariga_2007_exp2  
                      "block_or_phase", #beanland_pammer_2010_exp1A_fixating
                      "block_or_phase", #beanland_pammer_2010_exp1A_moving
@@ -363,7 +500,7 @@ us_presentation <- c("block_or_phase", #ariga_2007_exp2
                      "interleaved", #razpurker_pratt_2008_columns_rows_acc
                      "interleaved", #razpurker_pratt_2008_triangle_arrow_rt
                      "interleaved", #razpurker_pratt_2008_triangle_arrow_acc
-                     0, #richards_2012_tracking
+                     #0, #richards_2012_tracking
                      "block_or_phase", #russell_driver_2005_exp1_acc
                      "block_or_phase", #russell_driver_2005_exp1_rt
                      "block_or_phase", #russell_driver_2005_exp2_acc
@@ -376,10 +513,28 @@ us_presentation <- c("block_or_phase", #ariga_2007_exp2
                      "block_or_phase", #russell_driver_2005_exp5_rt
                      #"block_or_phase", #shafto_pitts_2015
                      "block_or_phase", #schnuerch_2016_exp1
-                     "block_or_phase" #schnuerch_2016_exp2
+                     "block_or_phase", #schnuerch_2016_exp2
+                     "interleaved", #"wood_simons_2019_exp1",
+                     "interleaved", #"wood_simons_2019_exp2",
+                     "interleaved", #"rashal_2017_exp1_RT"
+                     "interleaved",  #"rashal_2017_exp2_acc"
+                     "interleaved", #"rashal_2017_exp3_RT"
+                     "interleaved",  #"rashal_2017_exp4_acc"
+                     "interleaved",  #"rashal_2017_exp4_RT",
+                     "interleaved", #"rashal_2017_exp5_acc"
+                     "interleaved", #"rashal_2017_exp5_RT"
+                     "interleaved", #"rashal_2017_exp6_acc"
+                     "interleaved", #"rashal_2017_exp6_RT"
+                     "interleaved", #"kimchi_2004_exp_1_column_row_color_RT"
+                     "interleaved", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                     "interleaved", #"kimchi_2004_exp_1_triangle_arrow_acc
+                     "interleaved", #"kimchi_2004_exp_2_square_cross_color_acc"
+                     "interleaved", #"kimchi_2004_exp_2_square_cross_RT"
+                     "interleaved" #"kimchi_2004_exp_2_square_cross_acc"
                      )
 
-
+#****
+#======= Was the delay between the presentation of the US and awareness assessment fixed or did it vary? =======
 us_delay_type <- c("fixed", #ariga_2007_exp2  
                    "fixed", #beanland_pammer_2010_exp1A_fixating
                    "fixed", #beanland_pammer_2010_exp1A_moving
@@ -405,7 +560,7 @@ us_delay_type <- c("fixed", #ariga_2007_exp2
                    "variable", #razpurker_pratt_2008_columns_rows_acc
                    "variable", #razpurker_pratt_2008_triangle_arrow_rt
                    "variable", #razpurker_pratt_2008_triangle_arrow_acc
-                   "variable", #richards_2012_tracking
+                   #"variable", #richards_2012_tracking
                    "variable", #russell_driver_2005_exp1_acc
                    "variable", #russell_driver_2005_exp1_rt
                    "variable", #russell_driver_2005_exp2_acc
@@ -418,10 +573,28 @@ us_delay_type <- c("fixed", #ariga_2007_exp2
                    "variable", #russell_driver_2005_exp5_rt
                    #"variable", #shafto_pitts_2015
                    "variable", #schnuerch_2016_exp1
-                   "variable" #schnuerch_2016_exp2
+                   "variable", #schnuerch_2016_exp2
+                   "variable", #"wood_simons_2019_exp1"
+                   "variable", #"wood_simons_2019_exp2"
+                   "fixed",  #"rashal_2017_exp1_RT"
+                   "fixed",   #"rashal_2017_exp2_acc"
+                   "fixed",   #"rashal_2017_exp3_RT"
+                   "fixed",  #"rashal_2017_exp4_acc
+                   "fixed",  #"rashal_2017_exp4_RT",
+                   "fixed",  #"rashal_2017_exp5_acc"
+                   "fixed", #"rashal_2017_exp5_RT"
+                   "fixed", #"rashal_2017_exp6_acc"
+                   "fixed", #"rashal_2017_exp6_RT"
+                   "fixed", #"kimchi_2004_exp_1_column_row_color_RT"
+                   "fixed", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                   "fixed", #"kimchi_2004_exp_1_triangle_arrow_acc
+                   "fixed", #"kimchi_2004_exp_2_square_cross_color_acc"
+                   "fixed", #"kimchi_2004_exp_2_square_cross_RT"
+                   "fixed" #"kimchi_2004_exp_2_square_cross_acc"
                    )
 
 
+#======== Was assessment of awareness of the US presence based on a trial or a block of trials? ==========
 us_assessment <- c("trial", #ariga_2007_exp2  
                    "block_or_phase", #beanland_pammer_2010_exp1A_fixating
                    "block_or_phase", #beanland_pammer_2010_exp1A_moving
@@ -447,7 +620,7 @@ us_assessment <- c("trial", #ariga_2007_exp2
                    "block_or_phase", #razpurker_pratt_2008_columns_rows_acc
                    "block_or_phase", #razpurker_pratt_2008_triangle_arrow_rt
                    "block_or_phase", #razpurker_pratt_2008_triangle_arrow_acc
-                   "block_or_phase", #richards_2012_tracking
+                   #"block_or_phase", #richards_2012_tracking
                    "trial", #russell_driver_2005_exp1_acc
                    "trial", #russell_driver_2005_exp1_rt
                    "trial", #russell_driver_2005_exp2_acc
@@ -460,52 +633,86 @@ us_assessment <- c("trial", #ariga_2007_exp2
                    "trial", #russell_driver_2005_exp5_rt
                    #"block_or_phase", #shafto_pitts_2015
                    "block_or_phase", #schnuerch_2016_exp1
-                   "block_or_phase" #schnuerch_2016_exp2
+                   "block_or_phase", #schnuerch_2016_exp2
+                   "trial", #"wood_simons_2019_exp1"
+                   "trial", #"wood_simons_2019_exp2"
+                   "block_or_phase",  #"rashal_2017_exp1_RT"
+                   "block_or_phase",  #"rashal_2017_exp2_acc"
+                   "block_or_phase",   #"rashal_2017_exp3_RT"
+                   "block_or_phase",  #"rashal_2017_exp4_acc"
+                   "block_or_phase",  #"rashal_2017_exp4_RT",
+                   "block_or_phase", #"rashal_2017_exp5_acc"
+                   "block_or_phase", #"rashal_2017_exp5_RT"
+                   "block_or_phase", #"rashal_2017_exp6_acc"
+                   "block_or_phase", #"rashal_2017_exp6_RT"
+                   "block_or_phase", #"kimchi_2004_exp_1_column_row_color_RT"
+                   "block_or_phase", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                   "block_or_phase", #"kimchi_2004_exp_1_triangle_arrow_acc
+                   "block_or_phase", #"kimchi_2004_exp_2_square_cross_color_acc"
+                   "block_or_phase", #"kimchi_2004_exp_2_square_cross_RT"
+                   "block_or_phase" #"kimchi_2004_exp_2_square_cross_acc
                    )
 
-
-N_trials_awareness <- c(0, #ariga_2007_exp2  
+#======= In how many trials was awareness assessed (how many assessments)? ========
+N_trials_awareness <- c(1, #ariga_2007_exp2  
                         1, #beanland_pammer_2010_exp1A_fixating
                         1, #beanland_pammer_2010_exp1A_moving
                         1, #beanland_pammer_2010_exp2_slow_us
                         1, #beanland_pammer_2010_exp2_fast_us
                         40, #gabay_2012_exp1
                         40, #gabay_2012_exp2
-                        0, #lo_yeh_2008_exp1_200ms
-                        0, #lo_yeh_2008_exp1_500ms
-                        0, #lo_yeh_2008_exp2_200ms
-                        0, #lo_yeh_2008_exp2_500ms
+                        1, #lo_yeh_2008_exp1_200ms
+                        1, #lo_yeh_2008_exp1_500ms
+                        1, #lo_yeh_2008_exp2_200ms
+                        1, #lo_yeh_2008_exp2_500ms
                         1, #mack_and_rock_2000_exp1,
                         1, #mack_and_rock_2000_exp2,
                         1, #mack_and_rock_2000_exp3,
                         1, #mack_and_rock_2000_exp4,
                         1, #mack_and_rock_2000_exp5,
-                        0, #moore_egeth_1997_exp1
-                        0, #moore_egeth_1997_exp3
-                        0, #moore_2003_exp3
-                        0, #moore_2004
-                        0, #most_2005_exp1to7pooled
+                        1, #moore_egeth_1997_exp1
+                        1, #moore_egeth_1997_exp3
+                        1, #moore_2003_exp3
+                        1, #moore_2004
+                        1, #most_2005_exp1to7pooled
                         1, #razpurker_pratt_2008_columns_rows_rt
                         1, #razpurker_pratt_2008_columns_rows_acc
                         1, #razpurker_pratt_2008_triangle_arrow_rt
                         1, #razpurker_pratt_2008_triangle_arrow_acc
-                        1, #richards_2012_tracking
-                        0, #russell_driver_2005_exp1_acc
-                        0, #russell_driver_2005_exp1_rt
-                        0, #russell_driver_2005_exp2_acc
-                        0, #russell_driver_2005_exp2_rt
-                        0, #russell_driver_2005_exp3_acc
-                        0, #russell_driver_2005_exp3_rt
-                        0, #russell_driver_2005_exp4a_acc
-                        0, #russell_driver_2005_exp4b_acc
-                        0, #russell_driver_2005_exp5_acc
-                        0, #russell_driver_2005_exp5_rt
+                        #1, #richards_2012_tracking
+                        1, #russell_driver_2005_exp1_acc
+                        1, #russell_driver_2005_exp1_rt
+                        1, #russell_driver_2005_exp2_acc
+                        1, #russell_driver_2005_exp2_rt
+                        1, #russell_driver_2005_exp3_acc
+                        1, #russell_driver_2005_exp3_rt
+                        1, #russell_driver_2005_exp4a_acc
+                        1, #russell_driver_2005_exp4b_acc
+                        1, #russell_driver_2005_exp5_acc
+                        1, #russell_driver_2005_exp5_rt
                         #1, #shafto_pitts_2015
                         1, #schnuerch_2016_exp1
-                        1 #schnuerch_2016_exp2
+                        1, #schnuerch_2016_exp2
+                        1, #"wood_simons_2019_exp1"
+                        1, #"wood_simons_2019_exp2"
+                        1, #"rashal_2017_exp1_RT"
+                        1, #"rashal_2017_exp2_acc"
+                        1, #"rashal_2017_exp3_RT"
+                        1,  #"rashal_2017_exp4_acc"
+                        1,  #"rashal_2017_exp4_RT",
+                        1, #"rashal_2017_exp5_acc"
+                        1, #"rashal_2017_exp5_RT"
+                        1, #"rashal_2017_exp6_acc"
+                        1, #"rashal_2017_exp6_RT"
+                        1, #"kimchi_2004_exp_1_column_row_color_RT"
+                        1, #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                        1, #"kimchi_2004_exp_1_triangle_arrow_acc
+                        1, #"kimchi_2004_exp_2_square_cross_color_acc"
+                        1, #"kimchi_2004_exp_2_square_cross_RT"
+                        1 #"kimchi_2004_exp_2_square_cross_acc"
                         )
 
-## add controls?
+#===== How many subjects in the sample for awareness testing? ======
 N_participants_awareness <- c(20, #ariga_2007_exp2  
                               72, #beanland_pammer_2010_exp1A_fixating
                               72, #beanland_pammer_2010_exp1A_moving
@@ -531,7 +738,7 @@ N_participants_awareness <- c(20, #ariga_2007_exp2
                               14, #razpurker_pratt_2008_columns_rows_acc
                               14, #razpurker_pratt_2008_triangle_arrow_rt
                               14, #razpurker_pratt_2008_triangle_arrow_acc
-                              131, #richards_2012_tracking
+                              #131, #richards_2012_tracking
                               25, #russell_driver_2005_exp1_acc
                               25, #russell_driver_2005_exp1_rt
                               28, #russell_driver_2005_exp2_acc
@@ -544,10 +751,27 @@ N_participants_awareness <- c(20, #ariga_2007_exp2
                               24, #russell_driver_2005_exp5_rt
                               #30, #shafto_pitts_2015
                               61, #schnuerch_2016_exp1
-                              61 #schnuerch_2016_exp2
+                              61, #schnuerch_2016_exp2
+                              175, #"wood_simons_2019_exp1"
+                              216, #"wood_simons_2019_exp2"
+                              20,  #"rashal_2017_exp1_RT"
+                              28,  #"rashal_2017_exp2_acc"
+                              18, #"rashal_2017_exp3_RT"
+                              15,  #"rashal_2017_exp4_acc"
+                              15,  #"rashal_2017_exp4_RT",
+                              18,  #"rashal_2017_exp5_acc"
+                              18, #"rashal_2017_exp5_RT"
+                              18, #"rashal_2017_exp6_acc"
+                              18, #"rashal_2017_exp6_RT"
+                              14, #"kimchi_2004_exp_1_column_row_color_RT"
+                              14, #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                              14, #"kimchi_2004_exp_1_triangle_arrow_acc
+                              12, #"kimchi_2004_exp_2_square_cross_color_acc"
+                              12, #"kimchi_2004_exp_2_square_cross_RT"
+                              12 #"kimchi_2004_exp_2_square_cross_acc"
                               )
 
-
+#====== Was the result for the implicit test significant? =======
 significance <- c("no", #ariga_2007_exp2  
                   "yes", #beanland_pammer_2010_exp1A_fixating
                   "yes", #beanland_pammer_2010_exp1A_moving
@@ -573,7 +797,7 @@ significance <- c("no", #ariga_2007_exp2
                   "yes", #razpurker_pratt_2008_columns_rows_acc
                   "yes", #razpurker_pratt_2008_triangle_arrow_rt
                   "yes", #razpurker_pratt_2008_triangle_arrow_acc
-                  "no", #richards_2012_tracking
+                  #"no", #richards_2012_tracking
                   "yes", #russell_driver_2005_exp1_acc
                   "no", #russell_driver_2005_exp1_rt
                   "yes", #russell_driver_2005_exp2_acc
@@ -586,9 +810,27 @@ significance <- c("no", #ariga_2007_exp2
                   "no", #russell_driver_2005_exp5_rt
                   #"yes", #shafto_pitts_2015
                   "yes", #schnuerch_2016_exp1
-                  "yes" #schnuerch_2016_exp2
+                  "yes", #schnuerch_2016_exp2
+                  "yes", #"wood_simons_2019_exp1"
+                  "no",  #"wood_simons_2019_exp2"
+                  "yes", #"rashal_2017_exp1_RT"
+                  "no",  #"rashal_2017_exp2_acc"
+                  "no",   #"rashal_2017_exp3_RT"
+                  "yes",  #"rashal_2017_exp4_acc"
+                  "yes",  #"rashal_2017_exp4_RT",
+                  "yes",  #"rashal_2017_exp5_acc"
+                  "no", #"rashal_2017_exp5_RT"
+                  "no", #"rashal_2017_exp6_acc"
+                  "no", #"rashal_2017_exp6_RT"
+                  "yes", #"kimchi_2004_exp_1_column_row_color_RT"
+                  "no", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                  "no", #"kimchi_2004_exp_1_triangle_arrow_acc"
+                  "no", #"kimchi_2004_exp_2_square_cross_color_acc"
+                  "no", #"kimchi_2004_exp_2_square_cross_RT"
+                  "no" #"kimchi_2004_exp_2_square_cross_acc"
                   )
 
+#====== Gray literature =======
 gray_literature <- c("no", #ariga_2007_exp2  
                      "no", #beanland_pammer_2010_exp1A_fixating
                      "no", #beanland_pammer_2010_exp1A_moving
@@ -614,7 +856,7 @@ gray_literature <- c("no", #ariga_2007_exp2
                      "no", #razpurker_pratt_2008_columns_rows_acc
                      "no", #razpurker_pratt_2008_triangle_arrow_rt
                      "no", #razpurker_pratt_2008_triangle_arrow_acc
-                     "no", #richards_2012_tracking
+                     #"no", #richards_2012_tracking
                      "no", #russell_driver_2005_exp1_acc
                      "no", #russell_driver_2005_exp1_rt
                      "no", #russell_driver_2005_exp2_acc
@@ -627,10 +869,50 @@ gray_literature <- c("no", #ariga_2007_exp2
                      "no", #russell_driver_2005_exp5_rt
                      #"no", #shafto_pitts_2015
                      "no", #schnuerch_2016_exp1
-                     "no" #schnuerch_2016_exp2
+                     "no", #schnuerch_2016_exp2
+                     "no", #"wood_simons_2019_exp1"
+                     "no",  #"wood_simons_2019_exp2"
+                     "no",  #"rashal_2017_exp1_RT"
+                     "no",  #"rashal_2017_exp2_acc"
+                     "no",   #"rashal_2017_exp3_RT"
+                     "no",  #"rashal_2017_exp4_acc"
+                     "no",  #"rashal_2017_exp4_RT",
+                     "no",  #"rashal_2017_exp5_acc"
+                     "no", #"rashal_2017_exp5_RT"
+                     "no", #"rashal_2017_exp6_acc"
+                     "no", #"rashal_2017_exp6_RT"
+                     "no", #"kimchi_2004_exp_1_column_row_color_RT"
+                     "no", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                     "no", #"kimchi_2004_exp_1_triangle_arrow_acc"
+                     "no", #"kimchi_2004_exp_2_square_cross_color_acc"
+                     "no", #"kimchi_2004_exp_2_square_cross_RT"
+                     "no" #"kimchi_2004_exp_2_square_cross_acc"
                      )
 
+#======== Categorize experiments as inattention paradigms or not; 0 = no, 1 = yes ========
+inattention_paradigm <- c(rep("no", 21), #ariga_2007_exp2 to most_2005_exp1to7pooled
+                                   rep("yes",4), #razpurker-apfeld and pratt, 2008
+                                   #0, #richards_2012_tracking
+                                   rep("yes", 10), #russel_driver_2005
+                                   rep("no",2), #schunerch_2016
+                                   rep("no", 2), #wood_simons_2019
+                                   rep("yes", 15) #rashal_2017, kimchi_2004
+                          )
 
+#======== Categorize experiments as group assessment of awareness or not ========
+group_aware_assess <- c("yes", #ariga_2007_exp2
+                                 rep("no", 6), #beanland_pammer_2010_exp1A_fixating to gabay_2012_exp2
+                                 rep("yes",4), #lo_yeh_2008_exp1_200ms
+                                 rep("no", 5), #mack_and_rock_2000
+                                 rep("yes",9),  # moore_egeth_1997_exp1 to razpurker-apfeld and pratt, 2008
+                                 #0, #richards_2012_tracking
+                                 rep("yes", 10), #russsel_driver_2005
+                                 rep("no",2), #schunerch_2016
+                                 rep("no", 2), #wood_simons_2019
+                                 rep("yes", 15) #rashal_2017, kimchi_2004
+                        )
+
+#============= Create table by merging columns ============
 es_table <- as_tibble(data.frame("study"=study_names,
                                  "N_per_group"=N_per_group,
                                  "us_relevance"=us_relevance,
@@ -645,4 +927,7 @@ es_table <- as_tibble(data.frame("study"=study_names,
                                  "N_trials_awareness"=N_trials_awareness,
                                  "N_participants_awareness"=N_participants_awareness,
                                  "significance"=significance,
-                                 "gray_literature"=gray_literature))
+                                 "gray_literature"=gray_literature,
+                                 "inattention"=inattention_paradigm,
+                                 "group_awareness"=group_aware_assess))
+es_table$study <- as.character(es_table$study)
