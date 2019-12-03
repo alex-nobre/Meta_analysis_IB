@@ -121,7 +121,7 @@ data_irene_dt_tri <- data_irene_means %>%
 
 irene_target_cor_tri <- cor(data_irene_st_tri$mean_RT, 
                             data_irene_dt_tri$mean_RT)
-  
+
 #========================= Beanland and Pammer Exp 1A (2010) ==============================
 # Import data
 data_beanland_1A <- read.xlsx("Beanland&Pammer 2010 Exp1AB.xlsx", sheetIndex = 1)
@@ -129,14 +129,14 @@ data_beanland_1A <- read.xlsx("Beanland&Pammer 2010 Exp1AB.xlsx", sheetIndex = 1
 data_beanland_1A <- data_beanland_1A[data_beanland_1A$notice == 0,]
 
 data_beanland_1A$control_trials_mean_err_raw <- rowMeans(cbind(data_beanland_1A$t1err_raw,
-                                                           data_beanland_1A$t2err_raw,
-                                                           data_beanland_1A$t4err_raw))
+                                                               data_beanland_1A$t2err_raw,
+                                                               data_beanland_1A$t4err_raw))
 
 data_beanland_1A$crit_trials_mean_err_raw <- rowMeans(cbind(data_beanland_1A$t3err_raw,
-                                                               data_beanland_1A$t5err_raw))
+                                                            data_beanland_1A$t5err_raw))
 
 cor_beanland_1A <- cor(data_beanland_1A$crit_trials_mean_err_raw,
-    data_beanland_1A$control_trials_mean_err_raw)
+                       data_beanland_1A$control_trials_mean_err_raw)
 
 # only fixating condition
 data_beanland_1A_fixating <- data_beanland_1A %>%
@@ -148,7 +148,7 @@ cor_beanland_1A_fixating <- cor(data_beanland_1A_fixating$crit_trials_mean_err_r
 data_beanland_1A_moving <- data_beanland_1A %>%
   filter(condition == 2)
 cor_beanland_1A_moving <- cor(data_beanland_1A_moving$crit_trials_mean_err_raw,
-                                data_beanland_1A_moving$control_trials_mean_err_raw)
+                              data_beanland_1A_moving$control_trials_mean_err_raw)
 
 #========================= Beanland and Pammer Exp 2 (2010) ==============================
 # Import data
@@ -157,20 +157,20 @@ data_beanland_2 <- read.xlsx("Beanland&Pammer 2010 Exp 2_edited.xlsx", sheetInde
 data_beanland_2 <- data_beanland_2[data_beanland_2$notice == 2,]
 
 data_beanland_2$control_trials_mean_err_raw <- rowMeans(cbind(data_beanland_2$t1err_raw,
-                                                               data_beanland_2$t2err_raw,
-                                                               data_beanland_2$t4err_raw))
+                                                              data_beanland_2$t2err_raw,
+                                                              data_beanland_2$t4err_raw))
 
 data_beanland_2$crit_trials_mean_err_raw <- rowMeans(cbind(data_beanland_2$t3err_raw,
-                                                            data_beanland_2$t5err_raw))
+                                                           data_beanland_2$t5err_raw))
 
 cor_beanland_2 <- cor(data_beanland_2$crit_trials_mean_err_raw,
-                       data_beanland_2$control_trials_mean_err_raw)
+                      data_beanland_2$control_trials_mean_err_raw)
 
 # only slow condition
 data_beanland_2_slow <- data_beanland_2 %>%
   filter(condition == 1)
 cor_beanland_2_slow <- cor(data_beanland_2_slow$crit_trials_mean_err_raw,
-                                data_beanland_2_slow$control_trials_mean_err_raw)
+                           data_beanland_2_slow$control_trials_mean_err_raw)
 
 # only fast condition
 data_beanland_2_fast <- data_beanland_2 %>%
@@ -183,8 +183,8 @@ cor_beanland_2_fast <- cor(data_beanland_2_fast$crit_trials_mean_err_raw,
 # sample sizes
 n_schnuerch <- nrow(data_nonoticers)
 #n_razpurker <- length(unique(data_irene_means$sub))
-n_razpuker_col <- nrow(data_irene_sb_col)
-n_razpuker_tri <- nrow(data_irene_sb_tri)
+# n_razpuker_col <- nrow(data_irene_sb_col)
+# n_razpuker_tri <- nrow(data_irene_sb_tri)
 n_beanland1A_fixating <- nrow(data_beanland_1A_fixating)
 n_beanland1A_moving <- nrow(data_beanland_1A_moving)
 n_beanland2_slow <- nrow(data_beanland_2_slow)
@@ -193,8 +193,8 @@ n_beanland2_fast <- nrow(data_beanland_2_fast)
 # Concatente all ns
 cor_samplesizes <- c(n_schnuerch,
                      #n_razpurker,
-                     n_razpuker_col,
-                     n_razpuker_tri,
+                     # n_razpuker_col,
+                     # n_razpuker_tri,
                      n_beanland1A_fixating,
                      n_beanland1A_moving,
                      n_beanland2_slow,
@@ -203,8 +203,8 @@ cor_samplesizes <- c(n_schnuerch,
 # Vector with correlations
 corvalues <- c(cor_schnuerch,
                #cor_razpurker,
-               irene_target_cor_col,
-               irene_target_cor_tri,
+               # irene_target_cor_col,
+               # irene_target_cor_tri,
                cor_beanland_1A_fixating,
                cor_beanland_1A_moving,
                cor_beanland_2_slow,
@@ -221,3 +221,115 @@ z_weighted_avg <- weighted.mean(z_corvalues,
 cor_pairs <- FisherZInv(z_weighted_avg)
 
 
+#==================================================================================================
+# 
+# library(tidyverse)
+# library(ez)
+# library(data.table)
+# library(effsize)
+# 
+# data_irene$sub <- factor(data_irene$sub)
+# 
+# data_irene_means <- data_irene %>%
+#   group_by(sub, cond, Target, Background) %>% 
+#   summarise(mean_RT = mean(Latency.mS.)) %>%
+#   ungroup()
+# 
+# 
+# write_excel_csv2(data_irene_means, 
+#                  path = "C:/Users/Biosig/Google Drive/Doutorado/Tese/Meta-analysis_IB/Dados/RT_means_Razpurker-apfeld.csv")
+# # Run ANOVA
+# # ms_anova <- aov(mean_RT ~ cond * Target * Background + Error(sub/(cond*Target*Background)), 
+# #                 data_irene_means)
+# # summary(ms_anova)
+# 
+# ms_anova <- ezANOVA(data_irene_means,
+#                     mean_RT,
+#                     wid = sub,
+#                     within = .(cond, Target, Background))
+# 
+# data_tri_means <- data_irene_means %>%
+#   filter(cond == "tri")
+# 
+# sd_tri_st <- data_tri_means %>%
+#   filter(Target == "st") %>%
+#   summarize(sd.st = sd(mean_RT))
+# 
+# sd_tri_dt <- data_tri_means %>%
+#   filter(Target == "dt") %>%
+#   summarize(sd.dt = sd(mean_RT))
+# 
+# sd_tri <- data_tri_means %>%
+#   summarize(sd.tri = sd(mean_RT))
+# 
+# means_tri_st <- data_tri_means %>%
+#   filter(Target == "st") %>%
+#   group_by(Background) %>%
+#   summarize(mean.st = mean(mean_RT))
+# 
+# means_tri_dt <- data_tri_means %>%
+#   filter(Target == "dt") %>%
+#   group_by(Background) %>%
+#   summarize(mean.st = mean(mean_RT))
+# 
+# data_col_means <- data_irene_means %>%
+#   filter(cond == "col")
+# 
+# sd_col_st <- data_col_means %>%
+#   filter(Target == "st") %>%
+#   summarize(sd.st = sd(mean_RT))
+# 
+# sd_col_dt <- data_col_means %>%
+#   filter(Target == "dt") %>%
+#   summarize(sd.dt = sd(mean_RT))
+# 
+# sd_col <- data_col_means %>%
+#   summarize(sd.col = sd(mean_RT))
+# 
+# means_col_st <- data_col_means %>%
+#   filter(Target == "st") %>%
+#   group_by(Background) %>%
+#   summarize(mean.st = mean(mean_RT))
+# 
+# means_col_dt <- data_col_means %>%
+#   filter(Target == "dt") %>%
+#   group_by(Background) %>%
+#   summarize(mean.st = mean(mean_RT))
+# 
+# 13/sd_col
+# 
+# tri_ms_anova <- ezANOVA(data_tri_means,
+#                         mean_RT,
+#                         wid = sub,
+#                         within = .(Target, Background))
+# 
+# ggplot(data_tri_means, aes(x = Target,
+#                            y = mean_RT,
+#                            color = Background)) +
+#   stat_summary(fun.y = mean, geom = "point") +
+#   stat_summary(fun.y=mean, geom = "line", aes(group=Background)) +
+#   stat_summary(fun.data="mean_cl_boot")
+# 
+# data_tri_means %>%
+#   filter(Target == "st", Background == "sb") %>%
+#   summarize(avg_RT = mean(mean_RT))
+# 
+# data_tri_means %>%
+#   filter(Target == "st", Background == "db") %>%
+#   summarize(avg_RT = mean(mean_RT))
+# 
+# data_tri_means %>%
+#   filter(Target == "dt", Background == "sb") %>%
+#   summarize(avg_RT = mean(mean_RT))
+# 
+# data_tri_means %>%
+#   filter(Target == "dt", Background == "db") %>%
+#   summarize(avg_RT = mean(mean_RT))
+# 
+# 
+# # schnuerch
+# t.test(data_nonoticers$mean.neutral, data_nonoticers$mean.incong, paired = TRUE)
+# 
+# t.test(data_schnuerch$mean.neutral, data_schnuerch$mean.incong, paired = TRUE)
+# 
+# cohen.d(data_nonoticers$mean.neutral, data_nonoticers$mean.incong, paired = TRUE, pooled = TRUE)

@@ -229,7 +229,10 @@ c11_r <- sqrt((c11_tvalue**2)/(c11_tvalue**2 + c11_df))
 # Compute effect size from proportion
 c12_n <- 20
 c12_pop <- 20
-c12_successes <- round(85*c12_pop/100)
+c12_success_percentage <- 79.33
+c12_success_proportion <- c12_success_percentage/100
+c12_base_chance <- 0.5 #top/bottom
+c12_successes <- round(c12_success_percentage*c12_pop/100)
 c12_failures <- c12_pop - c12_successes 
 
 c12_chisquared <- unname(chisq.test(c(c12_successes, c12_failures), 
@@ -249,6 +252,16 @@ c12_phi <- sqrt(c12_chisquared/c12_pop)
 
 c12_r <- c12_phi #esc_phi(phi = c12_phi, totaln = c12_pop, es.type = "r")
 
+# c12_chies <- ES.w1(c(c12_successes/c12_pop, c12_failures/c12_pop),
+#                    c(0.5, 0.5))
+# 
+# c12_chisquared/(c12_pop*(2-1))
+# 
+# c12_chisqmin <- min(0.5, 0.5)
+# c12_chisqmax <- c12_pop*((1-c12_chisqmin)/c12_chisqmin)
+# 
+# c12_chies <- c12_chisquared/c12_chisqmax
+
 #c12_cohensd <- (2*c12_r)/sqrt(1-(c12_r**2))
 
 #c12_r <- 0.62
@@ -258,7 +271,10 @@ c12_r <- c12_phi #esc_phi(phi = c12_phi, totaln = c12_pop, es.type = "r")
 # Compute effect size from proportion
 c13_n <- 20
 c13_pop <- 20
-c13_successes <- round(95*c13_pop/100)
+C13_success_percentage <- 88.12
+C13_success_proportion <- C13_success_percentage/100
+C13_base_chance <- 0.5 #top/bottom
+c13_successes <- round(C13_success_percentage*c13_pop/100)
 c13_failures <- c13_pop - c13_successes
 
 c13_chisquared <- unname(chisq.test(c(c13_successes, c13_failures), 
@@ -324,10 +340,10 @@ c16_r <- sqrt((c16_tvalue**2)/(c16_tvalue**2 + c16_df))
 #==== 17. Razpurker-Apfeld et al. (2008) - columns/rows, RT ====
 
 # Compute effect sizes from F-value and dfs
-c17_n <- 14
+c17_n <- 7
 c17_dfeffect <- 1
 c17_dferror <- 13
-c17_fvalue <- 5.41 # negative value, because experimental condition is smaller
+c17_fvalue <- 5.41
 
 c17_cohensd <- (c17_fvalue * c17_dfeffect)/(c17_fvalue*c17_dfeffect+c17_dferror)
 
@@ -336,57 +352,57 @@ c17_r <- sqrt(c17_fvalue/(c17_fvalue + c17_dferror))
 #c17_r <- 0.54
 
 # correlations between pairs of observations for cohen's drm
-c17_cor_pairs <- irene_target_cor_col
+#c17_cor_pairs <- irene_target_cor_col
 
 #==== 18. Razpurker-Apfeld et al. (2008) - columns/rows, d' ====
 
 # Compute effect sizes from F-value and dfs
-c18_n <- 14
+c18_n <- 7
 c18_dfeffect <- 1
 c18_dferror <- 13
 c18_fvalue <- 4.98 # positive value, because effect is facilitatory
 
-c18_cohensd <- (c18_fvalue * c18_dfeffect)/(c18_fvalue*c18_dfeffect+c18_dferror)
+c18_cohensd <- NA#(c18_fvalue * c18_dfeffect)/(c18_fvalue*c18_dfeffect+c18_dferror)
 
-c18_r <- sqrt(c18_fvalue/(c18_fvalue + c18_dferror))
+c18_r <- NA#sqrt(c18_fvalue/(c18_fvalue + c18_dferror))
 
 #c18_r <- 0.52
 
 # correlations between pairs of observations for cohen's drm
-c18_cor_pairs <- irene_target_cor_col
+#c18_cor_pairs <- irene_target_cor_col
 
 #==== 19. Razpurker-Apfeld et al. (2008) - triangle/arrow, RT ====
 
 # ES computed from data
-c19_n <- 14
+c19_n <- 7
 c19_fvalue <- 0.001 # negative value, because experimental condition is smaller
 c19_dfeffect <- 1
 c19_dferror <- 13
-# 
-c19_cohensd <- (c19_fvalue * c19_dfeffect)/(c19_fvalue*c19_dfeffect+c19_dferror)
+ 
+c19_cohensd <- (c19_fvalue * c19_dfeffect)/(c19_fvalue*c19_dfeffect+c19_dferror) * (-1) # ES is negative
 
-c19_r <- sqrt(c19_fvalue/(c19_fvalue + c19_dferror))
+c19_r <- sqrt(c19_fvalue/(c19_fvalue + c19_dferror)) * (-1) # ES is negative
 
 # correlations between pairs of observations for cohen's drm
-c19_cor_pairs <- irene_target_cor_tri
+#c19_cor_pairs <- irene_target_cor_tri
   
 #==== 20. Razpurker-Apfeld et al. (2008) - triangle/arrow, d' ====
 
 # Compute effect sizes from F-value and dfs
-c20_n <- 14
+c20_n <- 7
 c20_dfeffect <- 1
 c20_dferror <- 13
 c20_fvalue <- 2.3 # positive value, because effect is facilitatory
 
-c20_cohensd <- (c20_fvalue * c20_dfeffect)/(c20_fvalue*c20_dfeffect+c20_dferror)
+c20_cohensd <- NA#(c20_fvalue * c20_dfeffect)/(c20_fvalue*c20_dfeffect+c20_dferror)
 
-c20_r <- sqrt(c20_fvalue/(c20_fvalue + c20_dferror))
+c20_r <- NA#sqrt(c20_fvalue/(c20_fvalue + c20_dferror))
 #c20_cohensd <- (2*c20_r)/sqrt(1-(c20_r**2))
 
 #c20_r <- 0.39
 
 # correlations between pairs of observations for cohen's drm
-c20_cor_pairs <- irene_target_cor_tri
+#c20_cor_pairs <- irene_target_cor_tri
 
 #==== 21. Richards et al. (2012), tracking task  ====
 
@@ -454,12 +470,12 @@ c24_r <- sqrt(c24_fvalue/(c24_fvalue + c24_dferror))
 
 # Compute effect sizes from F-value and dfs
 c25_n <- 28
-c25_fvalue <- 2.39 # positive value, because effect is facilitatory
+c25_fvalue <- 2.39 
 c25_dfeffect <- 1
 c25_dferror <- 27
 
-c25_cohensd <- (c25_fvalue * c25_dfeffect)/(c25_fvalue*c25_dfeffect+c25_dferror)
-c25_r <- sqrt(c25_fvalue/(c25_fvalue + c25_dferror))
+c25_cohensd <- (c25_fvalue * c25_dfeffect)/(c25_fvalue*c25_dfeffect+c25_dferror) * (-1) # ES is negative
+c25_r <- sqrt(c25_fvalue/(c25_fvalue + c25_dferror)) * (-1) # ES is negative
 
 #c25_r <- 0.28
 
@@ -467,7 +483,7 @@ c25_r <- sqrt(c25_fvalue/(c25_fvalue + c25_dferror))
 
 # Compute effect sizes from F-value and dfs
 c26_n <- 24
-c26_fvalue <- 7.7 # positive value, because effect is facilitatory
+c26_fvalue <- 7.7
 c26_dfeffect <- 1
 c26_dferror <- 23
 
@@ -484,8 +500,8 @@ c27_fvalue <- 3.1 # positive value, because effect is facilitatory
 c27_dfeffect <- 1
 c27_dferror <- 23
 
-c27_cohensd <- (c27_fvalue * c27_dfeffect)/(c27_fvalue*c27_dfeffect+c27_dferror)
-c27_r <- sqrt(c27_fvalue/(c27_fvalue + c27_dferror))
+c27_cohensd <- (c27_fvalue * c27_dfeffect)/(c27_fvalue*c27_dfeffect+c27_dferror) * (-1) # ES is negative
+c27_r <- sqrt(c27_fvalue/(c27_fvalue + c27_dferror)) * (-1) # ES is negative
 
 #c27_r <- 0.34
 
@@ -623,11 +639,14 @@ c36_cor_pairs <- cor_schnuerch
 # Compute effect size from proportion
 c38_pop <- 58+62+32+23
 c38_n <- c38_pop
-c38_successes <- round(84.2*c38_pop/100)
+c38_success_percentage <- 84.2
+c38_success_proportion <- c38_success_percentage/100
+c38_base_chance <- 0.5 #top/bottom
+c38_successes <- round(c38_success_percentage*c38_pop/100)
 c38_failures <- c38_pop - c38_successes
 
 c38_chisquared <- unname(chisq.test(c(c38_successes, c38_failures), 
-                                p = c(0.5, 0.5))$statistic)
+                                p = c(c38_base_chance, 1 - c38_base_chance))$statistic)
 
 c38_cohensd <- esc_chisq(c38_chisquared, 
                          es.type = "d", 
@@ -648,7 +667,10 @@ c38_r <- c38_phi #esc_phi(phi = c38_phi, totaln = c38_pop, es.type = "r")
 # Compute effect size from proportion
 c39_pop <- 30+29+29+32+35+29+32
 c39_n <- c39_pop
-c39_successes <- round(0.9*c39_pop/100)
+c39_success_percentage <- 0.9
+c39_success_proportion <- c39_success_percentage/100
+c39_base_chance <- 0.5 #???
+c39_successes <- round(c39_success_percentage*c39_pop/100)
 c39_failures <- c39_pop - c39_successes
 
 c39_chisquared <- unname(chisq.test(c(c39_successes, c39_failures), 
@@ -874,8 +896,8 @@ c47_dfeffect <- 1
 c47_dferror <- 27
 c47_n <- 28
 c47_partialetasquared <- 0.06
-c47_r <- sqrt(c47_fvalue/(c47_fvalue + c47_dferror))
-c47_cohensd <- (2 * c47_r)/sqrt(1 - (c47_r)**2)
+c47_r <- sqrt(c47_fvalue/(c47_fvalue + c47_dferror)) * (-1) # ES is negative
+c47_cohensd <- (2 * c47_r)/sqrt(1 - (c47_r)**2) * (-1) # ES is negative
 
 #==== 48. Rashal et al. exp 3 RT (2017) ====
 
@@ -1011,11 +1033,116 @@ c60_n <- 12
 c60_r <- sqrt(c60_fvalue/(c60_fvalue + c60_dferror))
 c60_cohensd <- (2 * c60_r)/sqrt(1 - (c60_r)**2)
 
+#==== 61. Kimchi et al. (2008) exp. 1 RT ====
+
+c61_fvalue <- 7.03
+c61_dfeffect <- 1
+c61_dferror <- 45
+c61_n <- 46
+c61_r <- sqrt(c61_fvalue/(c61_fvalue + c61_dferror))
+c61_cohensd <- (2 * c61_r)/sqrt(1 - (c61_r)**2)
+
+#==== 62. Kimchi et al. (2008) exp. 1 acc ====
+
+c62_fvalue <- 5.96
+c62_dfeffect <- 1
+c62_dferror <- 45
+c62_n <- 46
+c62_r <- sqrt(c62_fvalue/(c62_fvalue + c62_dferror))
+c62_cohensd <- (2 * c62_r)/sqrt(1 - (c62_r)**2)
+
+#==== 63. Lamy et al. (2006) exp. 2 same ====
+
+# Compute effect size from proportion
+c63_pop <- 8
+c63_n <- c63_pop
+c63_success_percentage <- 72.66
+c63_success_proportion <- c63_success_percentage/100
+c63_base_chance <- 0.5 #top/bottom
+c63_successes <- round(c63_success_percentage*c63_pop/100)
+c63_failures <- c63_pop - c63_successes 
+
+c63_chisquared <- unname(chisq.test(c(c63_successes, c63_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c63_cohensd <- esc_chisq(c63_chisquared, 
+                         es.type = "d", 
+                         totaln = c63_pop)$es
+
+
+# c63_etasquared <- esc_chisq(c63_chisquared, 
+#                    es.type = "eta", 
+#                    totaln = c63_pop)$es
+
+c63_phi <- sqrt(c63_chisquared/c63_pop)
+
+c63_r <- c63_phi #esc_phi(phi = c63_phi, totaln = c63_pop, es.type = "r")
+
+
+#==== 64. Lamy et al. (2006) exp. 2 different ====
+
+# Compute effect size from proportion
+c64_pop <- 8
+c64_n <- c64_pop
+c64_success_percentage <- 58.59
+c64_success_proportion <- c64_success_percentage/100
+c64_base_chance <- 0.5 #top/bottom
+c64_successes <- round(c64_success_percentage*c64_pop/100)
+c64_failures <- c64_pop - c64_successes 
+
+c64_chisquared <- unname(chisq.test(c(c64_successes, c64_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c64_cohensd <- esc_chisq(c64_chisquared, 
+                         es.type = "d", 
+                         totaln = c64_pop)$es
+
+
+# c64_etasquared <- esc_chisq(c64_chisquared, 
+#                    es.type = "eta", 
+#                    totaln = c64_pop)$es
+
+c64_phi <- sqrt(c64_chisquared/c64_pop)
+
+c64_r <- c64_phi #esc_phi(phi = c64_phi, totaln = c64_pop, es.type = "r")
+
+
+#==== 65. Lamy et al. (2006) exp. 3 RT ====
+
+c65_fvalue <- 10.13
+c65_dfeffect <- 1
+c65_dferror <- 8
+c65_n <- 9
+c65_r <- sqrt(c65_fvalue/(c65_fvalue + c65_dferror))
+c65_cohensd <- (2 * c65_r)/sqrt(1 - (c65_r)**2)
+
+
+#==== 66. Lamy et al. (2006) exp. 4 RT ====
+
+c66_fvalue <- 24.51
+c66_dfeffect <- 1
+c66_dferror <- 8
+c66_n <- 9
+c66_r <- sqrt(c66_fvalue/(c66_fvalue + c66_dferror))
+c66_cohensd <- (2 * c66_r)/sqrt(1 - (c66_r)**2)
+
+#==== 67. Lamy et al. (2006) exp. 5 easy ====
+
+c67_fvalue <- 10.60
+c67_dfeffect <- 1
+c67_dferror <- 10
+c67_n <-11
+c67_r <- sqrt(c67_fvalue/(c67_fvalue + c67_dferror))
+c67_cohensd <- (2 * c67_r)/sqrt(1 - (c67_r)**2)
+
+
 #========================================#
 #==== Build vector with effect sizes ====#
 #========================================#
 effect_indices <- c(1:11, 41:45, 12:20, 22:28, 30, 32, 33, 35, 36, 
-                    38, 39, 46:60)
+                    38, 39, 46:67)
 
 implicit_totaln <- map_dbl(paste("c", effect_indices, "_n",
                                  sep = ""), get)
@@ -1034,6 +1161,7 @@ implicit_r <- map_dbl(implicit_r_names, get)
 
 # Transform to Fisher's z (Viechtbauer and Cheung (2010))
 implicit_z_r <- FisherZ(implicit_r)
+
 
 # Compute hedge's g
 
@@ -1100,4 +1228,4 @@ implicit_variancedrm_names <- paste("c", effect_indices, "_variancedrm",
 
 implicit_variancedrm <- map_dbl(implicit_variancedrm_names, get)
 
-hedges_g(implicit_cohensdrm, implicit_totaln)
+#hedges_g(implicit_cohensdrm, implicit_totaln)
