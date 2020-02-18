@@ -4,71 +4,75 @@ library(tidyverse)
 
 ### Create vectors for columns
 study_names <- c("ariga_2007_exp2", 
-                        "beanland_pammer_2010_exp1A_fixating", 
-                        "beanland_pammer_2010_exp1A_moving", 
-                        "beanland_pammer_2010_exp2_slow_us", 
-                        "beanland_pammer_2010_exp2_fast_us", 
-                        "gabay_2012_exp1",
-                        "gabay_2012_exp2", 
-                        "lo_yeh_2008_exp1_200ms", 
-                        "lo_yeh_2008_exp1_500ms", 
-                        "lo_yeh_2008_exp2_200ms",
-                        "lo_yeh_2008_exp2_500ms",
-                        "mack_and_rock_2000_exp1",
-                        "mack_and_rock_2000_exp2",
-                        "mack_and_rock_2000_exp3",
-                        "mack_and_rock_2000_exp4",
-                        "mack_and_rock_2000_exp5",
-                        "moore_egeth_1997_exp1", 
-                        "moore_egeth_1997_exp3", 
-                        "moore_2003_exp3",
-                        "moore_2004", 
-                        "most_2005_exp1to7pooled", 
-                        "razpurker_pratt_2008_columns_rows", 
-                        "razpurker_pratt_2008_columns_rows", 
-                        "razpurker_pratt_2008_triangle_arrow",
-                        "razpurker_pratt_2008_triangle_arrow", 
-                        #"richards_2012_tracking", 
-                        "russell_driver_2005_exp1", 
-                        "russell_driver_2005_exp1", 
-                        "russell_driver_2005_exp2",
-                        "russell_driver_2005_exp2", 
-                        "russell_driver_2005_exp3", 
-                        "russell_driver_2005_exp3",
-                        "russell_driver_2005_exp4a", 
-                        "russell_driver_2005_exp4b", 
-                        "russell_driver_2005_exp5",
-                        "russell_driver_2005_exp5", 
-                        #"shafto_pitts_2015",
-                        "schnuerch_2016_exp1",
-                        "schnuerch_2016_exp2",
-                        "wood_simons_2019_exp1",
-                        "wood_simons_2019_exp2",
-                        "rashal_2017_exp1",
-                        "rashal_2017_exp2",
-                        "rashal_2017_exp3",
-                        "rashal_2017_exp4",
-                        "rashal_2017_exp4",
-                        "rashal_2017_exp5",
-                        "rashal_2017_exp5",
-                        "rashal_2017_exp6",
-                        "rashal_2017_exp6",
-                        "kimchi_2004_exp_1_column_row_color",
-                        "kimchi_2004_exp_1_triangle_arrow_color",
-                        "kimchi_2004_exp_1_triangle_arrow",
-                        "kimchi_2004_exp_2_square_cross_color",
-                        "kimchi_2004_exp_2_square_cross",
-                        "kimchi_2004_exp_2_square_cross",
-                        "kimchi_2008_exp_1",
-                        "kimchi_2008_exp_1",
-                        "lamy_2006_exp2",
-                        "lamy_2006_exp2",
-                        "lamy_2006_exp3",
-                        "lamy_2006_exp4",
-                        "lamy_2006_exp5"
+                 "beanland_pammer_2010_exp1A_fixating", 
+                 "beanland_pammer_2010_exp1A_moving", 
+                 "beanland_pammer_2010_exp2_slow_us", 
+                 "beanland_pammer_2010_exp2_fast_us", 
+                 "gabay_2012_exp1",
+                 "gabay_2012_exp2", 
+                 "lo_yeh_2008_exp1_200ms", 
+                 "lo_yeh_2008_exp1_500ms", 
+                 "lo_yeh_2008_exp2_200ms",
+                 "lo_yeh_2008_exp2_500ms",
+                 "mack_and_rock_2000_exp1",
+                 "mack_and_rock_2000_exp2",
+                 "mack_and_rock_2000_exp3",
+                 "mack_and_rock_2000_exp4",
+                 "mack_and_rock_2000_exp5",
+                 "moore_egeth_1997_exp1", 
+                 "moore_egeth_1997_exp3", 
+                 "moore_2003_exp3",
+                 "moore_2004", 
+                 "most_2005_exp1to7pooled", 
+                 "razpurker_pratt_2008_columns_rows", 
+                 "razpurker_pratt_2008_columns_rows", 
+                 "razpurker_pratt_2008_triangle_arrow",
+                 "razpurker_pratt_2008_triangle_arrow", 
+                 #"richards_2012_tracking", 
+                 "russell_driver_2005_exp1", 
+                 "russell_driver_2005_exp1", 
+                 "russell_driver_2005_exp2",
+                 "russell_driver_2005_exp2", 
+                 "russell_driver_2005_exp3", 
+                 "russell_driver_2005_exp3",
+                 "russell_driver_2005_exp4a", 
+                 "russell_driver_2005_exp4b", 
+                 "russell_driver_2005_exp5",
+                 "russell_driver_2005_exp5", 
+                 #"shafto_pitts_2015",
+                 "schnuerch_2016_exp1",
+                 "schnuerch_2016_exp2",
+                 "wood_simons_2019_exp1",
+                 "wood_simons_2019_exp2",
+                 "rashal_2017_exp1",
+                 "rashal_2017_exp2",
+                 "rashal_2017_exp3",
+                 "rashal_2017_exp4",
+                 "rashal_2017_exp4",
+                 "rashal_2017_exp5",
+                 "rashal_2017_exp5",
+                 "rashal_2017_exp6",
+                 "rashal_2017_exp6",
+                 "kimchi_2004_exp_1_column_row_color",
+                 "kimchi_2004_exp_1_triangle_arrow_color",
+                 "kimchi_2004_exp_1_triangle_arrow",
+                 "kimchi_2004_exp_1_connected_triangle_arrow",
+                 "kimchi_2004_exp_1_connected_triangle_arrow",
+                 "kimchi_2004_exp_2_square_cross_color",
+                 "kimchi_2004_exp_2_square_cross",
+                 "kimchi_2004_exp_2_square_cross",
+                 "kimchi_2004_exp_2_disconnected_square_cross",
+                 "kimchi_2004_exp_2_disconnected_square_cross",
+                 "kimchi_2008_exp_1",
+                 "kimchi_2008_exp_1",
+                 "lamy_2006_exp2",
+                 "lamy_2006_exp2",
+                 "lamy_2006_exp3",
+                 "lamy_2006_exp4",
+                 "lamy_2006_exp5"
 )
 
-studies_per_outcome <- c("ariga_2007_exp2", 
+studies_outcomes <- c("ariga_2007_exp2", 
                  "beanland_pammer_2010_exp1A_fixating", 
                  "beanland_pammer_2010_exp1A_moving", 
                  "beanland_pammer_2010_exp2_slow_us", 
@@ -121,9 +125,13 @@ studies_per_outcome <- c("ariga_2007_exp2",
                  "kimchi_2004_exp_1_column_row_color",
                  "kimchi_2004_exp_1_triangle_arrow_color",
                  "kimchi_2004_exp_1_triangle_arrow",
+                 "kimchi_2004_exp_1_connected_triangle_arrow_RT",
+                 "kimchi_2004_exp_1_connected_triangle_arrow_acc",
                  "kimchi_2004_exp_2_square_cross_color",
                  "kimchi_2004_exp_2_square_cross_RT",
                  "kimchi_2004_exp_2_square_cross_acc",
+                 "kimchi_2004_exp_2_disconnected_square_cross_RT",
+                 "kimchi_2004_exp_2_disconnected_square_cross_acc",
                  "kimchi_2008_exp_1_RT",
                  "kimchi_2008_exp_1_acc",
                  "lamy_2006_exp2_same",
@@ -188,9 +196,13 @@ us_relevance <- c("relevant", #ariga_2007_exp2
                   "irrelevant", #"kimchi_2004_exp_1_column_row_color_RT"
                   "irrelevant", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
                   "irrelevant", #"kimchi_2004_exp_1_triangle_arrow_acc"
+                  "irrelevant", #"kimchi_2004_exp_1_connected_triangle_arrow_RT",
+                  "irrelevant", #"kimchi_2004_exp_1_connected_triangle_arrow_acc",
                   "irrelevant", #"kimchi_2004_exp_2_square_cross_color_acc"
                   "irrelevant", #"kimchi_2004_exp_2_square_cross_RT"
                   "irrelevant", #"kimchi_2004_exp_2_square_cross_acc"
+                  "irrelevant", #"kimchi_2004_exp_2_disconnected_square_cross_RT",
+                  "irrelevant", #"kimchi_2004_exp_2_disconnected_square_cross_acc",
                   "irrelevant", #"kimchi_2008_exp_1_RT"
                   "irrelevant", #"kimchi_2008_exp_1_acc"
                   "relevant", #"lamy_2006_exp2_same"
@@ -255,9 +267,13 @@ implicit_measure <- c("RT", #ariga_2007_exp2
                       "RT", #"kimchi_2004_exp_1_column_row_color_RT"
                       "accuracy", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
                       "accuracy", #"kimchi_2004_exp_1_triangle_arrow_acc"
+                      "RT", #"kimchi_2004_exp_1_connected_triangle_arrow_RT",
+                      "accuracy", #"kimchi_2004_exp_1_connected_triangle_arrow_acc",
                       "accuracy", #"kimchi_2004_exp_2_square_cross_color_acc"
                       "RT", #"kimchi_2004_exp_2_square_cross_RT"
                       "accuracy", #"kimchi_2004_exp_2_square_cross_acc"
+                      "RT", #"kimchi_2004_exp_2_disconnected_square_cross_RT",
+                      "accuracy", #"kimchi_2004_exp_2_disconnected_square_cross_acc",
                       "RT", #"kimchi_2008_exp_1_RT"
                       "accuracy", #"kimchi_2008_exp_1_acc"
                       "accuracy", #"lamy_2006_exp2_same"
@@ -321,9 +337,13 @@ N_trials_implicit <- c(1, #ariga_2007_exp2
                        160, #"kimchi_2004_exp_1_column_row_color_RT"
                        160, #"kimchi_2004_exp_1_triangle_arrow_color_acc"
                        160, #"kimchi_2004_exp_1_triangle_arrow_acc"
+                       160, #"kimchi_2004_exp_1_connected_triangle_arrow_RT",
+                       160, #"kimchi_2004_exp_1_connected_triangle_arrow_acc",
                        160, #"kimchi_2004_exp_2_square_cross_color_acc"
                        160, #"kimchi_2004_exp_2_square_cross_RT"
                        160, #"kimchi_2004_exp_2_square_cross_acc"
+                       160, #"kimchi_2004_exp_2_disconnected_square_cross_RT",
+                       160, #"kimchi_2004_exp_2_disconnected_square_cross_acc",
                        160, #"kimchi_2008_exp_1_RT"
                        160, #"kimchi_2008_exp_1_acc"
                        16, #"lamy_2006_exp2_same"
@@ -387,9 +407,13 @@ N_participants_implicit <- c(20, #ariga_2007_exp2
                             14, #"kimchi_2004_exp_1_column_row_color_RT"
                             14, #"kimchi_2004_exp_1_triangle_arrow_color_acc"
                             14, #"kimchi_2004_exp_1_triangle_arrow_acc"
+                            14, #"kimchi_2004_exp_1_connected_triangle_arrow_RT",
+                            14, #"kimchi_2004_exp_1_connected_triangle_arrow_acc",
                             12, #"kimchi_2004_exp_2_square_cross_color_acc"
                             12, #"kimchi_2004_exp_2_square_cross_RT"
                             12, #"kimchi_2004_exp_2_square_cross_acc"
+                            12, #"kimchi_2004_exp_2_disconnected_square_cross_RT",
+                            12, #"kimchi_2004_exp_2_disconnected_square_cross_acc",
                             46, #"kimchi_2008_exp_1_RT"
                             46, #"kimchi_2008_exp_1_acc"
                             8, #"lamy_2006_exp2_same"
@@ -456,9 +480,13 @@ N_trials_awareness <- c(1, #ariga_2007_exp2
                         1, #"kimchi_2004_exp_1_column_row_color_RT"
                         1, #"kimchi_2004_exp_1_triangle_arrow_color_acc"
                         1, #"kimchi_2004_exp_1_triangle_arrow_acc
+                        1, #"kimchi_2004_exp_1_connected_triangle_arrow_RT",
+                        1, #"kimchi_2004_exp_1_connected_triangle_arrow_acc",
                         1, #"kimchi_2004_exp_2_square_cross_color_acc"
                         1, #"kimchi_2004_exp_2_square_cross_RT"
                         1, #"kimchi_2004_exp_2_square_cross_acc"
+                        1, #"kimchi_2004_exp_2_disconnected_square_cross_RT",
+                        1, #"kimchi_2004_exp_2_disconnected_square_cross_acc",
                         1, #"kimchi_2008_exp_1_RT"
                         1, #"kimchi_2008_exp_1_acc"
                         1, #"lamy_2006_exp2_same"
@@ -522,9 +550,13 @@ N_participants_awareness <- c(20, #ariga_2007_exp2
                               14, #"kimchi_2004_exp_1_column_row_color_RT"
                               14, #"kimchi_2004_exp_1_triangle_arrow_color_acc"
                               14, #"kimchi_2004_exp_1_triangle_arrow_acc
+                              14, #"kimchi_2004_exp_1_connected_triangle_arrow_RT",
+                              14, #"kimchi_2004_exp_1_connected_triangle_arrow_acc",
                               12, #"kimchi_2004_exp_2_square_cross_color_acc"
                               12, #"kimchi_2004_exp_2_square_cross_RT"
                               12, #"kimchi_2004_exp_2_square_cross_acc"
+                              12, #"kimchi_2004_exp_2_disconnected_square_cross_RT",
+                              12, #"kimchi_2004_exp_2_disconnected_square_cross_acc",
                               46, #"kimchi_2008_exp_1_RT"
                               46, #"kimchi_2008_exp_1_acc"
                               8, #"lamy_2006_exp2_same"
@@ -588,9 +620,13 @@ implicit_significance <- c("no", #ariga_2007_exp2
                   "yes", #"kimchi_2004_exp_1_column_row_color_RT"
                   "no", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
                   "no", #"kimchi_2004_exp_1_triangle_arrow_acc"
+                  "yes", #"kimchi_2004_exp_1_connected_triangle_arrow_RT",
+                  "yes", #"kimchi_2004_exp_1_connected_triangle_arrow_acc",
                   "no", #"kimchi_2004_exp_2_square_cross_color_acc"
                   "no", #"kimchi_2004_exp_2_square_cross_RT"
                   "no", #"kimchi_2004_exp_2_square_cross_acc"
+                  "yes", #"kimchi_2004_exp_2_disconnected_square_cross_RT",
+                  "yes", #"kimchi_2004_exp_2_disconnected_square_cross_acc",
                   "yes", #"kimchi_2008_exp_1_RT"
                   "yes", #"kimchi_2008_exp_1_acc"
                   "yes", #"lamy_2006_exp2_same"
@@ -654,9 +690,13 @@ gray_literature <- c("no", #ariga_2007_exp2
                      "no", #"kimchi_2004_exp_1_column_row_color_RT"
                      "no", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
                      "no", #"kimchi_2004_exp_1_triangle_arrow_acc"
+                     "no", #"kimchi_2004_exp_1_connected_triangle_arrow_RT",
+                     "no", #"kimchi_2004_exp_1_connected_triangle_arrow_acc",
                      "no", #"kimchi_2004_exp_2_square_cross_color_acc"
                      "no", #"kimchi_2004_exp_2_square_cross_RT"
                      "no", #"kimchi_2004_exp_2_square_cross_acc"
+                     "no", #"kimchi_2004_exp_2_disconnected_square_cross_RT",
+                     "no", #"kimchi_2004_exp_2_disconnected_square_cross_acc",
                      "no", #"kimchi_2008_exp_1_RT"
                      "no", #"kimchi_2008_exp_1_acc"
                      "no", #"lamy_2006_exp2_same"
@@ -673,7 +713,7 @@ inattention_paradigm <- c(rep("no", 21), #ariga_2007_exp2 to most_2005_exp1to7po
                                    rep("yes", 10), #russel_driver_2005
                                    rep("no",2), #schunerch_2016
                                    rep("no", 2), #wood_simons_2019
-                                   rep("yes", 17), #rashal_2017, kimchi_2008
+                                   rep("yes", 21), #rashal_2017, kimchi_2004, kimchi_2008
                           rep("no", 5) #"lamy_2006"
                           )
 
@@ -689,12 +729,12 @@ group_aware_assess <- c("yes", #ariga_2007_exp2
                                  rep("yes", 10), #russsel_driver_2005
                                  rep("no",2), #schunerch_2016
                                  rep("no", 2), #wood_simons_2019
-                                 rep("yes", 22) #rashal_2017, kimchi_2004, kimchi_2008,lamy_2006 
+                                 rep("yes", 26) #rashal_2017, kimchi_2004, kimchi_2008,lamy_2006 
                         )
 
 #============= Create table by merging columns ============
 es_table <- as_tibble(data.frame("study"=study_names,
-                                 "studies_per_outcome"=studies_per_outcome,
+                                 "studies_outcomes"=studies_outcomes,
                                  "us_relevance"=us_relevance,
                                  "implicit_measure"=implicit_measure,
                                  "N_trials_implicit"=N_trials_implicit,
@@ -705,5 +745,6 @@ es_table <- as_tibble(data.frame("study"=study_names,
                                  "gray_literature"=gray_literature,
                                  "inattention"=inattention_paradigm,
                                  "group_awareness"=group_aware_assess))
-es_table$individual_studies <- as.character(es_table$individual_studies)
+es_table$individual_studies <- as.character(es_table$study)
 
+str(es_table)

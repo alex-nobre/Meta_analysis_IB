@@ -1,6 +1,8 @@
 ---
 title: "Analysis notebook"
 output: html_notebook
+bibliography: library.bib
+csl: apa.csl
 ---
 
 This notebook details steps and decisions for the analysis of quantitive data in the meta-analysis.
@@ -11,18 +13,139 @@ IB = inattentional blindness;
 US = unexpected stimulus/stimuli;
 
 
+# Study selection
+
+The final sample for the qualitative review consisted of 27 papers. From those, the following papers were removed because the results were not behavioral:
+
+* Harris et al. (2018)
+* Schelonka et al. (2016)
+* Pammer and blink (2018)
+* Vandenbroucke et al. (2014)
+* Wiemer et al. (2013)
+* Scholte et al. (2006)
+* Shafto and Pitts (2015)
+* Pitts et al. (2011)
+* Richards et al. (2012)
+
+Additionally, another paper was removed for not reporting enough data to compute a summary effect size (Lathrop et al., 2011).
+
+The remaining papers broach 49 experiments/contrasts. Some of those included more than one measure for each comparison (usually RT and accuracy). Those were included as a single line, and modelled with a three-level meta-analysis model.
+
+# Variables
+
+## Did the us interact with the target stimulus? This means the US interacted with the stimuli in the main task either by being part of it of by forming a configuration with it (e.g., the Ponzo illusion). US were classified as relevant even if they were not mentioned in the instructions.
+
+Type: dichotomous variable. Levels: "relevant" or "irrelevant".
+
+
+
+## Is the implicit process perceptual or response-end?
+
+This is not clear-cut, as the rationale of some tasks, e.g., the inattention paradigms, is not well-specified.
+
+Type: dichotomous variable. Levels: ??
+
+
+
+## Is implicit processing measured by RT or accuracy?
+
+Type: dichotomous variable. Levels: "RT" or "acc".
+
+
+
+## How many trials were used to assess implicit processing?
+
+Type: integer variable. 
+
+
+
+## How many subjects in the sample for implicit processing testing?
+
+Type: integer variable. 
+
+This is either:
+
+* Total N if group assessment of awareness was performed
+* N of IB subjects if post-hoc data selection was performed
+
+
+
+##  Which type of awareness measure was employed (objective or subjective)?
+
+Type: categorial variable. Levels: "objective", "subjective" or "objective/subjective".
+
+* Objective measures: yes-or-no questions, forced-choice recognition tests.
+* Subjective measures: perceptual awareness scale, confidence ratings, post-wagering scales.
+
+
+
+## Was the US presented in a separate block/phase, or interleaved with non-US trials?
+
+This is used to test the hypothesis that assessment of awareness after a whole block has a higher chance of mixing aware and unaware trials, due to memory issues.
+
+Type: dichotomous variable. Levels: "block" or "interleaved".
+
+
+## Was assessment of awareness of the US presence based on a trial or a block of trials?
+
+Type: dichotomous variable. Levels: "trial" or "block".
+
+
+
+## In how many trials was awareness assessed (how many assessments)? 
+
+The number of assessments is the number of times the same type of assessment (e.g., yes or no question, forced-choice question) was performed, NOT the number of all assessments by all tasks. They do not group because they differ in sensitivity. Instead, we choose one of them as the assessment. It should be the more liberal one, so as not to underestimate awareness.
+
+Type: integer variable.
+
+
+
+## How many subjects in the sample for awareness testing?
+
+This is either:
+
+* Total N if group assessment of awareness was performed
+* N of IB subjects if post-hoc data selection was performed
+
+Type: integer variable.
+
+
+
+## Was the result for the implicit test significant?
+
+Type: dichotomous (categorical) variable. Levels: "yes" or "no".
+
+
+
+## Was the contrast published in the "gray literature" (e.g., book chapter, conference abstract) instead of as journal article?
+
+Type: dichotomous (categorical) variable. Levels: "yes" or "no".
+
+
+
+# Effect size computations
+
 Each experiment can contribute with one or more effect sizes/tests, one in each line. Each one of those is called a contrast.
 
+We compute effect sizes based on data available in the papers and data sent by researchers. From the papers included after full-text reading, the following did not present enough data to allow the computation of an effect-size:
+ 
+* Lathrop et al. (2011)
+* Scholte et al. (2006) - MEG
 
-# Implicit Effect size computations
-We compute effect sizes based on available data from the papers. From the papers included after full-text reading, the following did not present enough data to allow the computation of an effect-size:
- 
- * Lathrop et al. (2011)
- * Scholte et al. (2006) - MEG
- 
+Some experiments also did not provide sufficient data for computation of effect sizes for either RT or accuracy:
+
+* list
+
 These were considered only in the qualitative, but not in the quantitative analysis.
 
-Effect sizes need a direction. Otherwise, if only the absolute value of the difference is recorded, all data points in the funnel plot will necessarily appear in the right side of the plot.
+## Study designs
+
+Studies are coded as between or within, to allow for correction according to Morris and DeShon [-@Morris2002].
+
+
+## Direction of effect sizes
+
+Effect sizes need a direction: if only the absolute value of the difference is recorded, all data points in the funnel plot will necessarily appear in the right side of the plot.
 
 In our analysis, since there is no treatment/control group, we have to choose an experimental condition and a control condition to decide the direction. Our options are:
 
@@ -30,28 +153,128 @@ In our analysis, since there is no treatment/control group, we have to choose an
 * When the above is not mentioned, but it is clear that in one condition there is an US, and the other does not, the first is the experimental condition, the second is the control;
 * When a configuration is the US (e.g., grouping), the condition with the configuration is the experimental condition, the other is the control condition
 
-Problem:in some cases, smaller RTs result from implicit processing (e.g., orienting of attention by arrows - Gabay); in others, larger RTs result (e.g., amodal completion of dashed lines - Moore and Egeth, 2003).  So we cannot simply subtract experimental - control, because this will result in effects in both directions meaning the same thing
+Problem:in some cases, smaller RTs result from implicit processing (e.g., orienting of attention by arrows - Gabay); in others, larger RTs result (e.g., amodal completion of dashed lines - Moore and Egeth, 2003).  So we cannot simply subtract experimental - control, because this will result in effects in which mean same thing, but have opposite directions.
 
+For this reason, we decided to code effects as positive if they were in the direction predicted by the hypothesis if the US was implicitly processed, and negative if they went in the opposite direction. We adopted the following conventions: 
 
-* Alternative:
+* For continuous outcomes: We code effects in the direction of US processing (according to the direction predicted by the hypothesis) as positive and effects in the direction of no US processing (these will most likely be nonsignificant, but what matters is their contribution for the meta-analytic effect size) as negative.
 
-- Code effects in the direction of facilitation as positive and effects in the direction of no facilitation (these will most likely be nonsignificant, but what matters is their contribution for the meta-analytic effect size) as negative.
+* For comparisons against chance, deviations above chance mean a difference in the direction of US processing (according to the direction predicted by the hypothesis), thus positive; below chance (also in this case, most likely nonsignificant) as no US processing, thus negative.
 
 - For interactions: when the interaction between V1 and V2 does not indicate a reversal in the direction of the effect of levels of V2 across levels of V1, the direction of the effect shown by the interaction is the same as the direction of the effect of V2.
 
+- For congruence effects in inattention designs: a reversal of direction is expected. The direction is computed as below, following Jaccard (1998, p. 36):
 
-Are there any studies which these criteria do not contemplate?
 
-* What about when it is a comparison against chance? - deviations above chance mean a difference in the direction of facilitation, thus positive; below chance (also in this case, most likely nonsignificant) as no facilitation, thuss negative.
+Accuracy as error rate/RT (all but Rashal et al., 2017).
 
-Whenever an implicit effect is computed from proportions or percentages:
+Smaller quantities indicate better performance. Plots are always shown with background "nested" (for display: the design in crossed) within target. Differences between differences are computed like (by convention):
 
-* success = participant displayed the effect
-* failure = participant did not display the effect
+(stsb - stdb) - (dtsb - dtdb)
 
-## 1. Ariga et al. (2008)
+if value is negative: interaction as predicted (ES is positive)
+if value is positive: interaction is opposite of predicted (ES is negative)
 
-## 2 to 5. Beanland and Pammer (2011)
+
+Accuracy as percent of hits (Rashal et al., 2017).
+
+Smaller quantities indicate better performance. Plots are always shown with background "nested" (for display: the design in crossed) within target. Differences between differences are computed like (by convention):
+
+(stsb - stdb) - (dtsb - dtdb)
+
+if value is positive: interaction as predicted (ES is positive)
+if value is negative: interaction is opposite of predicted (ES is negative)
+
+
+After computing r and Cohen's d, we chose to use hedge's g as standardized effect size. We computed hedge's g using formulas for matched groups from Borenstein's introduction to meta-analysis [@Borenstein2009], pp. 25-30.
+
+
+## Formulas for computations of ES from specific statistics
+
+### Proportions or percentages
+
+When an implicit effect is computed from proportions or percentage, effect sizes are computed from the chi-squared value reported. When the chi-squared value was not reported and only proportions/percentages are available, we computed the chi-square using the total n for the implicit test or the awareness test (N_participants_implicit and N_participants_awareness, respectively). To compute the n of successes and failures for the chi-squared, we adopted the following convention:
+
+* success = participant displayed the effect/noticed the US
+* failure = participant did not display the effect/did not notice the US
+
+We computed the phi statistic, which is equivalent to the r correlation coefficient, using the formulas in Rosenthal and Dimatteo (2001, p. 72) and Navarro (2015, section 12.4). 
+
+
+### Cohen's drm from t-values
+
+We use the formula for computation of drm in Dunlap et al. [-@Dunlap1996] to convert cohen's d to drm.
+
+[insert equations]
+
+Formula 1. from the equations in Dunlap et al. [-@Dunlap1996, p. 171, formulas 2 and 3]:
+
+compute.cohens.drm <- function(cohensd, exp_cor_pairs, exp_n) {
+  cohens.drm <- (cohensd * sqrt((2 *(1 - exp_cor_pairs))/exp_n))/(sqrt(2/exp_n))
+}
+
+Formula 2. from Morris and DeShon [@Morris2002, p. 111, formula 12], formula from Lakens (https://github.com/Lakens/ANOVA_power_simulation/blob/master/d_to_dz.R):
+
+d_to_dz <- function(d, r){
+  dz <- d/(sqrt(2*(1-r)))
+  invisible(list(d = d,
+                 r = r,
+                 dz = dz))
+}
+
+
+
+### r from t-values or f-values
+
+Formula taken from Rosenthal and Dimatteo (2001, p. 72)
+
+### r from z-values
+
+Formula taken from Rosnow and Rosenthal (2003, p. 231), formula 29.
+
+
+### Computation of correlations to calculate variance of d for hedge's g
+
+To compute the correlations between pairs of observations, we used the following procedure [@Alexander1990; @Rosenthal2001]:
+
+1. Transform the correlation value to a z score;
+
+2. Compute the weighted average of the z-transformed correlations (by the sample size);
+
+3. Convert the weighted mean z-transformed correlation back to correlation coefficient.
+
+Alternative procedures include [@Field2010].
+
+Three datasets were available to compute the correlation estimate: Razpurker-Apfeld et al. (2004); Schnuerch et al. (2016); and Beanland and Pammer (2010). We computed the correlations between the following conditions:
+
+* Razpurker-Apfeld et al. (2004): correlations between RTs in each target type level (same target vs. different target), across background types (same background and different background) and separately for each grouping condition(columns/rows and triangle arrow);
+
+* Schnuerch et al. (2016): correlation between the mean RTs in the neutral and the incongruent conditions, only for unaware participants;
+
+* Beanland and Pammer (2010): correlations between accuracy in the critical trial and in the averaged control trials, separately for each experiment (1 and 2) and each condition in each experiment (fixating and moving for exp 1, slow and fast for exp. 2).
+
+
+## Conversion between effect sizes:
+
+* From d to r: formulas taken from Rosenthal and Dimatteo (2001, p. 71)
+
+
+
+## Calculate implicit Effect Sizes by study
+
+### 1. Ariga et al. (2008)
+
+Design: within-subjects
+
+
+Use reported t-values and dfs to compute ES. 
+
+ES is negative, because it is in the direction opposite of what would be expected if the participant noticed the US (i.e., RTs for invalid same-object are larger then for invalid different-object, rather than smaller).
+
+### 2 to 5. Beanland and Pammer (2011)
+
+Design: within-subjects
+
 
 Each condition (eyes-fixating x eyes-moving in exp. 1A, slow-US x fast-US in exp. 2) is a separate contrast, so each should be coded in a separated line.
 
@@ -67,30 +290,87 @@ There is still the issue of repeated exposition, which differs between the first
 
 - Exp. 2: Table 8 on page 986.
 
-## 12. & 13. Moore and Egeth, exps. 1 and 3
+
+
+### 6 and 7. Gabay et al. (2012), exps. 1 and 2
+
+Design: within-subjects
+
+We computed the ES from f-values and dfs.
+
+* Exp 1 (p. 627): ES is positive, because difference is in the direction expected if the participant processed the US (lower RTs for valid cues).
+
+* Exp 2 (p. 629): ES is positive, because difference is in the direction expected if the participant processed the US (lower RTs for valid cues).
+
+
+### 8 to 11. Lo and Yeh (2008), exps. 1 and 2
+
+We computed the ES from the reported t-values and dfs. 
+
+* Exp 1, 200ms (p. 1173): ES is positive, because effect is in the expected direction if the US was perceived (percentage of participants above 50% choosing the longer line according to the Ponzo illusion).
+
+* Exp 1, 500ms (p. 1173): ES is positive, because effect is in the expected direction if the US was perceived (percentage of participants above 50% choosing the longer line according to the Ponzo illusion).
+
+* Exp 2, 200ms (p. 1177): ES is positive, because effect is in the expected direction if the 
+US elicited a Simon effect (smaller RTs in the compatible condition than in the incompatible condition).
+
+* Exp 2, 500ms (p. 1177): ES is positive, because effect is in the expected direction if the 
+US elicited a Simon effect (smaller RTs in the compatible condition than in the incompatible condition).
+
+
+### 12. & 13. Moore and Egeth, exps. 1 and 3
 
 Experiment 2 is not included because it aims only at eliminating a visual confound; it does not include the illusion.
 
-The effect of the background on the responses is given by the percentage of subjects who responded according to the illusions (Ponzo illusion in exp. 1, Müller-Lyer illusion in exp. 3), compared with chance:
+The effect of the background on the responses is given by the percentage of subjects who responded according to the illusions (Ponzo illusion in exp. 1, Müller-Lyer illusion in exp. 3), compared with chance.
 
-- Exp. 1: "inattention block" data on page. 345
+If the percentage is at 50%, it is equal to what is expected if participants were to respond randomly (50% chance upper line, 50% chance lower line). If above 50%, this is evidence that the illusion occurred, raising the percetange. If below 50%, the illusion did not occur and participants correctly noticed that lines are equal.
 
-- Exp. 3: "inattention block" data on page. 349
+- Exp. 1: "inattention block" data on page. 345. Effect size is positive, because percentage is above 50%.
 
-## 14. Moore et al. (2003)
+- Exp. 3: "inattention block" data on page. 349. Effect size is positive, because percentage is above 50%.
 
 
-## 15. to 19. Razpurker-Apfeld et al. (2008)
+### 14. Moore et al. (2003), exp. 3, p. 313.
 
+The ES was computed from the reported t-value and n of pairs. 
+
+The ES is positive, because it is in the direction expected if the US was processed: the illusory figures interfere with the line judgement when they are superposed on the line path (vertical condition), hence RTs are slower in this condition (compared to the horizontal condition).
+
+### 15. Moore et al. (2004), pp. 713 and 714.
+
+The ES was computed from the reported t-value and n of pairs.
+
+The ES is positive, because it is in the direction expected if the US was processed: the simon effect facilitates responses in the same side as the stimulus when it is consistent with the target, hence RTs are faster in this condition (compared to the inconsistent condition). 
+
+Although the result for IB participants for the inattention trial do not explicitate the direction of the difference, the relative magnitudes are shown in page 714, figure 4B. Additionally, the result for the divided attention condition, when the effect is significant, show a positive value and assert a simon effect; so, a positive value means facilitation according to the Simon Effect, which is what would be expected if the US is processed.
+
+### 16. Most et al. (2005), exps. 1-7 pooled, p. 235
+
+We computed the US using the reported t-value and the n of pairs.
+
+The ES is positive, because it is in the direction expected if the US was processed: accuracy decreases in the critical trial compared to the pre-critical (second) trial.
+
+
+### 15 to 19. Razpurker-Apfeld et al. (2008)
+
+RT data were computed from the raw data (sent by the researchers).
 Each condition (column/row vs. triangle/arrow) is treated as a separate constrast. 
 
 -RT: Implicit processing is indicated by the congruence effect, which is indicated by an interaction (better performance in same trials during same-backgrounds trials and better performance in different trials during different-background trials).
-The direction of the interaction is determined as explained above.
+
+* Column/row grouping: The ES is positive, because the direction of the interaction matches what is expected is the US is processed: faster judgements for at least one of the target x background conditions (here, for target same x background same).
+
+* Triangle/arrow grouping: The ES is negative, because the difference between mean differences is positive (which is the opposite direction of the prediction if the US is processed): differences for "target-same" are as predicted, but the difference for "target-different" is opposite and larger, resulting in a negative value.
 
 - d': Implicit processing is the difference between d' in same and different background conditions. d' = hit - false alarms in different trials. If d' is positive, effect is facilitatory (hits > false alarms), so the effect size is also positive; otherwise, the effect size is negative.
 
+* Column/row grouping: The ES is positive, because the direction of the interaction matches what is expected is the US is processed: faster judgements for at least one of the target x background conditions (here, for target same x background same).
 
-## 20. & 21. Richards et al. (2012)
+* Triangle/arrow grouping: not enough info is reported to compute the ES.
+
+
+### 20. & 21. Richards et al. (2012)
 
 Data comes from page 174 in the paper, on Table 1, only from "IBs" participants. Lines from the inspection screen stage are not included because this stage does not include the US (red cross). Two options for effect:
 
@@ -99,59 +379,58 @@ Data comes from page 174 in the paper, on Table 1, only from "IBs" participants.
  - Difference in fixations and in gaze time between IBs who fixate the US and those who don't.
  
 We can also split the sample between subsamples, each forming a contrast.
+
+- Exclude from meta-analysis - not behavioral
  
  
-## 22. to 26. Russel and Driver (2005)
+### 22. to 26. Russel and Driver (2005)
 
 Similar to Razpurker-Apfeld et al. (2008).
 
-Exp. 1, acc: interaction significant, positive sign because effect is facilitatory
+Exp. 1, acc: interaction significant, positive sign because effect is in predicted direction
 
-Exp. 1, RT: interaction non-significant, positive sign because effect is facilitatory
+Exp. 1, RT: interaction non-significant, positive sign because effect is in predicted direction
 
-Exp. 2, acc: interaction significant, positive sign because effect is facilitatory
+Exp. 2, acc: interaction significant, positive sign because effect is in predicted direction (negative total difference, because difference for dt is predicted and larger than unpredicted difference for st)
 
-Exp. 2, RT: interaction non-significant, positive sign because effect is facilitatory
+Exp. 2, RT: interaction non-significant, negative sign because effect is in oppposite direction to predicted (positive total difference, because difference for st is nonpredicted and larger than predicted difference for dt)
 
-Exp. 3, acc: interaction significant, positive sign because effect is facilitatory
+Exp. 3, acc: interaction significant, positive sign because effect is in predicted direction (negative total difference, because difference for dt is predicted and larger than unpredicted difference for st)
 
-Exp. 3, RT: interaction non-significant, positive sign because effect is facilitatory
+Exp. 3, RT: interaction non-significant, negative sign because effect is in oppposite direction to predicted (positive total difference, because difference for st is nonpredicted and and difference in dt is also nonpredicted difference)
 
-Exp. 4A, acc: interaction significant, positive sign because effect is facilitatory
+Exp. 4A, acc: interaction significant, positive sign because effect is in predicted direction (negative total difference, because difference for dt is predicted and difference for st is also predicted)
 
 Exp. 4A, RT: interaction non-significant, but data not available to compute effect size
 
-Exp. 4A, acc: interaction significant, positive sign because effect is facilitatory
+Exp. 4A, acc: interaction significant, positive sign because effect is in predicted direction (negative total difference, because difference for dt is predicted and larger than null difference for st)
 
 Exp. 4B, RT: interaction non-significant, but data not available to compute effect size
 
-Exp. 5, acc: interaction significant, positive sign because effect is facilitatory
+Exp. 5, acc: interaction significant, positive sign because effect is in predicted direction (negative total difference, because difference for dt is predicted and difference for st is also predicted)
 
-Exp. 5, RT: interaction non-significant, positive sign because effect is facilitatory
-
-## 27. Shafto and Pitts (2015)
-
-Effect is computed from the t-value and corresponding df from Phase 1, in IB group. Effect is non-significant, and negative.
+Exp. 5, RT: interaction non-significant, positive sign because effect is in predicted direction (negative total difference, because difference for dt is predicted and difference for st is also predicted)
 
 
-## 28. & 29. Schnuerch et al. (2016) exps. 1 and 2.
+
+### 28. & 29. Schnuerch et al. (2016) exps. 1 and 2.
 
 Difference between incongruent and neutral trials in RT, which tests the hypothesis. Both effects are significant and facilitatory, thus have a positive sign.
 
-Computed Cohen's d in experiment is different from reported Cohen's d (0.43). Which to keep?
+Computed Cohen's d in experiment 1 is different from reported Cohen's d (0.43). Keep computed and register in paper.
 
 
-## 30. Scholte et al. (2006)
+### 30. Scholte et al. (2006)
 
 There are multiple contrasts, for v1, v2, v3, and v4/v8. Should all of them be separated?
 
-- Exclude - not behavioral
+- Exclude from meta-analysis - not behavioral
 
-## 31. Vandenbroucke et al. (2014)
+### 31. Vandenbroucke et al. (2014) - DO NOT USE (fMRI)
 
-- Exclude - not behavioral
+- Exclude from meta-analysis - not behavioral
 
-## 32. Wiemer et al. (2013)
+### 32. Wiemer et al. (2013) - DO NOT USE (SCR)
 
 Difference between SCRs evoked by flower stimuli and spider stimuli (p.161). The effect is facilitatory - thus, the sign is positive - and significant.
 
@@ -159,180 +438,367 @@ Design in between-subjects.
 
 Degree of freedom is decimal?? Round down?
 
-- Exclude - not behavioral
+- Exclude from meta-analsis - not behavioral
 
 
-## 33 to 35. Mack and Rock's experiments from chapter 8
+### 33 to 35. Mack and Rock's experiments from chapter 8
 
-### Exp. 1 - p. 178-179
+#### Exp. 1 - p. 178-179
 
 Use reported number of subjects who offered prime word as stem-completion in the priming experiment and in the control experiment; build a contingency table with the proportions; and compute chi-squared from the contingency table.
 
 In figure 1, reported percentage of participants who offered the words as stem completion does not match the n reported in the text on page 179; using percentages to compute proportions instead.
 
-### Exp. 2 - p. 182
+#### Exp. 2 - p. 182
 
 Use reported number of subjects who offered prime word as stem-completion in the priming experiment and in the control experiment; build a contingency table with the proportions; and compute chi-squared from the contingency table.
 
-### Exp. 3 - p. 184
+#### Exp. 3 - p. 184
 
 Use reported number of subjects who offered prime word as stem-completion in the priming experiment and those in the control experiment who were presented roots for the same words as in exp 3 (short and flake) shown in figure 1 (p. 178), to control for stimulus properties like frequency; build a contingency table with the proportions; and compute chi-squared from the contingency table.
 
 In figure 1, reported percentage of participants who offered "short" as stem completion + those who offered "flake" does not match the n reported in the text on page 179; using percentages to compute proportions instead.
 
-### Exp. 4 - p. 187-188
+#### Exp. 4 - p. 187-188
 
 Use reported number of subjects who offered prime word as stem-completion in the priming experiment and in the control experiment; build a contingency table with the proportions; and compute chi-squared from the contingency table.
 
 Reported chi-square value was incorrect (14.54, p.188).
 
-### Exp. 5 - p. 191
+#### Exp. 5 - p. 191
 
 Use reported number of subjects who offered prime word as stem-completion in the priming experiment and in the control experiment; build a contingency table with the proportions; and compute chi-squared from the contingency table.
 
+### 36. Wood and Simons (2019), exps. 1 and 2
 
-## Compute correlation to calculate variance of d for hedge's g
+Use data from "lax" criterion to reduce likelihood of false implicit results
 
-Two datasets are available to compute the correlation estimate: Razpurker-Apfeld et al. (2004) and Schnuerch et al. (2016).
+Use reported percentage of participants who chose the longer line (exp. 1) or who completed the word-stem with the prime (exp. 2) to compute ES.
 
-# Awareness effect sizes computations
+* Exp 1, p. 5 of pdf: ES is positive, because effect is in the direction of what is expected if the US was processed: participants chose the longer line above chance.
 
-Whenever awareness is computed from proportions or percentages:
+* Exp 2, p. 9 of pdf: ES is negative, because effect is in the opposite direction of what is expected if the US was processed: very few participants (below chance) completed the word-stem with the prime word.
+
+
+### 55 to 60. Kimchi et al. (2004)
+
+Effect sizes from f-values and dfs.
+
+Each grouping condition is treated as a separate constrast. 
+
+
+* Column/row by color similarity: The ES is positive, because the direction of the interaction matches what is expected is the US is processed: faster judgements for at least one of the target x background conditions (here, for target same x background same).
+
+* Triangle/arrow grouping: The ES is negative, because the difference between mean differences is positive (which is the opposite direction of the prediction if the US is processed): differences for "target-same" are as predicted, but the difference for "target-different" is opposite and larger, resulting in a negative value.
+
+- d': Implicit processing is the difference between d' in same and different background conditions. d' = hit - false alarms in different trials. If d' is positive, effect is facilitatory (hits > false alarms), so the effect size is also positive; otherwise, the effect size is negative.
+
+* Column/row grouping: The ES is positive, because the direction of the interaction matches what is expected is the US is processed: faster judgements for at least one of the target x background conditions (here, for target same x background same).
+
+* Triangle/arrow grouping: not enough info is reported to compute the ES.
+
+* Connected triangle/arrow: The ES is positive, because the direction of the interaction matches what is expected is the US is processed: faster judgements for at least one of the target x background conditions (here, both for target same x background same and for target different x background different).
+
+* Square/cross by color similarity: enough info to compute effect size only for accuracy. The ES is negative, because the difference is in the opposite direction to what is predicted for both the same and different conditions.
+
+* Square/cross: The ES is positive, because the direction of the differences is in the predicted direction for both RT and accuracy, both in the same and different conditions.
+
+Vertical/horizontal line by color similarity: not enough info is reported to compute the ES.
+
+Disconnected square/cross: The ES is positive, because the direction of the differences is in the predicted direction for both RT and accuracy, both in the same and different conditions.
+
+
+
+
+# Computation of awareness effect sizes
+
+By convention, we established that an ES in the direction of aware is positive, and an ES in the direction of unaware is negative.
+
+## Proportions or percentages
+
+When an awareness ES is computed from proportions or percentages:
 
 * success = participant was aware
 * failure = participant was unaware
 
-## 1. Ariga et al. (2008)
+For studies that report n or proportions/percentages of noticers and/or perform a goodness-of-fit test (chi-square, or fisher's exact test) to test against the hypothesis that the n or the proportion/percentages of participants is different from what would be expected by chance, we used the following conventions:
 
-## 2 to 5. Beanland and Pammer (2011)
+* If the percentage of noticers is at 50%, it is equal to what is expected if participants were to respond randomly (50% noticers, 50% nonnoticers). 
+
+* If above 50%, this is evidence that the participants noticed the US and were thus aware. In this case, the ES is positive. 
+
+* If below 50%, participants did not notice the US and did not respond randomly; instead, they asserting that they saw nothing (were not aware). In this case, the US is negative.
+
+
+### 1. Ariga et al. (2008)
+
+We use the reported percentage of noticers. The study reports percentages of noticing for two forced-choice questions. We use the higher percentage of the two, to avoid underestimating awareness.
+
+
+### 2 to 5. Beanland and Pammer (2011)
+
+We use the reported percentage of noticers.
 
 Since for the implicit processing effect sizes we considered only participants who were IB in both trials, and the goal of using awareness effect sizes is to assess the power of awareness measures, we adopted a conservative threshold and considered a success any participant who notices the US in either the first or the second critical trial.
 
-## 11 & 12. Moore and Egeth, exps. 1 and 3
+* Exp. 1A, fixating: p. 980; effect size is negative, because percentage is below 50%;
+* Exp. 1A, moving: p. 980; effect size is negative, because percentage is below 50%;
+* Exp. 2, slow US: p. 985; effect size is negative, because percentage is below 50%;
+* Exp. 2, fast US: p. 985; effect size is negative, because percentage is below 50%.
 
-Use of direct query instead of forced-choice, since this can be performed using implicit knowledge
+# 6 and 7. Gabay et al. (2012), exps. 1 and 2
 
-* Exp. 1: p. 345
+We used the reported n of noticers.
 
-* Exp. 3: p. 349
+* Exp. 1, p. 627; effect size is negative, because n is below 50% of sample.
+* Exp. 1, p. 628; effect size is positive, because n is above 50% of sample.
 
-Effect sizes computed using percentage of noticers given
 
-Result is infinite, so replace with largest effect in data
+### 8 to 11. Lo and Yeh (2008), exps. 1 and 2
 
-## 13. Moore et al. (2003)
+We computed the ES from the reported chi-squared values from the v-shape discrimination task, because 1) the results from the confidence ratings did not offer a result against chance reports; and 2) the study classified participants as aware or unaware bases on the discrimination task instead of the confidence ratings.
 
-Use question about regularity (p. 312), instead of orientation (p. 313), since the former assesses perception more generally and thus might be more sensitive
+* Exp 1, 200ms (p. 1172): ES is positive, because percentage is above 50%;
 
-Use reported percentage of noticers. However, because there were 0 noticers, the ES in inf. Therefore, we replaced the value for this contrast with the largest value among other contrasts.
+* Exp 1, 500ms (p. 1172): ES is positive, because percentage is above 50%;
 
-## 14. Moore et al. (2004)
+* Exp 2, 200ms (p. 1176): ES is negative, because percentage is below 50%;
 
-Use of direct query (714) instead of forced-choice for awareness effect, since this can be performed using implicit knowledge
+* Exp 2, 500ms (p. 1177): ES is negative, because percentage is below 50%.
 
-Effect size is computed from given percentage of noticers.
 
-## 15. Most et al. (2004)
+### 12 and 13. Moore and Egeth, exps. 1 and 3, 
 
-### Exp. 1 - p. 228
+Effect sizes computed using percentage of noticers reported. We use percentages of direct query instead of forced-choice, since forced-choice can be performed using implicit knowledge.
+
+* Exp. 1, p. 345: effect size is negative, because percentage is below 50%;
+* Exp. 3, p. 349: effect size is negative, because percentage is below 50%.
+
+Result for exp. 3 is infinite (0 participants noticed the pattern), so replace with largest effect in data.
+
+
+### 14. Moore et al. (2003), exp. 3 - p. 312
+
+Use the reported percentage of noticers to compute ES. We used the percentage reported for the question about regularity (p. 312), instead of orientation (p. 313), since the former assesses perception more generally and thus might be more sensitive.
+
+Effect size is positive, because percentage reported is above 50%.
+
+
+### 15. Moore et al. (2004), p. 712.
+
+We use the reported percentage of noticers to compute ES. We used the percentage reported of direct query (712) instead of forced-choice for awareness effect, since this can be performed using implicit knowledge.
+
+The ES is negative, because the percentage reported is below 50%.
+
+
+### 15. Most et al. (2004)
+
+Effect size is computed from the pooled reported n or percentage of noticers across experiments.
+
+The ES is negative, because the resulting proportion of noticers is above 50%.
+
+#### Exp. 1 - p. 228
 
 Use reported sum of number of noticers across conditions as successes and total n across conditions as population. Although this mixes distinct rates of noticing in distinct conditions, this is coherent with how the implicit effect sizes were reported in experiment eight, where conditions are also mixed.
 
-### Exp. 2 - p. 229
+#### Exp. 2 - p. 229
 
 Use reported percentage of noticers in each condition to compute n of noticers, and sum results to obtain n of successes.
 
-### Exp. 3 - p. 229 (rates), 230 (total n)
+#### Exp. 3 - p. 229 (rates), 230 (total n)
 
 Use reported percentage of noticers in each condition to compute n of noticers, and sum results to obtain n of successes.
 
-### Exp. 4 - p. 229 (rates), 231 (total n)
+#### Exp. 4 - p. 229 (rates), 231 (total n)
 
 Use reported percentage of noticers in each condition to compute n of noticers, and sum results to obtain n of successes.
 
-### Exp. 5 - p. 229 (rates), 233 (total n)
+#### Exp. 5 - p. 229 (rates), 233 (total n)
 
 Use reported percentage of noticers in each condition to compute n of noticers, and sum results to obtain n of successes.
 
-### Exp. 6 - p. 229 (rates), 233 (total n)
+#### Exp. 6 - p. 229 (rates), 233 (total n)
 
 Use reported percentage of noticers in each condition to compute n of noticers, and sum results to obtain n of successes.
 
-### Exp. 7 - p. 229 (rates), 234 (total n)
+#### Exp. 7 - p. 229 (rates), 234 (total n)
 
 Use reported percentage of noticers in each condition to compute n of noticers, and sum results to obtain n of successes.
 
 
-## 16. Razpurker-Apfeld et al. (2008) 
+### 16. Razpurker-Apfeld et al. (2008) 
 
-Use reported number of noticers (p. 188) and total n (p. 185) to compute chi-square. Two distinct effect sizes are computed by condition; within the same condition, the effect size is the same for RT and d', since it is the same sample. They are coded as separate cohen's d because RT and d' are separate entries (lines) in the table.
+Use reported number of noticers (p. 188) and total n (p. 185) to compute chi-square. 
 
-## 17. Richards et al. (2012)
+Two distinct effect sizes are computed by condition; within the same condition, the effect size is the same for RT and d', since it is the same sample. They are not coded as separate ES, even though RT and d' are separate entries (lines) for the implicit ES, because they must not contribute twice to the model.
 
-Use reported percentage of noticers (p. 173) to compute n of noticers.
+* Columns/rows condition, p. 188: ES is negative, because of of noticers is below 50%.
+* Triangle/arrow condition, p. 188: ES is negative, because of of noticers is below 50%.
 
-## 18. Russel and Driver (2005), exps. 1-5
 
-### Exp. 1 - p. 610
+### 17. Richards et al. (2012), p. 173. - DO OT USE (EYE TRACKING)
 
-Use reported n of noticers to compute chi-squared.
+Use reported percentage of noticers to compute n of noticers and ES.
 
-### Exp. 2 - p. 611
+ES is negative, because percentage reported is below 50%.
 
-Use reported n of noticers to compute chi-squared.
 
-### Exp. 3 - p. 613
+### 18 to 33. Russel and Driver (2005), exps. 1-5
 
-Use reported n of noticers to compute chi-squared.
-
-### Exp. 4A - p. 614-615
+#### Exp. 1 - p. 610
 
 Use reported n of noticers to compute chi-squared.
 
-### Exp. 4B - p. 615
+ES is negative, because n of noticers is below 50%.
+
+#### Exp. 2 - p. 611
 
 Use reported n of noticers to compute chi-squared.
 
-### Exp. 5 - p. 618
+ES is positive, because n of noticers is above 50%.
+
+#### Exp. 3 - p. 613
 
 Use reported n of noticers to compute chi-squared.
 
-## Mack and Rock's experiments from chapter 8
+ES is 0.
 
-### Exp. 1 - p. 178
+#### Exp. 4A - p. 614-615
+
+Only a single yes-or-no question; use as both lax and strict.
+
+Use reported n of noticers to compute chi-squared.
+
+ES is negative, because n of noticers is below 50%.
+
+#### Exp. 4B - p. 615
+
+Only a single yes-or-no question; use as both lax and strict.
+
+Use reported n of noticers to compute chi-squared.
+
+ES is negative, because n of noticers is below 50%.
+
+#### Exp. 5 - p. 618
+
+Lax: question 1 (yes-or-no question)
+
+Strict: question 2 (2AFC for rows or columns)
+
+Use reported n of noticers to compute chi-squared.
+
+ES is positive, because n of noticers is above 50%.
+
+### 35 and 36. Schnuerch et al. (2016), exps. 1 and 2.
+
+We computed the ES from the percentage of noticers,  which is both experiments was obtained by the reported percentage of nonnoticers.
+
+* Exp 1, p. 3: the ES is negative, because the percentage of noticers is below 50%.
+* Exp 2, p. 4: the ES is negative, because the percentage of noticers is below 50%.
+
+
+### 38 and 39. Wood and Simons (2019), exps. 1 and 2
+
+We use the reported percentage of noticers for the lax criterion. This is important to avoid understimating awareness.
+
+* Exp 1: p. 5 (of pdf); effect size is negative, because percentage is below 50%.
+
+* Exp 2: p. 9 (of pdf); effect size is positive, because percentage is above 50%.
+
+
+### 41 to 45. Mack and Rock's experiments from chapter 8
+
+#### Exp. 1 - p. 178
 
 Use reported number of unaware subjects to compute proportions.
 
-### Exp. 2 - p. 182
+ES is negative, because n of noticers is below 50%.
+
+#### Exp. 2 - p. 182
 
 Use reported number of unaware subjects to compute proportions.
 
-### Exp. 3 - p. 184
+ES is negative, because n of noticers is below 50%.
+
+#### Exp. 3 - p. 184
 
 Use reported number of unaware subjects to compute proportions.
 
-### Exp. 4 - p. 187
+ES is negative, because n of noticers is below 50%.
+
+#### Exp. 4 - p. 188
 
 Use reported number of unaware subjects to compute proportions.
 
-## 19. Shafto and Pitts (2015) - p. 10943
+ES is positive, because n of noticers is above 50%.
+
+#### Exp. 5 - p. 191
+
+Use reported number of unaware subjects to compute proportions.
+
+ES is positive, because n of noticers is above 50%.
+
+
+### 46 to 54. Rashal et al. (2017)
+
+Use reported number of noticers for change question. Reasons:
+
+* It does not demand identification;
+* It is more similar to yes-or-no questions, and the "lax" criterion of Wood and Simons (2019), so we assume it is less likely to underestimate awareness.
+
+* exp. 1 - p. 2078, table 1; effect size is positive, because percentage is above 50%
+* exp. 2- p. 2078, table 1; effect size is positive, because percentage is above 50%
+* exp. 3 - p. 2082, table 2; effect size is positive, because percentage is above 50%
+* exp. 4 - p. 2082, table 2; effect size is negative, because percentage is below 50%
+* exp. 5 - p. 2082, table 2; effect size is 0.
+* exp. 6 - p. 2082, table 2; effect size is positive, because percentage is above 50%
+
+Compare computed chi-squares with reported chi-square: differences found for experiments 3 and 4.
+
+### 57 to 69, 68 to 71. Kimchi et al. (2004)
+
+Lax:
+
+Use reported number of noticers for "change" question (column "something" in Table 1). Reasons:
+
+* It does not demand identification;
+* It is more similar to yes-or-no questions, and the "lax" criterion of Wood and Simons (2019), so we assume it is less likely to underestimate awareness.
+
+Strict: 
+
+* It demands the most complex identification compared to the color and "something";
+* It is more similar to yes-or-no questions.
+
+Use reported number of noticers for "pattern" question (column "organization" in Table 1). Reasons:
+
+* exp. 1, connected triangle/arrow - p. 692, table 1; effect size is positive, because percentage is above 50%
+* exp. 2, disconnected square/cross - p. 695, table 2; effect size is positive, because percentage is above 50%
+
+
+Compare computed chi-squares with reported chi-square: differences found for experiments 3 and 4.
+
+### 19. Shafto and Pitts (2015) - p. 10943 - DO NOT USE (EEG)
 
 Use reported number of inattentionally blind subjects.
 
-## 20. Wiemer et al. (2013) - p. 160
+### 20. Wiemer et al. (2013) - p. 160 - DO NOT USE (SRC)
 
 Use of percentage of noticers by condition to compute proportions, sum across conditions and compute chi-squared.
 
 
-# Calculation of effect sizes for model
+# Meta-analytic model fitting
 
-We chose to use hedge's g as standardized effect size. We computed hedge's g using formulas for matched groups from Borenstein's introduction to meta-analysis (2009), pp. 25-30.
+## Implicit model:
 
-# Meta-analytic model
+### Moderation
 
-## Moderation
+We chose to run a mixed effect subgroup analysis (fixed-effect between subgroups, random-effect within subgroups) because we assume the moderators are exhaustive levels of the studies [@Harrer].
+(https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/subgroup.html).
 
-We have the following variables to conduct moderation analysis so far for the implicit effects:
+This perform test both within subgroups and then comparisons between subgroups.
+
+
+The following variables to conduct moderation analysis so far for the implicit effects:
 
 * Measure: RT vs accuracy
 
@@ -340,21 +806,36 @@ We have the following variables to conduct moderation analysis so far for the im
 
 * N of trials - this needs to be done with a regression, using n of trials as a continuous predictor
 
-* Run moderator analysis for inattention paradigm
+* Inattention paradigm
 
-* Run moderator analysis for papers performing group assessment of awareness instead of inattetion paradigm - Alex
-
-Perform analysis within subgroups and then comparisons between subgroups
+* Group assessment of awareness instead of inattetion paradigm
 
 
-# Heterogeneity
-
-xzDRRRRRRRRRRRRRRRRRRRRRRRRRRRFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDDDDDDDDDDDDDDDDDDDDDDDDDDCVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV\aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 
------------------------------------------------------------------------------------
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+### Heterogeneity
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+* Visual inspection of forest plot: Wood and Simons (2019), exp. 2, has a disproportionately wide confidence interval.
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+* Heterogeneity test: low values of tau^2 and I^2. The test showed no significant results.
+
+* No outliers were detected. The confidence interval of Wood and Simons (2019), exp. 2, is not out of bounds.
+
+* Influence analysis: two inattention studies (Rashal et al., 2017; Kimchi and Razpurker-Apfeld, 2004) and a non-inattention study (Gabay et al., 2012) contribute largely for heterogeneity, while having a small influence in the pooled effect size. Wood and Simons (2019), exp. 2, has disproportionately wide confidence intervals and a huge influence in the effect size.
+
+Fitting the model without those studies did not change the qualitative results. However, Wood and Simons (2019) exp 2 was removed both due to:
+
+* The influence in the pooled ES
+* The impossibility of calculating base rates for choosing the words used as primes, in virtue of the absence of a control study.
+
+
+## Awareness model
+
+# Publication bias
+
+## p-curve
+
+We cannot conduct a p-curve analysis, because several of the comparisons are secondary analysis.
+
+
+# References

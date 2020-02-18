@@ -362,9 +362,9 @@ c18_dfeffect <- 1
 c18_dferror <- 13
 c18_fvalue <- 4.98 # positive value, because effect is facilitatory
 
-c18_cohensd <- NA#(c18_fvalue * c18_dfeffect)/(c18_fvalue*c18_dfeffect+c18_dferror)
+c18_cohensd <- (c18_fvalue * c18_dfeffect)/(c18_fvalue*c18_dfeffect+c18_dferror)
 
-c18_r <- NA#sqrt(c18_fvalue/(c18_fvalue + c18_dferror))
+c18_r <- sqrt(c18_fvalue/(c18_fvalue + c18_dferror))
 
 #c18_r <- 0.52
 
@@ -394,9 +394,9 @@ c20_dfeffect <- 1
 c20_dferror <- 13
 c20_fvalue <- 2.3 # positive value, because effect is facilitatory
 
-c20_cohensd <- NA#(c20_fvalue * c20_dfeffect)/(c20_fvalue*c20_dfeffect+c20_dferror)
+c20_cohensd <- (c20_fvalue * c20_dfeffect)/(c20_fvalue*c20_dfeffect+c20_dferror)
 
-c20_r <- NA#sqrt(c20_fvalue/(c20_fvalue + c20_dferror))
+c20_r <- sqrt(c20_fvalue/(c20_fvalue + c20_dferror))
 #c20_cohensd <- (2*c20_r)/sqrt(1-(c20_r**2))
 
 #c20_r <- 0.39
@@ -1013,7 +1013,6 @@ c58_r <- sqrt(c58_fvalue/(c58_fvalue + c58_dferror)) * (-1) # ES is negative
 c58_cohensd <- (2 * c58_r)/sqrt(1 - (c58_r)**2) # ES is negative
 
 
-
 #==== 59. Kimchi et al. (2004) exp. 2 - square/cross, RT ====
 
 c59_fvalue <- 6.27
@@ -1137,12 +1136,48 @@ c67_n <-11
 c67_r <- sqrt(c67_fvalue/(c67_fvalue + c67_dferror))
 c67_cohensd <- (2 * c67_r)/sqrt(1 - (c67_r)**2)
 
+#==== 68. Kimchi et al. (2004) exp. 1 - connected triangle/arrow, RT ====
+
+c68_fvalue <- 32.95
+c68_dfeffect <- 1
+c68_dferror <- 13
+c68_n <- 14
+c68_r <- sqrt(c68_fvalue/(c68_fvalue + c68_dferror))
+c68_cohensd <- (2 * c68_r)/sqrt(1 - (c68_r)**2)
+
+#==== 69. Kimchi et al. (2004) exp. 1 - connected triangle/arrow, accuracy ====
+
+c69_fvalue <- 10.4
+c69_dfeffect <- 1
+c69_dferror <- 13
+c69_n <- 14
+c69_r <- sqrt(c69_fvalue/(c69_fvalue + c69_dferror))
+c69_cohensd <- (2 * c69_r)/sqrt(1 - (c69_r)**2)
+
+#==== 70. Kimchi et al. (2004) exp. 2 - disconnected square/cross, RT ====
+
+c70_fvalue <- 15.54
+c70_dfeffect <- 1
+c70_dferror <- 11
+c70_n <- 12
+c70_r <- sqrt(c70_fvalue/(c70_fvalue + c70_dferror))
+c70_cohensd <- (2 * c70_r)/sqrt(1 - (c70_r)**2)
+
+#==== 71. Kimchi et al. (2004) exp. 2 - disconnected square/cross, acc ====
+
+c71_fvalue <- 45.08
+c71_dfeffect <- 1
+c71_dferror <- 11
+c71_n <- 12
+c71_r <- sqrt(c71_fvalue/(c71_fvalue + c71_dferror))
+c71_cohensd <- (2 * c71_r)/sqrt(1 - (c71_r)**2)
+
 
 #========================================#
 #==== Build vector with effect sizes ====#
 #========================================#
 effect_indices <- c(1:11, 41:45, 12:20, 22:28, 30, 32, 33, 35, 36, 
-                    38, 39, 46:67)
+                    38, 39, 46:57, 68, 69, 58:60, 70, 71, 61:67)
 
 implicit_totaln <- map_dbl(paste("c", effect_indices, "_n",
                                  sep = ""), get)
@@ -1229,3 +1264,4 @@ implicit_variancedrm_names <- paste("c", effect_indices, "_variancedrm",
 implicit_variancedrm <- map_dbl(implicit_variancedrm_names, get)
 
 #hedges_g(implicit_cohensdrm, implicit_totaln)
+

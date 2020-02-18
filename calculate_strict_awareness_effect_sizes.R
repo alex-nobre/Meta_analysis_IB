@@ -3,16 +3,14 @@ library(esc)
 library(tidyverse)
 library(DescTools)
 
-# Compute ES for proportions
-library(pwr)
+# Effect sizes:
 
-# Function to run one-proportion z-test
-source("ztest_function.R")
+# Formulas are taken from Lakens et al.'s sheet for effect sizes
 
 
 #==== 1. Ariga et al. (2007) exp 2 ====
+
 c1_pop <- 20
-c1_n <- c1_pop
 c1_success_percentage <- 50
 c1_success_proportion <- c1_success_percentage/100
 c1_base_chance <- 0.5
@@ -32,13 +30,8 @@ c1_cohensd <- esc_chisq(c1_chisquared,
 
 c1_phi <- sqrt(c1_chisquared/c1_pop)
 
-#c1_r <- c1_phi #esc_phi(phi = c1_phi, totaln = c1_pop, es.type = "r")
+c1_r <- c1_phi #esc_phi(phi = c1_phi, totaln = c1_pop, es.type = "r")
 
-c1_z <- z_test(x = c1_successes, n = c1_pop, p = 0.5, alternative = "two.sided")$ts.z
-
-c1_z_ES <- ES.h(p1 = c1_success_proportion, c1_base_chance <- 0.5)
-
-c1_r <- c1_z/sqrt(c1_pop)
 
 #==== 2 Beanland and Pammer (2010) exp. 1A, fixating ====
 
@@ -63,13 +56,8 @@ c2_cohensd <- (-1) * esc_chisq(c2_chisquared, # ES is negative
 
 c2_phi <- sqrt(c2_chisquared/c2_pop) * (-1) # effect size is negative
 
-#c2_r <- c2_phi #esc_phi(phi = c2_phi, totaln = c2_pop, es.type = "r")
+c2_r <- c2_phi #esc_phi(phi = c2_phi, totaln = c2_pop, es.type = "r")
 
-c2_z <- z_test(x = c2_successes, n = c2_pop, p = 0.5, alternative = "two.sided")$ts.z
-
-c2_z_ES <- ES.h(p1 = c2_success_proportion, c2_base_chance <- 0.5)
-
-c2_r <- c2_z/sqrt(c2_pop)
 
 #==== 3. Beanland and Pammer (2010) exp. 1A, moving ====
 
@@ -94,20 +82,14 @@ c3_cohensd <- (-1) * esc_chisq(c3_chisquared, # ES is negative
 
 c3_phi <- sqrt(c3_chisquared/c3_pop) * (-1) # effect size is negative
 
-#c3_r <- c3_phi #esc_phi(phi = c3_phi, totaln = c3_pop, es.type = "r")
-
-c3_z <- z_test(x = c3_successes, n = c3_pop, p = 0.5, alternative = "two.sided")$ts.z
-
-c3_z_ES <- ES.h(p1 = c3_success_proportion, c3_base_chance <- 0.5)
-
-c3_r <- c3_z/sqrt(c3_pop)
+c3_r <- c3_phi #esc_phi(phi = c3_phi, totaln = c3_pop, es.type = "r")
 
 
 #==== 4. Beanland and Pammer (2010) exp. 2, slow US ====
 
 # Compute effect size from percentage of noticers
 c4_pop <- 25
-c4_success_percentage <- 44
+c4_success_percentage <- 14
 c4_success_proportion <- c4_success_percentage/100
 c4_base_chance <- 0.5
 c4_successes <- round(c4_success_percentage*c4_pop/100)
@@ -127,7 +109,7 @@ c4_cohensd <- (-1) * esc_chisq(c4_chisquared, # ES is negative
 
 c4_phi <- sqrt(c4_chisquared/c4_pop) * (-1) # effect size is negative
 
-#c4_r <- c4_phi #esc_phi(phi = c4_phi, totaln = c4_pop, es.type = "r")
+c4_r <- c4_phi #esc_phi(phi = c4_phi, totaln = c4_pop, es.type = "r")
 
 
 #==== 5. Beanland and Pammer (2010) exp. 2, fast US ====
@@ -154,7 +136,7 @@ c5_cohensd <- (-1) * esc_chisq(c5_chisquared, # ES is negative
 
 c5_phi <- sqrt(c5_chisquared/c5_pop) * (-1) # effect size is negative
 
-#c5_r <- c5_phi #esc_phi(phi = c5_phi, totaln = c5_pop, es.type = "r")
+c5_r <- c5_phi #esc_phi(phi = c5_phi, totaln = c5_pop, es.type = "r")
 
 
 #==== 6. Gabay et al. (2012) - Exp. 1 ====
@@ -211,7 +193,7 @@ c7_r <- c7_phi #esc_phi(phi = c7_phi, totaln = c7_pop, es.type = "r")
 
 #==== 8. Lo e Yeh (2008) - exp. 1 (200 ms) ====
 
-# Compute effect size from proportion using reported chi-squared value
+# Compute effect size from proportion using given chi-squared value
 c8_pop <- 43
 c8_success_percentage <- 60
 c8_success_proportion <- c8_success_percentage/100
@@ -219,8 +201,7 @@ c8_base_chance <- 0.5
 c8_successes <- round(c8_success_percentage*c8_pop/100)
 c8_failures <- c8_pop - c8_successes
 
-
-c8_chisquared <- 1.88 #chi-squared is reported
+c8_chisquared <- 1.88
 
 c8_cohensd <- esc_chisq(c8_chisquared, 
                         es.type = "d", 
@@ -228,19 +209,14 @@ c8_cohensd <- esc_chisq(c8_chisquared,
 
 c8_r <- sqrt((c8_cohensd**2)/(c8_cohensd**2 + 4))
 
-# c8_z <- z_test(x = c8_successes, n = c8_pop, p = 0.5, alternative = "two.sided")$ts.z
-# 
-# c8_z_ES <- ES.h(p1 = c8_success_proportion, c8_base_chance <- 0.5)
-# 
-# c8_r <- c8_z/sqrt(c8_pop)
-
 # c8_phi <- sqrt(c8_chisquared/c8_pop)
 # 
 # c8_r <- c8_phi - same as through cohen's d
 
 #==== 9. Lo e Yeh (2008) - exp. 1 (500 ms) ====
 
-# Compute effect size from proportion using reported chi-squared value
+# Compute effect size from proportion using given chi-squared value
+
 c9_pop <- 41
 c9_success_percentage <- 51
 c9_success_proportion <- c9_success_percentage/100
@@ -248,7 +224,7 @@ c9_base_chance <- 0.5
 c9_successes <- round(c9_success_percentage*c9_pop/100)
 c9_failures <- c9_pop - c9_successes
 
-c9_chisquared <- 0.02 #chi-squared is reported
+c9_chisquared <- 0.02
 
 c9_cohensd <- esc_chisq(c9_chisquared, 
                         es.type = "d", 
@@ -258,7 +234,7 @@ c9_r <- sqrt((c9_cohensd**2)/(c9_cohensd**2 + 4))
 
 #==== 10. Lo e Yeh (2008) - exp. 2 (200 ms) ====
 
-# Compute effect size from proportion using reported chi-squared value
+# Compute effect size from proportion using chi-squared value
 c10_pop <- 23
 c10_success_percentage <- 47.83
 c10_success_proportion <- c10_success_percentage/100
@@ -266,17 +242,17 @@ c10_base_chance <- 0.5
 c10_successes <- round(c10_success_percentage*c10_pop/100)
 c10_failures <- c10_pop - c10_successes
 
-c10_chisquared <- 0.04 #chi-squared is reported
+c10_chisquared <- 0.04
 
 c10_cohensd <- (-1) * esc_chisq(c10_chisquared,  # ES is negative
                                 es.type = "d", 
                                 totaln = c10_pop)$es
 
-c10_r <- sqrt((c10_cohensd**2)/(c10_cohensd**2 + 4)) * (-1) # ES is negative
+c10_r <- sqrt((c10_cohensd**2)/(c10_cohensd**2 + 4)) * (-1) # is negative
 
 #==== 11. Lo e Yeh (2008) - exp. 2 (500 ms) ====
 
-# Compute effect size from proportion using reported chi-squared value
+# Compute effect size from proportion using chi-squared value
 c11_pop <- 25
 c11_success_percentage <- 44
 c11_success_proportion <- c11_success_percentage/100
@@ -284,16 +260,18 @@ c11_base_chance <- 0.5
 c11_successes <- round(c11_success_percentage*c11_pop/100)
 c11_failures <- c11_pop - c11_successes
 
-c11_chisquared <- 0.36 #chi-squared is reported
+
+c11_chisquared <- 0.36
 
 c11_cohensd <- (-1) * esc_chisq(c11_chisquared, # ES is negative
                                 es.type = "d", 
                                 totaln = c11_pop)$es
 
-c11_r <- sqrt((c11_cohensd**2)/(c11_cohensd**2 + 4)) * (-1) #ES is negative
+c11_r <- sqrt((c11_cohensd**2)/(c11_cohensd**2 + 4)) * (-1) # is negative
 
 
 #==== 12. Moore and Egeth (1997), exp. 1 ====
+
 # Compute effect size from percentage of noticers reported
 
 c12_pop <- 20
@@ -363,6 +341,7 @@ c13_r <- c13_z/sqrt(c13_pop)
 #==== 14. Moore et al. (2003) ====
 
 # Compute effect sizes from reported percentage of noticers
+
 c14_pop <- 44
 c14_success_percentage <- 54.55
 c14_success_proportion <- c14_success_percentage/100
@@ -383,22 +362,17 @@ c14_cohensd <- esc_chisq(c14_chisquared,
 
 c14_phi <- sqrt(c14_chisquared/c14_pop)
 
-#c14_r <- c14_phi #esc_phi(phi = c14_phi, totaln = c14_pop, es.type = "r")
-
-c14_z <- z_test(x = c14_successes, n = c14_pop, p = 0.5, alternative = "two.sided")$ts.z
-
-c14_z_ES <- ES.h(p1 = c14_success_proportion, c14_base_chance <- 0.5)
-
-c14_r <- c14_z/sqrt(c14_pop)
+c14_r <- c14_phi #esc_phi(phi = c14_phi, totaln = c14_pop, es.type = "r")
 
 
 #==== 15. Moore et al. (2004) ====
 
 # Compute effect sizes from reported percentage of noticers
+
 c15_pop <- 25
-c15_success_percentage <- 16
+c15_success_percentage <- 48
 c15_success_proportion <- c15_success_percentage/100
-c15_base_chance <- 0.5 #yes/no
+c15_base_chance <- 0.5 #left/right
 c15_successes <- round(c15_success_percentage*c15_pop/100)
 c15_failures <- c15_pop - c15_successes
 
@@ -495,7 +469,7 @@ c16_r <- c16_phi #esc_phi(phi = c16_phi, totaln = c16_pop, es.type = "r")
 
 # Compute effect sizes from reported percentage of noticers
 c17_pop <- 7
-c17_successes <- 7 #+ # columns/rows condition
+c17_successes <- 1 #+ # columns/rows condition
 #1 # triangle/arrow condition
 c17_failures <- c17_pop - c17_successes
 c17_success_percentage <- (c17_successes/c17_pop) * 100
@@ -505,15 +479,15 @@ c17_base_chance <- 0.5 #yes/no
 c17_chisquared <- unname(chisq.test(c(c17_successes, c17_failures), 
                                     p = c(0.5, 0.5))$statistic)
 
-c17_cohensd <- esc_chisq(c17_chisquared, 
-                         es.type = "d",
-                         totaln = c17_pop)$es
+c17_cohensd <- (-1) * esc_chisq(c17_chisquared, # ES is negative
+                                es.type = "d",
+                                totaln = c17_pop)$es
 
 # c17_etasquared <- esc_chisq(c17_chisquared, 
 #                             es.type = "eta", 
 #                             totaln = c17_pop)$es
 
-c17_phi <- sqrt(c17_chisquared/c17_pop)
+c17_phi <- sqrt(c17_chisquared/c17_pop) * (-1) # effect size is negative
 
 c17_r <- c17_phi #esc_phi(phi = c17_phi, totaln = c17_pop, es.type = "r")
 
@@ -537,7 +511,7 @@ c18_r <- NA
 
 # Compute effect sizes from reported percentage of noticers
 c19_pop <- 7
-c19_successes <- 7
+c19_successes <- 1
 c19_failures <- c19_pop - c19_successes
 c19_success_percentage <- (c19_successes/c19_pop) * 100
 c19_success_proportion <- c19_success_percentage/100
@@ -546,15 +520,15 @@ c19_base_chance <- 0.5 #yes/no
 c19_chisquared <- unname(chisq.test(c(c19_successes, c19_failures), 
                                     p = c(0.5, 0.5))$statistic)
 
-c19_cohensd <- esc_chisq(c19_chisquared,
-                         es.type = "d",
-                         totaln = c19_pop)$es
+c19_cohensd <- (-1) * esc_chisq(c19_chisquared, # ES is negative
+                                es.type = "d",
+                                totaln = c19_pop)$es
 
 # c19_etasquared <- esc_chisq(c19_chisquared, 
 #                             es.type = "eta", 
 #                             totaln = c19_pop)$es
 
-c19_phi <- sqrt(c19_chisquared/c19_pop)
+c19_phi <- sqrt(c19_chisquared/c19_pop) * (-1) # ES is negative
 
 c19_r <- c19_phi #esc_phi(phi = c19_phi, totaln = c19_pop, es.type = "r")
 
@@ -569,13 +543,14 @@ c20_success_percentage <- NA#(c20_successes/c20_pop) * 100
 c20_success_proportion <- NA#c20_success_percentage/100
 c20_base_chance <- NA#0.5 #yes/no
 
+
 c20_chisquared <- NA #c19_chisquared
 c20_cohensd <- NA #c19_cohensd
 c20_r <- NA
 
 #==== 21. Richards et al. (2012), tracking task  ====
-
-# Compute effect sizes from proportions
+# 
+# # Compute effect sizes from proportions
 # c21_pop <- 131
 # c21_successes <- round(47*c21_pop/100)
 # c21_failures <- c21_pop - c21_successes
@@ -585,8 +560,8 @@ c20_r <- NA
 # 
 # 
 # c21_cohensd <- (-1) * esc_chisq(c21_chisquared, # ES is negative
-#                                 es.type = "d",
-#                                 totaln = c21_pop)$es
+#                          es.type = "d",
+#                          totaln = c21_pop)$es
 # 
 # # c21_etasquared <- esc_chisq(c21_chisquared, 
 # #                             es.type = "eta", 
@@ -847,6 +822,7 @@ c33_cohensd <- NA #c32_cohensd
 
 c33_r <- NA
 
+
 #==== 34. Shafto and Pitts (2015) ====
 
 # Compute effect sizes from proportions
@@ -867,7 +843,7 @@ c33_r <- NA
 c35_pop <- 61
 c35_success_percentage <- 8
 c35_success_proportion <- c35_success_percentage/100
-c35_base_chance <- 0.5 
+c35_base_chance <- 0.5
 c35_successes <- round(c35_success_percentage*c35_pop/100)
 c35_failures <- c35_pop - c35_successes
 
@@ -918,13 +894,13 @@ c36_r <- c36_phi #esc_phi(phi = c36_phi, totaln = c36_pop, es.type = "r")
 #==== 37. Scholte et al. (2006) ====
 
 #==== 38. Wood and Simons (2019), exp. 1 ====
+
 # Compute effect size from proportion
 c38_pop <- 58+62+32+23
-c38_n <- c38_pop
-c38_success_percentage <- 32
+c38_success_percentage <- 16.5
 c38_success_proportion <- c38_success_percentage/100
-c38_base_chance <- 0.5 #yes/no
-c38_successes <- round(c38_success_percentage*c38_pop/100) #percentage from lax criterion
+c38_base_chance <- round(1/6, digits = 2) #6AFC
+c38_successes <- round(c38_success_percentage*c38_pop/100) #percentage from strict criterion
 c38_failures <- c38_pop - c38_successes
 
 c38_chisquared <- unname(chisq.test(c(c38_successes, c38_failures), 
@@ -947,24 +923,24 @@ c38_r <- c38_phi #esc_phi(phi = c38_phi, totaln = c38_pop, es.type = "r")
 
 # Compute effect size from proportion
 c39_pop <- 30+29+29+32+35+29+32
-c39_success_percentage <- 51.8
+c39_success_percentage <- 31.3
 c39_success_proportion <- c39_success_percentage/100
-c39_base_chance <- 0.5 #yes/no
+c39_base_chance <- 1/5 #5AFC
 c39_successes <- round(c39_success_percentage*c39_pop/100) #percentage from lax criterion
 c39_failures <- c39_pop - c39_successes
 
 c39_chisquared <- unname(chisq.test(c(c39_successes, c39_failures), 
-                                    p = c(c39_base_chance, 1 - c39_base_chance))$statistic)
+                                    p = c(c39_base_chance, 1-c39_base_chance))$statistic)
 
-c39_cohensd <- esc_chisq(c39_chisquared,
-                         es.type = "d",
-                         totaln = c39_pop)$es
+c39_cohensd <- (-1) * esc_chisq(c39_chisquared, # ES is negative
+                                es.type = "d",
+                                totaln = c39_pop)$es
 # 
 # c39_etasquared <- esc_chisq(c39_chisquared, 
 #                             es.type = "eta", 
 #                             totaln = c39_pop)$es
 
-c39_phi <- sqrt(c39_chisquared/c39_pop)
+c39_phi <- sqrt(c39_chisquared/c39_pop) * (-1) # effect size is negative
 
 c39_r <- c39_phi #esc_phi(phi = c39_phi, totaln = c39_pop, es.type = "r")
 
@@ -988,7 +964,6 @@ c41_failures <- c41_pop - c41_successes
 c41_success_percentage <- (c41_successes/c41_pop) * 100
 c41_success_proportion <- c41_success_percentage/100
 c41_base_chance <- 0.5 #yes/no
-
 
 c41_chisquared <- unname(chisq.test(c(c41_successes, c41_failures), 
                                     p = c(0.5, 0.5))$statistic)
@@ -1038,6 +1013,7 @@ c43_failures <- c43_pop - c43_successes
 c43_success_percentage <- (c43_successes/c43_pop) * 100
 c43_success_proportion <- c43_success_percentage/100
 c43_base_chance <- 0.5 #yes/no
+
 
 c43_chisquared <- unname(chisq.test(c(c43_successes, c43_failures), 
                                     p = c(0.5, 0.5))$statistic)
@@ -1310,14 +1286,13 @@ c54_r <- NA#0.31
 
 #==== 55. Kimchi et al. (2004) exp. 1 - Column/row by color similarity, RT ====
 
-# use reported number of noticers for "change" question
+# use reported number of noticers for "pattern" question
 c55_pop <- 14
-c55_success_percentage <- 93
+c55_success_percentage <- 0
 c55_success_proportion <- c55_success_percentage/100
 c55_base_chance <- 0.5 #???
 c55_successes <- round(c55_success_percentage*c55_pop/100) #percentage from yes or no question
 c55_failures <- c55_pop - c55_successes
-
 
 c55_chisquared <- unname(chisq.test(c(c55_successes, c55_failures), 
                                     p = c(0.5, 0.5))$statistic)
@@ -1336,9 +1311,9 @@ c55_r <- c55_phi #esc_phi(phi = c55_phi, totaln = c55_pop, es.type = "r")
 
 #==== 56. Kimchi et al. (2004) exp. 1 - triangle/arrow by color similarity, acc ====
 
-# use reported number of noticers for "change" question
+# use reported number of noticers for "pattern" question
 c56_pop <- 14
-c56_success_percentage <- 100
+c56_success_percentage <- 0
 c56_success_proportion <- c56_success_percentage/100
 c56_base_chance <- 0.5 #???
 c56_successes <- round(c56_success_percentage*c56_pop/100) #percentage from yes or no question
@@ -1361,9 +1336,9 @@ c56_r <- c56_phi #esc_phi(phi = c56_phi, totaln = c56_pop, es.type = "r")
 
 #==== 57. Kimchi et al. (2004) exp. 1 - triangle/arrow, acc ====
 
-# use reported number of noticers for "change" question
+# use reported number of noticers for "pattern" question
 c57_pop <- 14
-c57_success_percentage <- 79
+c57_success_percentage <- 7
 c57_success_proportion <- c57_success_percentage/100
 c57_base_chance <- 0.5 #???
 c57_successes <- round(c57_success_percentage*c57_pop/100) #percentage from yes or no question
@@ -1386,9 +1361,9 @@ c57_r <- c57_phi #esc_phi(phi = c57_phi, totaln = c57_pop, es.type = "r")
 
 #==== 58. Kimchi et al. (2004) exp. 2 - square/cross by color similarity, acc ====
 
-# use reported number of noticers for "change" question
+# use reported number of noticers for "pattern" question
 c58_pop <- 12
-c58_success_percentage <- 100
+c58_success_percentage <- 0
 c58_success_proportion <- c58_success_percentage/100
 c58_base_chance <- 0.5 #???
 c58_successes <- round(c58_success_percentage*c58_pop/100) #percentage from yes or no question
@@ -1412,12 +1387,12 @@ c58_r <- c58_phi #esc_phi(phi = c58_phi, totaln = c58_pop, es.type = "r")
 
 #==== 59. Kimchi et al. (2004) exp. 2 - square/cross, RT ====
 
-# use reported number of noticers for "change" question
+# use reported number of noticers for "pattern" question
 c59_pop <- 12
-c59_success_percentage <- 100
+c59_success_percentage <- 25
 c59_success_proportion <- c59_success_percentage/100
 c59_base_chance <- 0.5 #???
-c59_successes <- round(c59_success_percentage*c59_pop/100) #percentage from yes or no question
+c59_successes <- round(100*c59_pop/100) #percentage from yes or no question
 c59_failures <- c59_pop - c59_successes
 
 c59_chisquared <- unname(chisq.test(c(c59_successes, c59_failures), 
@@ -1439,10 +1414,10 @@ c59_r <- c59_phi #esc_phi(phi = c59_phi, totaln = c59_pop, es.type = "r")
 
 # Effect size is the same as for RT; should not be counted twice
 c60_pop <- 12
-c60_success_percentage <- NA#100
+c60_success_percentage <- NA#25
 c60_success_proportion <- NA#c60_success_percentage/100
-c60_base_chance <-NA# 0.5 #???
-c60_successes <- NA#round(c60_success_percentage*c60_pop/100) #percentage from yes or no question
+c60_base_chance <- NA#0.5 #???
+c60_successes <- NA#round(100*c60_pop/100) #percentage from yes or no question
 c60_failures <- NA#c60_pop - c60_successes
 
 c60_chisquared <- NA#unname(chisq.test(c(c60_successes, c60_failures), 
@@ -1464,7 +1439,7 @@ c60_r <- NA #c60_phi #esc_phi(phi = c60_phi, totaln = c60_pop, es.type = "r")
 
 # use reported number of noticers for "change" question
 c61_pop <- 46
-c61_successes <- 23
+c61_successes <- 21
 c61_failures <- c61_pop - c61_successes
 c61_success_percentage <- (c61_successes/c61_pop) * 100 #50
 c61_success_proportion <- c61_success_percentage/100
@@ -1640,10 +1615,9 @@ c67_phi <- sqrt(c67_chisquared/c67_pop)
 
 c67_r <- c67_phi #esc_phi(phi = c67_phi, totaln = c67_pop, es.type = "r")
 
-
 #==== 68. Kimchi et al. (2004) exp. 1 - connected triangle/arrow, RT ====
 
-# use reported number of noticers for "change" question
+# use reported number of noticers for "pattern" question
 c68_pop <- 14
 c68_success_percentage <- 93
 c68_success_proportion <- c68_success_percentage/100
@@ -1666,22 +1640,23 @@ c68_phi <- sqrt(c68_chisquared/c68_pop)
 
 c68_r <- c68_phi #esc_phi(phi = c68_phi, totaln = c68_pop, es.type = "r")
 
-#==== 69. Kimchi et al. (2004) exp. 1 - connected triangle/arrow, acc ====
+
+#==== 69. Kimchi et al. (2004) exp. 1 - connected triangle/arrow, accuracy ====
 
 # Effect size is the same as for RT; should not be counted twice
 c69_pop <- 14
-c69_success_percentage <- NA#93
+c69_success_percentage <- NA #93
 c69_success_proportion <- NA #c69_success_percentage/100
-c69_base_chance <-  NA #0.5 #???
+c69_base_chance <- NA #0.5 #???
 c69_successes <- NA #round(c69_success_percentage*c69_pop/100) #percentage from yes or no question
 c69_failures <- NA #c69_pop - c69_successes
 
 c69_chisquared <- NA #unname(chisq.test(c(c69_successes, c69_failures), 
-#                 p = c(0.5, 0.5))$statistic)
+#              p = c(0.5, 0.5))$statistic)
 
 c69_cohensd <- NA #esc_chisq(c69_chisquared,
-#         es.type = "d",
-#        totaln = c69_pop)$es
+#      es.type = "d",
+#     totaln = c69_pop)$es
 
 # c69_etasquared <- esc_chisq(c69_chisquared, 
 #                             es.type = "eta", 
@@ -1694,9 +1669,9 @@ c69_r <- NA #c69_phi #esc_phi(phi = c69_phi, totaln = c69_pop, es.type = "r")
 
 #==== 70. Kimchi et al. (2004) exp. 2 - disconnected square/cross, RT ====
 
-# use reported number of noticers for "change" question
+# use reported number of noticers for "pattern" question
 c70_pop <- 12
-c70_success_percentage <- 92
+c70_success_percentage <- 25
 c70_success_proportion <- c70_success_percentage/100
 c70_base_chance <- 0.5 #???
 c70_successes <- round(c70_success_percentage*c70_pop/100) #percentage from yes or no question

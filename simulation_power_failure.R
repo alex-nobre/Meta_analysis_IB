@@ -1,11 +1,18 @@
 
 
 library(effsize)
+library(fabricatr)
+
+source("ztest_function.R")
+
 
 # Save defaults
 graphical_defaults <- par()
 options_defaults <- options()
 
+# set decimal digits to 2
+options(digits = 3)
+options(scipen = 999)
 #=========== Pseudocode ===========
 # Generate n pairs implicit-effect/awareness effects, where each pair corresponds to one participant
 
@@ -52,7 +59,7 @@ prop_unaware_parts <- sample_size - sample_size * prop_aware_parts
 #====================================================================================#
 
 # Function to generate p-values
-generate_p_values <- function(n_iterations = 10000, 
+generate_p_values <- function(n_iterations = 5000, 
                               effect_implicit = 1, 
                               effect_awareness = 0.01, 
                               n_sample = 100, 
@@ -78,8 +85,7 @@ generate_p_values <- function(n_iterations = 10000,
     unaware_pop <- vector(mode = "list", length=n_unaware)
     
     for(part in 1:length(unaware_pop)) {
-      unaware_pop[[part]] <- c(rnorm(1, mean = 0, sd = 1), # awareness effect = 0
-                               # rnorm(1, mean = 1, sd = 1)) # implicit effect (small)
+      unaware_pop[[part]] <- c(draw_binary(N = 1, prob = 0.1), # small chance of reporting (false positive, Devue et al. 2009)
                                rnorm(1, mean = 0, sd = 1)) # implicit effect (null)
     }
     
@@ -87,7 +93,7 @@ generate_p_values <- function(n_iterations = 10000,
     aware_pop <- vector(mode = "list", length=n_aware)
     
     for(part in 1:length(aware_pop)) {
-      aware_pop[[part]] <- c(rnorm(1, mean = effect_awareness, sd = 1), # awareness effect > 0 - subs are conscious
+      aware_pop[[part]] <- c(draw_binary(N = 1, prob = effect_awareness), # awareness effect > 0 - subs are conscious
                              rnorm(1, mean = effect_implicit, sd = 1)) # implicit effect - effects are large
     }
     
@@ -100,10 +106,20 @@ generate_p_values <- function(n_iterations = 10000,
     
     # Compute and store t-values
     implicit_ttest <- t.test(implicit_scores)
-    awareness_ttest <- t.test(aware_scores)
+    awareness_proportion <- mean(aware_scores)
+    
+    # If proportion is significantly below chance, papers usually do not even test for awareness;
+    # In thar case, consider the p-value as non-significant according to usual alpha (0.05)
+    if(awareness_proportion > 0.5) {
+      awareness_test <- prop.test(x = sum(aware_scores), n = length(aware_scores), p = 0.5, 
+                                   alternative = "two.sided",
+                                   correct = FALSE) # for results equivalent to chi-square test  
+    } else {
+      awareness_test <- list(p.value = 0.05)
+    }
     
     implicit_p_values[iteration] <- implicit_ttest$p.value
-    awareness_p_values[iteration] <- awareness_ttest$p.value
+    awareness_p_values[iteration] <- awareness_test$p.value
   }
   return(list(implicit_p_values = implicit_p_values,
               awareness_p_values = awareness_p_values))
@@ -121,7 +137,7 @@ plot_p_values <- function(implicit_ps, awareness_ps,
   
   # Vector of color names: "red" for false implicit effects, blue for all the rest
   color_vector <- sapply(pvalue_pairs, function(x) ifelse(x[1] < 0.05 & # implicit p-value
-                                                            x[2] > 0.05, # awareness p-value
+                                                            x[2] >= 0.05, # awareness p-value
                                                           "red",
                                                           "blue"))
   # Plot
@@ -147,13 +163,39 @@ plot_p_values <- function(implicit_ps, awareness_ps,
 #====================================================================================#
 #=================================== Simulation ======================================
 #====================================================================================#
+# range of implicit effect sizes
+source("calculate_implicit_effect_sizes.R")
+
+# function to remove outliers
+# source: https://stackoverflow.com/questions/4787332/how-to-remove-outliers-from-a-dataset
+remove_outliers <- function(x, na.rm = TRUE, ...) {
+  qnt <- quantile(x, probs=c(.25, .75), na.rm = na.rm, ...)
+  H <- 1.5 * IQR(x, na.rm = na.rm)
+  y <- x
+  y[x < (qnt[1] - H)] <- NA
+  y[x > (qnt[2] + H)] <- NA
+  y <- y[!is.na(y)]
+}
+
+observed_implicit_effect_sizes <- sort(abs(remove_outliers(implicit_cohensdrm)))
+observed_implicit_effect_sizes <- observed_implicit_effect_sizes[observed_implicit_effect_sizes > 0.1] #remove 0 effects
+implicit_effect_sizes <- observed_implicit_effect_sizes[seq(1,
+                                                            length(observed_implicit_effect_sizes), 
+                                                            by = length(observed_implicit_effect_sizes)/10)]
+awareness_effect_sizes <- c(0.2, 0.4, 0.6, 0.8)
 
 # Create ps and plots
-sample_sizes <- c(6, 20, 26, 32, 42, 60, 80, 120, 200, 260)
-props_aware <- c(sample_size/2, sample_size/3, sample_size/4, sample_size/5)
+#sample_sizes <- c(6, 20, 26, 32, 42, 60, 80, 120, 200, 260)
+sample_sizes <- c(6, 20, 32, 60, 200)
+props_aware <- c(1/2, 1/3, 1/4, 1/5)
 proportion_labels <- c("50/50", "1/2", "25/75", "20/80")
 
+# Lists of graphical parameters
+dot_pchs <- c(0, 1, 2, 7, 8, 13, 14, 15, 16, 17)
+colors_plots <- c("blue", "red", "darkgreen", "darkorange", "yellow", 
+                  "black", "purple4", "cyan", "violetred1", "seagreen1")
 
+#==========================================================================#
 # Facetted scatterplot of false implicits; one facet for sample size
 par(mfrow=c(2,2))
 par(mar=c(4.1,4.1,3.1,2.1))
@@ -168,8 +210,8 @@ par(graphical_defaults)
 false_implicits_by_n <- vector(mode = "numeric",
                              length = length(sample_sizes))
 for(n in 1:length(sample_sizes)) {
-  values <- generate_p_values(n_sample = sample_sizes[n],
-                              prop_aware = sample_sizes[n]/2)
+  values <- generate_p_values(n_sample = sample_sizes[n])#,
+                              #prop_aware = sample_sizes[n]/2)
   
   # combine p-values into pairs to generate vector of color names
   value_pairs <- mapply(c, 
@@ -178,7 +220,7 @@ for(n in 1:length(sample_sizes)) {
   
   # Vector of significance values: 1 for false implicit, 0 otherwise
   significance_values <- sapply(value_pairs, function(x) ifelse(x[1] < 0.05 & # implicit p-value
-                                                          x[2] > 0.05, # awareness p-value
+                                                          x[2] >= 0.05, # awareness p-value
                                                           1,
                                                           0))
   
@@ -226,7 +268,7 @@ plot(implicit_effect_sizes,
 lines(implicit_effect_sizes,
       false_implicits_by_effect)
 
-#===== Compute and plot n of false implicits by implicit effect size =====
+#===== Compute and plot n of false implicits by awareness effect size =====
 
 awareness_effect_sizes <- seq(0.05, 0.5, by = 0.05)
 
@@ -435,29 +477,28 @@ par(graphical_defaults)
 #===== Implicit effect size x awareness effect size x sample size =====
 
 # Effects
-awareness_effect_sizes <- seq(0.05, 0.5, by = 0.05)
-implicit_effect_sizes <- seq(0.1, 1.0, by = 0.1)
-sample_sizes <- c(6, 20, 26, 32, 42, 60, 80, 120, 200, 260)
+#awareness_effect_sizes <- seq(0.05, 0.5, by = 0.05)
+#implicit_effect_sizes <- seq(0.1, 1.0, by = 0.1)
+#sample_sizes <- c(6, 20, 26, 32, 42, 60, 80, 120, 200, 260)
 
 # Lists of graphical parameters
-dot_pchs <- c(0, 1, 2, 7, 8, 13, 14, 15, 16, 17)
-colors_plots <- c("blue", "red", "darkgreen", "darkorange", "yellow", 
-                  "black", "purple4", "cyan", "violetred1", "seagreen1")
+# dot_pchs <- c(0, 1, 2, 7, 8, 13, 14, 15, 16, 17)
+# colors_plots <- c("blue", "red", "darkgreen", "darkorange", "yellow", 
+#                   "black", "purple4", "cyan", "violetred1", "seagreen1")
 
-par(mfrow=c(2,5))
+par(mfrow=c(2,2)) # 4 plots
 par(mar=c(4.1,4.1,3.1,2.1))
 for(n in 1:length(awareness_effect_sizes)) {
   
+  false_implicits_by_sample_sizes <- vector(mode = "list",
+                                            length = length(sample_sizes))
   
-  false_implicits_by_effect <- vector(mode = "list",
-                                      length = length(implicit_effect_sizes))
-  
-  for(es in 1:length(implicit_effect_sizes)) {
+  for(sz in 1:length(sample_sizes)) {
     
-    false_implicits_by_sample_sizes <- vector(mode = "numeric",
-                                              length = length(sample_sizes))
+    false_implicits_by_effect <- vector(mode = "numeric",
+                                        length = length(implicit_effect_sizes))
     
-    for(sz in 1:length(sample_sizes)) {
+    for(es in 1:length(implicit_effect_sizes)) {
       
       values <- generate_p_values(effect_implicit = implicit_effect_sizes[es],
                                   effect_awareness = awareness_effect_sizes[n],
@@ -470,17 +511,17 @@ for(n in 1:length(awareness_effect_sizes)) {
       
       # Vector of significance values: 1 for false implicit, 0 otherwise
       significance_values <- sapply(value_pairs, function(x) ifelse(x[1] < 0.05 & # implicit p-value
-                                                                      x[2] > 0.05, # awareness p-value
+                                                                      x[2] >= 0.05, # awareness p-value
                                                                     1,
                                                                     0))
       
       # Add n of false implicits for this sample size to vector
-      false_implicits_by_sample_sizes[sz] <- sum(significance_values)/length(significance_values)
+      false_implicits_by_effect[es] <- sum(significance_values)/length(significance_values)
       
       rm(list = c("values", "value_pairs"))
     }
     
-    false_implicits_by_effect[[es]] <- false_implicits_by_sample_sizes
+    false_implicits_by_sample_sizes[[sz]] <- false_implicits_by_effect
   }
   
   # Plot panel for current awareness effect:
@@ -488,7 +529,7 @@ for(n in 1:length(awareness_effect_sizes)) {
   # one curve with symbols for each sample size
   # one symbol type and one colored by sample size
   plot(implicit_effect_sizes,
-       false_implicits_by_effect[[1]],
+       false_implicits_by_sample_sizes[[1]],
        pch = dot_pchs[1], #pch = 16,
        col = colors_plots[1],
        ylim = c(0, 1.0),
@@ -496,19 +537,20 @@ for(n in 1:length(awareness_effect_sizes)) {
        xlab = "Implicit effect sizes",
        ylab = "Proportion of false implicits")
   lines(implicit_effect_sizes,
-        false_implicits_by_effect[[1]],
+        false_implicits_by_sample_sizes[[1]],
         col = colors_plots[1])
   
   # Extra curves
-  for(sz in 2:length(false_implicits_by_effect)) {
+  for(sz in 2:length(false_implicits_by_sample_sizes)) {
     points(implicit_effect_sizes,
-           false_implicits_by_effect[[sz]],
+           false_implicits_by_sample_sizes[[sz]],
            pch = dot_pchs[sz],
            col = colors_plots[sz])
     lines(implicit_effect_sizes,
-          false_implicits_by_effect[[sz]],
+          false_implicits_by_sample_sizes[[sz]],
           col = colors_plots[sz])
   }
+  gc()
 }
 
 par(graphical_defaults)
@@ -652,3 +694,115 @@ for(iteration in 1:n_iterations_per_sample){
 # cohen.d(sapply(unaware_pop, function(x) x[2]), # implicit effects from unaware subs
 #         sapply(aware_pop, function(x) x[2]),
 #         paired = TRUE)
+
+#==========================================================================================================#
+
+
+# Use the mean proportion of successes across studies as probability
+
+#draw_binomial(N = 20, prob = 0.5, trials = 10)
+
+# Generate values outside function
+# Create vectors to store t-values for implicit and awareness tests
+implicit_p_values <- vector(mode = "numeric",
+                            length=n_iterations_per_sample)
+
+awareness_p_values <- vector(mode = "numeric",
+                             length=n_iterations_per_sample)
+
+
+# Generate implicit and awareness t-values for each population
+# For now, variances are the same in both groups for each test
+for(iteration in 1:n_iterations_per_sample){
+  # Create a list of awareness-implicit score vectors for each population
+  
+  ## Unaware group
+  unaware_pop <- vector(mode = "list", length=sample_size/2)
+  
+  for(part in 1:length(unaware_pop)) {
+    unaware_pop[[part]] <- c(draw_binary(N = 1, prob = 0.1), # awareness effect = 0
+                             # rnorm(1, mean = 1, sd = 1)) # implicit effect (small)
+                             rnorm(1, mean = 0, sd = 1)) # implicit effect (null)
+  }
+  
+  ## Aware group
+  aware_pop <- vector(mode = "list", length=sample_size/2)
+  
+  for(part in 1:length(aware_pop)) {
+    aware_pop[[part]] <- c(draw_binary(N = 1, prob = 0.75), # awareness effect > 0 - subs are conscious
+                           rnorm(1, mean = effect_size_implicit, sd = 1)) # implicit effect - effects are large
+  }
+  
+  # Join values from both groups to run t-tests
+  aware_scores <- c(sapply(unaware_pop, function(x) x[1]),
+                    sapply(aware_pop, function(x) x[1]))
+  
+  implicit_scores <- c(sapply(unaware_pop, function(x) x[2]), # implicit effects from unaware subs
+                       sapply(aware_pop, function(x) x[2])) # implicit effects from aware subs
+  
+  # Compute and store p-values
+  implicit_ttest <- t.test(implicit_scores, mu = 0)
+  
+  awareness_proportion <- mean(aware_scores)
+  if(awareness_proportion > 0.5) {
+    awareness_ttest <- prop.test(x = sum(aware_scores), n = length(aware_scores), p = 0.5, 
+                                 alternative = "two.sided",
+                                 correct = FALSE) # for results equivalent to chi-square test  
+  } else {
+    awareness_ttest <- list(p.value = 0.05)
+  }
+  
+  
+  implicit_p_values[iteration] <- implicit_ttest$p.value
+  awareness_p_values[iteration] <- awareness_ttest$p.value
+}
+
+
+# range of implicit effect sizes
+source("calculate_implicit_effect_sizes.R")
+
+# function to remove outliers
+# source: https://stackoverflow.com/questions/4787332/how-to-remove-outliers-from-a-dataset
+remove_outliers <- function(x, na.rm = TRUE, ...) {
+  qnt <- quantile(x, probs=c(.25, .75), na.rm = na.rm, ...)
+  H <- 1.5 * IQR(x, na.rm = na.rm)
+  y <- x
+  y[x < (qnt[1] - H)] <- NA
+  y[x > (qnt[2] + H)] <- NA
+  y <- y[!is.na(y)]
+}
+
+observed_implicit_effect_sizes <- sort(abs(remove_outliers(implicit_cohensdrm)))
+implicit_effect_sizes <- observed_implicit_effect_sizes[seq(1,
+                                                            length(observed_implicit_effect_sizes), 
+                                                            by = length(observed_implicit_effect_sizes)/10)]
+awareness_effect_sizes <- c(0.2, 0.4, 0.6, 0.8)
+
+test_pgen <- generate_p_values(effect_implicit = 0.1, effect_awareness = 0.80)
+
+# combine p-values into pairs to generate vector of color names
+value_pairs <- mapply(c, 
+                      test_pgen[[1]], test_pgen[[2]], 
+                      SIMPLIFY=FALSE)
+
+# Vector of significance values: 1 for false implicit, 0 otherwise
+significance_values <- sapply(value_pairs, function(x) ifelse(x[1] < 0.05 & # implicit p-value
+                                                                x[2] >= 0.05, # awareness p-value
+                                                              1,
+                                                              0))
+
+# Add n of false implicits for this sample size to vector
+false_implicits_by_effect <- sum(significance_values)/length(significance_values)
+
+
+plot(implicit_effect_sizes,
+     false_implicits_by_effect,
+     pch = dot_pchs[1], #pch = 16,
+     col = colors_plots[1],
+     ylim = c(0, 1.0),
+     main = paste("Awareness effect size:", awareness_effect_sizes[1], sep = " "),
+     xlab = "Implicit effect sizes",
+     ylab = "Proportion of false implicits")
+lines(implicit_effect_sizes,
+      false_implicits_by_effect,
+      col = colors_plots[1])

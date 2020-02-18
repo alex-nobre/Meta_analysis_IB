@@ -11,6 +11,7 @@ source("ztest_function.R")
 
 
 #==== 1. Ariga et al. (2007) exp 2 ====
+
 c1_pop <- 20
 c1_n <- c1_pop
 c1_success_percentage <- 50
@@ -294,6 +295,7 @@ c11_r <- sqrt((c11_cohensd**2)/(c11_cohensd**2 + 4)) * (-1) #ES is negative
 
 
 #==== 12. Moore and Egeth (1997), exp. 1 ====
+
 # Compute effect size from percentage of noticers reported
 
 c12_pop <- 20
@@ -1640,7 +1642,6 @@ c67_phi <- sqrt(c67_chisquared/c67_pop)
 
 c67_r <- c67_phi #esc_phi(phi = c67_phi, totaln = c67_pop, es.type = "r")
 
-
 #==== 68. Kimchi et al. (2004) exp. 1 - connected triangle/arrow, RT ====
 
 # use reported number of noticers for "change" question
@@ -1666,9 +1667,9 @@ c68_phi <- sqrt(c68_chisquared/c68_pop)
 
 c68_r <- c68_phi #esc_phi(phi = c68_phi, totaln = c68_pop, es.type = "r")
 
-#==== 69. Kimchi et al. (2004) exp. 1 - connected triangle/arrow, acc ====
+#==== 69. Kimchi et al. (2004) exp. 1 - connected triangle/arrow, RT ====
 
-# Effect size is the same as for RT; should not be counted twice
+# use reported number of noticers for "change" question
 c69_pop <- 14
 c69_success_percentage <- NA#93
 c69_success_proportion <- NA #c69_success_percentage/100
@@ -1720,7 +1721,7 @@ c70_r <- c70_phi #esc_phi(phi = c70_phi, totaln = c70_pop, es.type = "r")
 
 #==== 71. Kimchi et al. (2004) exp. 2 - disconnected square/cross, acc ====
 
-# Effect size is the same as for RT; should not be counted twice
+# use reported number of noticers for "change" question
 c71_pop <- 12
 c71_success_percentage <- NA# 92
 c71_success_proportion <- NA #c71_success_percentage/100

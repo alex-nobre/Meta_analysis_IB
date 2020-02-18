@@ -70,7 +70,7 @@ es_table$awareness_d <- awareness_cohensd
 
 # # Compute variance of d (formula 4.28)
 es_table$variance_implicit_d <- (1/es_table$N_per_group +
-                           (es_table$implicit_d)^2/2*es_table$N_per_group) * 2*(1-cor_pairs)
+                                   (es_table$implicit_d)^2/2*es_table$N_per_group) * 2*(1-cor_pairs)
 
 #es_table$variance_implicit_d <- implicit_variancedrm
 
@@ -146,10 +146,10 @@ implicit_meta_es <- metagen(TE = es_table$implicit_hedgesg, # treatment effect (
                             sm="SMD"#,
                             #exclude = c(40:54), # Rashal et al. (2017) and Kimchi (2004)
                             #exclude = which(es_table$study=="wood_simons_2019_exp2"),
-                            )
+)
 
 
-                   
+
 
 summary(implicit_meta_es)
 
@@ -164,17 +164,149 @@ forest(implicit_meta_es, # generate untrimmed forest plot
        print.tau2 = FALSE,
        digits.sd = 2,
        pooled.totals = TRUE
-       )
-       
+)
+
 dev.off()
 
+#=============================== 3 level model==========================
+### Create vectors for columns
+study_names_3level <- c("ariga_2007", 
+                        "beanland_pammer_2010_exp1A", 
+                        "beanland_pammer_2010_exp1A", 
+                        "beanland_pammer_2010_exp2", 
+                        "beanland_pammer_2010_exp2", 
+                        "gabay_2012_exp1",
+                        "gabay_2012_exp2", 
+                        "lo_yeh_2008_exp1_200ms", 
+                        "lo_yeh_2008_exp1_500ms", 
+                        "lo_yeh_2008_exp2_200ms",
+                        "lo_yeh_2008_exp2_500ms",
+                        "mack_and_rock_2000_exp1",
+                        "mack_and_rock_2000_exp2",
+                        "mack_and_rock_2000_exp3",
+                        "mack_and_rock_2000_exp4",
+                        "mack_and_rock_2000_exp5",
+                        "moore_egeth_1997_exp1", 
+                        "moore_egeth_1997_exp3", 
+                        "moore_2003_exp3",
+                        "moore_2004", 
+                        "most_2005_exp1to7pooled", 
+                        "razpurker_pratt_2008_columns_rows", 
+                        "razpurker_pratt_2008_columns_rows", 
+                        "razpurker_pratt_2008_triangle_arrow",
+                        "razpurker_pratt_2008_triangle_arrow", 
+                        #"richards_2012_tracking", 
+                        "russell_driver_2005_exp1", 
+                        "russell_driver_2005_exp1", 
+                        "russell_driver_2005_exp2",
+                        "russell_driver_2005_exp2", 
+                        "russell_driver_2005_exp3", 
+                        "russell_driver_2005_exp3",
+                        "russell_driver_2005_exp4a", 
+                        "russell_driver_2005_exp4b", 
+                        "russell_driver_2005_exp5",
+                        "russell_driver_2005_exp5", 
+                        #"shafto_pitts_2015",
+                        "schnuerch_2016_exp1",
+                        "schnuerch_2016_exp2",
+                        "wood_simons_2019_exp1",
+                        "rashal_2017_exp1",
+                        "rashal_2017_exp2",
+                        "rashal_2017_exp3",
+                        "rashal_2017_exp4",
+                        "rashal_2017_exp4",
+                        "rashal_2017_exp5",
+                        "rashal_2017_exp5",
+                        "rashal_2017_exp6",
+                        "rashal_2017_exp6",
+                        "kimchi_2004_exp_1_column_row_color",
+                        "kimchi_2004_exp_1_triangle_arrow_color",
+                        "kimchi_2004_exp_1_triangle_arrow",
+                        "kimchi_2004_exp_2_square_cross_color",
+                        "kimchi_2004_exp_2_square_cross",
+                        "kimchi_2004_exp_2_square_cross"
+)
+
+# study_effects_3level <- c("ariga_2007_exp2", 
+#                         "beanland_pammer_2010_exp1A", 
+#                         "beanland_pammer_2010_exp1A", 
+#                         "beanland_pammer_2010_exp2", 
+#                         "beanland_pammer_2010_exp2", 
+#                         "gabay_2012_exp1",
+#                         "gabay_2012_exp2", 
+#                         "lo_yeh_2008_exp1_200ms", 
+#                         "lo_yeh_2008_exp1_500ms", 
+#                         "lo_yeh_2008_exp2_200ms",
+#                         "lo_yeh_2008_exp2_500ms",
+#                         "mack_and_rock_2000_exp1",
+#                         "mack_and_rock_2000_exp2",
+#                         "mack_and_rock_2000_exp3",
+#                         "mack_and_rock_2000_exp4",
+#                         "mack_and_rock_2000_exp5",
+#                         "moore_egeth_1997_exp1", 
+#                         "moore_egeth_1997_exp3", 
+#                         "moore_2003_exp3",
+#                         "moore_2004", 
+#                         "most_2005_exp1to7pooled", 
+#                         "razpurker_pratt_2008_columns_rows_rt", 
+#                         "razpurker_pratt_2008_columns_rows_acc", 
+#                         "razpurker_pratt_2008_triangle_arrow_rt",
+#                         "razpurker_pratt_2008_triangle_arrow_acc", 
+#                         #"richards_2012_tracking", 
+#                         "russell_driver_2005_exp1_acc", 
+#                         "russell_driver_2005_exp1_rt", 
+#                         "russell_driver_2005_exp2_acc",
+#                         "russell_driver_2005_exp2_rt", 
+#                         "russell_driver_2005_exp3_acc", 
+#                         "russell_driver_2005_exp3_rt",
+#                         "russell_driver_2005_exp4a_acc", 
+#                         "russell_driver_2005_exp4b_acc", 
+#                         "russell_driver_2005_exp5_acc",
+#                         "russell_driver_2005_exp5_rt", 
+#                         #"shafto_pitts_2015",
+#                         "schnuerch_2016_exp1",
+#                         "schnuerch_2016_exp2",
+#                         "wood_simons_2019_exp1",
+#                         "wood_simons_2019_exp2",
+#                         "rashal_2017_exp1_RT",
+#                         "rashal_2017_exp2_acc",
+#                         "rashal_2017_exp3_RT",
+#                         "rashal_2017_exp4_acc",
+#                         "rashal_2017_exp4_RT",
+#                         "rashal_2017_exp5_acc",
+#                         "rashal_2017_exp5_RT",
+#                         "rashal_2017_exp6_acc",
+#                         "rashal_2017_exp6_RT",
+#                         "kimchi_2004_exp_1_column_row_color_RT",
+#                         "kimchi_2004_exp_1_triangle_arrow_color_acc",
+#                         "kimchi_2004_exp_1_triangle_arrow_acc",
+#                         "kimchi_2004_exp_2_square_cross_color_acc",
+#                         "kimchi_2004_exp_2_square_cross_RT",
+#                         "kimchi_2004_exp_2_square_cross_acc"
+# )
+
+study_effects_3level <- seq(1:length(study_names_3level))
+es_table_3_level <- es_table
+
+es_table_3_level$study <- study_names_3level
+es_table_3_level$effect <- study_effects_3level
+
+implicit_meta_es_3level<-rma.mv(implicit_hedgesg, # treatment effect (Hedge's g)
+                                se_implicit_g,
+                                random = list(~ 1 | effect, 
+                                              ~ 1 | study), 
+                                tdist = TRUE, 
+                                data = es_table_3_level,
+                                method = "REML")
+
+summary(implicit_meta_es_3level)
 #========================= 3. Publication bias for implicit ES ============================
 # Check assimetry with funnel plot
 funnel(x = implicit_meta_es,
        xlab = "Hedges' g", 
        contour.levels = c(0.95, 0.975, 0.99), 
        col.contour = c("darkblue","blue","lightblue")
-       )
+)
 legend(5, 0,legend = c("p < 0.05", "p<0.025", "p < 0.01"),
        bty = "n",
        fill=c("darkblue","blue","lightblue"))
