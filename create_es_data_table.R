@@ -72,6 +72,7 @@ study_names <- c("ariga_2007_exp2",
                  "lamy_2006_exp5"
 )
 
+
 studies_outcomes <- c("ariga_2007_exp2", 
                  "beanland_pammer_2010_exp1A_fixating", 
                  "beanland_pammer_2010_exp1A_moving", 
@@ -212,6 +213,76 @@ us_relevance <- c("relevant", #ariga_2007_exp2
                   "irrelevant" #"lamy_2006_exp5"
                   )
 
+
+#==== Gestalt study? ====
+gestalt <- c("yes", #"ariga_2007_exp2"
+             "no", #"beanland_pammer_2010_exp1A_fixating"
+             "no", #"beanland_pammer_2010_exp1A_moving"
+             "no", #"beanland_pammer_2010_exp2_slow_us" 
+             "no", #"beanland_pammer_2010_exp2_fast_us"
+             "no", #"gabay_2012_exp1"
+             "no", #"gabay_2012_exp2"
+             "yes", #"lo_yeh_2008_exp1_200ms"
+             "yes", #"lo_yeh_2008_exp1_500ms"
+             "no", #"lo_yeh_2008_exp2_200ms"
+             "no", #"lo_yeh_2008_exp2_500ms"
+             "no", #"mack_and_rock_2000_exp1"
+             "no", #"mack_and_rock_2000_exp2"
+             "no", #"mack_and_rock_2000_exp3"
+             "no", #"mack_and_rock_2000_exp4"
+             "no", #"mack_and_rock_2000_exp5"
+             "yes", #"moore_egeth_1997_exp1"
+             "yes", #"moore_egeth_1997_exp3"
+             "yes", #moore_2003_exp3
+             "no", #moore_2004
+             "no", #most_2005_exp1to7pooled
+             "yes", #razpurker_pratt_2008_columns_rows_rt
+             "yes", #razpurker_pratt_2008_columns_rows_acc
+             "yes", #razpurker_pratt_2008_triangle_arrow_rt
+             "yes", #razpurker_pratt_2008_triangle_arrow_acc
+             #"irrelevant", #richards_2012_tracking
+             "yes", #russell_driver_2005_exp1_acc
+             "yes", #russell_driver_2005_exp1_rt
+             "yes", #russell_driver_2005_exp2_acc
+             "yes", #russell_driver_2005_exp2_rt
+             "yes", #russell_driver_2005_exp3_acc
+             "yes", #russell_driver_2005_exp3_rt
+             "yes", #russell_driver_2005_exp4a_acc
+             "yes", #russell_driver_2005_exp4b_acc
+             "yes", #russell_driver_2005_exp5_acc
+             "yes", #russell_driver_2005_exp5_rt
+             #"irrelevant", #shafto_pitts_2015
+             "no", #schnuerch_2016_exp1
+             "no", #schnuerch_2016_exp2,
+             "yes", #"wood_simons_2019_exp1"
+             "no", #"wood_simons_2019_exp2"
+             "yes", #"rashal_2017_exp1_RT"
+             "yes",  #"rashal_2017_exp2_acc"
+             "yes",   #"rashal_2017_exp3_RT"
+             "yes",  #"rashal_2017_exp4_acc"
+             "yes",  #"rashal_2017_exp4_RT",
+             "yes", #"rashal_2017_exp5_acc"
+             "yes", #"rashal_2017_exp5_RT"
+             "yes", #"rashal_2017_exp6_acc"
+             "yes", #"rashal_2017_exp6_RT"
+             "yes", #"kimchi_2004_exp_1_column_row_color_RT"
+             "yes", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+             "yes", #"kimchi_2004_exp_1_triangle_arrow_acc"
+             "no", #"kimchi_2004_exp_1_connected_triangle_arrow_RT",
+             "no", #"kimchi_2004_exp_1_connected_triangle_arrow_acc",
+             "yes", #"kimchi_2004_exp_2_square_cross_color_acc"
+             "yes", #"kimchi_2004_exp_2_square_cross_RT"
+             "yes", #"kimchi_2004_exp_2_square_cross_acc"
+             "yes", #"kimchi_2004_exp_2_disconnected_square_cross_RT",
+             "yes", #"kimchi_2004_exp_2_disconnected_square_cross_acc",
+             "yes", #"kimchi_2008_exp_1_RT"
+             "yes", #"kimchi_2008_exp_1_acc"
+             "yes", #"lamy_2006_exp2_same"
+             "yes", #"lamy_2006_exp2_different"
+             "yes", #"lamy_2006_exp3_RT"
+             "yes", #"lamy_2006_exp4_RT"
+             "no" #"lamy_2006_exp5"
+)
 
 #======= Is implicit processing measured by RT or acc? ======
 implicit_measure <- c("RT", #ariga_2007_exp2  
@@ -744,7 +815,8 @@ es_table <- as_tibble(data.frame("study"=study_names,
                                  "implicit_significance"=implicit_significance,
                                  "gray_literature"=gray_literature,
                                  "inattention"=inattention_paradigm,
-                                 "group_awareness"=group_aware_assess))
+                                 "group_awareness"=group_aware_assess,
+                                 "gestalt_study"=gestalt))
 es_table$individual_studies <- as.character(es_table$study)
 
 str(es_table)

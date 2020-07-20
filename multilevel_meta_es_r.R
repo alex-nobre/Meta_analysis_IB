@@ -101,6 +101,7 @@ es_table$variance_implicit_rs <- ((1 - es_table$implicit_rs**2)**2)/(es_table$N_
 es_table$variance_implicit_z_rs <- 1/(es_table$N_participants_implicit - 3)
 es_table$se_implicit_z_rs <- sqrt(es_table$variance_implicit_z_rs)
 
+### Awareness ES
 # Create column for Cohen's d and Hedges' g
 es_table$awareness_d <- awareness_cohensd
 es_table$awareness_hedgesg <- awareness_hedgesg
@@ -484,7 +485,7 @@ implicit_meta_es_r_gray_literature <- rma.mv(implicit_z_rs,
                                          random = list(~ 1 | studies_outcomes, 
                                                        ~ 1 | study), 
                                          tdist = TRUE, 
-                                         data = es_table,
+                                         data = es_table_clean,
                                          method = "REML",
                                          mods = ~ gray_literature)
 
@@ -496,9 +497,19 @@ implicit_meta_es_r_group_awareness <- rma.mv(implicit_z_rs,
                                          random = list(~ 1 | studies_outcomes, 
                                                        ~ 1 | study), 
                                          tdist = TRUE, 
-                                         data = es_table,
+                                         data = es_table_clean,
                                          method = "REML",
                                          mods = ~ group_awareness)
+
+# Mixed effects model for gestalt studies
+implicit_meta_es_r_gestalt <- rma.mv(implicit_z_rs, 
+                                             variance_implicit_z_rs, 
+                                             random = list(~ 1 | studies_outcomes, 
+                                                           ~ 1 | study), 
+                                             tdist = TRUE, 
+                                             data = es_table_clean,
+                                             method = "REML",
+                                             mods = ~ gestalt_study)
 
 # implicit_meta_es_r_implicit_significance <- rma.mv(implicit_z_rs, 
 #                                              variance_implicit_z_rs, 
