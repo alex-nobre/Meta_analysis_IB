@@ -9,10 +9,15 @@ library(tidyverse)
 library(xlsx)
 library(DescTools)
 
-#========================= Schnuerch et al.(2016) data =========================
+# Analysis directory
+analysis_dir <- "C:/Users/Biosig/Google Drive/Doutorado/Tese/Meta-analysis_IB/Dados/Data_sent_by_researchers/"
+
+#========================================================================#
+#==================== Schnuerch et al. (2016) data ======================
+#========================================================================#
 
 # Import data
-data_schnuerch <- read.xlsx("completeDataFrame.xlsx", sheetIndex = 1)
+data_schnuerch <- read.xlsx(paste(analysis_dir, "completeDataFrame.xlsx", sep = ""), sheetIndex = 1)
 
 # Keep only unaware subjects who did not meet any exclusion criterion
 data_nonoticers <- subset(data_schnuerch, include == 1)
@@ -22,7 +27,10 @@ cor_schnuerch <- cor(data_nonoticers$mean.neutral,
     data_nonoticers$mean.incong)
 
 
-#==================== Razpurker-apfeld and Pratt (2008) ========================
+#========================================================================#
+#================== Razpurker-apfeld and Pratt (2008) ====================
+#========================================================================#
+
 # Import data
 data_irene <- read.xlsx("RT_data_Razpurker-apfeld.xlsx", sheetIndex = 1)
 
@@ -122,7 +130,11 @@ data_irene_dt_tri <- data_irene_means %>%
 irene_target_cor_tri <- cor(data_irene_st_tri$mean_RT, 
                             data_irene_dt_tri$mean_RT)
 
-#========================= Beanland and Pammer Exp 1A (2010) ==============================
+
+#========================================================================#
+#================== Beanland and Pammer Exp 1A (2010) ====================
+#========================================================================#
+
 # Import data
 data_beanland_1A <- read.xlsx("Beanland&Pammer 2010 Exp1AB.xlsx", sheetIndex = 1)
 
@@ -150,7 +162,10 @@ data_beanland_1A_moving <- data_beanland_1A %>%
 cor_beanland_1A_moving <- cor(data_beanland_1A_moving$crit_trials_mean_err_raw,
                               data_beanland_1A_moving$control_trials_mean_err_raw)
 
-#========================= Beanland and Pammer Exp 2 (2010) ==============================
+#========================================================================#
+#================== Beanland and Pammer Exp 2 (2010) =====================
+#========================================================================#
+
 # Import data
 data_beanland_2 <- read.xlsx("Beanland&Pammer 2010 Exp 2_edited.xlsx", sheetIndex = 1)
 
@@ -178,8 +193,144 @@ data_beanland_2_fast <- data_beanland_2 %>%
 cor_beanland_2_fast <- cor(data_beanland_2_fast$crit_trials_mean_err_raw,
                            data_beanland_2_fast$control_trials_mean_err_raw)
 
+#========================================================================#
+#================ Pugnaghi et al. (2020), exp 1 - RT =====================
+#========================================================================#
 
-#=================== compute mean correlation ========================
+data_pugnaghi2020_exp1 <- read.xlsx(paste(analysis_dir, "Revision_data/DataFrame&Legend_iPrep Load3.xlsx", sep = ""), sheetIndex = 1)
+
+# Keep only IB participants and those fitting the inclusion criteria
+data_pugnaghi2020_exp1_include <- subset(data_pugnaghi2020_exp1, Inclusion == 1)
+
+# Create columns with data collapsed across perceptual load conditions
+cor_pugnaghi2020_exp1_RT_ll <- cor(data_pugnaghi2020_exp1_include$mean_Kong_LL, data_pugnaghi2020_exp1_include$mean_Inkong_LL)
+cor_pugnaghi2020_exp1_RT_hl <- cor(data_pugnaghi2020_exp1_include$mean_Kong_HL, data_pugnaghi2020_exp1_include$mean_Inkong_HL)
+
+# Vector with correlations
+pugnaghi2020_exp1_RT_corvalues <- c(cor_pugnaghi2020_exp1_RT_ll,
+                               cor_pugnaghi2020_exp1_RT_hl)
+
+# Transform cors to z scores
+pugnaghi2020_exp1_RT_z_corvalues <- FisherZ(pugnaghi2020_exp1_RT_corvalues)
+
+# Compute weighted average of z scores using sample size (the same for both since it's within-subjects)
+pugnaghi2020_exp1_RT_z_weighted_avg <- weighted.mean(pugnaghi2020_exp1_RT_z_corvalues,
+                                         c(65, 65))
+
+# Transform weighted mean z score back to weighted correlation
+cor_pugnaghi2020_exp1_RT <- FisherZInv(pugnaghi2020_exp1_RT_z_weighted_avg)
+
+
+#========================================================================#
+#============== Pugnaghi et al. (2020), exp 1 - acc ======================
+#========================================================================#
+
+# Create columns with data collapsed across perceptual load conditions
+cor_pugnaghi2020_exp1_acc_ll <- cor(data_pugnaghi2020_exp1_include$count_correct_RT_kong_lload, 
+                                   data_pugnaghi2020_exp1_include$count_correct_RT_inkong_lload)
+cor_pugnaghi2020_exp1_acc_hl <- cor(data_pugnaghi2020_exp1_include$count_correct_RT_kong_hload, 
+                       data_pugnaghi2020_exp1_include$count_correct_RT_inkong_hload)
+
+# Vector with correlations
+pugnaghi2020_exp1_acc_corvalues <- c(cor_pugnaghi2020_exp1_acc_ll,
+                                     cor_pugnaghi2020_exp1_acc_hl)
+
+# Transform cors to z scores
+pugnaghi2020_exp1_acc_z_corvalues <- FisherZ(pugnaghi2020_exp1_acc_corvalues)
+
+# Compute weighted average of z scores using sample size (the same for both since it's within-subjects)
+pugnaghi2020_exp1_acc_z_weighted_avg <- weighted.mean(pugnaghi2020_exp1_acc_z_corvalues,
+                                         c(65, 65))
+
+# Transform weighted mean z score back to weighted correlation
+cor_pugnaghi2020_exp1_acc <- FisherZInv(pugnaghi2020_exp1_acc_z_weighted_avg)
+
+
+# Correlation between two measures of experiment 1
+cor_pugnaghi2020_exp1 <- FisherZInv(weighted.mean(FisherZ(c(cor_pugnaghi2020_exp1_RT,
+                                                            cor_pugnaghi2020_exp1_acc)),
+                                                  c(65,65)
+                                                  )
+                                    )
+
+
+#========================================================================#
+#================ Pugnaghi et al. (2020), exp 2 - RT =====================
+#========================================================================#
+
+data_pugnaghi2020_exp2 <- read.xlsx(paste(analysis_dir, "Revision_data/DataFrame&Legend_iPrep Load4.xlsx", sep = ""), sheetIndex = 1)
+
+# Keep only IB participants and those fitting the inclusion criteria
+data_pugnaghi2020_exp2_include <- subset(data_pugnaghi2020_exp2, Inclusion == 1)
+
+# Create columns with data collapsed across perceptual load conditions
+cor_pugnaghi2020_exp2_RT_ll <- cor(data_pugnaghi2020_exp2_include$mean_Kong_LL, data_pugnaghi2020_exp2_include$mean_Inkong_LL)
+cor_pugnaghi2020_exp2_RT_hl <- cor(data_pugnaghi2020_exp2_include$mean_Kong_HL, data_pugnaghi2020_exp2_include$mean_Inkong_HL)
+
+# Vector with correlations
+pugnaghi2020_exp2_RT_corvalues <- c(cor_pugnaghi2020_exp2_RT_ll,
+                                    cor_pugnaghi2020_exp2_RT_hl)
+
+# Transform cors to z scores
+pugnaghi2020_exp2_RT_z_corvalues <- FisherZ(pugnaghi2020_exp2_RT_corvalues)
+
+# Compute weighted average of z scores using sample size (the same for both since it's within-subjects)
+pugnaghi2020_exp2_RT_z_weighted_avg <- weighted.mean(pugnaghi2020_exp2_RT_z_corvalues,
+                                                     c(65, 65))
+
+# Transform weighted mean z score back to weighted correlation
+cor_pugnaghi2020_exp2_RT <- FisherZInv(pugnaghi2020_exp2_RT_z_weighted_avg)
+
+
+#========================================================================#
+#============== Pugnaghi et al. (2020), exp 2 - acc ======================
+#========================================================================#
+
+# Create columns with data collapsed across perceptual load conditions
+cor_pugnaghi2020_exp2_acc_ll <- cor(data_pugnaghi2020_exp2_include$count_correct_RT_kong_lload, 
+                                    data_pugnaghi2020_exp2_include$count_correct_RT_inkong_lload)
+cor_pugnaghi2020_exp2_acc_hl <- cor(data_pugnaghi2020_exp2_include$count_correct_RT_kong_hload, 
+                                    data_pugnaghi2020_exp2_include$count_correct_RT_inkong_hload)
+
+# Vector with correlations
+pugnaghi2020_exp2_acc_corvalues <- c(cor_pugnaghi2020_exp2_acc_ll,
+                                     cor_pugnaghi2020_exp2_acc_hl)
+
+# Transform cors to z scores
+pugnaghi2020_exp2_acc_z_corvalues <- FisherZ(pugnaghi2020_exp2_acc_corvalues)
+
+# Compute weighted average of z scores using sample size (the same for both since it's within-subjects)
+pugnaghi2020_exp2_acc_z_weighted_avg <- weighted.mean(pugnaghi2020_exp2_acc_z_corvalues,
+                                                      c(65, 65))
+
+# Transform weighted mean z score back to weighted correlation
+cor_pugnaghi2020_exp2_acc <- FisherZInv(pugnaghi2020_exp2_acc_z_weighted_avg)
+
+# Correlation between two measures of experiment 2
+cor_pugnaghi2020_exp2 <- FisherZInv(weighted.mean(FisherZ(c(cor_pugnaghi2020_exp2_RT,
+                                                            cor_pugnaghi2020_exp2_acc)),
+                                                  c(65,65)
+                                                  )
+                                    )
+
+
+#========================================================================#
+#=========================== Nobre et al. (2020) =========================
+#========================================================================#
+# 
+# load("C:/Users/Biosig/Google Drive/Doutorado/Tese/Replication_Contour_integration/Data/questionnaire_ERPs")
+# 
+# meta_analysis_data <- questionnaire.ERPs[,questionnaire.ERPs$group.original == "unaware"]
+# 
+# 
+# cor_nobre <- cor(questionnaire.ERPs$RT.mean.sqr_1, RT.mean.rand_1)
+
+
+
+#===================================================================================#
+#=================== Compute mean correlation across studies ========================
+#===================================================================================#
+
 # sample sizes
 n_schnuerch <- nrow(data_nonoticers)
 #n_razpurker <- length(unique(data_irene_means$sub))
@@ -189,6 +340,8 @@ n_beanland1A_fixating <- nrow(data_beanland_1A_fixating)
 n_beanland1A_moving <- nrow(data_beanland_1A_moving)
 n_beanland2_slow <- nrow(data_beanland_2_slow)
 n_beanland2_fast <- nrow(data_beanland_2_fast)
+n_pugnaghi2020_exp1 <- nrow(data_pugnaghi2020_exp1_include)
+n_pugnaghi2020_exp2 <- nrow(data_pugnaghi2020_exp2_include)
 
 # Concatente all ns
 cor_samplesizes <- c(n_schnuerch,
@@ -198,7 +351,9 @@ cor_samplesizes <- c(n_schnuerch,
                      n_beanland1A_fixating,
                      n_beanland1A_moving,
                      n_beanland2_slow,
-                     n_beanland2_fast)
+                     n_beanland2_fast,
+                     n_pugnaghi2020_exp1,
+                     n_pugnaghi2020_exp2)
 
 # Vector with correlations
 corvalues <- c(cor_schnuerch,
@@ -208,7 +363,9 @@ corvalues <- c(cor_schnuerch,
                cor_beanland_1A_fixating,
                cor_beanland_1A_moving,
                cor_beanland_2_slow,
-               cor_beanland_2_fast)
+               cor_beanland_2_fast,
+               cor_pugnaghi2020_exp1,
+               cor_pugnaghi2020_exp2)
 
 # Transform cors to z scores
 z_corvalues <- FisherZ(corvalues)
@@ -220,116 +377,3 @@ z_weighted_avg <- weighted.mean(z_corvalues,
 # Transform weighted mean z score back to weighted correlation
 cor_pairs <- FisherZInv(z_weighted_avg)
 
-
-#==================================================================================================
-# 
-# library(tidyverse)
-# library(ez)
-# library(data.table)
-# library(effsize)
-# 
-# data_irene$sub <- factor(data_irene$sub)
-# 
-# data_irene_means <- data_irene %>%
-#   group_by(sub, cond, Target, Background) %>% 
-#   summarise(mean_RT = mean(Latency.mS.)) %>%
-#   ungroup()
-# 
-# 
-# write_excel_csv2(data_irene_means, 
-#                  path = "C:/Users/Biosig/Google Drive/Doutorado/Tese/Meta-analysis_IB/Dados/RT_means_Razpurker-apfeld.csv")
-# # Run ANOVA
-# # ms_anova <- aov(mean_RT ~ cond * Target * Background + Error(sub/(cond*Target*Background)), 
-# #                 data_irene_means)
-# # summary(ms_anova)
-# 
-# ms_anova <- ezANOVA(data_irene_means,
-#                     mean_RT,
-#                     wid = sub,
-#                     within = .(cond, Target, Background))
-# 
-# data_tri_means <- data_irene_means %>%
-#   filter(cond == "tri")
-# 
-# sd_tri_st <- data_tri_means %>%
-#   filter(Target == "st") %>%
-#   summarize(sd.st = sd(mean_RT))
-# 
-# sd_tri_dt <- data_tri_means %>%
-#   filter(Target == "dt") %>%
-#   summarize(sd.dt = sd(mean_RT))
-# 
-# sd_tri <- data_tri_means %>%
-#   summarize(sd.tri = sd(mean_RT))
-# 
-# means_tri_st <- data_tri_means %>%
-#   filter(Target == "st") %>%
-#   group_by(Background) %>%
-#   summarize(mean.st = mean(mean_RT))
-# 
-# means_tri_dt <- data_tri_means %>%
-#   filter(Target == "dt") %>%
-#   group_by(Background) %>%
-#   summarize(mean.st = mean(mean_RT))
-# 
-# data_col_means <- data_irene_means %>%
-#   filter(cond == "col")
-# 
-# sd_col_st <- data_col_means %>%
-#   filter(Target == "st") %>%
-#   summarize(sd.st = sd(mean_RT))
-# 
-# sd_col_dt <- data_col_means %>%
-#   filter(Target == "dt") %>%
-#   summarize(sd.dt = sd(mean_RT))
-# 
-# sd_col <- data_col_means %>%
-#   summarize(sd.col = sd(mean_RT))
-# 
-# means_col_st <- data_col_means %>%
-#   filter(Target == "st") %>%
-#   group_by(Background) %>%
-#   summarize(mean.st = mean(mean_RT))
-# 
-# means_col_dt <- data_col_means %>%
-#   filter(Target == "dt") %>%
-#   group_by(Background) %>%
-#   summarize(mean.st = mean(mean_RT))
-# 
-# 13/sd_col
-# 
-# tri_ms_anova <- ezANOVA(data_tri_means,
-#                         mean_RT,
-#                         wid = sub,
-#                         within = .(Target, Background))
-# 
-# ggplot(data_tri_means, aes(x = Target,
-#                            y = mean_RT,
-#                            color = Background)) +
-#   stat_summary(fun.y = mean, geom = "point") +
-#   stat_summary(fun.y=mean, geom = "line", aes(group=Background)) +
-#   stat_summary(fun.data="mean_cl_boot")
-# 
-# data_tri_means %>%
-#   filter(Target == "st", Background == "sb") %>%
-#   summarize(avg_RT = mean(mean_RT))
-# 
-# data_tri_means %>%
-#   filter(Target == "st", Background == "db") %>%
-#   summarize(avg_RT = mean(mean_RT))
-# 
-# data_tri_means %>%
-#   filter(Target == "dt", Background == "sb") %>%
-#   summarize(avg_RT = mean(mean_RT))
-# 
-# data_tri_means %>%
-#   filter(Target == "dt", Background == "db") %>%
-#   summarize(avg_RT = mean(mean_RT))
-# 
-# 
-# # schnuerch
-# t.test(data_nonoticers$mean.neutral, data_nonoticers$mean.incong, paired = TRUE)
-# 
-# t.test(data_schnuerch$mean.neutral, data_schnuerch$mean.incong, paired = TRUE)
-# 
-# cohen.d(data_nonoticers$mean.neutral, data_nonoticers$mean.incong, paired = TRUE, pooled = TRUE)

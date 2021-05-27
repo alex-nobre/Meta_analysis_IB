@@ -31,12 +31,22 @@ Additionally, another paper was removed for not reporting enough data to compute
 
 The remaining papers broach 49 experiments/contrasts. Some of those included more than one measure for each comparison (usually RT and accuracy). Those were included as a single line, and modelled with a three-level meta-analysis model.
 
+
+
 # Variables
 
-## Did the us interact with the target stimulus? This means the US interacted with the stimuli in the main task either by being part of it of by forming a configuration with it (e.g., the Ponzo illusion). US were classified as relevant even if they were not mentioned in the instructions.
+## us_relevance
+
+Did the us interact with the target stimulus? This means the US interacted with the stimuli in the main task either by being part of it of by forming a configuration with it (e.g., the Ponzo illusion). US were classified as relevant even if they were not mentioned in the instructions.
 
 Type: dichotomous variable. Levels: "relevant" or "irrelevant".
 
+
+## gestalt
+
+Did the study investigate the ocurrence of some king of gestalt processing (grouping, figure-ground segregation, etc.)?
+
+Type: dichotomous variable. Levels: "yes" or "no".
 
 
 ## Is the implicit process perceptual or response-end?
@@ -46,20 +56,23 @@ This is not clear-cut, as the rationale of some tasks, e.g., the inattention par
 Type: dichotomous variable. Levels: ??
 
 
+## implicit_measure
 
-## Is implicit processing measured by RT or accuracy?
+Is implicit processing measured by RT or accuracy?
 
 Type: dichotomous variable. Levels: "RT" or "acc".
 
 
+## N_trials_implicit
 
-## How many trials were used to assess implicit processing?
+How many trials were used to assess implicit processing?
 
 Type: integer variable. 
 
 
+## N_participants_implicit
 
-## How many subjects in the sample for implicit processing testing?
+How many subjects in the sample for implicit processing testing?
 
 Type: integer variable. 
 
@@ -67,6 +80,59 @@ This is either:
 
 * Total N if group assessment of awareness was performed
 * N of IB subjects if post-hoc data selection was performed
+
+
+## N_trials_awareness
+
+In how many trials was awareness assessed (how many assessments)? 
+
+The number of assessments is the number of times the same type of assessment (e.g., yes or no question, forced-choice question) was performed, NOT the number of all assessments by all tasks. They do not group because they differ in sensitivity. Instead, we choose one of them as the assessment. It should be the more liberal one, so as not to underestimate awareness.
+
+Type: integer variable.
+
+
+## N_participants_awareness
+
+How many subjects in the sample for awareness testing?
+
+This is either:
+
+* Total N if group assessment of awareness was performed
+* N of IB subjects if post-hoc data selection was performed
+
+Type: integer variable.
+
+
+Manual computations for 
+
+Pugnaghi et al. (2019): 
+
+* Exp. 1: 80 - 1 (anticipated US) -  = 65
+* Exp. 2: 80 - 3 (anticipated US) - 3 (too many errors) - 1 (error in data recording) = 75.
+* Exp. 3: 80 - 1 (anticipated US) - 1 (exclusion criteria) - 6 (too many errors) = 72.
+* Total = 212
+
+Pugnaghi et al. (2020): 
+
+* Exp. 1: 80 - 4 (full attention failure) - 1 (error in data recording) = 75
+* Exp. 2: 114 - 2 (anticipated US) - 4 (full attention failure) - 2 (error in data recording) = 106
+
+Kreitz et al. (2020) papers:
+
+* Dataset 1: 123 - 2 (anticipated US) - 4 (full attention failure) - 1 (problems in thresholding procedure) = 116.
+* Dataset 2 (see "legend_study_2.docx"): 200 - 2 (problems with instructions) - 2 (no matching conditions) - 4 (full attention failure in one of the tasks) = 192.
+* Dataset 3: 120 - 2 (impaired vision) - 3 (full attention failure) - 4 (error in data recording) = 111.
+* Dataset 4: 120 - 4 (impaired vision) - 4 (full attention failure) - 1 (anticipated US) = 110.
+* Dataset 5: 120 - 3 (impaired vision) - 6 (full attention failure) - 7 (anticipated US) = 110.
+* Dataset 6: 1104 - 550 (all exclusion criteria) = 554.
+* Dataset 7: 100 - 5 (anticipated US) = 95.
+* Dataset 8: 100 - 9 (anticipated US) - 1 (full attention failure) = 90.
+* Dataset 9: 100 - 2 (impaired vision) - 9 (anticipated US) = 89.
+* Dataset 10: 120 - 5 (all exclusion criteria) = 115.
+* Dataset 13: 200 - 7 (anticipated US) - 4 (full attention failure) - 1 (error in data recording) = 188.
+* Dataset 14: 200 - 7 (anticipated US) - 5 (full attention failure) - 3 (too many errors) - 1 (error in data recording) = 184.
+* Dataset 15: 300 - 7 (anticipated US) - 5 (impaired vision) - 9 (full attention failure) = 277.
+* Dataset 16: 300 - 20 (anticipated US) - 5 (knew the paradigm) - 5 (impaired vision) - 1 (incomplete experiment) - 9 (full attention failure) = 260.
 
 
 
@@ -91,35 +157,24 @@ Type: dichotomous variable. Levels: "block" or "interleaved".
 Type: dichotomous variable. Levels: "trial" or "block".
 
 
-
-## In how many trials was awareness assessed (how many assessments)? 
-
-The number of assessments is the number of times the same type of assessment (e.g., yes or no question, forced-choice question) was performed, NOT the number of all assessments by all tasks. They do not group because they differ in sensitivity. Instead, we choose one of them as the assessment. It should be the more liberal one, so as not to underestimate awareness.
-
-Type: integer variable.
-
-
-
-## How many subjects in the sample for awareness testing?
-
-This is either:
-
-* Total N if group assessment of awareness was performed
-* N of IB subjects if post-hoc data selection was performed
-
-Type: integer variable.
-
-
-
 ## Was the result for the implicit test significant?
 
 Type: dichotomous (categorical) variable. Levels: "yes" or "no".
 
 
 
-## Was the contrast published in the "gray literature" (e.g., book chapter, conference abstract) instead of as journal article?
+## Gray literature
+
+Was the contrast published in the "gray literature" (e.g., book chapter, conference abstract) instead of as journal article?
 
 Type: dichotomous (categorical) variable. Levels: "yes" or "no".
+
+
+## Static vs dynamic
+ 
+Did the study investigate processing of static or moving US?
+
+Type: dichotomous (categorical) variable. Levels: "static" or "dynamic".
 
 
 
@@ -260,7 +315,7 @@ Three datasets were available to compute the correlation estimate: Razpurker-Apf
 
 
 
-## Calculate implicit Effect Sizes by study
+## Calculate implicit effect sizes by study
 
 ### 1. Ariga et al. (2008)
 
@@ -291,12 +346,14 @@ There is still the issue of repeated exposition, which differs between the first
 - Exp. 2: Table 8 on page 986.
 
 
-
 ### 6 and 7. Gabay et al. (2012), exps. 1 and 2
 
 Design: within-subjects
 
 We computed the ES from f-values and dfs.
+
+Experimental condition: valid
+Control condition: invalid
 
 * Exp 1 (p. 627): ES is positive, because difference is in the direction expected if the participant processed the US (lower RTs for valid cues).
 
@@ -306,6 +363,8 @@ We computed the ES from f-values and dfs.
 ### 8 to 11. Lo and Yeh (2008), exps. 1 and 2
 
 We computed the ES from the reported t-values and dfs. 
+
+Cohen's d is given (0.71); computation of the same statistic from t-values and dfs leads to approximately the same result (0.7074).
 
 * Exp 1, 200ms (p. 1173): ES is positive, because effect is in the expected direction if the US was perceived (percentage of participants above 50% choosing the longer line according to the Ponzo illusion).
 
@@ -480,6 +539,16 @@ Use reported percentage of participants who chose the longer line (exp. 1) or wh
 * Exp 2, p. 9 of pdf: ES is negative, because effect is in the opposite direction of what is expected if the US was processed: very few participants (below chance) completed the word-stem with the prime word.
 
 
+### 46 to 54. Rashal et al. (2017)
+
+* Exp. 1: data for acc results was not reported.
+
+* Exp. 2: data for RT results was not reported. ES is negative, because the effect is in the opposite direction of what is expected is the US was processed.
+
+* Exp. 3: data for acc results was not reported.
+
+
+
 ### 55 to 60. Kimchi et al. (2004)
 
 Effect sizes from f-values and dfs.
@@ -487,9 +556,11 @@ Effect sizes from f-values and dfs.
 Each grouping condition is treated as a separate constrast. 
 
 
-* Column/row by color similarity: The ES is positive, because the direction of the interaction matches what is expected is the US is processed: faster judgements for at least one of the target x background conditions (here, for target same x background same).
+* Column/row by color similarity: The ES is positive, because the direction of the interaction matches what is expected is the US is processed: faster judgements for at least one of the target x background conditions (here, for target same x background same). Data for accuracy results was not reported.
 
-* Triangle/arrow grouping: The ES is negative, because the difference between mean differences is positive (which is the opposite direction of the prediction if the US is processed): differences for "target-same" are as predicted, but the difference for "target-different" is opposite and larger, resulting in a negative value.
+* Triangle/arrow by color similarity: data for RT results was not reported.
+
+* Triangle/arrow grouping: The ES is negative, because the difference between mean differences is positive (which is the opposite direction of the prediction if the US is processed): differences for "target-same" are as predicted, but the difference for "target-different" is opposite and larger, resulting in a negative value. Data for RT results was not reported.
 
 - d': Implicit processing is the difference between d' in same and different background conditions. d' = hit - false alarms in different trials. If d' is positive, effect is facilitatory (hits > false alarms), so the effect size is also positive; otherwise, the effect size is negative.
 
@@ -499,7 +570,7 @@ Each grouping condition is treated as a separate constrast.
 
 * Connected triangle/arrow: The ES is positive, because the direction of the interaction matches what is expected is the US is processed: faster judgements for at least one of the target x background conditions (here, both for target same x background same and for target different x background different).
 
-* Square/cross by color similarity: enough info to compute effect size only for accuracy. The ES is negative, because the difference is in the opposite direction to what is predicted for both the same and different conditions.
+* Square/cross by color similarity: enough info to compute effect size only for accuracy. The ES is negative, because the difference is in the opposite direction to what is predicted for both the same and different conditions. Data for RT results was not reported.
 
 * Square/cross: The ES is positive, because the direction of the differences is in the predicted direction for both RT and accuracy, both in the same and different conditions.
 
@@ -508,11 +579,55 @@ Vertical/horizontal line by color similarity: not enough info is reported to com
 Disconnected square/cross: The ES is positive, because the direction of the differences is in the predicted direction for both RT and accuracy, both in the same and different conditions.
 
 
+### 72. Pugnaghi et al. (2020)
+
+Effect sizes from f-values and dfs.
+
+Use f-value instead of collapsing t-values across low-load and high-load conditions, because the latter loses info about the variance between load conditions.
 
 
-# Computation of awareness effect sizes
+### 76. Nobre et al. (2020)
 
-By convention, we established that an ES in the direction of aware is positive, and an ES in the direction of unaware is negative.
+Data only for RT (accuracy is not comparable due to the adaptive procedure)
+
+No correlation between conditions (square/random), because trials in each condition are not necessarily equivalent due to the adaptive procedure.
+
+
+### 77. Pugnaghi et al. (2019) - p. 8
+
+Use the data for analysis of presence vs. absence of US, instead of data for repeated vs new stimuli, to investigate implicit processing of the presence of unexpected stimuli instead of types of implicit processing (point made by reviewer 1, point 1.4).
+
+Effect sizes from t-values and dfs. These are reported in the discussion instead of the results section.
+
+
+### 78 to 91. Kreit et al. (2020) - datasets
+
+The data reported for implicit effects are related to performance in the questions originally intended to assess awareness in the original studies. This creates an issue in that, if selection of IB participants in the review is done using the same criteria as in the original studies, the same measure is used both for selection of participants and for assessment of implicit processing. This is not explicitly stated in the text; they only mention that participants were included who "did not notice the unexpected stimulus".
+
+The solution is to compare the n included for each study in the original study and in the review. If this differs, this means that the authors changed the participant selection criteria in the review.
+
+For :
+
+ ####1 - "Kreitz et al. (2015) - Does semantic preactivation reduce inattentional blindness"
+ ####2 - "Kreitz et al. (2015) - Inattentional Blindness and Individual Differences in Cognitive Abilities"
+ ####3 - "Kreitz et al. (2015) - Some See It, Some Don’t: Exploring the Relation between Inattentional Blindness and Personality Factors"
+ ####4 - "Kreitz et al. (2015) - Inattentional blindness is influenced by exposure time not motion speed"
+ ####5 - "Kreitz et al. (2016) - The Influence of Attention Set, Working Memory Capacity, and Expectations on Inattentional Blindness"
+ 
+only percentages are reported (2) or depicted in figures (1,4). For (3), the n-included reported in the original paper is 354, whereas in the review it is 290. Thus, the criterion has changed for that study.
+
+For (5), the number is the same (available in Table 2 of the original study), indicating that the same tasks are used to select the sample and assess performance, which is problematic.
+
+An alternative is to compare performance in critical and control trials in those experiments. However, the data for the review paper does not include performance in the control trials, only in the critical trial. Thus, we need the raw data for the individual papers. Raw data is available for the following studies:
+
+
+# Calculate awareness effect sizes by study
+
+For this analysis, only studies that use "group assessment of awareness" are included. The rationale is the following: the interest of this analysis is to assess how likely is, meta-analytically, that participants noticed the US more often than chance. Studies that did not employ group assessment of awareness ("post-hoc selection studies") do not allow this because they selected participants individually. Because the interest of this analysis is on how the classification of participants as aware or unaware may influence the results on implicit processing, we include in this analysis only studies which employ “group assessment of awareness".
+
+Moreover, using a rate of aware participants for post-hoc selection means including aware participants in the computation, even though they were not included in the final analysis for implicit processing. Conversely, not including those would always lead to a 0% rate of aware participants for those studies. So they should not be included.
+
+By convention, we established that an ES in the direction of aware is positive, and an ES in the direction of unaware is negative. 50% is chance.
 
 ## Proportions or percentages
 
@@ -533,6 +648,8 @@ For studies that report n or proportions/percentages of noticers and/or perform 
 ### 1. Ariga et al. (2008)
 
 We use the reported percentage of noticers. The study reports percentages of noticing for two forced-choice questions. We use the higher percentage of the two, to avoid underestimating awareness.
+
+Criterion for chance: 50%, as both questions are dichotomous.
 
 
 ### 2 to 5. Beanland and Pammer (2011)
@@ -558,6 +675,8 @@ We used the reported n of noticers.
 
 We computed the ES from the reported chi-squared values from the v-shape discrimination task, because 1) the results from the confidence ratings did not offer a result against chance reports; and 2) the study classified participants as aware or unaware bases on the discrimination task instead of the confidence ratings.
 
+Criterion for chance: 50%, as the v-shape question is dichotomous.
+
 * Exp 1, 200ms (p. 1172): ES is positive, because percentage is above 50%;
 
 * Exp 1, 500ms (p. 1172): ES is positive, because percentage is above 50%;
@@ -571,6 +690,8 @@ We computed the ES from the reported chi-squared values from the v-shape discrim
 
 Effect sizes computed using percentage of noticers reported. We use percentages of direct query instead of forced-choice, since forced-choice can be performed using implicit knowledge.
 
+Criterion for chance: 50%, as the direct query has a dichotomous answer (yes/no).
+
 * Exp. 1, p. 345: effect size is negative, because percentage is below 50%;
 * Exp. 3, p. 349: effect size is negative, because percentage is below 50%.
 
@@ -581,12 +702,16 @@ Result for exp. 3 is infinite (0 participants noticed the pattern), so replace w
 
 Use the reported percentage of noticers to compute ES. We used the percentage reported for the question about regularity (p. 312), instead of orientation (p. 313), since the former assesses perception more generally and thus might be more sensitive.
 
+Criterion for chance: 50%, as the question about regularity has a dichotomous answer (regular/irregular).
+
 Effect size is positive, because percentage reported is above 50%.
 
 
 ### 15. Moore et al. (2004), p. 712.
 
 We use the reported percentage of noticers to compute ES. We used the percentage reported of direct query (712) instead of forced-choice for awareness effect, since this can be performed using implicit knowledge.
+
+Criterion for chance: 50%, as the direct query has a dichotomous answer (yes/no).
 
 The ES is negative, because the percentage reported is below 50%.
 
@@ -628,7 +753,9 @@ Use reported percentage of noticers in each condition to compute n of noticers, 
 
 ### 16. Razpurker-Apfeld et al. (2008) 
 
-Use reported number of noticers (p. 188) and total n (p. 185) to compute chi-square. 
+Use reported number of noticers (p. 188) and total n (p. 185) to compute chi-square. The number of noticers used is that from the "organization" question, because this is the one used by the authors to infer unawareness.
+
+Criterion for chance: ???? open question.
 
 Two distinct effect sizes are computed by condition; within the same condition, the effect size is the same for RT and d', since it is the same sample. They are not coded as separate ES, even though RT and d' are separate entries (lines) for the implicit ES, because they must not contribute twice to the model.
 
@@ -648,6 +775,8 @@ ES is negative, because percentage reported is below 50%.
 #### Exp. 1 - p. 610
 
 Use reported n of noticers to compute chi-squared.
+
+Criterion for chance: 50%, as all questions are dichotomous.
 
 ES is negative, because n of noticers is below 50%.
 
@@ -777,6 +906,54 @@ Use reported number of noticers for "pattern" question (column "organization" in
 
 Compare computed chi-squares with reported chi-square: differences found for experiments 3 and 4.
 
+
+### 72 to 75. Pugnaghi et al. (2020) - Exps. 1 and 2
+
+Lax awareness effect sizes would be only responses to the yes-or-no question; strict would be responses to both questions. Only strict effect sizes area available in the paper and datasets.
+
+
+### 76. Nobre et al. (2020)
+
+
+
+
+### 77. Pugnaghi et al. (2019)
+
+None of the experiments report detailed responses to the assessment of awareness. We use as successes only the classifications provided by the authors (noticers and non-noticers) in the raw data excel file.
+
+Noticers may have met one or more of the others exclusion criteria: check each noticer's row in the excel file for this. Participantes who meet those other criteria should not be counted.
+
+
+* Exp. 1: 1 noticer, no exclusion criterion.
+* Exp. 2: 1 noticer, no exclusion criterion; 1 noticer with exclusion criterion.
+* Exp. 3: 9 noticers, no exclusion criterion.
+
+Use total across experiments, as results for implicit processing are reported for the 3 experiments pooled only.
+
+Total: 1 + 1 + 9 = 11.
+
+
+### 78 to 91. Kreit et al. (2020) - datasets
+
+Retrieve n of noticers from raw data or from difference between N_participants_awareness and nincluded in the paper.
+
+Noticers may have met one or more of the others exclusion criteria: check each noticer's row in the excel file for this. Participantes who meet those other criteria should not be counted.
+
+* Dataset 1: 47 noticers with no exclusion criteria; 1 noticer with exclusion criterion.
+* Dataset 2: difference between N_participants_awareness and nincluded in the paper: 172-86=86.
+* Dataset 3: difference between N_participants_awareness and nincluded in the paper: 111-62=49.
+* Dataset 4: difference between N_participants_awareness and nincluded in the paper: 110-64=46.
+* Dataset 5: difference between N_participants_awareness and nincluded in the paper: 106-38=68.
+* Dataset 6: difference between N_participants_awareness and nincluded in the paper: 554-290=264.
+* Dataset 7: difference between N_participants_awareness and nincluded in the paper: 95-42=53.
+* Dataset 8: difference between N_participants_awareness and nincluded in the paper: 90-33=57.
+* Dataset 9: difference between N_participants_awareness and nincluded in the paper: 89-21=68.
+* Dataset 10: difference between N_participants_awareness and nincluded in the paper: 115-34=81.
+* Dataset 13: difference between N_participants_awareness and nincluded in the paper: 188-57=131.
+* Dataset 14: difference between N_participants_awareness and nincluded in the paper: 184-64=120.
+* Dataset 15: difference between N_participants_awareness and nincluded in the paper: 277-68=209.
+* Dataset 16: difference between N_participants_awareness and nincluded in the paper: 260-178=82.
+
 ### 19. Shafto and Pitts (2015) - p. 10943 - DO NOT USE (EEG)
 
 Use reported number of inattentionally blind subjects.
@@ -811,8 +988,6 @@ The following variables to conduct moderation analysis so far for the implicit e
 * Group assessment of awareness instead of inattetion paradigm
 
 
-
-
 ### Heterogeneity
 
 * Visual inspection of forest plot: Wood and Simons (2019), exp. 2, has a disproportionately wide confidence interval.
@@ -832,6 +1007,8 @@ Fitting the model without those studies did not change the qualitative results. 
 ## Awareness model
 
 # Publication bias
+
+We did not perform analysis of publication bias, as the reports of awareness measures do not seem to be reported in a way as to avoid publication of negative results.  
 
 ## p-curve
 

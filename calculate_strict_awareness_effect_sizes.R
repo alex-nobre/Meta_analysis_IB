@@ -1,11 +1,19 @@
 
+#===============================================================================================#
+#=================================== Compute effect sizes ======================================#
+# Compute effect sizes for awareness effects
+# Effects are r
+#===============================================================================================#
+
 library(esc)
 library(tidyverse)
 library(DescTools)
 
-# Effect sizes:
+# Compute ES for proportions
+library(pwr)
 
-# Formulas are taken from Lakens et al.'s sheet for effect sizes
+# Function to run one-proportion z-test
+source("ztest_function.R")
 
 
 #==== 1. Ariga et al. (2007) exp 2 ====
@@ -1718,13 +1726,518 @@ c71_phi <- NA #sqrt(c71_chisquared/c71_pop)
 
 c71_r <- NA #c71_phi #esc_phi(phi = c71_phi, totaln = c71_pop, es.type = "r")
 
+
+#==== 72. Pugnaghi et al. (2020) exp 1 RT =====
+
+# Compute effect sizes from percentages of noticers
+c72_pop <- 75
+c72_successes <- 11
+c72_success_percentage <- (c72_successes/c72_pop) * 100
+c72_success_proportion <- c72_success_percentage/100
+c72_failures <- c72_pop - c72_successes
+
+c72_chisquared <- unname(chisq.test(c(c72_successes, c72_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c72_cohensd <- (-1) * esc_chisq(c72_chisquared, # ES is negative
+                                es.type = "d",
+                                totaln = c72_pop)$es
+
+# c72_etasquared <- esc_chisq(c72_chisquared, 
+#                             es.type = "eta", 
+#                             totaln = c72_pop)$es
+
+c72_phi <- sqrt(c72_chisquared/c72_pop) * (-1) # effect size is negative
+
+c72_r <- c72_phi #esc_phi(phi = c72_phi, totaln = c72_pop, es.type = "r")
+
+
+#============ 73. Pugnaghi et al. (2020) exp 1 accuracy ============
+
+# Compute effect sizes from percentages of noticers
+c73_pop <- 75
+c73_successes <- NA
+c73_success_percentage <- NA
+c73_success_proportion <- NA
+c73_failures <- NA
+
+c73_chisquared <- NA
+
+
+c73_cohensd <- NA
+
+# c73_etasquared <- esc_chisq(c73_chisquared, 
+#                             es.type = "eta", 
+#                             totaln = c73_pop)$es
+
+c73_phi <- NA
+
+c73_r <- NA
+
+
+#============ 74. Pugnaghi et al. (2020) exp 2 RT ============
+
+# Compute effect sizes from percentages of noticers
+c74_pop <- 106
+c74_successes <- 4
+c74_success_percentage <- (c74_successes/c74_pop) * 100
+c74_success_proportion <- c74_success_percentage/100
+c74_failures <- c74_pop - c74_successes
+
+c74_chisquared <- unname(chisq.test(c(c74_successes, c74_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c74_cohensd <- (-1) * esc_chisq(c74_chisquared, # ES is negative
+                                es.type = "d",
+                                totaln = c74_pop)$es
+
+
+c74_phi <- sqrt(c74_chisquared/c74_pop) * (-1) # effect size is negative
+
+c74_r <- c74_phi
+
+
+#============ 75. Pugnaghi et al. (2020) exp 2 accuracy ============
+
+# Compute effect sizes from percentages of noticers
+c75_pop <- 75
+c75_successes <- NA
+c75_success_percentage <- NA
+c75_success_proportion <- NA
+c75_failures <- NA
+
+c75_chisquared <- NA
+
+
+c75_cohensd <- NA
+
+# c75_etasquared <- esc_chisq(c75_chisquared, 
+#                             es.type = "eta", 
+#                             totaln = c75_pop)$es
+
+c75_phi <- NA
+
+c75_r <- NA
+
+
+#============ 76. Nobre et al. (2020) ============
+
+# Compute effect sizes from percentages of noticers
+c76_pop <- 30
+c76_successes <- 17
+c76_success_percentage <- (c76_successes/c76_pop) * 100
+c76_success_proportion <- c76_success_percentage/100
+c76_failures <- c76_pop - c76_successes
+
+c76_chisquared <- unname(chisq.test(c(c76_successes, c76_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c76_cohensd <- esc_chisq(c76_chisquared,
+                         es.type = "d",
+                         totaln = c76_pop)$es
+
+
+c76_phi <- sqrt(c76_chisquared/c76_pop)
+
+c76_r <- c76_phi
+
+
+#=============== 77. Pugnaghi et al. (2019) =============
+
+# Compute effect sizes from percentages of noticers
+c77_pop <- 212
+c77_successes <- 11
+c77_success_percentage <- (c77_successes/c77_pop) * 100
+c77_success_proportion <- c77_success_percentage/100
+c77_failures <- c77_pop - c77_successes
+
+c77_chisquared <- unname(chisq.test(c(c77_successes, c77_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c77_cohensd <- (-1) * esc_chisq(c77_chisquared, # ES is negative
+                                es.type = "d",
+                                totaln = c77_pop)$es
+
+
+c77_phi <- sqrt(c77_chisquared/c77_pop) * (-1) # effect size is negative
+
+c77_r <- c77_phi
+
+
+#============== 78. Kreitz et al. (2020) - Dataset 1 ===============
+
+# Compute effect sizes from percentages of noticers
+c78_pop <- 116
+c78_successes <- 47
+c78_success_percentage <- (c78_successes/c78_pop) * 100
+c78_success_proportion <- c78_success_percentage/100
+c78_failures <- c78_pop - c78_successes
+
+c78_chisquared <- unname(chisq.test(c(c78_successes, c78_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c78_cohensd <- (-1) * esc_chisq(c78_chisquared, # ES is negative
+                                es.type = "d",
+                                totaln = c78_pop)$es
+
+
+c78_phi <- sqrt(c78_chisquared/c78_pop) * (-1) # effect size is negative
+
+c78_r <- c78_phi
+
+
+#============== 79. Kreitz et al. (2020) - Datasets 2.1 & 2.2 ===============
+# 
+# # Compute effect sizes from percentages of noticers
+# c79_pop <- 172
+# c79_successes <- 86
+# c79_failures <- c79_pop - c79_successes
+# 
+# c79_chisquared <- unname(chisq.test(c(c79_successes, c79_failures), 
+#                                     p = c(0.5, 0.5))$statistic)
+# 
+# 
+# c79_cohensd <- (-1) * esc_chisq(c79_chisquared, # ES is negative
+#                                 es.type = "d",
+#                                 totaln = c79_pop)$es
+# 
+# 
+# c79_phi <- sqrt(c79_chisquared/c79_pop)
+# 
+# c79_r <- c79_phi
+
+
+#============== 80. Kreitz et al. (2020) - Dataset 3 ===============
+
+# Compute effect sizes from percentages of noticers
+c80_pop <- 111
+c80_successes <- 49
+c80_success_percentage <- (c80_successes/c80_pop) * 100
+c80_success_proportion <- c80_success_percentage/100
+c80_failures <- c80_pop - c80_successes
+
+c80_chisquared <- unname(chisq.test(c(c80_successes, c80_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c80_cohensd <- (-1) * esc_chisq(c80_chisquared, # ES is negative
+                                es.type = "d",
+                                totaln = c80_pop)$es
+
+
+c80_phi <- sqrt(c80_chisquared/c80_pop) * (-1) # effect size is negative
+
+c80_r <- c80_phi
+
+
+#============== 81. Kreitz et al. (2020) - Dataset 4 ===============
+
+# Compute effect sizes from percentages of noticers
+c81_pop <- 110
+c81_successes <- 46
+c81_success_percentage <- (c81_successes/c81_pop) * 100
+c81_success_proportion <- c81_success_percentage/100
+c81_failures <- c81_pop - c81_successes
+
+c81_chisquared <- unname(chisq.test(c(c81_successes, c81_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c81_cohensd <- (-1) * esc_chisq(c81_chisquared, # ES is negative
+                                es.type = "d",
+                                totaln = c81_pop)$es
+
+
+c81_phi <- sqrt(c81_chisquared/c81_pop) * (-1) # effect size is negative
+
+c81_r <- c81_phi
+
+
+#============== 82. Kreitz et al. (2020) - Dataset 5 ===============
+
+# Compute effect sizes from percentages of noticers
+c82_pop <- 106
+c82_successes <- 68
+c82_success_percentage <- (c82_successes/c82_pop) * 100
+c82_success_proportion <- c82_success_percentage/100
+c82_failures <- c82_pop - c82_successes
+
+c82_chisquared <- unname(chisq.test(c(c82_successes, c82_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c82_cohensd <- esc_chisq(c82_chisquared,
+                         es.type = "d",
+                         totaln = c82_pop)$es
+
+
+c82_phi <- sqrt(c82_chisquared/c82_pop)
+
+c82_r <- c82_phi
+
+
+#============== 83. Kreitz et al. (2020) - Dataset 6 ===============
+
+# Compute effect sizes from percentages of noticers
+c83_pop <- 554
+c83_successes <- 264
+c83_success_percentage <- (c83_successes/c83_pop) * 100
+c83_success_proportion <- c83_success_percentage/100
+c83_failures <- c83_pop - c83_successes
+
+c83_chisquared <- unname(chisq.test(c(c83_successes, c83_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c83_cohensd <- (-1) * esc_chisq(c83_chisquared, # ES is negative
+                                es.type = "d",
+                                totaln = c83_pop)$es
+
+
+c83_phi <- sqrt(c83_chisquared/c83_pop) * (-1) # effect size is negative
+
+c83_r <- c83_phi
+
+
+#============== 84. Kreitz et al. (2020) - Dataset 7 ===============
+
+# Compute effect sizes from percentages of noticers
+c84_pop <- 95
+c84_successes <- 53
+c84_success_percentage <- (c84_successes/c84_pop) * 100
+c84_success_proportion <- c84_success_percentage/100
+c84_failures <- c84_pop - c84_successes
+
+c84_chisquared <- unname(chisq.test(c(c84_successes, c84_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c84_cohensd <- esc_chisq(c84_chisquared,
+                         es.type = "d",
+                         totaln = c84_pop)$es
+
+
+c84_phi <- sqrt(c84_chisquared/c84_pop)
+
+c84_r <- c84_phi
+
+
+#============== 85. Kreitz et al. (2020) - Dataset 8 ===============
+
+# Compute effect sizes from percentages of noticers
+c85_pop <- 90
+c85_successes <- 57
+c85_success_percentage <- (c85_successes/c85_pop) * 100
+c85_success_proportion <- c85_success_percentage/100
+c85_failures <- c85_pop - c85_successes
+
+c85_chisquared <- unname(chisq.test(c(c85_successes, c85_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c85_cohensd <- esc_chisq(c85_chisquared,
+                         es.type = "d",
+                         totaln = c85_pop)$es
+
+
+c85_phi <- sqrt(c85_chisquared/c85_pop)
+
+c85_r <- c85_phi
+
+
+#============== 86. Kreitz et al. (2020) - Dataset 9 ===============
+
+# Compute effect sizes from percentages of noticers
+c86_pop <- 89
+c86_successes <- 68
+c86_success_percentage <- (c86_successes/c86_pop) * 100
+c86_success_proportion <- c86_success_percentage/100
+c86_failures <- c86_pop - c86_successes
+
+c86_chisquared <- unname(chisq.test(c(c86_successes, c86_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c86_cohensd <- esc_chisq(c86_chisquared,
+                         es.type = "d",
+                         totaln = c86_pop)$es
+
+
+c86_phi <- sqrt(c86_chisquared/c86_pop)
+
+c86_r <- c86_phi
+
+
+#============== 87. Kreitz et al. (2020) - Dataset 10 ===============
+
+# Compute effect sizes from percentages of noticers
+c87_pop <- 115
+c87_successes <- 81
+c87_success_percentage <- (c87_successes/c87_pop) * 100
+c87_success_proportion <- c87_success_percentage/100
+c87_failures <- c87_pop - c87_successes
+
+c87_chisquared <- unname(chisq.test(c(c87_successes, c87_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c87_cohensd <- esc_chisq(c87_chisquared,
+                         es.type = "d",
+                         totaln = c87_pop)$es
+
+
+c87_phi <- sqrt(c87_chisquared/c87_pop)
+
+c87_r <- c87_phi
+
+
+#============== 88. Kreitz et al. (2020) - Dataset 13 ===============
+
+# Compute effect sizes from percentages of noticers
+c88_pop <- 188
+c88_successes <- 131
+c88_success_percentage <- (c88_successes/c88_pop) * 100
+c88_success_proportion <- c88_success_percentage/100
+c88_failures <- c88_pop - c88_successes
+
+c88_chisquared <- unname(chisq.test(c(c88_successes, c88_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c88_cohensd <- esc_chisq(c88_chisquared,
+                         es.type = "d",
+                         totaln = c88_pop)$es
+
+
+c88_phi <- sqrt(c88_chisquared/c88_pop)
+
+c88_r <- c88_phi
+
+
+#============== 89. Kreitz et al. (2020) - Dataset 14 ===============
+
+# Compute effect sizes from percentages of noticers
+c89_pop <- 184
+c89_successes <- 120
+c89_success_percentage <- (c89_successes/c89_pop) * 100
+c89_success_proportion <- c89_success_percentage/100
+c89_failures <- c89_pop - c89_successes
+
+c89_chisquared <- unname(chisq.test(c(c89_successes, c89_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c89_cohensd <- esc_chisq(c89_chisquared,
+                         es.type = "d",
+                         totaln = c89_pop)$es
+
+
+c89_phi <- sqrt(c89_chisquared/c89_pop)
+
+c89_r <- c89_phi
+
+
+#============== 90. Kreitz et al. (2020) - Dataset 15 ===============
+
+# Compute effect sizes from percentages of noticers
+c90_pop <- 277
+c90_successes <- 209
+c90_success_percentage <- (c90_successes/c90_pop) * 100
+c90_success_proportion <- c90_success_percentage/100
+c90_failures <- c90_pop - c90_successes
+
+c90_chisquared <- unname(chisq.test(c(c90_successes, c90_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c90_cohensd <- esc_chisq(c90_chisquared,
+                         es.type = "d",
+                         totaln = c90_pop)$es
+
+
+c90_phi <- sqrt(c90_chisquared/c90_pop)
+
+c90_r <- c90_phi
+
+
+#============== 91. Kreitz et al. (2020) - Dataset 16 ===============
+
+# Compute effect sizes from percentages of noticers
+c91_pop <- 260
+c91_successes <- 82
+c91_success_percentage <- (c91_successes/c91_pop) * 100
+c91_success_proportion <- c91_success_percentage/100
+c91_failures <- c91_pop - c91_successes
+
+c91_chisquared <- unname(chisq.test(c(c91_successes, c91_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c91_cohensd <- (-1) * esc_chisq(c91_chisquared, # ES is negative
+                                es.type = "d",
+                                totaln = c91_pop)$es
+
+
+c91_phi <- sqrt(c91_chisquared/c91_pop) * (-1) # effect size is negative
+
+c91_r <- c91_phi
+
+
+#============== 92. Kreitz et al. (2020) - Dataset 2.1 ===============
+
+# Compute effect sizes from percentages of noticers
+c92_pop <- 172
+c92_successes <- 86
+c92_success_percentage <- (c92_successes/c92_pop) * 100
+c92_success_proportion <- c92_success_percentage/100
+c92_failures <- c92_pop - c92_successes
+
+c92_chisquared <- unname(chisq.test(c(c92_successes, c92_failures), 
+                                    p = c(0.5, 0.5))$statistic)
+
+
+c92_cohensd <- esc_chisq(c92_chisquared,
+                         es.type = "d",
+                         totaln = c92_pop)$es
+
+
+c92_phi <- sqrt(c92_chisquared/c92_pop)
+
+c92_r <- c92_phi
+
+
+#============== 93. Kreitz et al. (2020) - Dataset 2.2 ===============
+
+# Compute effect sizes from percentages of noticers
+c93_pop <- 172
+c93_successes <- NA
+c93_success_percentage <- NA
+c93_success_proportion <- NA
+c93_failures <- NA
+
+c93_chisquared <- NA
+
+
+c93_cohensd <- NA
+
+
+c93_phi <- NA
+
+c93_r <- NA
+
+
 #========================================#
 #==== Build vector with effect sizes =====
 #========================================#
 
 #=================== Cohen's d ====================
 effect_indices <- c(1:11, 41:45, 12:20, 22:28, 30, 32, 33, 35, 36, 
-                    38, 39, 46:57, 68, 69, 58:60, 70, 71, 61:67)
+                    38, 39, 46:57, 68, 69, 58:60, 70, 71, 61:67, 72:78, 80:93)
 awareness_cohensd_names <- paste("c", effect_indices, "_cohensd",
                                  sep = "")
 

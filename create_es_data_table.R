@@ -27,8 +27,7 @@ study_names <- c("ariga_2007_exp2",
                  "razpurker_pratt_2008_columns_rows", 
                  "razpurker_pratt_2008_columns_rows", 
                  "razpurker_pratt_2008_triangle_arrow",
-                 "razpurker_pratt_2008_triangle_arrow", 
-                 #"richards_2012_tracking", 
+                 "razpurker_pratt_2008_triangle_arrow",
                  "russell_driver_2005_exp1", 
                  "russell_driver_2005_exp1", 
                  "russell_driver_2005_exp2",
@@ -39,7 +38,6 @@ study_names <- c("ariga_2007_exp2",
                  "russell_driver_2005_exp4b", 
                  "russell_driver_2005_exp5",
                  "russell_driver_2005_exp5", 
-                 #"shafto_pitts_2015",
                  "schnuerch_2016_exp1",
                  "schnuerch_2016_exp2",
                  "wood_simons_2019_exp1",
@@ -69,7 +67,29 @@ study_names <- c("ariga_2007_exp2",
                  "lamy_2006_exp2",
                  "lamy_2006_exp3",
                  "lamy_2006_exp4",
-                 "lamy_2006_exp5"
+                 "lamy_2006_exp5",
+                 "pugnaghi_2020_exp1",
+                 "pugnaghi_2020_exp1",
+                 "pugnaghi_2020_exp2",
+                 "pugnaghi_2020_exp2",
+                 "nobre_2020",
+                 "pugnaghi_2019",
+                 "kreitz_2020_dataset1",
+                 #"kreitz_2020_dataset2",
+                 "kreitz_2020_dataset3",
+                 "kreitz_2020_dataset4",
+                 "kreitz_2020_dataset5",
+                 "kreitz_2020_dataset6",
+                 "kreitz_2020_dataset7",
+                 "kreitz_2020_dataset8",
+                 "kreitz_2020_dataset9",
+                 "kreitz_2020_dataset10",
+                 "kreitz_2020_dataset13",
+                 "kreitz_2020_dataset14",
+                 "kreitz_2020_dataset15",
+                 "kreitz_2020_dataset16",
+                 "kreitz_2020_dataset2",
+                 "kreitz_2020_dataset2"
 )
 
 
@@ -98,7 +118,6 @@ studies_outcomes <- c("ariga_2007_exp2",
                  "razpurker_pratt_2008_columns_rows_acc", 
                  "razpurker_pratt_2008_triangle_arrow_rt",
                  "razpurker_pratt_2008_triangle_arrow_acc", 
-                 #"richards_2012_tracking", 
                  "russell_driver_2005_exp1_acc", 
                  "russell_driver_2005_exp1_rt", 
                  "russell_driver_2005_exp2_acc",
@@ -109,7 +128,6 @@ studies_outcomes <- c("ariga_2007_exp2",
                  "russell_driver_2005_exp4b", 
                  "russell_driver_2005_exp5_acc",
                  "russell_driver_2005_exp5_rt", 
-                 #"shafto_pitts_2015",
                  "schnuerch_2016_exp1",
                  "schnuerch_2016_exp2",
                  "wood_simons_2019_exp1",
@@ -139,7 +157,29 @@ studies_outcomes <- c("ariga_2007_exp2",
                  "lamy_2006_exp2_different",
                  "lamy_2006_exp3",
                  "lamy_2006_exp4",
-                 "lamy_2006_exp5"
+                 "lamy_2006_exp5",
+                 "pugnaghi_2020_exp1_RT",
+                 "pugnaghi_2020_exp1_acc",
+                 "pugnaghi_2020_exp2_RT",
+                 "pugnaghi_2020_exp2_acc",
+                 "nobre_2020",
+                 "pugnaghi_2019",
+                 "kreitz_2020_dataset1",
+                 #"kreitz_2020_dataset2",
+                 "kreitz_2020_dataset3",
+                 "kreitz_2020_dataset4",
+                 "kreitz_2020_dataset5",
+                 "kreitz_2020_dataset6",
+                 "kreitz_2020_dataset7",
+                 "kreitz_2020_dataset8",
+                 "kreitz_2020_dataset9",
+                 "kreitz_2020_dataset10",
+                 "kreitz_2020_dataset13",
+                 "kreitz_2020_dataset14",
+                 "kreitz_2020_dataset15",
+                 "kreitz_2020_dataset16",
+                 "kreitz_2020_dataset2.1",
+                 "kreitz_2020_dataset2.2"
 )
 
 
@@ -169,7 +209,6 @@ us_relevance <- c("relevant", #ariga_2007_exp2
                   "irrelevant", #razpurker_pratt_2008_columns_rows_acc
                   "irrelevant", #razpurker_pratt_2008_triangle_arrow_rt
                   "irrelevant", #razpurker_pratt_2008_triangle_arrow_acc
-                  #"irrelevant", #richards_2012_tracking
                   "irrelevant", #russell_driver_2005_exp1_acc
                   "irrelevant", #russell_driver_2005_exp1_rt
                   "irrelevant", #russell_driver_2005_exp2_acc
@@ -180,7 +219,6 @@ us_relevance <- c("relevant", #ariga_2007_exp2
                   "irrelevant", #russell_driver_2005_exp4b_acc
                   "irrelevant", #russell_driver_2005_exp5_acc
                   "irrelevant", #russell_driver_2005_exp5_rt
-                  #"irrelevant", #shafto_pitts_2015
                   "irrelevant", #schnuerch_2016_exp1
                   "irrelevant", #schnuerch_2016_exp2,
                   "relevant", #"wood_simons_2019_exp1"
@@ -210,11 +248,33 @@ us_relevance <- c("relevant", #ariga_2007_exp2
                   "relevant", #"lamy_2006_exp2_different"
                   "irrelevant", #"lamy_2006_exp3_RT"
                   "irrelevant", #"lamy_2006_exp4_RT"
-                  "irrelevant" #"lamy_2006_exp5"
+                  "irrelevant", #"lamy_2006_exp5"
+                  "irrelevant", #"pugnaghi_2020_exp1_RT"
+                  "irrelevant", #"pugnaghi_2020_exp1_acc"
+                  "irrelevant", #"pugnaghi_2020_exp2_RT"
+                  "irrelevant", #"pugnaghi_2020_exp2_acc"
+                  "irrelevant", #"nobre_2020"
+                  "irrelevant", #"pugnaghi_2019"
+                  "irrelevant", #"kreitz_2020_dataset1"
+                  #"irrelevant", #"kreitz_2020_dataset2"
+                  "irrelevant", #"kreitz_2020_dataset3"
+                  "irrelevant", #"kreitz_2020_dataset4"
+                  "irrelevant", #"kreitz_2020_dataset5"
+                  "irrelevant", #"kreitz_2020_dataset6"
+                  "irrelevant", #"kreitz_2020_dataset7"
+                  "irrelevant", #"kreitz_2020_dataset8"
+                  "irrelevant", #"kreitz_2020_dataset9"
+                  "irrelevant", #"kreitz_2020_dataset10"
+                  "irrelevant", #"kreitz_2020_dataset13"
+                  "irrelevant", #"kreitz_2020_dataset14"
+                  "irrelevant", #"kreitz_2020_dataset15"
+                  "irrelevant", #"kreitz_2020_dataset16",
+                  "irrelevant", #"kreitz_2020_dataset2.1",
+                  "irrelevant" #"kreitz_2020_dataset2.2"
                   )
 
 
-#==== Gestalt study? ====
+#==== Gestalt study ====
 gestalt <- c("yes", #"ariga_2007_exp2"
              "no", #"beanland_pammer_2010_exp1A_fixating"
              "no", #"beanland_pammer_2010_exp1A_moving"
@@ -240,7 +300,6 @@ gestalt <- c("yes", #"ariga_2007_exp2"
              "yes", #razpurker_pratt_2008_columns_rows_acc
              "yes", #razpurker_pratt_2008_triangle_arrow_rt
              "yes", #razpurker_pratt_2008_triangle_arrow_acc
-             #"irrelevant", #richards_2012_tracking
              "yes", #russell_driver_2005_exp1_acc
              "yes", #russell_driver_2005_exp1_rt
              "yes", #russell_driver_2005_exp2_acc
@@ -251,7 +310,6 @@ gestalt <- c("yes", #"ariga_2007_exp2"
              "yes", #russell_driver_2005_exp4b_acc
              "yes", #russell_driver_2005_exp5_acc
              "yes", #russell_driver_2005_exp5_rt
-             #"irrelevant", #shafto_pitts_2015
              "no", #schnuerch_2016_exp1
              "no", #schnuerch_2016_exp2,
              "yes", #"wood_simons_2019_exp1"
@@ -281,10 +339,32 @@ gestalt <- c("yes", #"ariga_2007_exp2"
              "yes", #"lamy_2006_exp2_different"
              "yes", #"lamy_2006_exp3_RT"
              "yes", #"lamy_2006_exp4_RT"
-             "no" #"lamy_2006_exp5"
+             "no", #"lamy_2006_exp5"
+             "no", #"pugnaghi_2020_exp1_RT",
+             "no", #"pugnaghi_2020_exp1_acc",
+             "no", #"pugnaghi_2020_exp2_RT",
+             "no", #"pugnaghi_2020_exp2_acc",
+             "yes", #"nobre_2020",
+             "no", #"pugnaghi_2019",
+             "no", #"kreitz_2020_dataset1",
+             #"no", #"kreitz_2020_dataset2",
+             "no", #"kreitz_2020_dataset3",
+             "no", #"kreitz_2020_dataset4",
+             "no", #"kreitz_2020_dataset5",
+             "no", #"kreitz_2020_dataset6",
+             "no", #"kreitz_2020_dataset7",
+             "no", #"kreitz_2020_dataset8",
+             "no", #"kreitz_2020_dataset9",
+             "no", #"kreitz_2020_dataset10",
+             "no", #"kreitz_2020_dataset13",
+             "no", #"kreitz_2020_dataset14",
+             "no", #"kreitz_2020_dataset15",
+             "no", #"kreitz_2020_dataset16"
+             "no", #"kreitz_2020_dataset2.1"
+             "no" #"kreitz_2020_dataset2.2"
 )
 
-#======= Is implicit processing measured by RT or acc? ======
+#======= Implicit measure ======
 implicit_measure <- c("RT", #ariga_2007_exp2  
                       "accuracy", #beanland_pammer_2010_exp1A_fixating
                       "accuracy", #beanland_pammer_2010_exp1A_moving
@@ -310,7 +390,6 @@ implicit_measure <- c("RT", #ariga_2007_exp2
                       "accuracy", #razpurker_pratt_2008_columns_rows_acc
                       "RT", #razpurker_pratt_2008_triangle_arrow_rt
                       "accuracy", #razpurker_pratt_2008_triangle_arrow_acc
-                      #"accuracy", #richards_2012_tracking
                       "accuracy", #russell_driver_2005_exp1_acc
                       "RT", #russell_driver_2005_exp1_rt
                       "accuracy", #russell_driver_2005_exp2_acc
@@ -321,7 +400,6 @@ implicit_measure <- c("RT", #ariga_2007_exp2
                       "accuracy", #russell_driver_2005_exp4b_acc
                       "accuracy", #russell_driver_2005_exp5_acc
                       "RT", #russell_driver_2005_exp5_rt
-                      #NA, #shafto_pitts_2015
                       "RT", #schnuerch_2016_exp1
                       "RT", #schnuerch_2016_exp2,
                       "accuracy", #"wood_simons_2019_exp1"
@@ -351,7 +429,29 @@ implicit_measure <- c("RT", #ariga_2007_exp2
                       "accuracy", #"lamy_2006_exp2_different"
                       "RT", #"lamy_2006_exp3_RT"
                       "RT", #"lamy_2006_exp4_RT"
-                      "RT" #"lamy_2006_exp5"
+                      "RT", #"lamy_2006_exp5"
+                      "RT", #"pugnaghi_2020_exp1_RT"
+                      "accuracy", #"pugnaghi_2020_exp1_acc"
+                      "RT", #"pugnaghi_2020_exp2_RT"
+                      "accuracy", #"pugnaghi_2020_exp2_acc"
+                      "RT", #"nobre_2020"
+                      "RT", #"pugnaghi_2019"
+                      "accuracy", #"kreitz_2020_dataset1"
+                      #"accuracy", #"kreitz_2020_dataset2"
+                      "accuracy", #"kreitz_2020_dataset3"
+                      "accuracy", #"kreitz_2020_dataset4"
+                      "accuracy", #"kreitz_2020_dataset5"
+                      "accuracy", #"kreitz_2020_dataset6"
+                      "accuracy", #"kreitz_2020_dataset7"
+                      "accuracy", #"kreitz_2020_dataset8"
+                      "accuracy", #"kreitz_2020_dataset9"
+                      "accuracy", #"kreitz_2020_dataset10"
+                      "accuracy", #"kreitz_2020_dataset13"
+                      "accuracy", #"kreitz_2020_dataset14"
+                      "accuracy", #"kreitz_2020_dataset15"
+                      "accuracy", #"kreitz_2020_dataset16"
+                      "accuracy", #"kreitz_2020_dataset2.1"
+                      "accuracy" #"kreitz_2020_dataset2.2"
                       )
 
 #=========== How many trials were used to assess implicit processing? =============
@@ -380,7 +480,6 @@ N_trials_implicit <- c(1, #ariga_2007_exp2
                        320, #razpurker_pratt_2008_columns_rows_acc
                        320, #razpurker_pratt_2008_triangle_arrow_rt
                        320, #razpurker_pratt_2008_triangle_arrow_acc
-                       #1, #richards_2012_tracking
                        480, #russell_driver_2005_exp1_acc
                        480, #russell_driver_2005_exp1_rt
                        480, #russell_driver_2005_exp2_acc
@@ -391,7 +490,6 @@ N_trials_implicit <- c(1, #ariga_2007_exp2
                        600, #russell_driver_2005_exp4b_acc
                        600, #russell_driver_2005_exp5_acc
                        600, #russell_driver_2005_exp5_rt
-                       #216, #shafto_pitts_2015
                        150, #schnuerch_2016_exp1
                        192, #schnuerch_2016_exp2
                        1, #"wood_simons_2019_exp1"
@@ -421,10 +519,33 @@ N_trials_implicit <- c(1, #ariga_2007_exp2
                        16, #"lamy_2006_exp2_different"
                        180, #"lamy_2006_exp3_RT"
                        180, #"lamy_2006_exp4_RT"
-                       180 #"lamy_2006_exp5"
+                       180, #"lamy_2006_exp5"
+                       160, #"pugnaghi_2020_exp1_RT"
+                       160, #"pugnaghi_2020_exp1_acc"
+                       160, #"pugnaghi_2020_exp2_RT"
+                       160, #"pugnaghi_2020_exp2_acc"
+                       240, #"nobre_2020"
+                       220, #"pugnaghi_2019"
+                       1, #"kreitz_2020_dataset1"
+                       #1, #"kreitz_2020_dataset2"
+                       1, #"kreitz_2020_dataset3"
+                       1, #"kreitz_2020_dataset4"
+                       1, #"kreitz_2020_dataset5"
+                       1, #"kreitz_2020_dataset6"
+                       1, #"kreitz_2020_dataset7"
+                       1, #"kreitz_2020_dataset8"
+                       1, #"kreitz_2020_dataset9"
+                       1, #"kreitz_2020_dataset10"
+                       1, #"kreitz_2020_dataset13"
+                       1, #"kreitz_2020_dataset14"
+                       1, #"kreitz_2020_dataset15"
+                       1, #"kreitz_2020_dataset16"
+                       1, #"kreitz_2020_dataset2.1"
+                       1 #"kreitz_2020_dataset2.2"
                        )
 
-#======== How many subjects in the sample for implicit processing testing? ===========
+#======== N participants implicit =========
+# How many subjects in the sample for implicit processing testing?
 N_participants_implicit <- c(20, #ariga_2007_exp2  
                             27, #beanland_pammer_2010_exp1A_fixating
                             31, #beanland_pammer_2010_exp1A_moving
@@ -450,7 +571,6 @@ N_participants_implicit <- c(20, #ariga_2007_exp2
                             14, #razpurker_pratt_2008_columns_rows_acc
                             14, #razpurker_pratt_2008_triangle_arrow_rt
                             14, #razpurker_pratt_2008_triangle_arrow_acc
-                            #131, #richards_2012_tracking
                             25, #russell_driver_2005_exp1_acc
                             25, #russell_driver_2005_exp1_rt
                             28, #russell_driver_2005_exp2_acc
@@ -461,7 +581,6 @@ N_participants_implicit <- c(20, #ariga_2007_exp2
                             20, #russell_driver_2005_exp4b_acc
                             24, #russell_driver_2005_exp5_acc
                             24, #russell_driver_2005_exp5_rt
-                            #15, #shafto_pitts_2015
                             61, #schnuerch_2016_exp1
                             58, #schnuerch_2016_exp2
                             175, #"wood_simons_2019_exp1"
@@ -491,13 +610,33 @@ N_participants_implicit <- c(20, #ariga_2007_exp2
                             8, #"lamy_2006_exp2_different"
                             9, #"lamy_2006_exp3_RT"
                             9, #"lamy_2006_exp4_RT"
-                            11 #"lamy_2006_exp5"
+                            11, #"lamy_2006_exp5"
+                            65, #"pugnaghi_2020_exp1_RT"
+                            65, #"pugnaghi_2020_exp1_acc"
+                            102, #"pugnaghi_2020_exp2_RT"
+                            102, #"pugnaghi_2020_exp2_acc"
+                            13, #"nobre_2020"
+                            201, #"pugnaghi_2019"
+                            69, #"kreitz_2020_dataset1"
+                            #86, #"kreitz_2020_dataset2"
+                            62, #"kreitz_2020_dataset3"
+                            64, #"kreitz_2020_dataset4"
+                            38, #"kreitz_2020_dataset5"
+                            290, #"kreitz_2020_dataset6"
+                            42, #"kreitz_2020_dataset7"
+                            33, #"kreitz_2020_dataset8"
+                            21, #"kreitz_2020_dataset9"
+                            34, #"kreitz_2020_dataset10"
+                            57, #"kreitz_2020_dataset13"
+                            64, #"kreitz_2020_dataset14"
+                            68, #"kreitz_2020_dataset15"
+                            178, #"kreitz_2020_dataset16"
+                            86, #"kreitz_2020_dataset2.1"
+                            86 #"kreitz_2020_dataset2.2"
                             )
 
 
-
-
-#======= In how many trials was awareness assessed (how many assessments)? ========
+#======= Fow many assessments of awareness? ========
 N_trials_awareness <- c(1, #ariga_2007_exp2  
                         1, #beanland_pammer_2010_exp1A_fixating
                         1, #beanland_pammer_2010_exp1A_moving
@@ -523,7 +662,6 @@ N_trials_awareness <- c(1, #ariga_2007_exp2
                         1, #razpurker_pratt_2008_columns_rows_acc
                         1, #razpurker_pratt_2008_triangle_arrow_rt
                         1, #razpurker_pratt_2008_triangle_arrow_acc
-                        #1, #richards_2012_tracking
                         1, #russell_driver_2005_exp1_acc
                         1, #russell_driver_2005_exp1_rt
                         1, #russell_driver_2005_exp2_acc
@@ -534,7 +672,6 @@ N_trials_awareness <- c(1, #ariga_2007_exp2
                         1, #russell_driver_2005_exp4b_acc
                         1, #russell_driver_2005_exp5_acc
                         1, #russell_driver_2005_exp5_rt
-                        #1, #shafto_pitts_2015
                         1, #schnuerch_2016_exp1
                         1, #schnuerch_2016_exp2
                         1, #"wood_simons_2019_exp1"
@@ -564,7 +701,29 @@ N_trials_awareness <- c(1, #ariga_2007_exp2
                         1, #"lamy_2006_exp2_different"
                         1, #"lamy_2006_exp3_RT"
                         1, #"lamy_2006_exp4_RT"
-                        1 #"lamy_2006_exp5"
+                        1, #"lamy_2006_exp5"
+                        1, #"pugnaghi_2020_exp1_RT"
+                        1, #"pugnaghi_2020_exp1_acc"
+                        1, #"pugnaghi_2020_exp2_RT"
+                        1, #"pugnaghi_2020_exp2_acc"
+                        1, #"nobre_2020"
+                        1, #"pugnaghi_2019"
+                        1, #"kreitz_2020_dataset1"
+                        #1, #"kreitz_2020_dataset2"
+                        1, #"kreitz_2020_dataset3"
+                        1, #"kreitz_2020_dataset4"
+                        1, #"kreitz_2020_dataset5"
+                        1, #"kreitz_2020_dataset6"
+                        1, #"kreitz_2020_dataset7"
+                        1, #"kreitz_2020_dataset8"
+                        1, #"kreitz_2020_dataset9"
+                        1, #"kreitz_2020_dataset10"
+                        1, #"kreitz_2020_dataset13"
+                        1, #"kreitz_2020_dataset14"
+                        1, #"kreitz_2020_dataset15"
+                        1, #"kreitz_2020_dataset16"
+                        1, #"kreitz_2020_dataset2.1"
+                        1 #"kreitz_2020_dataset2.2"
                         )
 
 #===== How many subjects in the sample for awareness testing? ======
@@ -593,7 +752,6 @@ N_participants_awareness <- c(20, #ariga_2007_exp2
                               14, #razpurker_pratt_2008_columns_rows_acc
                               14, #razpurker_pratt_2008_triangle_arrow_rt
                               14, #razpurker_pratt_2008_triangle_arrow_acc
-                              #131, #richards_2012_tracking
                               25, #russell_driver_2005_exp1_acc
                               25, #russell_driver_2005_exp1_rt
                               28, #russell_driver_2005_exp2_acc
@@ -604,7 +762,6 @@ N_participants_awareness <- c(20, #ariga_2007_exp2
                               21, #russell_driver_2005_exp4b_acc
                               24, #russell_driver_2005_exp5_acc
                               24, #russell_driver_2005_exp5_rt
-                              #30, #shafto_pitts_2015
                               61, #schnuerch_2016_exp1
                               61, #schnuerch_2016_exp2
                               175, #"wood_simons_2019_exp1"
@@ -634,7 +791,29 @@ N_participants_awareness <- c(20, #ariga_2007_exp2
                               8, #"lamy_2006_exp2_different"
                               9, #"lamy_2006_exp3_RT"
                               9, #"lamy_2006_exp4_RT"
-                              11 #"lamy_2006_exp5"
+                              11, #"lamy_2006_exp5"
+                              75, #"pugnaghi_2020_exp1_RT"
+                              75, #"pugnaghi_2020_exp1_acc"
+                              106, #"pugnaghi_2020_exp2_RT"
+                              106, #"pugnaghi_2020_exp2_acc"
+                              30, #"nobre_2020"
+                              212, #"pugnaghi_2019"
+                              116, #"kreitz_2020_dataset1"
+                              #172, #"kreitz_2020_dataset2"
+                              111, #"kreitz_2020_dataset3"
+                              110, #"kreitz_2020_dataset4"
+                              106, #"kreitz_2020_dataset5"
+                              554, #"kreitz_2020_dataset6"
+                              95, #"kreitz_2020_dataset7"
+                              90, #"kreitz_2020_dataset8"
+                              89, #"kreitz_2020_dataset9"
+                              115, #"kreitz_2020_dataset10"
+                              188, #"kreitz_2020_dataset13"
+                              184, #"kreitz_2020_dataset14"
+                              277, #"kreitz_2020_dataset15"
+                              260, #"kreitz_2020_dataset16"
+                              172, #"kreitz_2020_dataset2.1"
+                              172 #"kreitz_2020_dataset2.2"
                               )
 
 #====== Was the result for the implicit test significant? =======
@@ -663,7 +842,6 @@ implicit_significance <- c("no", #ariga_2007_exp2
                   "yes", #razpurker_pratt_2008_columns_rows_acc
                   "yes", #razpurker_pratt_2008_triangle_arrow_rt
                   "yes", #razpurker_pratt_2008_triangle_arrow_acc
-                  #"no", #richards_2012_tracking
                   "yes", #russell_driver_2005_exp1_acc
                   "no", #russell_driver_2005_exp1_rt
                   "yes", #russell_driver_2005_exp2_acc
@@ -674,7 +852,6 @@ implicit_significance <- c("no", #ariga_2007_exp2
                   "yes", #russell_driver_2005_exp4b_acc
                   "no", #russell_driver_2005_exp5_acc
                   "no", #russell_driver_2005_exp5_rt
-                  #"yes", #shafto_pitts_2015
                   "yes", #schnuerch_2016_exp1
                   "yes", #schnuerch_2016_exp2
                   "yes", #"wood_simons_2019_exp1"
@@ -704,7 +881,29 @@ implicit_significance <- c("no", #ariga_2007_exp2
                   "yes", #"lamy_2006_exp2_different"
                   "yes", #"lamy_2006_exp3_RT"
                   "yes", #"lamy_2006_exp4_RT"
-                  "yes" #"lamy_2006_exp5"
+                  "yes", #"lamy_2006_exp5"
+                  "yes", #"pugnaghi_2020_exp1_RT"
+                  "yes", #"pugnaghi_2020_exp1_acc"
+                  "no", #"pugnaghi_2020_exp2_RT"
+                  "yes", #"pugnaghi_2020_exp2_acc"
+                  "no", #"nobre_2020"
+                  "yes", #"pugnaghi_2019"
+                  "yes", #"kreitz_2020_dataset1"
+                  #"yes", #"kreitz_2020_dataset2"
+                  "yes", #"kreitz_2020_dataset3"
+                  "no", #"kreitz_2020_dataset4"
+                  "no", #"kreitz_2020_dataset5"
+                  "yes", #"kreitz_2020_dataset6"
+                  "yes", #"kreitz_2020_dataset7"
+                  "yes", #"kreitz_2020_dataset8"
+                  "yes", #"kreitz_2020_dataset9"
+                  "no", #"kreitz_2020_dataset10"
+                  "no", #"kreitz_2020_dataset13"
+                  "no", #"kreitz_2020_dataset14"
+                  "no", #"kreitz_2020_dataset15"
+                  "no", #"kreitz_2020_dataset16"
+                  "yes", #"kreitz_2020_dataset2.1"
+                  "yes" #"kreitz_2020_dataset2.2"
                   )
 
 #====== Gray literature =======
@@ -733,7 +932,6 @@ gray_literature <- c("no", #ariga_2007_exp2
                      "no", #razpurker_pratt_2008_columns_rows_acc
                      "no", #razpurker_pratt_2008_triangle_arrow_rt
                      "no", #razpurker_pratt_2008_triangle_arrow_acc
-                     #"no", #richards_2012_tracking
                      "no", #russell_driver_2005_exp1_acc
                      "no", #russell_driver_2005_exp1_rt
                      "no", #russell_driver_2005_exp2_acc
@@ -744,7 +942,6 @@ gray_literature <- c("no", #ariga_2007_exp2
                      "no", #russell_driver_2005_exp4b_acc
                      "no", #russell_driver_2005_exp5_acc
                      "no", #russell_driver_2005_exp5_rt
-                     #"no", #shafto_pitts_2015
                      "no", #schnuerch_2016_exp1
                      "no", #schnuerch_2016_exp2
                      "no", #"wood_simons_2019_exp1"
@@ -774,8 +971,120 @@ gray_literature <- c("no", #ariga_2007_exp2
                      "no", #"lamy_2006_exp2_different"
                      "no", #"lamy_2006_exp3_RT"
                      "no", #"lamy_2006_exp4_RT"
-                     "no" #"lamy_2006_exp5"
+                     "no", #"lamy_2006_exp5"
+                     "no", #"pugnaghi_2020_exp1_RT"
+                     "no", #"pugnaghi_2020_exp1_acc"
+                     "no", #"pugnaghi_2020_exp2_RT"
+                     "no", #"pugnaghi_2020_exp2_acc"
+                     "no", #"nobre_2020"
+                     "no", #"pugnaghi_2019"
+                     "no", #"kreitz_2020_dataset1"
+                     #"no", #"kreitz_2020_dataset2"
+                     "no", #"kreitz_2020_dataset3"
+                     "no", #"kreitz_2020_dataset4"
+                     "no", #"kreitz_2020_dataset5"
+                     "no", #"kreitz_2020_dataset6"
+                     "no", #"kreitz_2020_dataset7"
+                     "no", #"kreitz_2020_dataset8"
+                     "no", #"kreitz_2020_dataset9"
+                     "no", #"kreitz_2020_dataset10"
+                     "no", #"kreitz_2020_dataset13"
+                     "no", #"kreitz_2020_dataset14"
+                     "no", #"kreitz_2020_dataset15"
+                     "no", #"kreitz_2020_dataset16"
+                     "no", #"kreitz_2020_dataset2.1"
+                     "no" #"kreitz_2020_dataset2.2"
                      )
+
+#====== Static vs dynamic =======
+static_dynamic <- c("static", #ariga_2007_exp2  
+                     "dynamic", #beanland_pammer_2010_exp1A_fixating
+                     "dynamic", #beanland_pammer_2010_exp1A_moving
+                     "dynamic", #beanland_pammer_2010_exp2_slow_us
+                     "dynamic", #beanland_pammer_2010_exp2_fast_us
+                     "static", #gabay_2012_exp1
+                     "static", #gabay_2012_exp2
+                     "static", #lo_yeh_2008_exp1_200ms
+                     "static", #lo_yeh_2008_exp1_500ms
+                     "static", #lo_yeh_2008_exp2_200ms
+                     "static", #lo_yeh_2008_exp2_500ms
+                     "static", #mack_and_rock_2000_exp1,
+                     "static", #mack_and_rock_2000_exp2,
+                     "static", #mack_and_rock_2000_exp3,
+                     "static", #mack_and_rock_2000_exp4,
+                     "static", #mack_and_rock_2000_exp5,
+                     "static", #moore_egeth_1997_exp1
+                     "static", #moore_egeth_1997_exp3
+                     "static", #moore_2003_exp3
+                     "static", #moore_2004
+                     "dynamic", #most_2005_exp1to7pooled
+                     "static", #razpurker_pratt_2008_columns_rows_rt
+                     "static", #razpurker_pratt_2008_columns_rows_acc
+                     "static", #razpurker_pratt_2008_triangle_arrow_rt
+                     "static", #razpurker_pratt_2008_triangle_arrow_acc
+                     "static", #russell_driver_2005_exp1_acc
+                     "static", #russell_driver_2005_exp1_rt
+                     "static", #russell_driver_2005_exp2_acc
+                     "static", #russell_driver_2005_exp2_rt
+                     "static", #russell_driver_2005_exp3_acc
+                     "static", #russell_driver_2005_exp3_rt
+                     "static", #russell_driver_2005_exp4a_acc
+                     "static", #russell_driver_2005_exp4b_acc
+                     "static", #russell_driver_2005_exp5_acc
+                     "static", #russell_driver_2005_exp5_rt
+                     "static", #schnuerch_2016_exp1
+                     "static", #schnuerch_2016_exp2
+                     "static", #"wood_simons_2019_exp1"
+                     "static",  #"wood_simons_2019_exp2"
+                     "static",  #"rashal_2017_exp1_RT"
+                     "static",  #"rashal_2017_exp2_acc"
+                     "static",   #"rashal_2017_exp3_RT"
+                     "static",  #"rashal_2017_exp4_acc"
+                     "static",  #"rashal_2017_exp4_RT",
+                     "static",  #"rashal_2017_exp5_acc"
+                     "static", #"rashal_2017_exp5_RT"
+                     "static", #"rashal_2017_exp6_acc"
+                     "static", #"rashal_2017_exp6_RT"
+                     "static", #"kimchi_2004_exp_1_column_row_color_RT"
+                     "static", #"kimchi_2004_exp_1_triangle_arrow_color_acc"
+                     "static", #"kimchi_2004_exp_1_triangle_arrow_acc"
+                     "static", #"kimchi_2004_exp_1_connected_triangle_arrow_RT",
+                     "static", #"kimchi_2004_exp_1_connected_triangle_arrow_acc",
+                     "static", #"kimchi_2004_exp_2_square_cross_color_acc"
+                     "static", #"kimchi_2004_exp_2_square_cross_RT"
+                     "static", #"kimchi_2004_exp_2_square_cross_acc"
+                     "static", #"kimchi_2004_exp_2_disconnected_square_cross_RT",
+                     "static", #"kimchi_2004_exp_2_disconnected_square_cross_acc",
+                     "static", #"kimchi_2008_exp_1_RT"
+                     "static", #"kimchi_2008_exp_1_acc"
+                     "static", #"lamy_2006_exp2_same"
+                     "static", #"lamy_2006_exp2_different"
+                     "static", #"lamy_2006_exp3_RT"
+                     "static", #"lamy_2006_exp4_RT"
+                     "static", #"lamy_2006_exp5"
+                    "static", #"pugnaghi_2020_exp1_RT"
+                    "static", #"pugnaghi_2020_exp1_acc"
+                    "static", #"pugnaghi_2020_exp2_RT"
+                    "static", #"pugnaghi_2020_exp2_acc"
+                    "static", #"nobre_2020"
+                    "static", #"pugnaghi_2019"
+                    "static", #"kreitz_2020_dataset1"
+                    #NA, #"kreitz_2020_dataset2" - will be replaced by separate entries for each experiment
+                    "static", #"kreitz_2020_dataset3"
+                    "static", #"kreitz_2020_dataset4"
+                    "static", #"kreitz_2020_dataset5"
+                    "static", #"kreitz_2020_dataset6"
+                    "dynamic", #"kreitz_2020_dataset7"
+                    "dynamic", #"kreitz_2020_dataset8"
+                    "dynamic", #"kreitz_2020_dataset9"
+                    "dynamic", #"kreitz_2020_dataset10"
+                    "static", #"kreitz_2020_dataset13"
+                    "static", #"kreitz_2020_dataset14"
+                    "static", #"kreitz_2020_dataset15"
+                    "dynamic", #"kreitz_2020_dataset16"
+                    "static", #"kreitz_2020_dataset2.1"
+                    "dynamic" #"kreitz_2020_dataset2.2"
+)
 
 #======== Categorize experiments as inattention paradigms or not; 0 = no, 1 = yes ========
 inattention_paradigm <- c(rep("no", 21), #ariga_2007_exp2 to most_2005_exp1to7pooled
@@ -785,7 +1094,7 @@ inattention_paradigm <- c(rep("no", 21), #ariga_2007_exp2 to most_2005_exp1to7po
                                    rep("no",2), #schunerch_2016
                                    rep("no", 2), #wood_simons_2019
                                    rep("yes", 21), #rashal_2017, kimchi_2004, kimchi_2008
-                          rep("no", 5) #"lamy_2006"
+                          rep("no", 26) #"lamy_2006", pughnaghi_2020, nobre_2020, pugnaghi_2019, kreitz_2020
                           )
 
 #======== Categorize experiments as group assessment of awareness or not ========
@@ -796,11 +1105,11 @@ group_aware_assess <- c("yes", #ariga_2007_exp2
                                  rep("yes",4), # moore_egeth_1997_exp1 to moore_2004  
                                  rep("no",1), #most_2005_exp1to7pooled
                                  rep("yes", 4), #razpurker_pratt_2008
-                                 #0, #richards_2012_tracking
                                  rep("yes", 10), #russsel_driver_2005
                                  rep("no",2), #schunerch_2016
                                  rep("no", 2), #wood_simons_2019
-                                 rep("yes", 26) #rashal_2017, kimchi_2004, kimchi_2008,lamy_2006 
+                                 rep("yes", 26), #rashal_2017, kimchi_2004, kimchi_2008,lamy_2006
+                                 rep("no", 21) #pughnaghi_2020, nobre_2020, pugnaghi_2019, kreitz_2020
                         )
 
 #============= Create table by merging columns ============
@@ -816,7 +1125,9 @@ es_table <- as_tibble(data.frame("study"=study_names,
                                  "gray_literature"=gray_literature,
                                  "inattention"=inattention_paradigm,
                                  "group_awareness"=group_aware_assess,
-                                 "gestalt_study"=gestalt))
+                                 "gestalt_study"=gestalt,
+                                 "static_dynamic"=static_dynamic))
+
 es_table$individual_studies <- as.character(es_table$study)
 
 str(es_table)
