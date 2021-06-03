@@ -18,9 +18,6 @@ library(gridExtra)
 
 # PET-PEESE
 source("./PETPEESE/PETPEESE_functions.R")
-
-# 3PSM
-library(weightr)
 #=====================================================#
 
 # Save defaults
@@ -74,7 +71,7 @@ dev.off()
 # They very similar, so we can go with the two-level model
 
 # 3PSM to compare with PET results
-weightfunct(es_table_clean$implicit_z_rs, 
+weightr::weightfunct(es_table_clean$implicit_z_rs, 
             es_table_clean$variance_implicit_z_rs)
 
 
