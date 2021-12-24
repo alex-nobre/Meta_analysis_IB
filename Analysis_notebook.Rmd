@@ -256,19 +256,19 @@ When an implicit effect is computed from proportions or percentage, effect sizes
 We computed the phi statistic, which is equivalent to the r correlation coefficient, using the formulas in Rosenthal and Dimatteo (2001, p. 72) and Navarro (2015, section 12.4). 
 
 
-### Cohen's drm from t-values
+### Cohen's dz and drm from t-values
 
-We use the formula for computation of drm in Dunlap et al. [-@Dunlap1996] to convert cohen's d to drm.
+#### Cohen's dz
 
-[insert equations]
+We computed cohen's dz due to the repeated measures nature of the designs. Cohen's dz is computed using the formula from Rosenthal (1991, p. 15):
 
-Formula 1. from the equations in Dunlap et al. [-@Dunlap1996, p. 171, formulas 2 and 3]:
+d = t/sqrt(df)
 
-compute.cohens.drm <- function(cohensd, exp_cor_pairs, exp_n) {
-  cohens.drm <- (cohensd * sqrt((2 *(1 - exp_cor_pairs))/exp_n))/(sqrt(2/exp_n))
-}
+We did NOT employ Lakens' equation 7, as this is incorrect (used n instead of dfs).
 
-Formula 2. from Morris and DeShon [@Morris2002, p. 111, formula 12], formula from Lakens (https://github.com/Lakens/ANOVA_power_simulation/blob/master/d_to_dz.R):
+Whenever necessary, we converted from cohen's d to d using the following equation:
+
+Formula 2 from Morris and DeShon [@Morris2002, p. 111, formula 12], formula from Lakens (https://github.com/Lakens/ANOVA_power_simulation/blob/master/d_to_dz.R):
 
 d_to_dz <- function(d, r){
   dz <- d/(sqrt(2*(1-r)))
@@ -278,14 +278,89 @@ d_to_dz <- function(d, r){
 }
 
 
+#### Cohen's drm
+We chose not to employ cohen's drm, following Lakens (2013), who recommends against it. Regardless, our initial approach was to use the formula for computation of drm in Dunlap et al. [-@Dunlap1996] to convert cohen's d to drm.
+
+[insert equations]
+
+Formula 1. from the equations in Dunlap et al. [-@Dunlap1996, p. 171, formulas 2 and 3]:
+
+compute.cohens.drm <- function(cohensd, exp_cor_pairs, exp_n) {
+  cohens.drm <- (cohensd * sqrt((2 *(1 - exp_cor_pairs))/exp_n))/(sqrt(2/exp_n))
+}
+
+The code previously employed was the following:
+
+```{r}
+# Compute Cohen's drm from cohen's d
+
+#cor_pairs_names <- paste("c", effect_indices, "_cor_pairs",
+#                                sep = "")
+
+# Function to compute
+# compute.cohens.drm <- function(cohensd, r){
+#   dz <- cohensd/(sqrt(2*(1-r)))
+# }
+# 
+# 
+# for(index in effect_indices) {
+#   exp_r_name <- paste("c", index, "_cor_pairs", sep = "")
+#   cohensd_name <- paste("c", index, "_cohensd", sep = "")
+#   cohensdrm_name <- paste("c", index, "_cohensdrm", sep = "")
+#   if(exists(exp_r_name)) {
+#     assign(cohensdrm_name, compute.cohens.drm(get(cohensd_name), get(exp_r_name)))
+#   } else {
+#     assign(cohensdrm_name, compute.cohens.drm(get(cohensd_name), cor_pairs))
+#   }
+# }
+
+# cohen's drm
+# implicit_cohensdrm_names <- paste("c", effect_indices, "_cohensdrm",
+#                                 sep = "")
+# 
+# implicit_cohensdrm <- map_dbl(implicit_cohensdrm_names, get)
+# 
+# # Compute variance of drm
+# compute.variance.drm <- function(cohensdrm, r, n) {
+#   (1/n + (cohensdrm)^2/2*n) * 2*(1-r)
+# }
+# 
+# 
+# 
+# for(index in effect_indices) {
+#   exp_r_name <- paste("c", index, "_cor_pairs", sep = "")
+#   cohensdrm_name <- paste("c", index, "_cohensdrm", sep = "")
+#   varianced_name <- paste("c", index, "_variancedrm", sep = "")
+#   n_name <- paste("c", index, "_n", sep = "")
+#   if(exists(exp_r_name)) {
+#     assign(varianced_name, compute.variance.drm(get(cohensdrm_name), get(exp_r_name), get(n_name)))
+#   } else {
+#     assign(varianced_name, compute.variance.drm(get(cohensdrm_name), cor_pairs, get(n_name)))
+#   }
+# }
+# 
+# 
+# # cohen's drm variances
+# implicit_variancedrm_names <- paste("c", effect_indices, "_variancedrm",
+#                                   sep = "")
+# 
+# implicit_variancedrm <- map_dbl(implicit_variancedrm_names, get)
+
+#hedges_g(implicit_cohensdrm, implicit_totaln)
+```
+
+
+We opted to standardize all effect sizes in r, due to its advantages. This includes being able to compare distinct designs. According to Rosenthal (1991, p. 17):
+
+"Thus when we employ r as our effect size estimate, we need not make any special adjustment in moving from t tests for independent to those for correlated observations."
 
 ### r from t-values or f-values
 
-Formula taken from Rosenthal and Dimatteo (2001, p. 72)
+Formula taken from Rosenthal and Dimatteo (2001, p. 72). This is independent of the design (between or within).
 
 ### r from z-values
 
-Formula taken from Rosnow and Rosenthal (2003, p. 231), formula 29.
+Formula taken from Rosnow and Rosenthal (2003, p. 231), formula 29. This is independent of the design (between or within).
 
 
 ### Computation of correlations to calculate variance of d for hedge's g
@@ -311,8 +386,27 @@ Three datasets were available to compute the correlation estimate: Razpurker-Apf
 
 ## Conversion between effect sizes:
 
-* From d to r: formulas taken from Rosenthal and Dimatteo (2001, p. 71)
+* From r to d: The formula presented in [@ellis] as well as in Rosenthal and Dimatteo (2001, p. 71) is:
 
+cohensd = (2 * r)/sqrt(1-(r ** 2))
+
+However, this is the formula for between-subject designs. For within-subject designs, the formula is (inferred from formulas 2.8 and 2.13 of Rosenthal, 1991, p. 15):
+
+cohensd = r/sqrt(1-(r ** 2))
+
+According to Rosenthal (1991, p. 17):
+
+"That is not the situation for equations 2.12 and
+2.13, however. When the effect size estimates are the mean differences divided either by S or by u,the definition of the size of the study changes by a factor of 2 in going from t for independent observations to t for correlated
+observations."
+
+Thus, we eliminated the 2 multipling the numerator in the between-subjects equation. This formula can also be arrived at by rearranging equations 2.8 and 2.13.
+
+* From d to r: 
+
+The formulas in Rosenthal and Dimatteo (2001, p. 71) are for between-subject designs. Although r can be computed from t and f statistics independently of the design, the relationship between r and d does depend on the design. The formula to compute r from d in within-subject designs is:
+
+r = sqrt(d ** 2/(d **2 + 1))
 
 
 ## Calculate implicit effect sizes by study

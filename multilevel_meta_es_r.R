@@ -65,20 +65,21 @@ source("create_es_data_table.R")
 
 # Add columns with effect sizes
 # replace ds by computed cohens ds
-#es_table$implicit_d <- implicit_cohensd
-es_table$implicit_d <- implicit_cohensdrm
+es_table$implicit_d <- implicit_cohensd
+# es_table$implicit_d <- implicit_cohensdrm
 
-## Create variables to compute Hedges' g (formulas from Borestein's Introduction to Meta-Analysis, 2009) 
+## Create variables to compute Hedges' g 
+## (formulas from Borestein's Introduction to Meta-Analysis, 2009) 
 ## for both implicit and awareness effect sizes
 
 ### Implicit ES
 
-# # Compute variance of d (formula 4.28)
+# Compute variance and sd of d (formulas 4.28 and 4.29)
 es_table$variance_implicit_d <- (1/es_table$N_participants_implicit +
                                    (es_table$implicit_d)^2/2*es_table$N_participants_implicit) * 2*(1-cor_pairs)
 
+es_table$se_implicit_d <- sqrt(es_table$variance_implicit_d)
 #es_table$variance_implicit_d <- implicit_variancedrm
-
 # Compute correction factor J (formula 4.22)
 es_table$J <- 1 - (3/(4*(es_table$N_participants_implicit-1)-1))
 
@@ -91,12 +92,13 @@ es_table$variance_implicit_g <- (es_table$J)^2 * es_table$variance_implicit_d
 # Compute standard error of g (formula 4.25)
 es_table$se_implicit_g <- sqrt(es_table$variance_implicit_g)
 
-# r and Fisher's z
+# Implicit r and Fisher's z
 es_table$implicit_rs <- implicit_r
 es_table$implicit_z_rs <- implicit_z_r
 
-# Variances of r and Fisher's z
+# Variances and sd of implicit r and Fisher's z
 es_table$variance_implicit_rs <- ((1 - es_table$implicit_rs**2)**2)/(es_table$N_participants_implicit - 1)
+es_table$se_implicit_rs <- sqrt(es_table$variance_implicit_rs)
 es_table$variance_implicit_z_rs <- 1/(es_table$N_participants_implicit - 3)
 es_table$se_implicit_z_rs <- sqrt(es_table$variance_implicit_z_rs)
 

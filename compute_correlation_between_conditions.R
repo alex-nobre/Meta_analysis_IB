@@ -10,7 +10,7 @@ library(xlsx)
 library(DescTools)
 
 # Analysis directory
-analysis_dir <- "C:/Users/Biosig/Google Drive/Doutorado/Tese/Meta-analysis_IB/Dados/Data_sent_by_researchers/"
+analysis_dir <- "E:/Dados_doutorado/Meta-analysis/Dados/Data_sent_by_researchers/"
 
 #========================================================================#
 #==================== Schnuerch et al. (2016) data ======================
@@ -343,7 +343,7 @@ n_beanland2_fast <- nrow(data_beanland_2_fast)
 n_pugnaghi2020_exp1 <- nrow(data_pugnaghi2020_exp1_include)
 n_pugnaghi2020_exp2 <- nrow(data_pugnaghi2020_exp2_include)
 
-# Concatente all ns
+# Concatenate all ns
 cor_samplesizes <- c(n_schnuerch,
                      #n_razpurker,
                      # n_razpuker_col,
@@ -356,7 +356,7 @@ cor_samplesizes <- c(n_schnuerch,
                      n_pugnaghi2020_exp2)
 
 # Vector with correlations
-corvalues <- c(cor_schnuerch,
+cor_values <- c(cor_schnuerch,
                #cor_razpurker,
                # irene_target_cor_col,
                # irene_target_cor_tri,
@@ -368,12 +368,15 @@ corvalues <- c(cor_schnuerch,
                cor_pugnaghi2020_exp2)
 
 # Transform cors to z scores
-z_corvalues <- FisherZ(corvalues)
+z_cor_values <- FisherZ(cor_values)
 
 # Compute weighted average of z scores
-z_weighted_avg <- weighted.mean(z_corvalues,
+cor_z_weighted_avg <- weighted.mean(z_cor_values,
                                 cor_samplesizes)
 
 # Transform weighted mean z score back to weighted correlation
-cor_pairs <- FisherZInv(z_weighted_avg)
+cor_pairs <- FisherZInv(cor_z_weighted_avg)
+
+# Remove unnecessary data
+rm(list=grep("cor_",ls(),value=TRUE,invert=TRUE))
 
